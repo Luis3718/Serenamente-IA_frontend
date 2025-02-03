@@ -20,8 +20,9 @@
             </button>
             <nav class="submenu">
                 <ul>
-                    <li><a href="Actividades.html">Mis actividades</a></li>
-                    <li><a href="Perfil.html" class="login">Mi perfil</a></li>
+                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="progreso.html">Mis actividades</a></li>
+                    <li><a href="perfil.html" class="login">Mi perfil</a></li>
                 </ul>
             </nav>
         </div>
@@ -91,26 +92,34 @@
     
 </body>
 <script>
-    const token = localStorage.getItem("token");
+    async function verificarAutenticacion() {
+        const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:8002/", {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`
+        if (!token) {
+            window.location.href = "login.html"; // Redirige al login si no hay token
+            return;
         }
-    });
 
-    if (!response.ok) {
-        console.error("Error en la solicitud:", await response.json());
+        try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                console.error("Error en la autenticación:", await response.json());
+                localStorage.removeItem("token");
+                window.location.href = "login.html"; // Redirige si el token es inválido
+            }
+        } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html"; // Redirige en caso de fallo
+        }
     }
 
-    // Funcionalidad del menu de hamburguesa
-    const menuToggle = document.querySelector('.menu-toggle');
-    const submenu = document.querySelector('.submenu');
-
-    menuToggle.addEventListener('click', () => {
-        submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
-    });
+    verificarAutenticacion();
 </script>
 
 </html>

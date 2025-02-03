@@ -130,7 +130,7 @@
         const data = await response.json();
         // Guardar el token en localStorage
         localStorage.setItem("token", data.access_token);
-        alert(data.message); // Muestra el mensaje de éxito
+        //alert(data.message); // Muestra el mensaje de éxito
 
         // Redirigir al usuario a otra página, si es necesario
         window.location.href = "/dashboard.html";

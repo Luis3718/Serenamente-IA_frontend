@@ -40,7 +40,7 @@
     display: flex;
     justify-content: center; /* Centra los elementos del menú */
     align-items: center;
-    width: 75%; /* Reducción del ancho */
+    width: 50%; /* Reducción del ancho */
     margin: 0 auto; /* Centrado horizontal */
     position: relative;
     overflow: hidden; /* Corta los bordes del logo fuera del menú */
