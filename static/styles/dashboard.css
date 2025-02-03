@@ -35,10 +35,14 @@
 .submenu {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Alinea el menú a la derecha */
+    justify-content: center; /* Mantiene el submenú centrado */
     background-color: white;
     padding: 10px 20px;
-    position: relative;
+    width: auto; /* Se adapta al contenido */
+    max-width: 70%; /* Ajusta el ancho para que no se extienda demasiado */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centra el menú respecto a la página */
 }
 
 .submenu ul {
@@ -48,6 +52,7 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    justify-content: center; /* Centrar elementos del submenú */
 }
 
 .user-container {
@@ -100,7 +105,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    justify-content: center; /* Centra el avatar */
+    margin-left: 20px; /* Espaciado entre los elementos del menú */
 }
 
 .avatar {
