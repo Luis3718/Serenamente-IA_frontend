@@ -208,6 +208,29 @@ main {
     color: #333; /* Texto oscuro */
 }
 
+.formulario-mensaje {
+    background-color: #ffcc00;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    visibility: hidden;
+}
+
+.formulario-mensaje.oculto {
+    visibility: hidden;
+}
+
+.formulario-mensaje a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
 .social-bar {
     position: fixed;
     top: 50%;
@@ -356,8 +379,9 @@ footer {
     }
 
     .submenu {
-        width: 70%; /* Reducir ancho del submenú */
+        width: 50%; /* Reducir ancho del submenú */
         padding: 15px 0; /* Ajustar padding */
+        transform: translateX(-50%); /* Centra el menú respecto a la página */
     }
 
     .submenu ul {

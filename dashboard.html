@@ -15,9 +15,7 @@
                     <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
                 </a>
             </div>
-            <button class="menu-toggle" aria-label="Toggle Menu">
-                &#9776; <!-- Icono de tres rayitas -->
-            </button>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
             <nav class="submenu">
                 <ul>
                     <li><a href="actividades.html">Mis actividades</a></li>
@@ -38,8 +36,13 @@
     <main>
         <div class="container">
             <h1>Bienvenido a SerenaMente IA</h1>
-            <p>
-                Revolucionando la salud mental con inteligencia artificial.
+            <p>Revolucionando la salud mental con inteligencia artificial.</p>
+            
+            <!-- Contenedor del mensaje de formulario -->
+            <div id="formulario-mensaje" class="formulario-mensaje oculto">
+                <p>Contesta este formulario para comenzar con el uso del sistema.</p>
+                <a href="formulario.html" class="boton-formulario">Ir al formulario</a>
+            </div>
         </div>
     </main>
 
@@ -80,7 +83,7 @@
                 <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
             </a>
         </div>
-    </div>       
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -95,47 +98,56 @@
             </div>
         </div>
     </footer>
-    
-</body>
-<script>
-    async function verificarAutenticacion() {
-        const token = localStorage.getItem("token");
 
-        if (!token) {
-            window.location.href = "login.html"; // Redirige al login si no hay token
-            return;
-        }
+    <script>
+        // Funcion para el menu de hamburguesa
+        const menuToggle = document.querySelector('.menu-toggle');
+        const submenu = document.querySelector('.submenu');
 
-        try {
-            const response = await fetch("http://localhost:8002/auth/verify-token", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+        menuToggle.addEventListener('click', () => {
+            submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+        });
 
-            if (!response.ok) {
-                console.error("Error en la autenticación:", await response.json());
-                localStorage.removeItem("token");
+        // Funcion que verifica el token y si se contesto el pretest
+        async function verificarAutenticacion() {
+            const token = localStorage.getItem("token");
+            if (!token) {
                 window.location.href = "login.html";
                 return;
             }
 
-            const userData = await response.json();
-            const initials = userData.usuario.nombre
+            try {
+                const response = await fetch("http://localhost:8002/auth/verify-token", {
+                    method: "GET",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    console.error("Error en la autenticación:", await response.json());
+                    localStorage.removeItem("token");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const userData = await response.json();
+                const initials = userData.usuario.nombre
                 .split(" ")
                 .map(word => word[0])
                 .join("")
                 .toUpperCase();
+                document.getElementById("user-avatar").textContent = initials;
 
-            document.getElementById("user-avatar").textContent = initials;
-        } catch (error) {
-            console.error("Error en la autenticación:", error);
-            window.location.href = "login.html";
+                // Mostrar mensaje si no ha contestado el formulario
+                if (userData.formulario_contestado === false) {
+                    document.getElementById("formulario-mensaje").style.visibility = "visible";
+                }
+            } catch (error) {
+                console.error("Error en la autenticación:", error);
+                window.location.href = "login.html";
+            }
         }
-    }
 
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
         const avatar = document.getElementById("user-avatar");
         const userMenu = document.querySelector(".user-menu");
 
@@ -147,8 +159,8 @@
             localStorage.removeItem("token");
             window.location.href = "login.html";
         });
-
         verificarAutenticacion();
     });
-</script>
+    </script>
+</body>
 </html>
