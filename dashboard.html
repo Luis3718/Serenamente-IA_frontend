@@ -22,7 +22,13 @@
                 <ul>
                     <li><a href="actividades.html">Mis actividades</a></li>
                     <li><a href="progreso.html">Mis actividades</a></li>
-                    <li><a href="perfil.html" class="login">Mi perfil</a></li>
+                    <div class="user-menu">
+                        <div id="user-avatar" class="avatar">US</div>
+                        <div id="user-dropdown" class="dropdown-menu">
+                            <a href="perfil.html">Ver perfil</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>                        
                 </ul>
             </nav>
         </div>
@@ -111,15 +117,38 @@
             if (!response.ok) {
                 console.error("Error en la autenticación:", await response.json());
                 localStorage.removeItem("token");
-                window.location.href = "login.html"; // Redirige si el token es inválido
+                window.location.href = "login.html";
+                return;
             }
+
+            const userData = await response.json();
+            const initials = userData.usuario.nombre
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .toUpperCase();
+
+            document.getElementById("user-avatar").textContent = initials;
         } catch (error) {
             console.error("Error en la autenticación:", error);
-            window.location.href = "login.html"; // Redirige en caso de fallo
+            window.location.href = "login.html";
         }
     }
 
-    verificarAutenticacion();
-</script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const avatar = document.getElementById("user-avatar");
+        const userMenu = document.querySelector(".user-menu");
 
+        avatar.addEventListener("click", function () {
+            userMenu.classList.toggle("active");
+        });
+
+        document.getElementById("logout").addEventListener("click", function () {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+        });
+
+        verificarAutenticacion();
+    });
+</script>
 </html>
