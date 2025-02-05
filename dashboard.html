@@ -37,12 +37,6 @@
         <div class="container">
             <h1>Bienvenido a SerenaMente IA</h1>
             <p>Revolucionando la salud mental con inteligencia artificial.</p>
-            
-            <!-- Contenedor del mensaje de formulario -->
-            <div id="formulario-mensaje" class="formulario-mensaje oculto">
-                <p>Contesta este formulario para comenzar con el uso del sistema.</p>
-                <a href="formulario.html" class="boton-formulario">Ir al formulario</a>
-            </div>
         </div>
     </main>
 
@@ -136,11 +130,6 @@
                 .join("")
                 .toUpperCase();
                 document.getElementById("user-avatar").textContent = initials;
-
-                // Mostrar mensaje si no ha contestado el formulario
-                if (userData.formulario_contestado === false) {
-                    document.getElementById("formulario-mensaje").style.visibility = "visible";
-                }
             } catch (error) {
                 console.error("Error en la autenticación:", error);
                 window.location.href = "login.html";

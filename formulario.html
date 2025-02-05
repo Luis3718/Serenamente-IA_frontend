@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerenaMente IA</title>
+    <link rel="stylesheet" href="static/styles/formulario.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                &#9776; <!-- Icono de tres rayitas -->
+            </button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="detalles.html">¿Qué es SerenaMente IA?</a></li>
+                    <li><a href="quienessomos.html">¿Quiénes Somos?</a></li>
+                    <li><a href="FAQS.html">FAQ's</a></li>
+                    <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container">      
+            <!-- Contenedor del mensaje de formulario -->
+            <div id="formulario-mensaje" class="formulario-mensaje oculto">
+                <h3>Por favor ve el siguiente video antes de comenzar con el formulario</h3>
+                <p></p>
+                <div class="rectangulo video">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/R2BV8BeNaHc?si=8i4hKmU47v5-owYb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <p></p>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="carta_concentimiento" name="carta_concentimiento" required>
+                    <label for="carta_concentimiento">
+                        He leído y acepto el <span class="carta_concentimiento" id="carta_concentimientoLink">formato de consentimiento informado</span>.
+                    </label>
+                </div>
+                <p></p>
+                <a href="formulario.html" class="boton-formulario">Comenzar Pre test</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para Carta de Consentimiento Informado -->
+    <div id="modalCarta" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeCarta">&times;</span>
+            <h1>Consentimiento Informado para Participar en la Investigación:</h1>
+            <h2>Aceptación y utilidad de una aplicación autoaplicada con componentes de
+                inteligencia artificial para mejorar una intervención de telepsicología, con el objetivo
+                de aumentar el bienestar y mejorar la salud mental.</h2>
+                <p>Estimado/a participante,</p>
+                        <p>Ha sido invitada(o) a participar en un estudio científico llevado a cabo por integrantes del proyecto de
+                            investigación: <b>Aceptación y utilidad de una aplicación autoaplicada con componentes de
+                            inteligencia artificial para mejorar una intervención de telepsicología, con el objetivo de
+                            aumentar el bienestar y mejorar la salud mental</b>, de la Universidad Nacional Autónoma de México
+                            en la Facultad de Estudios Superiores Iztacala, integrantes del Laboratorio de psicología e
+                            innovación tecnológica. El propósito de este formato es informarle sobre los objetivos del proyecto y
+                            el uso confidencial de sus datos.</p>
+                        <p>El objetivo de este estudio es <i>evaluar la aceptación y utilidad de una aplicación autoaplicada con
+                            componentes de inteligencia artificial para mejorar una intervención de telepsicología, con el objetivo
+                            de aumentar el bienestar y mejorar la salud mental mediante el uso de mindfulness</i>. Es importante
+                            informarle que su anonimato está garantizado y que los datos personales solicitados serán tratados
+                            con fines de investigación, enseñanza y estadísticos por la responsable del proyecto: Dra. Lorena
+                            Alejandra Flores Plata, investigadora de la Facultad de Estudios Superiores Iztacala (FESI) de la
+                            Universidad Nacional Autónoma de México, con domicilio en Av. de los Reyes 1, Tlalnepantla de
+                            Baz, México. C.P. 5700, Torre de tutorías, 2do. Piso, cubículo 22. Mismos que son supervisados
+                            por la Comisión de Ética de la FESI, a cargo del Presidente General: M. C. Esp. Federico
+                            Sandoval Olvera.</p>
+                        <small>La investigación en la que usted participará tiene las siguientes finalidades: 1. Evaluar una
+                            aplicación de inteligencia artificial conversacional en telepsicología para mejorar el bienestar
+                            emocional de mexicanos. 2. Medir la usabilidad y satisfacción de la aplicación. 3. Usar los
+                            datos para análisis estadísticos de la muestra estudiada.</small>
+                        <h1>detalles de la Investigación:</h1>
+                        <ul>
+                            <li><b>Proceso de Consentimiento Informado:</b> Usted deberá leer y comprender el documento de
+                                consentimiento informado. Si está de acuerdo, deberá firmar el documento para participar en
+                                el estudio. Puede manifestar su negativa para el tratamiento de sus datos personales dentro
+                                de 5 días hábiles después de haber otorgado su consentimiento.</li>
+                            <li><b>Duración y Frecuencia del Estudio:</b>El estudio tiene una duración aproximada de 6
+                                semanas, con dos seguimientos a 3 y 6 meses.</li>
+                            <li><b>Procedimientos:</b> Usted usará una aplicación de manera semanal, mediante un dispositivo
+                                tecnológico, basada en inteligencia artificial que ofrece ejercicios de mindfulness y técnicas
+                                para mejorar el bienestar emocional. Recibirá instrucciones detalladas sobre cómo utilizar la
+                                aplicación. Asimismo, de manera semanal o quincenal recibirá una llamada telefónica de
+                                seguimiento y para resolver dudas acerca de la aplicación. Esta llamada tendrá contenido no clínico, es decir, no se abordarán problemas emocionales, sino solo procedimientos y
+                                aspectos técnicos de la intervención web.</li>
+                            <li><b>Beneficios:</b> Usted comprende que el uso de la aplicación puede prevenir el desarrollo de
+                                trastornos como depresión, ansiedad o estrés, y mejore su bienestar emocional.</li>
+                            <li><b>Trascendencia:</b> Según la literatura, si usted cumple con todo lo señalado en el estudio,
+                                podrá aumentar su bienestar o mantener niveles óptimos, lo cual puede disminuir las
+                                posibilidades de desarrollar niveles severos de trastornos emocionales.</li>
+                            <li><b>Confidencialidad:</b> La aplicación podrá recopilar información personal que usted nos
+                                proporcione, la cual se guardará en bases de datos controladas y con acceso limitado. Sus
+                                datos personales serán tratados con base en los principios de licitud, consentimiento,
+                                información, calidad, finalidad, lealtad, proporcionalidad y responsabilidad, conforme a la
+                                legislación. Se mantendrá la confidencialidad de sus datos personales estableciendo y
+                                manteniendo de forma efectiva medidas de seguridad administrativas, técnicas y físicas para
+                                evitar su daño, pérdida, alteración, destrucción, uso, acceso o divulgación indebida.</li>
+                            <li><b>Datos Personales:</b> Sus datos personales podrán ser conservados durante toda la relación
+                                de intervención sostenida y, una vez concluida, se conservarán por un periodo adicional de
+                                hasta 5 años. Posteriormente, serán descartados para evitar un tratamiento indebido de los
+                                mismos. Todos sus datos serán borrados de las bases de datos, así como las copias que
+                                existan, después de este periodo.Nos abstendremos de vender, arrendar o alquilar sus datos
+                                personales. No obstante, podremos compartir las bases de datos con terceros nacionales o
+                                extranjeros para realizar procesos de investigación con fines estadísticos y monitoreo, para el
+                                cumplimiento de la legislación aplicable y de nuestras políticas internas. En virtud de lo
+                                anterior, dichas personas no podrán utilizar la información proporcionada por la aplicación de
+                                manera diferente a la establecida en el presente aviso de privacidad. Estas transferencias de
+                                datos personales serán realizadas con todas las medidas de seguridad apropiadas, de
+                                conformidad con los principios contenidos en la Ley Federal de Protección de Datos
+                                Personales en Posesión de los Particulares, su Reglamento y los Lineamientos del Aviso de
+                                Privacidad.</li>
+                            <li><b>Riesgos:</b> La participación no supone ningún riesgo para usted, incluso si abandona la
+                                investigación.</li>
+                            <li><b>Contacto para dudas:</b> Si tiene dudas sobre sus derechos, puede contactar a
+                                serenamente@iztacala.unam.mx, etica.iztacala@gmail.com o bien comunicarse a la línea de
+                                apoyo: +52 55562-31344.</li>
+                            <li><b>Participación Voluntaria:</b> Su participación en el estudio es voluntaria y puede retirarse en
+                                cualquier momento sin penalización.</li>
+                            <li><b>Terminación del Estudio:</b> El estudio puede finalizar por razones propias del mismo, y en tal
+                                caso, se le informará con anticipación.</li>
+                            <li><b>Copia del Consentimiento:</b> Usted recibirá una copia de este consentimiento informado para
+                                sus registros.</li>
+                        </ul>
+                        <p><b>“He leído el presente documento de consentimiento informado, he comprendido las
+                            explicaciones en él facilitadas acerca del objetivo del proyecto de investigación. También
+                            comprendo que, en cualquier momento y sin necesidad de dar ninguna explicación, puedo
+                            revocar el consentimiento que ahora presento. También he sido informado y comprendo que mis
+                            datos serán protegidos y utilizados únicamente con fines académicos y de investigación.
+                            Consiento voluntariamente participar en la aplicación bajo las características que en él
+                            operan y que anteriormente fueron mencionadas. Entiendo que tengo derecho a retirar mi
+                            participación a voluntad propia”.</b></p>
+        </div>
+    </div>
+
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>       
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+<script>
+    // Funcion para el menu de hamburguesa
+    const menuToggle = document.querySelector('.menu-toggle');
+    const submenu = document.querySelector('.submenu');
+
+    menuToggle.addEventListener('click', () => {
+        submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
+
+     // Abrir y cerrar modal de Carta de Consentimiento Informado
+     const cartaConcentimientoLink = document.getElementById('carta_concentimientoLink');
+    const modalCarta = document.getElementById('modalCarta');
+    const closeCarta = document.getElementById('closeCarta');
+
+    cartaConcentimientoLink.addEventListener('click', () => {
+        modalCarta.style.display = 'block';
+    });
+
+    closeCarta.addEventListener('click', () => {
+        modalCarta.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modalCarta) {
+            modalCarta.style.display = 'none';
+        }
+    });
+
+    // Funcion que verifica el token y si se contesto el pretest
+    async function verificarAutenticacion() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                console.error("Error en la autenticación:", await response.json());
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            console.log("No hay error con el token")
+        } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html";
+        }
+    }
+
+    verificarAutenticacion();
+</script>
+
+</html>
