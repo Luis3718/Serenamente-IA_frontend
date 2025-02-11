@@ -47,7 +47,7 @@
             <p>
                 <strong>Escala:</strong> 1 = Totalmente en desacuerdo, 2 = En desacuerdo, 3 = Ni de acuerdo ni en desacuerdo, 4 = De acuerdo, 5 = Totalmente de acuerdo
             </p>
-            <form id="APOIform" action="process_apoi.py" method="POST">
+            <form id="APOIform">
                 <!-- Preguntas -->
                 <div class="question">
                     <p>1. Si quiero aprender habilidades para gestionar mejor mi vida, prefiero un terapeuta antes que una intervención psicológica online.</p>
@@ -168,6 +168,25 @@
     
 </body>
 <script>
+     // Funcionalidad de la barra 
+     document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("baiForm");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+    
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

@@ -45,7 +45,7 @@
                 Indique para cada uno de los siguientes síntomas el grado en que se ha visto afectado por ellos durante 
                 <u>la última semana y en el momento actual</u>.
             </p>
-            <form id="baiForm" action="process.py" method="POST">
+            <form id="baiForm">
                 <!-- Preguntas -->
                 <div class="question">
                     <p>1. Hormigueo o entumecimiento</p>
@@ -228,7 +228,7 @@
                     <label><input type="radio" name="q20" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
                     <label><input type="radio" name="q20" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
                 </div>
-                                <div class="question">
+                <div class="question">
                     <p>21. Sudoración (no debida al calor)</p>
                     <label><input type="radio" name="q20" value="0"> 0 - No, en absoluto</label><br>
                     <label><input type="radio" name="q20" value="1"> 1 - Levemente</label><br>
@@ -301,6 +301,25 @@
     
 </body>
 <script>
+    // Funcionalidad de la barra 
+    document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("baiForm");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+    
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

@@ -41,7 +41,7 @@
             <p>
                 A continuación, aparece un conjunto de afirmaciones sobre su experiencia diaria. Indique con qué frecuencia tiene usted dichas experiencias, de acuerdo a su experiencia real, en vez de lo que su experiencia debería ser.
             </p>
-            <form id="Mindfulness" action="process.py" method="POST">
+            <form id="Mindfulness">
                 <!-- Preguntas -->
                 <div class="question">
                     <p>1. Puedo sentir una emoción y no estar consciente de ella hasta tiempo después.</p>
@@ -255,6 +255,25 @@
     
 </body>
 <script>
+     // Funcionalidad de la barra 
+     document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("baiForm");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+    
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

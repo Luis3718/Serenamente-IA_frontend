@@ -45,7 +45,7 @@
             <p>
                 <strong>Opciones de Respuesta:</strong> 1 = Casi nunca, 2 = Ocasionalmente, 3 = La mitad de las veces 4 = Bastante a menudo 5 = Casi siempre
             </p>
-            <form id="Autoform" action="process_auto.py" method="POST">
+            <form id="Autoform">
                 <!-- Preguntas -->
                 <div class="question">
                     <p>1. Me desapruebo y me juzgo por mis defectos y limitaciones.</p>
@@ -317,6 +317,25 @@
     </footer>
 </body>
 <script>
+     // Funcionalidad de la barra 
+     document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("baiForm");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+    
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

@@ -43,7 +43,7 @@
                 Marca la opción que mejor se adecúe a tu situación actual, 
                 <u>teniendo en cuenta el último mes.</u>
             </p>
-            <form id="Estresform" action="process.py" method="POST">
+            <form id="Estresform">
                 <!-- Preguntas -->
                 <div class="question">
                     <p>1. ¿Con qué frecuencia has estado afectado/a por algo que ha ocurrido inesperadamente?</p>
@@ -221,6 +221,25 @@
     
 </body>
 <script>
+     // Funcionalidad de la barra 
+     document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("baiForm");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

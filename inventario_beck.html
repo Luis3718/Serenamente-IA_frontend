@@ -44,7 +44,7 @@
                 la que mejor describa cómo se ha sentido <u>en las últimas dos semanas, incluido el día de hoy.</u> 
                 Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
             </p>
-            <form id="Beck" action="process_depresion.py" method="POST">
+            <form id="Beck">
                 <!-- Preguntas -->
                 <div class="question">
                     <p>1. Tristeza</p>
@@ -261,6 +261,25 @@
     
 </body>
 <script>
+    // Funcionalidad de la barra 
+    document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("baiForm");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 
