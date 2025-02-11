@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación APOI</title>
+    <link rel="stylesheet" href="static/styles/formularios.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                &#9776; <!-- Icono de tres rayitas -->
+            </button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="detalles.html">¿Qué es SerenaMente IA?</a></li>
+                    <li><a href="quienessomos.html">¿Quiénes Somos?</a></li>
+                    <li><a href="FAQS.html">FAQ's</a></li>
+                    <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Formulario -->
+    <main>
+        <div class="container">
+            <!-- Barra de progreso -->
+            <div class="progress-container-horizontal">
+                <div class="progress-bar" id="progressBar"></div>
+                <span id="progressText">0%</span>
+            </div>
+            <!-- Título -->
+            <h1>Evaluación APOI</h1>
+            <p>
+                <strong>Instrucciones:</strong> Las siguientes afirmaciones se refieren a las intervenciones psicológicas online, desarrolladas para mejorar el malestar emocional (por ejemplo, la depresión o la ansiedad). 
+                Por favor, indique su valoración personal o, si no está familiarizada/o con este tipo de intervenciones por experiencia propia, comparta con nosotros sus expectativas. 
+                Valore su actitud hacia las intervenciones psicológicas online en general (no solo en base a la del presente estudio).
+            </p>
+            <p>
+                <strong>Escala:</strong> 1 = Totalmente en desacuerdo, 2 = En desacuerdo, 3 = Ni de acuerdo ni en desacuerdo, 4 = De acuerdo, 5 = Totalmente de acuerdo
+            </p>
+            <form id="APOIform" action="process_apoi.py" method="POST">
+                <!-- Preguntas -->
+                <div class="question">
+                    <p>1. Si quiero aprender habilidades para gestionar mejor mi vida, prefiero un terapeuta antes que una intervención psicológica online.</p>
+                    <label><input type="radio" name="q1" value="1"> 1</label>
+                    <label><input type="radio" name="q1" value="2"> 2</label>
+                    <label><input type="radio" name="q1" value="3"> 3</label>
+                    <label><input type="radio" name="q1" value="4"> 4</label>
+                    <label><input type="radio" name="q1" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>2. Una intervención psicológica online puede ayudarme a reconocer los problemas que tengo que enfrentar.</p>
+                    <label><input type="radio" name="q2" value="1"> 1</label>
+                    <label><input type="radio" name="q2" value="2"> 2</label>
+                    <label><input type="radio" name="q2" value="3"> 3</label>
+                    <label><input type="radio" name="q2" value="4"> 4</label>
+                    <label><input type="radio" name="q2" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>3. Una intervención psicológica online puede inspirarme para abordar mejor mis problemas.</p>
+                    <label><input type="radio" name="q3" value="1"> 1</label>
+                    <label><input type="radio" name="q3" value="2"> 2</label>
+                    <label><input type="radio" name="q3" value="3"> 3</label>
+                    <label><input type="radio" name="q3" value="4"> 4</label>
+                    <label><input type="radio" name="q3" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>4. Creo que el concepto de intervenciones psicológicas online tiene sentido.</p>
+                    <label><input type="radio" name="q4" value="1"> 1</label>
+                    <label><input type="radio" name="q4" value="2"> 2</label>
+                    <label><input type="radio" name="q4" value="3"> 3</label>
+                    <label><input type="radio" name="q4" value="4"> 4</label>
+                    <label><input type="radio" name="q4" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>5. Tengo la sensación de que una intervención psicológica online puede ayudarme.</p>
+                    <label><input type="radio" name="q5" value="1"> 1</label>
+                    <label><input type="radio" name="q5" value="2"> 2</label>
+                    <label><input type="radio" name="q5" value="3"> 3</label>
+                    <label><input type="radio" name="q5" value="4"> 4</label>
+                    <label><input type="radio" name="q5" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>6. Es más probable que me mantenga motivada/o con un terapeuta que con una intervención psicológica online.</p>
+                    <label><input type="radio" name="q6" value="1"> 1</label>
+                    <label><input type="radio" name="q6" value="2"> 2</label>
+                    <label><input type="radio" name="q6" value="3"> 3</label>
+                    <label><input type="radio" name="q6" value="4"> 4</label>
+                    <label><input type="radio" name="q6" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>7. En situaciones de crisis, un terapeuta puede ayudarme mejor que una intervención psicológica online.</p>
+                    <label><input type="radio" name="q7" value="1"> 1</label>
+                    <label><input type="radio" name="q7" value="2"> 2</label>
+                    <label><input type="radio" name="q7" value="3"> 3</label>
+                    <label><input type="radio" name="q7" value="4"> 4</label>
+                    <label><input type="radio" name="q7" value="5"> 5</label>
+                </div>
+               <!-- Botones de navegación -->
+                <div class="navigation-buttons">
+                    <button type="button" id="previousButton">Anterior</button>
+                    <button type="button" id="nextButton">Siguiente</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>       
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const submenu = document.querySelector('.submenu');
+
+    menuToggle.addEventListener('click', () => {
+        submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
+
+    // Funcion que verifica el token y si se contesto el pretest
+    async function verificarAutenticacion() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                console.error("Error en la autenticación:", await response.json());
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            console.log("No hay error con el token")
+        } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html";
+        }
+    }
+
+    // Redirecciones de botones
+    document.getElementById('nextButton').addEventListener('click', () => {
+        //alert('Respuestas guardadas. Continuando al siguiente cuestionario.');
+        window.location.href = 'autocompasion.html'; // Cambiar a la página siguiente
+    });
+
+    document.getElementById('previousButton').addEventListener('click', () => {
+        //alert('Regresando al cuestionario anterior.');
+        window.location.href = 'maas.html'; // Cambiar a la página anterior
+    });
+    
+    verificarAutenticacion();
+</script>
+</html>

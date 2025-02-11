@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Autocompasión SCS</title>
+    <link rel="stylesheet" href="static/styles/formularios.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                &#9776; <!-- Icono de tres rayitas -->
+            </button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="detalles.html">¿Qué es SerenaMente IA?</a></li>
+                    <li><a href="quienessomos.html">¿Quiénes Somos?</a></li>
+                    <li><a href="FAQS.html">FAQ's</a></li>
+                    <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Formulario -->
+    <main>
+        <div class="container">
+            <!-- Barra de progreso -->
+            <div class="progress-container-horizontal">
+                <div class="progress-bar" id="progressBar"></div>
+                <span id="progressText">0%</span>
+            </div>
+            <!-- Título -->
+            <h1>Escala de Autocompasión SCS</h1>
+            <p>
+                <strong>Instrucciones:</strong> Lee las frases que aparecen a continuación cuidadosamente antes de responder. Elige la frecuencia con la que te comportas frente a esa situación.
+            </p>
+            <p>
+                <strong>Opciones de Respuesta:</strong> 1 = Casi nunca, 2 = Ocasionalmente, 3 = La mitad de las veces 4 = Bastante a menudo 5 = Casi siempre
+            </p>
+            <form id="Autoform" action="process_auto.py" method="POST">
+                <!-- Preguntas -->
+                <div class="question">
+                    <p>1. Me desapruebo y me juzgo por mis defectos y limitaciones.</p>
+                    <label><input type="radio" name="q1" value="1"> 1</label>
+                    <label><input type="radio" name="q1" value="2"> 2</label>
+                    <label><input type="radio" name="q1" value="3"> 3</label>
+                    <label><input type="radio" name="q1" value="4"> 4</label>
+                    <label><input type="radio" name="q1" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>2. Cuando me siento desanimado tiendo a obsesionarme y fijarme en todo lo que está mal.</p>
+                    <label><input type="radio" name="q2" value="1"> 1</label>
+                    <label><input type="radio" name="q2" value="2"> 2</label>
+                    <label><input type="radio" name="q2" value="3"> 3</label>
+                    <label><input type="radio" name="q2" value="4"> 4</label>
+                    <label><input type="radio" name="q2" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>3. Cuando las cosas van mal para mí, veo las dificultades como una parte de la vida por la que todos pasan.</p>
+                    <label><input type="radio" name="q3" value="1"> 1</label>
+                    <label><input type="radio" name="q3" value="2"> 2</label>
+                    <label><input type="radio" name="q3" value="3"> 3</label>
+                    <label><input type="radio" name="q3" value="4"> 4</label>
+                    <label><input type="radio" name="q3" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>4. Cuando pienso en mis limitaciones tiendo a sentirme más separado y aislado del resto del mundo.</p>
+                    <label><input type="radio" name="q4" value="1"> 1</label>
+                    <label><input type="radio" name="q4" value="2"> 2</label>
+                    <label><input type="radio" name="q4" value="3"> 3</label>
+                    <label><input type="radio" name="q4" value="4"> 4</label>
+                    <label><input type="radio" name="q4" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>5. Tntento ser cariñoso/a conmigo mismo/a cuando siento dolor emocional.</p>
+                    <label><input type="radio" name="q5" value="1"> 1</label>
+                    <label><input type="radio" name="q5" value="2"> 2</label>
+                    <label><input type="radio" name="q5" value="3"> 3</label>
+                    <label><input type="radio" name="q5" value="4"> 4</label>
+                    <label><input type="radio" name="q5" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>6. ECuando fallo en algo importante para mí, me consumen los sentimientos de insuficiencia.</p>
+                    <label><input type="radio" name="q6" value="1"> 1</label>
+                    <label><input type="radio" name="q6" value="2"> 2</label>
+                    <label><input type="radio" name="q6" value="3"> 3</label>
+                    <label><input type="radio" name="q6" value="4"> 4</label>
+                    <label><input type="radio" name="q6" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>7. Cuando me siento desanimado y triste, me recuerdo a mí mismo que hay muchas otras personas en el mundo que se sienten como yo.</p>
+                    <label><input type="radio" name="q7" value="1"> 1</label>
+                    <label><input type="radio" name="q7" value="2"> 2</label>
+                    <label><input type="radio" name="q7" value="3"> 3</label>
+                    <label><input type="radio" name="q7" value="4"> 4</label>
+                    <label><input type="radio" name="q7" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>8. Cuando atravieso épocas muy difíciles, tiendo a ser duro/a conmigo mismo/a.</p>
+                    <label><input type="radio" name="q8" value="1"> 1</label>
+                    <label><input type="radio" name="q8" value="2"> 2</label>
+                    <label><input type="radio" name="q8" value="3"> 3</label>
+                    <label><input type="radio" name="q8" value="4"> 4</label>
+                    <label><input type="radio" name="q8" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>9. uando algo me molesta, trato de mantener mis emociones en equilibrio.</p>
+                    <label><input type="radio" name="q9" value="1"> 1</label>
+                    <label><input type="radio" name="q9" value="2"> 2</label>
+                    <label><input type="radio" name="q9" value="3"> 3</label>
+                    <label><input type="radio" name="q9" value="4"> 4</label>
+                    <label><input type="radio" name="q9" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>10. Cuando me siento incapaz de alguna manera, trato de recordarme que esos sentimientos de incapacidad son compartidos por la mayoría de las personas.</p>
+                    <label><input type="radio" name="q10" value="1"> 1</label>
+                    <label><input type="radio" name="q10" value="2"> 2</label>
+                    <label><input type="radio" name="q10" value="3"> 3</label>
+                    <label><input type="radio" name="q10" value="4"> 4</label>
+                    <label><input type="radio" name="q10" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>11. Soy intolerante e impaciente con aquellos aspectos de mi personalidad que no me gustan.</p>
+                    <label><input type="radio" name="q11" value="1"> 1</label>
+                    <label><input type="radio" name="q11" value="2"> 2</label>
+                    <label><input type="radio" name="q11" value="3"> 3</label>
+                    <label><input type="radio" name="q11" value="4"> 4</label>
+                    <label><input type="radio" name="q11" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>12. Cuando atravieso una situación muy difícil, yo mismo/a me proporciono el cuidado y cariño que necesito.</p>
+                    <label><input type="radio" name="q12" value="1"> 1</label>
+                    <label><input type="radio" name="q12" value="2"> 2</label>
+                    <label><input type="radio" name="q12" value="3"> 3</label>
+                    <label><input type="radio" name="q12" value="4"> 4</label>
+                    <label><input type="radio" name="q12" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>13. Cuando me siento desanimado/a, tiendo a sentir que probablemente la mayoría de las personas son más felices que yo.</p>
+                    <label><input type="radio" name="q13" value="1"> 1</label>
+                    <label><input type="radio" name="q13" value="2"> 2</label>
+                    <label><input type="radio" name="q13" value="3"> 3</label>
+                    <label><input type="radio" name="q13" value="4"> 4</label>
+                    <label><input type="radio" name="q13" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>14. Cuando sucede algo doloroso, trato de tener una visión equilibrada de la situación.</p>
+                    <label><input type="radio" name="q14" value="1"> 1</label>
+                    <label><input type="radio" name="q14" value="2"> 2</label>
+                    <label><input type="radio" name="q14" value="3"> 3</label>
+                    <label><input type="radio" name="q14" value="4"> 4</label>
+                    <label><input type="radio" name="q14" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>15. Intento ver mis fallas como parte de la condición humana.</p>
+                    <label><input type="radio" name="q15" value="1"> 1</label>
+                    <label><input type="radio" name="q15" value="2"> 2</label>
+                    <label><input type="radio" name="q15" value="3"> 3</label>
+                    <label><input type="radio" name="q15" value="4"> 4</label>
+                    <label><input type="radio" name="q15" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>16. Cuando veo aspectos de mí mismo/a que no me gustan, me deprimo.</p>
+                    <label><input type="radio" name="q16" value="1"> 1</label>
+                    <label><input type="radio" name="q16" value="2"> 2</label>
+                    <label><input type="radio" name="q16" value="3"> 3</label>
+                    <label><input type="radio" name="q16" value="4"> 4</label>
+                    <label><input type="radio" name="q16" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>17. Cuando me equivoco en algo importante para mí, trato de ver las cosas con perspectiva.</p>
+                    <label><input type="radio" name="q17" value="1"> 1</label>
+                    <label><input type="radio" name="q17" value="2"> 2</label>
+                    <label><input type="radio" name="q17" value="3"> 3</label>
+                    <label><input type="radio" name="q17" value="4"> 4</label>
+                    <label><input type="radio" name="q17" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>18. Cuando realmente estoy en problemas, tiendo a sentir que a otras personas les debe resultar más fácil.</p>
+                    <label><input type="radio" name="q18" value="1"> 1</label>
+                    <label><input type="radio" name="q18" value="2"> 2</label>
+                    <label><input type="radio" name="q18" value="3"> 3</label>
+                    <label><input type="radio" name="q18" value="4"> 4</label>
+                    <label><input type="radio" name="q18" value="5"> 5</label>
+                </div>    
+                <div class="question">
+                    <p>19. Soy amable conmigo mismo/a cuando estoy experimentando sufrimiento.</p>
+                    <label><input type="radio" name="q19" value="1"> 1</label>
+                    <label><input type="radio" name="q19" value="2"> 2</label>
+                    <label><input type="radio" name="q19" value="3"> 3</label>
+                    <label><input type="radio" name="q19" value="4"> 4</label>
+                    <label><input type="radio" name="q19" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>20. Cuando algo me molesta me dejo llevar por mis sentimientos.</p>
+                    <label><input type="radio" name="q20" value="1"> 1</label>
+                    <label><input type="radio" name="q20" value="2"> 2</label>
+                    <label><input type="radio" name="q20" value="3"> 3</label>
+                    <label><input type="radio" name="q20" value="4"> 4</label>
+                    <label><input type="radio" name="q20" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>21. Puedo ser un poco insensible hacia mí mismo/a cuando experimento sufrimiento.</p>
+                    <label><input type="radio" name="q21" value="1"> 1</label>
+                    <label><input type="radio" name="q21" value="2"> 2</label>
+                    <label><input type="radio" name="q21" value="3"> 3</label>
+                    <label><input type="radio" name="q21" value="4"> 4</label>
+                    <label><input type="radio" name="q21" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>22. Cuando me siento deprimido/a trato de observar mis sentimientos con curiosidad y mente abierta.</p>
+                    <label><input type="radio" name="q22" value="1"> 1</label>
+                    <label><input type="radio" name="q22" value="2"> 2</label>
+                    <label><input type="radio" name="q22" value="3"> 3</label>
+                    <label><input type="radio" name="q22" value="4"> 4</label>
+                    <label><input type="radio" name="q22" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>23. Soy intolerante con mis propios defectos y limitaciones.</p>
+                    <label><input type="radio" name="q23" value="1"> 1</label>
+                    <label><input type="radio" name="q23" value="2"> 2</label>
+                    <label><input type="radio" name="q23" value="3"> 3</label>
+                    <label><input type="radio" name="q23" value="4"> 4</label>
+                    <label><input type="radio" name="q23" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>24. Cuando sucede algo doloroso tiendo a exagerar la gravedad del incidente.</p>
+                    <label><input type="radio" name="q24" value="1"> 1</label>
+                    <label><input type="radio" name="q24" value="2"> 2</label>
+                    <label><input type="radio" name="q24" value="3"> 3</label>
+                    <label><input type="radio" name="q24" value="4"> 4</label>
+                    <label><input type="radio" name="q24" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>25. Cuando fallo en algo que es importante para mí, tiendo a sentirme solo en mi fracaso.</p>
+                    <label><input type="radio" name="q25" value="1"> 1</label>
+                    <label><input type="radio" name="q25" value="2"> 2</label>
+                    <label><input type="radio" name="q25" value="3"> 3</label>
+                    <label><input type="radio" name="q25" value="4"> 4</label>
+                    <label><input type="radio" name="q25" value="5"> 5</label>
+                </div>
+                <div class="question">
+                    <p>26. Intento ser comprensivo y paciente con aquellos aspectos de mi personalidad que no me gustan.</p>
+                    <label><input type="radio" name="q26" value="1"> 1</label>
+                    <label><input type="radio" name="q26" value="2"> 2</label>
+                    <label><input type="radio" name="q26" value="3"> 3</label>
+                    <label><input type="radio" name="q26" value="4"> 4</label>
+                    <label><input type="radio" name="q26" value="5"> 5</label>
+                </div>
+               <!-- Botones de navegación -->
+                <div class="navigation-buttons">
+                    <button type="button" id="previousButton">Anterior</button>
+                    <button type="button" id="nextButton">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>       
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const submenu = document.querySelector('.submenu');
+
+    menuToggle.addEventListener('click', () => {
+        submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
+
+    // Funcion que verifica el token y si se contesto el pretest
+    async function verificarAutenticacion() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                console.error("Error en la autenticación:", await response.json());
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            console.log("No hay error con el token")
+        } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html";
+        }
+    }
+
+    // Redirecciones de botones
+    document.getElementById('nextButton').addEventListener('click', () => {
+        //alert('Respuestas guardadas. Continuando al siguiente cuestionario.');
+        window.location.href = 'autocompasion.html'; // Cambiar a la página siguiente
+    });
+
+    document.getElementById('previousButton').addEventListener('click', () => {
+        //alert('Regresando al cuestionario anterior.');
+        window.location.href = 'apoi.html'; // Cambiar a la página anterior
+    });
+    
+    verificarAutenticacion();
+</script>
+</html>

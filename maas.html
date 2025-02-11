@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Atención Plena MAAS</title>
+    <link rel="stylesheet" href="static/styles/formularios.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                &#9776; <!-- Icono de tres rayitas -->
+            </button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="detalles.html">¿Qué es SerenaMente IA?</a></li>
+                    <li><a href="quienessomos.html">¿Quiénes Somos?</a></li>
+                    <li><a href="FAQS.html">FAQ's</a></li>
+                    <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Formulario -->
+    <main>
+        <div class="container">
+            <!-- Barra de progreso -->
+            <div class="progress-container-horizontal">
+                <div class="progress-bar" id="progressBar"></div>
+                <span id="progressText">0%</span>
+            </div>
+            <!-- Título -->
+            <h1>Escala de Atención Plena MAAS</h1>
+            <p>
+                A continuación, aparece un conjunto de afirmaciones sobre su experiencia diaria. Indique con qué frecuencia tiene usted dichas experiencias, de acuerdo a su experiencia real, en vez de lo que su experiencia debería ser.
+            </p>
+            <form id="Mindfulness" action="process.py" method="POST">
+                <!-- Preguntas -->
+                <div class="question">
+                    <p>1. Puedo sentir una emoción y no estar consciente de ella hasta tiempo después.</p>
+                    <label><input type="radio" name="q1" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q1" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q1" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q1" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q1" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q1" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>2. Rompo o derramo cosas por descuido, al no poner atención, o porque estoy pensando en otra cosa.</p>
+                    <label><input type="radio" name="q2" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q2" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q2" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q2" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q2" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q2" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>3. Se me hace difícil permanecer concentrado en lo que está sucediendo en un momento dado.</p>
+                    <label><input type="radio" name="q3" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q3" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q3" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q3" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q3" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q3" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>4. Tiendo a caminar rápidamente para llegar a donde tengo que ir, sin poner mucha atención a lo que ocurre alrededor.</p>
+                    <label><input type="radio" name="q4" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q4" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q4" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q4" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q4" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q4" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>5. Tiendo a no percibir la tensión física o el nivel de incomodidad a que estoy sometido, hasta que realmente son evidentes.</p>
+                    <label><input type="radio" name="q5" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q5" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q5" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q5" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q5" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q5" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>6. Se me olvidan los nombres de las personas, inmediatamente después de que me presentan a alguien.</p>
+                    <label><input type="radio" name="q6" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q6" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q6" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q6" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q6" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q6" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>7. Parece como si estuviera funcionando de manera «automática» sin darme cuenta de lo que estoy haciendo.</p>
+                    <label><input type="radio" name="q7" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q7" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q7" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q7" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q7" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q7" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>8. Me apresuro a hacer mis tareas sin realmente prestarles mucha atención a lo que hago.</p>
+                    <label><input type="radio" name="q8" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q8" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q8" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q8" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q8" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q8" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>9. Me concentro tanto en la meta que quiero alcanzar, que pierdo contacto con lo que estoy haciendo para conseguirla.</p>
+                    <label><input type="radio" name="q9" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q9" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q9" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q9" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q9" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q9" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>10. Realizo trabajos automáticamente, sin ponerle mucha atención a lo que hago.</p>
+                    <label><input type="radio" name="q10" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q10" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q10" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q10" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q10" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q10" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>11. Escucho a mi interlocutor con un oído, mientras hago otra cosa simultáneamente.</p>
+                    <label><input type="radio" name="q11" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q11" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q11" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q11" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q11" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q11" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>12. Llego a un lugar en «piloto automático» y luego me pregunto qué iba a hacer en ese lugar.</p>
+                    <label><input type="radio" name="q12" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q12" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q12" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q12" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q12" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q12" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>13. Me preocupo por cosas que pueden ocurrir en el futuro o por asuntos del pasado.</p>
+                    <label><input type="radio" name="q13" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q13" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q13" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q13" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q13" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q13" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>14. Hago cosas sin ponerles mucha atención.</p>
+                    <label><input type="radio" name="q14" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q14" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q14" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q14" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q14" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q14" value="6"> Casi nunca</label><br>
+                </div>
+
+                <div class="question">
+                    <p>15. Como entre comidas sin estar consciente de que estoy comiendo.</p>
+                    <label><input type="radio" name="q15" value="1"> Casi siempre</label><br>
+                    <label><input type="radio" name="q15" value="2"> Con mucha frecuencia</label><br>
+                    <label><input type="radio" name="q15" value="3"> Con cierta frecuencia</label><br>
+                    <label><input type="radio" name="q15" value="4"> Con poca frecuencia</label><br>
+                    <label><input type="radio" name="q15" value="5"> Con muy poca frecuencia</label><br>
+                    <label><input type="radio" name="q15" value="6"> Casi nunca</label><br>
+                </div>                
+                <!-- Botones de navegación -->
+                <div class="navigation-buttons">
+                    <button type="button" id="previousButton">Anterior</button>
+                    <button type="button" id="nextButton">Siguiente</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>       
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const submenu = document.querySelector('.submenu');
+
+    menuToggle.addEventListener('click', () => {
+        submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
+
+    // Funcion que verifica el token y si se contesto el pretest
+    async function verificarAutenticacion() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                console.error("Error en la autenticación:", await response.json());
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            console.log("No hay error con el token")
+        } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html";
+        }
+    }
+
+    // Redirecciones de botones
+    document.getElementById('nextButton').addEventListener('click', () => {
+        //alert('Respuestas guardadas. Continuando al siguiente cuestionario.');
+        window.location.href = 'apoi.html'; // Cambiar a la página siguiente
+    });
+
+    document.getElementById('previousButton').addEventListener('click', () => {
+        //alert('Regresando al cuestionario anterior.');
+        window.location.href = 'escala_estres.html'; // Cambiar a la página anterior
+    });
+    
+    verificarAutenticacion();
+</script>
+</html>
