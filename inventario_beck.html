@@ -265,7 +265,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
-        const form = document.getElementById("baiForm");
+        const form = document.getElementById("Beck");
         const totalQuestions = document.querySelectorAll(".question").length;
         let answeredQuestions = 0;
 
@@ -280,6 +280,51 @@
         form.addEventListener("change", updateProgress);
     });
 
+     // Funcionalidad calculo de calificacion y 
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Beck'); // Asegúrate de que el ID coincida con tu formulario
+    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
+
+        const formData = new FormData(form);
+        let responses = [];
+        let totalScore = 0;
+
+        for (let i = 1; i <= 21; i++) { // Asumiendo que tienes 21 preguntas
+            let value = formData.get(`q${i}`);
+            if (value) {
+                totalScore += parseInt(value, 10);
+                responses.push({ question: 21+i, answer: value });
+            }
+        }
+
+        // Determinar categoría basada en la calificación total
+        let categoria = "";
+        if (totalScore < 13) {
+            categoria = "Mínima";
+        } else if (totalScore >= 14 && totalScore < 20) {
+            categoria = "Leve";
+        } else if (totalScore >= 20 && totalScore <= 29) {
+            categoria = "Moderada";
+        } else if (totalScore >= 30) {
+            categoria = "Severa";
+        }
+
+        const resultsJSON = {
+            formType: 2,
+            totalScore: totalScore,
+            category: categoria,
+            responses: responses
+        };
+
+        sessionStorage.setItem('Beck_responses', JSON.stringify(resultsJSON));
+        console.log('Datos guardados:', sessionStorage.getItem('Beck_responses'));
+    });
+    });
+
+    // Funcion del menu de hamburguesa
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

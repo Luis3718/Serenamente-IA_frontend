@@ -321,7 +321,7 @@
      document.addEventListener("DOMContentLoaded", function () {
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
-        const form = document.getElementById("baiForm");
+        const form = document.getElementById("Autoform");
         const totalQuestions = document.querySelectorAll(".question").length;
         let answeredQuestions = 0;
 
@@ -336,6 +336,41 @@
         form.addEventListener("change", updateProgress);
     });
     
+    // Funcionalidad calculo de calificacion y 
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Autoform'); // Asegúrate de que el ID coincida con tu formulario
+    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
+
+        const formData = new FormData(form);
+        let responses = [];
+        let totalScore = 0;
+
+        for (let i = 1; i <= 26; i++) { // Asumiendo que tienes 21 preguntas
+            let value = formData.get(`q${i}`);
+            if (value) {
+                totalScore += parseInt(value, 10);
+                responses.push({ question: 89+i, answer: value });
+            }
+        }
+
+        // Determinar categoría basada en la calificación total
+        let categoria = "No aplica";
+
+        const resultsJSON = {
+            formType: 8,
+            totalScore: totalScore,
+            category: categoria,
+            responses: responses
+        };
+
+        sessionStorage.setItem('Autocompacion_responses', JSON.stringify(resultsJSON));
+        console.log('Datos guardados:', sessionStorage.getItem('Autocompacion_responses'));
+    });
+    });
+
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 
@@ -379,7 +414,7 @@
     // Redirecciones de botones
     document.getElementById('nextButton').addEventListener('click', () => {
         //alert('Respuestas guardadas. Continuando al siguiente cuestionario.');
-        window.location.href = 'autocompasion.html'; // Cambiar a la página siguiente
+        window.location.href = 'algo.html'; // Cambiar a la página siguiente
     });
 
     document.getElementById('previousButton').addEventListener('click', () => {

@@ -142,7 +142,7 @@
      document.addEventListener("DOMContentLoaded", function () {
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
-        const form = document.getElementById("baiForm");
+        const form = document.getElementById("Riesgo_suicida");
         const totalQuestions = document.querySelectorAll(".question").length;
         let answeredQuestions = 0;
 
@@ -157,6 +157,58 @@
         form.addEventListener("change", updateProgress);
     });
     
+    // Funcionalidad calculo de calificacion y 
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Riesgo_suicida'); // Asegúrate de que el ID coincida con tu formulario
+    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
+
+        const formData = new FormData(form);
+        let responses = [];
+        let totalScore = 0;
+
+        for (let i = 1; i <= 6; i++) { // Asumiendo que tienes 21 preguntas
+            let value = formData.get(`q${i}`);
+            if (value) {
+                totalScore += parseInt(value, 10);
+                responses.push({ question: 42+i, answer: value });
+            }
+        }
+
+        const q1 = formData.get('q1');
+        const q2 = formData.get('q2');
+        const q3 = formData.get('q3');
+        const q4 = formData.get('q4');
+        const q5 = formData.get('q5');
+        const q6 = formData.get('q6');
+
+        // Determinar categoría basada en la calificación total
+        let categoria = "";
+        if (totalScore <= 0) {
+            categoria = "Nulo";
+        } else if (q1 === '1' || q2 === '1' || q6 === '1') {
+            categoria = "Ligero";
+        } else if (q3 == '1' || q2 == '1' && q3 == '1'){
+            categoria = "Moderado";
+        } else if (q4 == '1' || q5 == '1' || q3 == '1' && q6 == '1'){
+            categoria = "Severa"
+        }
+
+        const resultsJSON = {
+            formType: 3,
+            totalScore: totalScore,
+            category: categoria,
+            responses: responses
+        };
+
+        sessionStorage.setItem('Sucida_responses', JSON.stringify(resultsJSON));
+        console.log('Datos guardados:', sessionStorage.getItem('Suicida_responses'));
+    });
+    });
+
+    // Funcionalid del menu de hamburguesa
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 

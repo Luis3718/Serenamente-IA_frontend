@@ -230,12 +230,12 @@
                 </div>
                 <div class="question">
                     <p>21. Sudoración (no debida al calor)</p>
-                    <label><input type="radio" name="q20" value="0"> 0 - No, en absoluto</label><br>
-                    <label><input type="radio" name="q20" value="1"> 1 - Levemente</label><br>
-                    <label><input type="radio" name="q20" value="2"> 2 - No me molesta mucho</label><br>
-                    <label><input type="radio" name="q20" value="3"> 3 - Moderadamente</label><br>
-                    <label><input type="radio" name="q20" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                    <label><input type="radio" name="q20" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                    <label><input type="radio" name="q21" value="0"> 0 - No, en absoluto</label><br>
+                    <label><input type="radio" name="q21" value="1"> 1 - Levemente</label><br>
+                    <label><input type="radio" name="q21" value="2"> 2 - No me molesta mucho</label><br>
+                    <label><input type="radio" name="q21" value="3"> 3 - Moderadamente</label><br>
+                    <label><input type="radio" name="q21" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
+                    <label><input type="radio" name="q21" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
                 </div>
                 <!-- Botones de navegación -->
                 <div class="navigation-buttons">
@@ -320,6 +320,70 @@
         form.addEventListener("change", updateProgress);
     });
     
+    // Funcionalidad calculo de calificacion y 
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('baiForm'); // Asegúrate de que el ID coincida con tu formulario
+    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
+
+        const formData = new FormData(form);
+        let responses = [];
+        let totalScore = 0;
+
+        for (let i = 1; i <= 21; i++) { // Asumiendo que tienes 21 preguntas
+            let value = formData.get(`q${i}`);
+            if (value) {
+                totalScore += parseInt(value, 10);
+                responses.push({ question: i, answer: value });
+            }
+        }
+
+        // Determinar categoría basada en la calificación total
+        let categoria = "";
+        if (totalScore < 14) {
+            categoria = "Mínima";
+        } else if (totalScore >= 14 && totalScore <= 20) {
+            categoria = "Leve";
+        } else if (totalScore >= 21 && totalScore <= 31) {
+            categoria = "Moderada";
+        } else if (totalScore > 31) {
+            categoria = "Severa";
+        }
+
+        const resultsJSON = {
+            formType: 1,
+            totalScore: totalScore,
+            category: categoria,
+            responses: responses
+        };
+
+        // Guardar en sessionStorage como una cadena JSON
+        sessionStorage.setItem('BAI_responses', JSON.stringify(resultsJSON));
+        console.log('Datos guardados:', sessionStorage.getItem('BAI_responses'));
+
+        // Aquí puedes agregar la lógica para enviar estos datos a tu servidor o base de datos
+        // Ejemplo:
+        // fetch('tu_endpoint_de_API', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(resultsJSON)
+        // })
+        // .then(response => response.json())
+        // .then(data => console.log('Success:', data))
+        // .catch((error) => {
+        //     console.error('Error:', error);
+        // });
+
+        // Opcionalmente, redirigir al usuario a otro lugar o manejar la UI aquí
+    });
+});
+
+
+    // Funcionalidad del menu de hamburguesa
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
 
@@ -329,6 +393,7 @@
 
     document.getElementById("logout").addEventListener("click", function () {
         localStorage.removeItem("token");
+        sessionStorage.clear();
         window.location.href = "login.html";
     });
 
