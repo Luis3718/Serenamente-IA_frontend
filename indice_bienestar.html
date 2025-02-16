@@ -172,7 +172,27 @@
         form.addEventListener("change", updateProgress);
     });
 
-    //
+    // Funcionalidad para extraer el id del token 
+    function getTokenId() {
+    const token = localStorage.getItem("token");
+    if (token) {
+        try {
+            const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            const { id } = JSON.parse(jsonPayload);
+            return id;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+            return null;
+        }
+    }
+    return null;
+    }
+    
     // Funcionalidad calculo de calificacion y 
     document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('Bienestarform'); // Asegúrate de que el ID coincida con tu formulario
@@ -196,13 +216,16 @@
         totalScore = totalScore * 4
         // Determinar categoría basada en la calificación total
         let categoria = "";
-        if (totalScore <= 50) {
+        if (totalScore <= 40) {
             categoria = "Bajo";
+        } else if (totalScore >= 41 && totalScore <= 60){
+            categoria = "Moderado"
         } else if (totalScore > 51) {
             categoria = "Alto";
         } 
 
         const resultsJSON = {
+            ID_Paciente: getTokenId(),
             formType: 4,
             totalScore: totalScore,
             category: categoria,
