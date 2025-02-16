@@ -263,6 +263,18 @@
             </form>
         </div>
     </main>
+
+     <!-- Modal Structure -->
+     <div id="modalAlert" class="modal" style="display:none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; z-index: 1000; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+        <div class="modal-content">
+            <h4>Alerta</h4>
+            <p>Por favor, responde todas las preguntas antes de continuar.</p>
+        </div>
+        <div class="modal-footer">
+            <button id="closeModal" style="padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 5px; cursor: pointer;">Cerrar</button>
+        </div>
+    </div>
+
     <div class="social-bar">
         <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
@@ -433,10 +445,73 @@
         }
     }
 
-    // Redirecciones de botones
-    document.getElementById('nextButton').addEventListener('click', () => {
-        //alert('Respuestas guardadas. Continuando al siguiente cuestionario.');
-        window.location.href = 'algo.html'; // Cambiar a la página siguiente
+    // Funcionalidad formulario completo
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Autoform');
+    const nextButton = document.getElementById('nextButton');
+    const modal = document.getElementById('modalAlert');
+    const closeModalButton = document.getElementById('closeModal');
+
+    // Define globalmente la función para enviar formularios
+    async function enviarFormularios() {
+        // Lista de claves para los formularios almacenados en localStorage
+        const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_responses', 'Autocompacion_responses'];
+        let listaFormularios = [];
+
+        // Cargar formularios del localStorage
+        for (const key of keysFormularios) {
+            const formularioData = sessionStorage.getItem(key);
+            if (formularioData) {
+                listaFormularios.push(JSON.parse(formularioData));
+            }
+        }
+
+        console.log("Datos cargados")
+        console.log(listaFormularios)
+
+        // Función para enviar los datos al servidor
+        for (const resultsJSON of listaFormularios) {
+            try {
+                const response = await fetch('http://localhost:8002/formularios/respuestas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(resultsJSON)
+                });
+                const data = await response.json();
+                //alert('Respuestas guardadas correctamente.');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al guardar las respuestas.');
+            }
+        }
+    }
+
+    function validateForm() {
+        const questions = form.querySelectorAll('.question');
+        for (let question of questions) {
+            const isChecked = question.querySelector('input[type="radio"]:checked');
+            if (!isChecked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (!validateForm()) {
+            modal.style.display = 'block'; // Muestra el modal si el formulario no es válido
+        } else {
+            enviarFormularios();
+            alert('Respuestas guardadas correctamente.');
+        }
+    });
+
+    closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none'; // Oculta el modal cuando el usuario cierra el modal
+    });
     });
 
     document.getElementById('previousButton').addEventListener('click', () => {

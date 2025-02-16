@@ -206,6 +206,18 @@
             </form>
         </div>
     </main>
+
+    <!-- Modal Structure -->
+    <div id="modalAlert" class="modal" style="display:none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; z-index: 1000; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+        <div class="modal-content">
+            <h4>Alerta</h4>
+            <p>Por favor, responde todas las preguntas antes de continuar.</p>
+        </div>
+        <div class="modal-footer">
+            <button id="closeModal" style="padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 5px; cursor: pointer;">Cerrar</button>
+        </div>
+    </div>
+
     <div class="social-bar">
         <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
@@ -387,10 +399,36 @@
         }
     }
 
-    // Redirecciones de botones
-    document.getElementById('nextButton').addEventListener('click', () => {
-        //alert('Respuestas guardadas. Continuando al siguiente cuestionario.');
-        window.location.href = 'riesgo_suicida.html'; // Cambiar a la página siguiente
+    // Funcionalidad formulario completo
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Beck');
+    const nextButton = document.getElementById('nextButton');
+    const modal = document.getElementById('modalAlert');
+    const closeModalButton = document.getElementById('closeModal');
+
+    function validateForm() {
+        const questions = form.querySelectorAll('.question');
+        for (let question of questions) {
+            const isChecked = question.querySelector('input[type="radio"]:checked');
+            if (!isChecked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (!validateForm()) {
+            modal.style.display = 'block'; // Muestra el modal si el formulario no es válido
+        } else {
+            window.location.href = 'riesgo_suicida.html'; // Cambiar a la página siguiente
+        }
+    });
+
+    closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none'; // Oculta el modal cuando el usuario cierra el modal
+    });
     });
 
     document.getElementById('previousButton').addEventListener('click', () => {
