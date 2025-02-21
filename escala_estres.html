@@ -284,22 +284,30 @@
         const formData = new FormData(form);
         let responses = [];
         let totalScore = 0;
+        // preguntas 4, 5, 6, 7, 9, 10, 13
+        const invertedQuestions = [4, 5, 6, 7, 9, 10, 13]; // Preguntas con puntuación invertida
 
-        for (let i = 1; i <= 14; i++) { // Asumiendo que tienes 21 preguntas
+        for (let i = 1; i <= 14; i++) { 
             let value = formData.get(`q${i}`);
             if (value) {
-                totalScore += parseInt(value, 10);
+                // Invertir el valor para preguntas específicas
+                if (invertedQuestions.includes(i)) {
+                    value = 4 - parseInt(value, 10);
+                } else {
+                    value = parseInt(value, 10);
+                }
+                totalScore += value;
                 responses.push({ question: 53+i, answer: value });
             }
         }
 
         // Determinar categoría basada en la calificación total
         let categoria = "";
-        if (totalScore < 18) {
+        if (totalScore <= 18) {
             categoria = "Leve";
         } else if (totalScore >= 19 && totalScore <= 37) {
             categoria = "Moderado";
-        } else if (totalScore > 38) {
+        } else if (totalScore >= 38) {
             categoria = "Alto";
         }
 

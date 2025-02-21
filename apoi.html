@@ -220,40 +220,69 @@
     return null;
     }
 
-    // Funcionalidad calculo de calificacion y 
+    // Funcionalidad calculo de calificacion
     document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('APOIform'); // Asegúrate de que el ID coincida con tu formulario
-    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+        const form = document.getElementById('APOIform'); // Asegúrate de que el ID coincida con tu formulario
+        const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
 
-    nextButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
+        nextButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
 
-        const formData = new FormData(form);
-        let responses = [];
-        let totalScore = 0;
+            // posible modificación a suma de los items 1 6 y 7 actitud desfavorable APOI desfavorable
+            // actitud favorable items 2, 3, 4, 5
 
-        for (let i = 1; i <= 7; i++) { // Asumiendo que tienes 21 preguntas
-            let value = formData.get(`q${i}`);
-            if (value) {
-                totalScore += parseInt(value, 10);
-                responses.push({ question: 82+i, answer: value });
-            }
-        }
+            // Determinar categoría basada en la calificación total
 
-        // Determinar categoría basada en la calificación total
-        let categoria = "No aplica";
+            // Crear un segundo instrumento para el APOI favorable
+            // JSON del APOI desfavorable
+            
+            const formData = new FormData(form);
+            let responsesDes = [];
+            let responsesFav = [];
+            let totalScoreDes = 0;
+            let totalScoreFav = 0;
+            let categoria = "No aplica";
 
-        const resultsJSON = {
-            ID_Paciente: getTokenId(),
-            formType: 7,
-            totalScore: totalScore,
-            category: categoria,
-            responses: responses
-        };
+            let itemsDes = [1, 6, 7];
+            itemsDes.forEach((item, index) => {
+                let value = formData.get(`q${item}`);
+                if (value) {
+                    totalScoreDes += parseInt(value, 10);
+                    responsesDes.push({ question: 82 + index + 1, answer: value });
+                }
+            });
 
-        sessionStorage.setItem('APOI_responses', JSON.stringify(resultsJSON));
-        console.log('Datos guardados:', sessionStorage.getItem('APOI_responses'));
-    });
+            const resultsJSONDes = {
+                ID_Paciente: getTokenId(),
+                formType: 7,
+                totalScore: totalScoreDes,
+                category: categoria,
+                responses: responsesDes
+            };
+
+            sessionStorage.setItem('APOI_desfavorable_responses', JSON.stringify(resultsJSONDes));
+            console.log('Datos guardados:', sessionStorage.getItem('APOI_desfavorable_responses'));
+
+            let itemsFav = [2, 3, 4, 5];
+            itemsFav.forEach((item, index) => {
+                let value = formData.get(`q${item}`);
+                if (value) {
+                    totalScoreFav += parseInt(value, 10);
+                    responsesFav.push({ question: 85 + index + 1, answer: value });
+                }
+            });
+
+            const resultsJSONFav = {
+                ID_Paciente: getTokenId(),
+                formType: 8,
+                totalScore: totalScoreFav,
+                category: categoria,
+                responses: responsesFav
+            };
+
+            sessionStorage.setItem('APOI_favorable_responses', JSON.stringify(resultsJSONFav));
+            console.log('Datos guardados:', sessionStorage.getItem('APOI_favorable_responses'));
+        });
     });
 
     const menuToggle = document.querySelector('.menu-toggle');

@@ -364,7 +364,7 @@
         let responses = [];
         let totalScore = 0;
 
-        for (let i = 1; i <= 21; i++) { // Asumiendo que tienes 21 preguntas
+        for (let i = 1; i <= 21; i++) { 
             let value = formData.get(`q${i}`);
             if (value) {
                 totalScore += parseInt(value, 10);

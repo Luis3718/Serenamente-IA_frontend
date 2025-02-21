@@ -377,24 +377,48 @@
     nextButton.addEventListener('click', function(event) {
         event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
 
+        // Calcular inversos para las preguntas
+        // 1, 2, 4, 6, 8, 11, 13, 16, 18, 20, 21, 24, 25
+        // sumar todo y dividir entre 26 para que el resultado final quede entre 1 y 5
+        // entre 1 y 2.5 es baja autocompasion
+        // mayor a 2.5 hasta 3.5 es moderada 
+        // mayor a 3.5 es alta
+
         const formData = new FormData(form);
         let responses = [];
         let totalScore = 0;
+        const invertedQuestions = [1, 2, 4, 6, 8, 11, 13, 16, 18, 20, 21, 24, 25]; // Preguntas con puntuación invertida
 
-        for (let i = 1; i <= 26; i++) { // Asumiendo que tienes 21 preguntas
+        for (let i = 1; i <= 26; i++) { 
             let value = formData.get(`q${i}`);
             if (value) {
-                totalScore += parseInt(value, 10);
+                // Invertir el valor para preguntas específicas
+                if (invertedQuestions.includes(i)) {
+                    value = 4 - parseInt(value, 10);
+                } else {
+                    value = parseInt(value, 10);
+                }
+                totalScore += value;
                 responses.push({ question: 89+i, answer: value });
             }
         }
 
+        totalScore = totalScore/26
+        
         // Determinar categoría basada en la calificación total
-        let categoria = "No aplica";
+        let categoria = "";
+        if (totalScore >= 1 && totalScore <2.5) {
+            categoria = "Baja";
+        } else if (totalScore >= 2.5 && totalScore < 3.5){
+            categoria = "Moderada"
+        } else if (totalScore >= 3.5) {
+            categoria = "Alta";
+        } 
 
+        // Determinar categoría basada en la calificación total
         const resultsJSON = {
             ID_Paciente: getTokenId(),
-            formType: 8,
+            formType: 9,
             totalScore: totalScore,
             category: categoria,
             responses: responses
@@ -455,7 +479,7 @@
     // Define globalmente la función para enviar formularios
     async function enviarFormularios() {
         // Lista de claves para los formularios almacenados en localStorage
-        const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_responses', 'Autocompacion_responses'];
+        const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Autocompacion_responses'];
         let listaFormularios = [];
 
         // Cargar formularios del localStorage
@@ -506,6 +530,7 @@
         } else {
             enviarFormularios();
             alert('Respuestas guardadas correctamente.');
+            // window.location.href = "resultados.html"
         }
     });
 

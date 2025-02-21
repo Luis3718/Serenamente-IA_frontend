@@ -217,7 +217,7 @@
         let responses = [];
         let totalScore = 0;
 
-        for (let i = 1; i <= 5; i++) { // Asumiendo que tienes 21 preguntas
+        for (let i = 1; i <= 5; i++) { 
             let value = formData.get(`q${i}`);
             if (value) {
                 totalScore += parseInt(value, 10);
@@ -232,7 +232,7 @@
             categoria = "Bajo";
         } else if (totalScore >= 41 && totalScore <= 60){
             categoria = "Moderado"
-        } else if (totalScore > 51) {
+        } else if (totalScore >= 61) {
             categoria = "Alto";
         } 
 

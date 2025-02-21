@@ -201,7 +201,7 @@
         let responses = [];
         let totalScore = 0;
 
-        for (let i = 1; i <= 6; i++) { // Asumiendo que tienes 21 preguntas
+        for (let i = 1; i <= 6; i++) { 
             let value = formData.get(`q${i}`);
             if (value) {
                 totalScore += parseInt(value, 10);
@@ -225,7 +225,7 @@
         } else if (q3 == '1' || q2 == '1' && q3 == '1'){
             categoria = "Moderado";
         } else if (q4 == '1' || q5 == '1' || q3 == '1' && q6 == '1'){
-            categoria = "Severa"
+            categoria = "Severa";
         }
 
         const resultsJSON = {
