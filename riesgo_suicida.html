@@ -218,14 +218,19 @@
 
         // Determinar categoría basada en la calificación total
         let categoria = "";
-        if (totalScore <= 0) {
-            categoria = "Nulo";
-        } else if (q1 === '1' || q2 === '1' || q6 === '1') {
-            categoria = "Ligero";
-        } else if (q3 == '1' || q2 == '1' && q3 == '1'){
-            categoria = "Moderado";
-        } else if (q4 == '1' || q5 == '1' || q3 == '1' && q6 == '1'){
+
+        // Primero evalúa la condición más severa
+        if (q4 == '1' || q5 == '1' || (q3 == '1' && q6 == '1')) {
             categoria = "Severa";
+        } 
+        else if (q3 == '1' || (q2 == '1' && q6 == '1')) {
+            categoria = "Moderado";
+        } 
+        else if (q1 == '1' || q2 == '1' || q6 == '1') {
+            categoria = "Ligero";
+        } 
+        else if (totalScore <= 0) {
+            categoria = "Nulo";
         }
 
         const resultsJSON = {

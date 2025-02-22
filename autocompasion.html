@@ -476,39 +476,64 @@
     const modal = document.getElementById('modalAlert');
     const closeModalButton = document.getElementById('closeModal');
 
-    // Define globalmente la función para enviar formularios
+
     async function enviarFormularios() {
-        // Lista de claves para los formularios almacenados en localStorage
-        const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Autocompacion_responses'];
-        let listaFormularios = [];
+    // Lista de claves para los formularios almacenados en sessionStorage
+    const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Autocompacion_responses'];
+    let listaFormularios = [];
 
-        // Cargar formularios del localStorage
-        for (const key of keysFormularios) {
-            const formularioData = sessionStorage.getItem(key);
-            if (formularioData) {
-                listaFormularios.push(JSON.parse(formularioData));
-            }
+    // Cargar formularios del sessionStorage
+    for (const key of keysFormularios) {
+        const formularioData = sessionStorage.getItem(key);
+        if (formularioData) {
+            listaFormularios.push(JSON.parse(formularioData));
         }
+    }
 
-        console.log("Datos cargados")
-        console.log(listaFormularios)
+    let formulariosEnviados = 0;
 
-        // Función para enviar los datos al servidor
-        for (const resultsJSON of listaFormularios) {
-            try {
-                const response = await fetch('http://localhost:8002/formularios/respuestas', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(resultsJSON)
-                });
-                const data = await response.json();
-                //alert('Respuestas guardadas correctamente.');
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error al guardar las respuestas.');
+    // Función para enviar los datos al servidor
+    for (const resultsJSON of listaFormularios) {
+        try {
+            const response = await fetch('http://localhost:8002/formularios/respuestas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(resultsJSON)
+            });
+            const data = await response.json();
+            formulariosEnviados++;
+
+            // Verifica si todos los formularios han sido enviados antes de evaluar al paciente
+            if (formulariosEnviados === listaFormularios.length) {
+                evaluarPaciente(resultsJSON.ID_Paciente);
             }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al guardar las respuestas.');
+        }
+    }
+    }
+
+    async function evaluarPaciente(idPaciente) {
+        try {
+            const response = await fetch(`http://localhost:8002/formularios/evaluar_paciente/${idPaciente}`);
+            const resultado = await response.json();
+
+            alert(`Evaluación del paciente: ${resultado.status}`);
+            if (resultado.status === "No apto") {
+                // Aquí puedes redirigir a otra página o manejar el caso de "no apto" como prefieras
+                console.log('El paciente no es apto.');
+                console.log(resultado.message);
+                // Redirigir a la pagina de canalizacion
+                
+            }
+            else{
+                // Redirigir a la pagina de resultados
+            }
+        } catch (error) {
+            console.error('Error al evaluar al paciente:', error);
         }
     }
 
@@ -530,7 +555,7 @@
         } else {
             enviarFormularios();
             alert('Respuestas guardadas correctamente.');
-            // window.location.href = "resultados.html"
+            //window.location.href = "resultados.html"
         }
     });
 
