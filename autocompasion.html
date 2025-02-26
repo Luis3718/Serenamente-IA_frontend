@@ -527,10 +527,11 @@
                 console.log('El paciente no es apto.');
                 console.log(resultado.message);
                 // Redirigir a la pagina de canalizacion
-                
+                window.location.href = 'canalizacion.html'; // Cambiar a la página anterior
             }
             else{
                 // Redirigir a la pagina de resultados
+                window.location.href = 'resultados.html'; // Cambiar a la página anterior
             }
         } catch (error) {
             console.error('Error al evaluar al paciente:', error);

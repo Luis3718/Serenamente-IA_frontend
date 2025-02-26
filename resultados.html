@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SerenaMente IA</title>
-    <link rel="stylesheet" href="static/styles/main.css">
+    <link rel="stylesheet" href="static/styles/resultados.css">
 </head>
 <body>
     <!-- Submenú y logo-->
@@ -32,12 +32,33 @@
     <!-- Contenido principal -->
     <main>
         <div class="container">
-            <h1>Bienvenido a SerenaMente IA</h1>
-            <p>
-                Revolucionando la salud mental con inteligencia artificial.
-        </div>
+            <p>Gracias por tus respuestas. Para conocer más sobre tus resultados abre cada campo.</p>
+            <p>Recuerda: Esto no es un diagnóstico psicológico.</p>    
+            <div class="row">
+                <div class="cell" id="cell1">
+                    <h3></h3>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div class="cell" id="cell2">
+                    <h3></h3>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div class="cell" id="cell3">
+                    <h3></h3>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div class="cell" id="cell4">
+                    <h3></h3>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+            </div>
+        </div>        
     </main>
-
+    
     <div class="social-bar">
         <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
@@ -75,8 +96,8 @@
                 <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
             </a>
         </div>
-    </div>       
-
+    </div>
+    
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -93,6 +114,92 @@
     
 </body>
 <script>
+    // Funcion del contenedor
+    const contenido = {
+        tipo1: {
+            titulo: "Ansiedad",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La ansiedad es una emoción natural del cuerpo ante una potencial amenaza interna o externa. Tu resultado indica que es adaptativa y desarrollarás más habilidades emocionales al finalizar SerenaMente IA."
+        },
+        tipo2: {
+            titulo: "Ansiedad",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La ansiedad es una reacción emocional natural que prepara al cuerpo ante un peligro real o percibido. En ocasiones, las señales de alarma se presentan más continua e intensamente."
+        },
+        tipo3: {
+            titulo: "Ansiedad",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "Tus respuestas nos hacen considerar que puedes beneficiarte de un programa psicológico como el que ofrece SerenaMente-IA e incrementes tus recursos para lidiar con estas señales, y así evitar que la ansiedad se vuelva una dificultad en tu vida."
+        },
+        tipo4: {
+            titulo: "Ansiedad",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La ansiedad es una reacción emocional natural del cuerpo, sin embargo, a veces puede ser intensa y compleja de manejar. Tus respuestas nos hacen considerar que te beneficiarías de un programa en SerenaMente IA, orientado a que identifiques y desarrolles estrategias para lidiar y regular tus emociones."
+        },
+        tipo5: {
+            titulo: "Depresión",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La depresión es una condición en la que nos percibimos con menos vitalidad. Actualmente tu puntaje indica que no tienes síntomas significativos, por lo que SerenaMente IA incrementará tu resiliencia y manejo de situaciones difíciles."
+        },
+        tipo6: {
+            titulo: "Depresión",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La depresión es un estado físico y mental en el que tenemos menos vitalidad para realizar nuestras actividades diarias, lo que nos puede conducir a sentirnos abrumados. El programa de SerenaMente IA está diseñado para facilitar el manejo de tus emociones y así evitar que la depresión se convierta en un desafío para tu bienestar."
+        },
+        tipo7: {
+            titulo: "Depresión",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La depresión es un estado físico y mental en el que tenemos menos vitalidad que puede llegar a interferir con las actividades diarias, lo que nos puede conducir a sentirnos abrumados. Tus respuestas nos llevan a pensar que trabajar en la mejora de tu estado emocional podría ser un objetivo valioso. En SerenaMente IA puedes beneficiarte al prácticar estrategias, específica de autocuidado en el momento presente, incrementando la plenitud en tu vida."
+        },
+        tipo8: {
+            titulo: "Depresión",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "La depresión es un estado físico y mental en el que tenemos menos vitalidad que puede llegar a interferir con las actividades diarias, convirtiéndose en un desafío para tu bienestar. Tus respuestas sugieren que el apoyo de un profesional de la salud mental es importante para orientarte en estrategias para manejar tus síntomas. SerenaMente IA ofrece un apoyo preventivo que puede no cubrir tus necesidades personales."
+        },
+        tipo9: {
+            titulo: "Bienestar",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "El bienestar es un estado positivo que refleja nuestra calidad de vida y nuestra capacidad para aportar al mundo, sintiendo que nuestras acciones tienen significado y propósito. Tu puntaje sugiere que tu nivel de bienestar se encuentra por debajo del promedio, por lo que implementar el programa de SerenaMente IA podrás desarrollar estrategias para no quedar atrapado por las experiencias difíciles."
+        },
+        tipo10: {
+            titulo: "Bienestar",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "El bienestar es un estado positivo que refleja nuestra calidad de vida y nuestra capacidad para aportar al mundo, sintiendo que nuestras acciones tienen significado y propósito. Tu puntaje sugiere que tu nivel de bienestar se encuentra por debajo del promedio, por lo que implementar el programa de SerenaMente IA podrás desarrollar estrategias para no quedar atrapado por las experiencias difíciles."
+        },
+        tipo11: {
+            titulo: "Bienestar",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "El bienestar es un estado positivo relacionado a nuestra calidad de vida y a nuestra capacidad para contribuir al mundo con un sentimiento de significado y propósito. Tu nivel de bienestar está por arriba del promedio, pero aún puedes tomar acciones para aumentarlo. En SerenaMente IA encontrarás recursos para cuidar de este estado positivo y cómo incrementarlo."
+        },
+        tipo12: {
+            titulo: "Estrés",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "Sentir estrés es natural en las personas. Contar con habilidades para manejar el estrés de nuestra vida cotidiana está asociado al bienestar físico y mental. Muestras habilidades para hacer frente a las situaciones desafiantes de la vida; sin embargo, fortalecer tus herramientas para manejar el estrés y mejorar tu bienestar emocional contribuirá aún más a tu calidad de vida."
+        },
+        tipo13: {
+            titulo: "Estrés",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "Sentir estrés es natural en las personas porque nos prepara para reaccionar. Cuando es continuado o estamos enfrentando una situación puede incrementarse y llegar a sentirnos abrumados. Tu puntaje sugiere que logras afrontar las situaciones y al completar el programa de SerenaMente IA habrás ampliado tus habilidades para manejar las experiencias con mayor equilibrio sin poner en riesgo tu bienestar emocional."
+        },
+        tipo14: {
+            titulo: "Estrés",
+            imagen: "static/imagenes/tacometro_placeholder.jpg",
+            texto: "Una reacción emocional ante situaciones imprevistas o complejas es el estrés. Cuando el nivel de estrés es alto, se pone en riesgo el bienestar físico y mental. Tus respuestas indican que estás experimentado un nivel de estrés significativo, por lo que es importante que desarrolles y expandas tus recursos y estrategias que te permitan lidiar ante las situaciones estresantes con mayor claridad y menos reactividad."
+        }
+        
+    };
+
+    // Función para actualizar el contenido
+    function actualizarContenido(id, tipo) {
+        const contenedor = document.getElementById(id);
+        if (contenedor && contenido[tipo]) {
+            contenedor.querySelector('h3').textContent = contenido[tipo].titulo;
+            contenedor.querySelector('img').src = contenido[tipo].imagen;
+            contenedor.querySelector('img').alt = contenido[tipo].titulo;
+            contenedor.querySelector('p').textContent = contenido[tipo].texto;
+        }
+    }
+
     // Funcion para el menu de hamburguesa
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
@@ -101,7 +208,7 @@
         submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
     });
 
-    // Funcion del boton logout
+    // Funcion para dar funcionalidad al logout
     document.getElementById("logout").addEventListener("click", function () {
         localStorage.removeItem("token");
         window.location.href = "login.html";
@@ -135,7 +242,48 @@
         }
     }
 
-    verificarAutenticacion();
+    // Funcionalidad para extraer el id del token 
+     function getTokenId() {
+    const token = localStorage.getItem("token");
+    if (token) {
+        try {
+            const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            const { id } = JSON.parse(jsonPayload);
+            return id;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+            return null;
+        }
+    }
+    return null;
+    }
+
+    // Llamado a la funcion para actualizar el BAI
+    actualizarContenido('cell1', 'tipo1');
+    actualizarContenido('cell1', 'tipo2');
+    actualizarContenido('cell1', 'tipo3');
+    actualizarContenido('cell1', 'tipo4');
+
+    // Llamado a la funcion para actualizar el Beck
+    actualizarContenido('cell2', 'tipo5');
+    actualizarContenido('cell2', 'tipo6');
+    actualizarContenido('cell2', 'tipo7');
+    actualizarContenido('cell2', 'tipo8');
+
+    // Llamado a la funcion para actualizar el Indice de bienestar
+    actualizarContenido('cell3', 'tipo9');
+    actualizarContenido('cell3', 'tipo10');
+    actualizarContenido('cell3', 'tipo11');
+
+    // Llamado a la funcion para actualizar la escala de estres
+    actualizarContenido('cell4', 'tipo12');
+    actualizarContenido('cell4', 'tipo13');
+    actualizarContenido('cell4', 'tipo14');
 </script>
 
 </html>
