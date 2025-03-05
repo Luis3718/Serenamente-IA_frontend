@@ -54,7 +54,7 @@
                 </div>
                 <div class="question">
                     <p>2. Durante el último mes, ¿cuánto tiempo ha tardado en dormirse en las noches del último mes? (Apunte el tiempo en minutos)</p>
-                    <input type="number" name="q2" min="0" required>
+                    <input type="number" name="q2" min="0" max="60 "required>
                 </div>
                 <div class="question am-pm">
                     <p>3. Durante el último mes, ¿a qué hora se ha estado levantando por la mañana?</p>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="question">
                     <p>4. ¿Cuántas horas calcula que habrá dormido verdaderamente cada noche durante el último mes? (el tiempo puede ser diferente al que permanezca en la cama) (Apunte las horas que cree haber dormido)</p>
-                    <input type="number" name="q4" min="0" required>
+                    <input type="number" name="q4" min="0" max="24" required>
                 </div>
                 <div class="question">
                     <p>5. Durante el último mes, ¿cuántas veces ha tenido problemas para dormir a causa de:</p>
@@ -245,75 +245,90 @@
     
 </body>
 <script>
-     // Funcionalidad de la barra 
-     document.addEventListener("DOMContentLoaded", function () {
-        const progressBar = document.getElementById("progressBar");
-        const progressText = document.getElementById("progressText");
-        const form = document.getElementById("Sueñoform");
-        const totalQuestions = document.querySelectorAll(".question").length;
+    // Funcionalidad de la barra 
+    document.addEventListener("DOMContentLoaded", function () {
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const form = document.getElementById("Sueñoform");
+    const questions = form.querySelectorAll(".question");
+    let totalQuestions = questions.length;
+
+    function updateProgress() {
         let answeredQuestions = 0;
 
-        function updateProgress() {
-            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
-            answeredQuestions = selectedInputs.length;
-            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
-            progressBar.style.width = `${progressPercentage}%`;
-            progressText.textContent = `${progressPercentage}%`;
-        }
+        // Recorrer cada pregunta y verificar si se ha respondido
+        questions.forEach(question => {
+            // Contar como respondida si alguna opción está seleccionada
+            if (question.querySelector('input[type="radio"]:checked') ||
+                (question.querySelector('input[type="number"]') && question.querySelector('input[type="number"]').value !== "") ||
+                (question.querySelector('input[type="text"]') && question.querySelector('input[type="text"]').value.trim() !== "")) {
+                answeredQuestions += 1;
+            }
+        });
 
-        form.addEventListener("change", updateProgress);
+        const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+        progressBar.style.width = `${progressPercentage}%`;
+        progressText.textContent = `${progressPercentage}%`;
+    }
+
+    // Evento para actualizar la barra de progreso al cambiar cualquier entrada
+    form.addEventListener("change", updateProgress);
+    form.addEventListener("input", updateProgress);
     });
 
-    // Funcionalidad para extraer el id del token 
-    function getTokenId() {
-    const token = localStorage.getItem("token");
-    if (token) {
-        try {
-            const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-
-            const { id } = JSON.parse(jsonPayload);
-            return id;
-        } catch (error) {
-            console.error("Error decoding token:", error);
-            return null;
-        }
-    }
-    return null;
-    }
-    
-    // Funcionalidad calculo de calificacion y 
     document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('Sueñoform'); // Asegúrate de que el ID coincida con tu formulario
-    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+    const form = document.getElementById('Sueñoform');
+    const nextButton = document.getElementById('nextButton');
 
-    nextButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
-
-        const formData = new FormData(form);
-        let responses = [];
-        let totalScore = 0;
-
-        for (let i = 1; i <= 18; i++) { 
-            let value = formData.get(`q${i}`);
-            if (value) {
-                totalScore += parseInt(value, 10);
-                responses.push({ question: 89+i, answer: value });
+    function getTokenId() {
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                const { id } = JSON.parse(jsonPayload);
+                return id;
+            } catch (error) {
+                console.error("Error decoding token:", error);
+                return null;
             }
         }
+        return null;
+    }
 
-        totalScore = totalScore
-        // Determinar categoría basada en la calificación total
-        let categoria = "Sin categoria";
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        let responses = [];
+        const questions = form.querySelectorAll('.question');
+        let index = 90;
+
+        questions.forEach(question => {
+            let inputText = question.querySelector('input[type="text"]');
+            let inputNumber = question.querySelector('input[type="number"]');
+            let inputRadio = question.querySelector('input[type="radio"]:checked');
+
+            let answerValue = inputText ? inputText.value : 
+                              (inputNumber ? inputNumber.value : 
+                              (inputRadio ? inputRadio.value : ""));
+
+            // Para las preguntas con AM/PM, asegúrate de agregar el sufijo adecuado
+            if (question.classList.contains('am-pm') && inputRadio) {
+                answerValue = inputNumber.value + " " + inputRadio.value; // Combina el número con AM o PM
+            }
+
+            responses.push({question: index, answer: answerValue});
+            index++;
+        });
 
         const resultsJSON = {
             ID_Paciente: getTokenId(),
             formType: 9,
-            totalScore: totalScore,
-            category: categoria,
+            totalScore: 0, // actualiza según sea necesario
+            category: "Nulo",
             responses: responses
         };
 
@@ -364,7 +379,7 @@
     }
 
     // Funcionalidad formulario completo
-   document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('Sueñoform');
     const nextButton = document.getElementById('nextButton');
     const modal = document.getElementById('modalAlert');
@@ -372,26 +387,40 @@
 
     function validateForm() {
         const questions = form.querySelectorAll('.question');
-        for (let question of questions) {
-            const isChecked = question.querySelector('input[type="radio"]:checked');
-            if (!isChecked) {
-                return false;
+        let isValid = true;
+
+        questions.forEach(question => {
+            // Verificar inputs de tipo texto y número
+            const textInput = question.querySelector('input[type="text"], input[type="number"]');
+            if (textInput && (textInput.value.trim() === "" || textInput.value == "0")) {
+                isValid = false; // Campo de texto o número vacío o igual a cero
             }
-        }
-        return true;
+
+            // Verificar botones de radio en cada grupo
+            const radios = question.querySelectorAll('input[type="radio"]');
+            if (radios.length > 0) {
+                const radioChecked = Array.from(radios).some(radio => radio.checked);
+                if (!radioChecked) {
+                    isValid = false; // Ningún botón de radio seleccionado en este grupo
+                }
+            }
+        });
+
+        return isValid;
     }
 
     nextButton.addEventListener('click', function(event) {
         event.preventDefault();
         if (!validateForm()) {
-            modal.style.display = 'block'; // Muestra el modal si el formulario no es válido
+            modal.style.display = 'block'; // Mostrar el modal si la validación falla
         } else {
-            window.location.href = 'autocompasion.html'; // Cambiar a la página siguiente
+            modal.style.display = 'none'; // Todo está correcto, se puede proceder
+            window.location.href = 'autocompasion.html'; // Descomentar para redirigir cuando todo esté correcto
         }
     });
 
     closeModalButton.addEventListener('click', function() {
-        modal.style.display = 'none'; // Oculta el modal cuando el usuario cierra el modal
+        modal.style.display = 'none'; // Ocultar el modal cuando se cierra
     });
     });
 

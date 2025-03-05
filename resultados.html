@@ -243,7 +243,7 @@
     }
 
     // Funcionalidad para extraer el id del token 
-     function getTokenId() {
+    function getTokenId() {
     const token = localStorage.getItem("token");
     if (token) {
         try {
@@ -263,27 +263,79 @@
     return null;
     }
 
+    const formularioCellMap = {
+        1: 'cell1',
+        2: 'cell2',
+        4: 'cell3',
+        5: 'cell4'
+    };
+
+    const formulariosMap = {
+        1: { // Asumiendo que el formulario con ID 1 es el BAI
+            'Mínima' : 'tipo1',
+            'Leve': 'tipo2',
+            'Moderada': 'tipo3',
+            'Severa': 'tipo4'
+
+        },
+        2: { 
+            'Mínima' : 'tipo1',
+            'Leve': 'tipo2',
+            'Moderada': 'tipo3',
+            'Severa': 'tipo4'
+
+        },
+        3 : {
+            'Bajo' : 'tipo1',
+            'Moderado' : 'tipo2',
+            'Alto' : 'tipo3'
+        },
+        5 : {
+            'Leve' : 'tipo1',
+            'Moderado': 'tipo2',
+            'Alto': 'tipo3'
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const idPaciente = getTokenId(); // Obtiene el ID del paciente
+    fetch(`http://localhost:8002/formularios/categorias/${idPaciente}`)
+    .then(response => response.json())
+    .then(data => {
+        data.forEach((resultado) => {
+            const formularioId = resultado.ID_Formulario;
+            const cellId = formularioCellMap[formularioId]; // Obtiene el cell correspondiente al ID del formulario
+            const categoria = resultado.Categoria.trim();
+            const tipo = formulariosMap[formularioId][categoria]; // Obtiene el tipo basado en la categoría
+            if (tipo) {
+                actualizarContenido(cellId, tipo); // Actualiza el contenido en el cell correcto
+            }
+        });
+    })
+    .catch(error => console.error('Error al obtener las categorías:', error));
+    });
+
     // Llamado a la funcion para actualizar el BAI
-    actualizarContenido('cell1', 'tipo1');
-    actualizarContenido('cell1', 'tipo2');
-    actualizarContenido('cell1', 'tipo3');
-    actualizarContenido('cell1', 'tipo4');
+    //actualizarContenido('cell1', 'tipo1');
+    //actualizarContenido('cell1', 'tipo2');
+    //actualizarContenido('cell1', 'tipo3');
+    //actualizarContenido('cell1', 'tipo4');
 
     // Llamado a la funcion para actualizar el Beck
-    actualizarContenido('cell2', 'tipo5');
-    actualizarContenido('cell2', 'tipo6');
-    actualizarContenido('cell2', 'tipo7');
-    actualizarContenido('cell2', 'tipo8');
+    //actualizarContenido('cell2', 'tipo5');
+    //actualizarContenido('cell2', 'tipo6');
+    //actualizarContenido('cell2', 'tipo7');
+    //actualizarContenido('cell2', 'tipo8');
 
     // Llamado a la funcion para actualizar el Indice de bienestar
-    actualizarContenido('cell3', 'tipo9');
-    actualizarContenido('cell3', 'tipo10');
-    actualizarContenido('cell3', 'tipo11');
+    //actualizarContenido('cell3', 'tipo9');
+    //actualizarContenido('cell3', 'tipo10');
+    //actualizarContenido('cell3', 'tipo11');
 
     // Llamado a la funcion para actualizar la escala de estres
-    actualizarContenido('cell4', 'tipo12');
-    actualizarContenido('cell4', 'tipo13');
-    actualizarContenido('cell4', 'tipo14');
+    //actualizarContenido('cell4', 'tipo12');
+    //actualizarContenido('cell4', 'tipo13');
+    //actualizarContenido('cell4', 'tipo14');
 </script>
 
 </html>
