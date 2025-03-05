@@ -110,6 +110,7 @@
     gap: 20px;
 }
 
+/* Estilo general del cuerpo */
 body {
     display: flex;
     flex-direction: column;
@@ -124,7 +125,7 @@ body {
     color: #333; /* Texto oscuro */
 }
 
-/* Contenedor principal del body */
+/* Contenedor principal */
 main {
     flex: 1; /* Permite que el footer se ajuste correctamente al fondo */
     display: flex;
@@ -134,6 +135,32 @@ main {
     padding: 40px; /* Espaciado externo */
 }
 
+.question p {
+    font-weight: bold;
+}
+
+.question.am-pm {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    gap: 10px; /* Espacio entre elementos */
+}
+
+.question.am-pm input[type="number"],
+.question.am-pm input[type="radio"] {
+    flex: 0 0 auto; /* No permite que los inputs crezcan o se encojan */
+    margin-right: 10px; /* Espacio a la derecha de cada input */
+}
+
+.question.am-pm label {
+    margin: 0 5px; /* Espacio alrededor de las etiquetas */
+    white-space: nowrap; /* Evita que las etiquetas se partan en líneas */
+}
+
+.question.am-pm input[type="radio"] {
+    margin-top: 0; /* Ajusta el margen superior para mejor alineación */
+}
+
+/* Contenedor del formulario */
 .container {
     background-color: #ffffff; /* Fondo claro para el contenedor */
     padding: 50px; /* Incremento del espaciado interno */
@@ -143,46 +170,141 @@ main {
     max-width: 1000px; /* Aumenta el ancho máximo */
     width: 100%; /* Asegura que sea responsivo */
     min-height: 300px; /* Altura mínima más grande */
-    font-family: Arial, sans-serif; /* Fuente limpia y legible */
     font-size: 16px;
     color: #333; /* Texto oscuro */
+    text-align: justify;
 }
 
-.container .row {
-    display: grid; /* Usamos grid en lugar de flex para tener un control más detallado sobre la cuadrícula */
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
-    gap: 20px; /* Espaciado entre los elementos de la cuadrícula */
-    margin: 20px; /* Margen externo para el contenedor */
+/* Barra de progreso horizontal */
+.progress-container-horizontal {
+    position: sticky; /* Barra fija al desplazar */
+    top: 0; /* Fijada en la parte superior del formulario */
+    width: 100%; /* Ancho completo del formulario */
+    background-color: #f3f3f3; /* Fondo claro */
+    padding: 10px 0; /* Espaciado interno vertical */
+    z-index: 10; /* Prioridad visual */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px; /* Bordes redondeados */
 }
 
-.container .cell {
-    display: flex; /* Flex para organizar imagen y texto */
-    flex-direction: column; /* Elementos en columna */
-    align-items: center; /* Centrar elementos horizontalmente */
-    justify-content: center; /* Centrar elementos verticalmente */
-    padding: 20px; /* Espaciado interno */
-    background-color: #fff; /* Fondo blanco para cada celda */
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Sombra suave para cada celda */
-    border-radius: 8px; /* Bordes redondeados */
+/* Barra de progreso */
+.progress-bar {
+    height: 10px; /* Altura de la barra */
+    background-color: #ffc000; /* Color amarillo */
+    width: 0%; /* Comienza vacía */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: width 0.3s ease; /* Transición suave */
 }
 
-.container img {
-    width: 80%; /* Tamaño de la imagen ajustado al 80% del contenedor */
-    margin-bottom: 15px; /* Margen entre la imagen y el texto */
+/* Texto del porcentaje */
+#progressText {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333; /* Color oscuro */
+    margin-left: 20px; /* Espaciado con la barra */
 }
 
-.container .cell h3 {
-    font-size: 18px; /* Aumentar el tamaño del título si es necesario */
-    color: #333; /* Color del texto para título */
-    margin-bottom: 10px; /* Espacio debajo del título */
+/* Encabezados y párrafos */
+h1{
+    margin-bottom: 23px; /* Espaciado inferior */
+    text-align: justify; /* Texto alineado a la izquierda */
 }
 
-.container .cell p {
-    font-size: 16px; /* Tamaño de la fuente para el texto */
-    text-align: center; /* Texto centrado */
-    color: #666; /* Color del texto más suave */
+/* Preguntas */
+p {
+    margin-bottom: 2px; /* Espaciado inferior entre preguntas */
+    text-align: justify;
 }
 
+/* Opciones */
+label {
+    display: block; /* Cada opción ocupa una línea */
+    margin-bottom: 1px; /* Espaciado inferior entre opciones */
+}
+
+/* Botones de navegación */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between; /* Separación uniforme */
+    margin-top: 20px; /* Espaciado superior */
+}
+
+/* Estilo de botones */
+button {
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #ffc000; /* Fondo amarillo */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Indicador de clic */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+}
+
+button:hover {
+    background-color: #ff9800; /* Color más oscuro al pasar el cursor */
+}
+
+/* Estilos para el fondo oscurecido detrás del modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
+    z-index: 999; /* Asegura que el fondo esté detrás del modal pero sobre otros elementos */
+    display: none; /* Oculto por defecto */
+}
+
+/* Estilos para el modal */
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Asegura que el modal esté sobre el fondo oscurecido */
+    width: 90%; /* O ajusta según la anchura deseada */
+    max-width: 500px; /* Máxima anchura del modal */
+    display: none; /* Oculto por defecto */
+}
+
+/* Estilos para la cabecera del modal */
+.modal-content h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Estilos para el contenido del modal */
+.modal-content {
+    padding: 20px;
+    text-align: center; /* Centra el texto del modal */
+}
+
+/* Estilos para el pie del modal */
+.modal-footer {
+    text-align: right;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+/* Botón para cerrar el modal */
+#closeModal {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
 .social-bar {
     position: fixed;

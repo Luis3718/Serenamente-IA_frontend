@@ -418,7 +418,7 @@
         // Determinar categoría basada en la calificación total
         const resultsJSON = {
             ID_Paciente: getTokenId(),
-            formType: 9,
+            formType: 10,
             totalScore: totalScore,
             category: categoria,
             responses: responses
@@ -479,7 +479,7 @@
 
     async function enviarFormularios() {
     // Lista de claves para los formularios almacenados en sessionStorage
-    const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Autocompacion_responses'];
+    const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Sueño_responses', 'Autocompacion_responses'];
     let listaFormularios = [];
 
     // Cargar formularios del sessionStorage
@@ -556,7 +556,6 @@
         } else {
             enviarFormularios();
             alert('Respuestas guardadas correctamente.');
-            //window.location.href = "resultados.html"
         }
     });
 
@@ -566,8 +565,7 @@
     });
 
     document.getElementById('previousButton').addEventListener('click', () => {
-        //alert('Regresando al cuestionario anterior.');
-        window.location.href = 'apoi.html'; // Cambiar a la página anterior
+        window.location.href = 'indice_calidad_sueño.html'; // Cambiar a la página anterior
     });
     
     verificarAutenticacion();

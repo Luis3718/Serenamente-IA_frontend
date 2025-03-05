@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de Bienestar General-5 (WBI5)</title>
+    <link rel="stylesheet" href="static/styles/formulario_sueño.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                &#9776; <!-- Icono de tres rayitas -->
+            </button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="detalles.html">¿Qué es SerenaMente IA?</a></li>
+                    <li><a href="quienessomos.html">¿Quiénes Somos?</a></li>
+                    <li><a href="FAQS.html">FAQ's</a></li>
+                    <li><a href="#" id="logout">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Formulario -->
+    <main>
+        <div class="container">
+            <!-- Barra de progreso -->
+            <div class="progress-container-horizontal">
+                <div class="progress-bar" id="progressBar"></div>
+                <span id="progressText">0%</span>
+            </div>
+            <!-- Título -->
+            <h1>Índice de Calidad de Sueño de Pittsburgh</h1>
+            <p>
+                Las siguientes preguntas hacen referencia a la manera en que ha dormido durante el último mes. Intente responder de la manera más exacta posible lo ocurrido durante  <u>la mayor parte de los días y noches del último mes.</u>
+            </p>
+            <form id="Sueñoform">
+                <!-- Preguntas -->
+                <div class="question am-pm">
+                    <p>1. Durante el último mes, ¿cuál ha sido, usualmente, su hora de acostarse?</p>
+                    <input type="number" name="q1_hour" min="1" max="12" required>
+                    <input type="radio" name="q1_ampm" value="AM" id="q1_am" required>
+                    <label for="q1_am">AM</label>
+                    <input type="radio" name="q1_ampm" value="PM" id="q1_pm" required>
+                    <label for="q1_pm">PM</label>
+                </div>
+                <div class="question">
+                    <p>2. Durante el último mes, ¿cuánto tiempo ha tardado en dormirse en las noches del último mes? (Apunte el tiempo en minutos)</p>
+                    <input type="number" name="q2" min="0" required>
+                </div>
+                <div class="question am-pm">
+                    <p>3. Durante el último mes, ¿a qué hora se ha estado levantando por la mañana?</p>
+                    <input type="number" name="q3_hour" min="1" max="12" required>
+                    <input type="radio" name="q3_ampm" value="AM" id="q3_am" required>
+                    <label for="q3_am">AM</label>
+                    <input type="radio" name="q3_ampm" value="PM" id="q3_pm" required>
+                    <label for="q3_pm">PM</label>
+                </div>
+                <div class="question">
+                    <p>4. ¿Cuántas horas calcula que habrá dormido verdaderamente cada noche durante el último mes? (el tiempo puede ser diferente al que permanezca en la cama) (Apunte las horas que cree haber dormido)</p>
+                    <input type="number" name="q4" min="0" required>
+                </div>
+                <div class="question">
+                    <p>5. Durante el último mes, ¿cuántas veces ha tenido problemas para dormir a causa de:</p>
+                    <input type="text" name="q5" required>
+                </div>
+                <div class="question">
+                    <p>6. No poder conciliar el sueño en la primera media hora:</p>
+                    <label><input type="radio" name="q6" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q6" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q6" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q6" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>7. Despertarse durante la noche o de madrugada:</p>
+                    <label><input type="radio" name="q7" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q7" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q7" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q7" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>8. Tener que levantarse para ir al sanitario:</p>
+                    <label><input type="radio" name="q8" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q8" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q8" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q8" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>9. No poder respirar bien:</p>
+                    <label><input type="radio" name="q9" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q9" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q9" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q9" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>10. Toser o roncar ruidosamente:</p>
+                    <label><input type="radio" name="q10" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q10" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q10" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q10" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>11. Sentir frío:</p>
+                    <label><input type="radio" name="q11" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q11" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q11" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q11" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>12. Sentir demasiado calor:</p>
+                    <label><input type="radio" name="q12" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q12" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q12" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q12" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>13. Tener pesadillas o “malos sueños”</p>
+                    <label><input type="radio" name="q13" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q13" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q13" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q13" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>14. Sufrir dolores:</p>
+                    <label><input type="radio" name="q14" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q14" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q14" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q14" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>15. Otras razones:</p>
+                    <label><input type="radio" name="q15" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q15" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q15" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q15" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>16. Durante el último mes ¿cómo valoraría, en conjunto, la calidad de su dormir?</p>
+                    <label><input type="radio" name="q16" value="0"> 0 - Bastante buena</label><br>
+                    <label><input type="radio" name="q16" value="1"> 1 - Buena</label><br>
+                    <label><input type="radio" name="q16" value="2"> 2 - Mala</label><br>
+                    <label><input type="radio" name="q16" value="3"> 3 - Bastante mala</label><br>
+                </div>
+                <div class="question">
+                    <p>17. Durante el último mes, ¿cuántas veces habrá tomado medicinas (por su cuenta o recetadas por el médico) para dormir?</p>
+                    <label><input type="radio" name="q17" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q17" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q17" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q17" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>18. Durante el último mes, ¿cuántas veces ha sentido somnolencia mientras conducía, comía o desarrollaba alguna otra actividad?</p>
+                    <label><input type="radio" name="q18" value="0"> 0 - Ninguna vez en el último mes</label><br>
+                    <label><input type="radio" name="q18" value="1"> 1 - Menos de una vez a la semana</label><br>
+                    <label><input type="radio" name="q18" value="2"> 2 - Una o dos veces a la semana</label><br>
+                    <label><input type="radio" name="q18" value="3"> 3 - Tres o más veces a la semana</label><br>
+                </div>
+                <div class="question">
+                    <p>19. Durante el último mes, ¿ha representado para usted mucho problema el “tener ánimos” para realizar alguna de las actividades detalladas en la pregunta anterior?</p>
+                    <label><input type="radio" name="q19" value="0"> 0 - Ningún problema</label><br>
+                    <label><input type="radio" name="q19" value="1"> 1 - Un problema muy ligero</label><br>
+                    <label><input type="radio" name="q19" value="2"> 2 - Algo de problema</label><br>
+                    <label><input type="radio" name="q19" value="3"> 3 - Un gran problema</label><br>
+                </div>
+                <!-- Botones de navegación -->
+                <div class="navigation-buttons">
+                    <button type="button" id="previousButton">Anterior</button>
+                    <button type="button" id="nextButton">Siguiente</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+     <!-- Modal Structure -->
+     <div id="modalAlert" class="modal" style="display:none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; z-index: 1000; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+        <div class="modal-content">
+            <h4>Alerta</h4>
+            <p>Por favor, responde todas las preguntas antes de continuar.</p>
+        </div>
+        <div class="modal-footer">
+            <button id="closeModal" style="padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 5px; cursor: pointer;">Cerrar</button>
+        </div>
+    </div>
+
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>       
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+<script>
+     // Funcionalidad de la barra 
+     document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const form = document.getElementById("Sueñoform");
+        const totalQuestions = document.querySelectorAll(".question").length;
+        let answeredQuestions = 0;
+
+        function updateProgress() {
+            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
+            answeredQuestions = selectedInputs.length;
+            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        form.addEventListener("change", updateProgress);
+    });
+
+    // Funcionalidad para extraer el id del token 
+    function getTokenId() {
+    const token = localStorage.getItem("token");
+    if (token) {
+        try {
+            const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            const { id } = JSON.parse(jsonPayload);
+            return id;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+            return null;
+        }
+    }
+    return null;
+    }
+    
+    // Funcionalidad calculo de calificacion y 
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Sueñoform'); // Asegúrate de que el ID coincida con tu formulario
+    const nextButton = document.getElementById('nextButton'); // ID de tu botón de navegación
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Previene la recarga de la página que podría ocurrir al enviar un formulario
+
+        const formData = new FormData(form);
+        let responses = [];
+        let totalScore = 0;
+
+        for (let i = 1; i <= 18; i++) { 
+            let value = formData.get(`q${i}`);
+            if (value) {
+                totalScore += parseInt(value, 10);
+                responses.push({ question: 89+i, answer: value });
+            }
+        }
+
+        totalScore = totalScore
+        // Determinar categoría basada en la calificación total
+        let categoria = "Sin categoria";
+
+        const resultsJSON = {
+            ID_Paciente: getTokenId(),
+            formType: 9,
+            totalScore: totalScore,
+            category: categoria,
+            responses: responses
+        };
+
+        sessionStorage.setItem('Sueño_responses', JSON.stringify(resultsJSON));
+        console.log('Datos guardados:', sessionStorage.getItem('Sueño_responses'));
+    });
+    });
+
+    // Funcionalidad del menu de hamburguesa
+    const menuToggle = document.querySelector('.menu-toggle');
+    const submenu = document.querySelector('.submenu');
+
+    menuToggle.addEventListener('click', () => {
+        submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    });
+
+    // Funcion que verifica el token y si se contesto el pretest
+    async function verificarAutenticacion() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+                method: "GET",
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                console.error("Error en la autenticación:", await response.json());
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+                return;
+            }
+
+            console.log("No hay error con el token")
+        } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html";
+        }
+    }
+
+    // Funcionalidad formulario completo
+   document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('Sueñoform');
+    const nextButton = document.getElementById('nextButton');
+    const modal = document.getElementById('modalAlert');
+    const closeModalButton = document.getElementById('closeModal');
+
+    function validateForm() {
+        const questions = form.querySelectorAll('.question');
+        for (let question of questions) {
+            const isChecked = question.querySelector('input[type="radio"]:checked');
+            if (!isChecked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    nextButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (!validateForm()) {
+            modal.style.display = 'block'; // Muestra el modal si el formulario no es válido
+        } else {
+            window.location.href = 'autocompasion.html'; // Cambiar a la página siguiente
+        }
+    });
+
+    closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none'; // Oculta el modal cuando el usuario cierra el modal
+    });
+    });
+
+    document.getElementById('previousButton').addEventListener('click', () => {
+        //alert('Regresando al cuestionario anterior.');
+        window.location.href = 'apoi.html'; // Cambiar a la página anterior
+    });
+    
+    //verificarAutenticacion();
+</script>
+</html>
