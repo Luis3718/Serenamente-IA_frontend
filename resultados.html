@@ -33,7 +33,7 @@
     <main>
         <div class="container">
             <p>Gracias por tus respuestas. Para conocer más sobre tus resultados abre cada campo.</p>
-            <p>Recuerda: Esto no es un diagnóstico psicológico.</p>    
+            <p><b>Recuerda: Esto no es un diagnóstico psicológico.</b></p>    
             <div class="row">
                 <div class="cell" id="cell1">
                     <h3></h3>
@@ -45,12 +45,12 @@
                     <img src="" alt="">
                     <p></p>
                 </div>
-                <div class="cell" id="cell3">
+                <div class="cell" id="cell4">
                     <h3></h3>
                     <img src="" alt="">
                     <p></p>
                 </div>
-                <div class="cell" id="cell4">
+                <div class="cell" id="cell5">
                     <h3></h3>
                     <img src="" alt="">
                     <p></p>
@@ -118,7 +118,7 @@
     const contenido = {
         tipo1: {
             titulo: "Ansiedad",
-            imagen: "static/imagenes/1_4.jpg",
+            imagen: "static/imagenes/1_4.svg",
             texto: "La ansiedad es una emoción natural del cuerpo ante una potencial amenaza interna o externa. Tu resultado indica que es adaptativa y desarrollarás más habilidades emocionales al finalizar SerenaMente IA."
         },
         tipo2: {
@@ -191,13 +191,15 @@
 
     // Función para actualizar el contenido
     function actualizarContenido(id, tipo) {
-        const contenedor = document.getElementById(id);
-        if (contenedor && contenido[tipo]) {
-            contenedor.querySelector('h3').textContent = contenido[tipo].titulo;
-            contenedor.querySelector('img').src = contenido[tipo].imagen;
-            contenedor.querySelector('img').alt = contenido[tipo].titulo;
-            contenedor.querySelector('p').textContent = contenido[tipo].texto;
-        }
+    const contenedor = document.getElementById(id);
+    if (contenedor && contenido[tipo]) {
+        contenedor.querySelector('h3').textContent = contenido[tipo].titulo;
+        contenedor.querySelector('img').src = contenido[tipo].imagen;
+        contenedor.querySelector('img').alt = contenido[tipo].titulo;
+        contenedor.querySelector('p').textContent = contenido[tipo].texto;
+    } else {
+        console.error('No se encontró el tipo o el contenedor:', id, tipo);
+    }
     }
 
     // Funcion para el menu de hamburguesa
@@ -263,79 +265,41 @@
     return null;
     }
 
-    const formularioCellMap = {
-        1: 'cell1',
-        2: 'cell2',
-        4: 'cell3',
-        5: 'cell4'
-    };
-
-    const formulariosMap = {
-        1: { // Asumiendo que el formulario con ID 1 es el BAI
-            'Mínima' : 'tipo1',
-            'Leve': 'tipo2',
-            'Moderada': 'tipo3',
-            'Severa': 'tipo4'
-
-        },
-        2: { 
-            'Mínima' : 'tipo1',
-            'Leve': 'tipo2',
-            'Moderada': 'tipo3',
-            'Severa': 'tipo4'
-
-        },
-        3 : {
-            'Bajo' : 'tipo1',
-            'Moderado' : 'tipo2',
-            'Alto' : 'tipo3'
-        },
-        5 : {
-            'Leve' : 'tipo1',
-            'Moderado': 'tipo2',
-            'Alto': 'tipo3'
-        }
-    };
-
+    // Funcion para obtener la categoria
     document.addEventListener('DOMContentLoaded', function() {
-    const idPaciente = getTokenId(); // Obtiene el ID del paciente
+    const idPaciente = getTokenId(); // Asegúrate de que esta función extrae correctamente el ID del token
     fetch(`http://localhost:8002/formularios/categorias/${idPaciente}`)
     .then(response => response.json())
     .then(data => {
         data.forEach((resultado) => {
             const formularioId = resultado.ID_Formulario;
-            const cellId = formularioCellMap[formularioId]; // Obtiene el cell correspondiente al ID del formulario
             const categoria = resultado.Categoria.trim();
-            const tipo = formulariosMap[formularioId][categoria]; // Obtiene el tipo basado en la categoría
-            if (tipo) {
-                actualizarContenido(cellId, tipo); // Actualiza el contenido en el cell correcto
+            const cellId = `cell${formularioId}`;
+            let tipo;
+            switch(formularioId) {
+                case 1:
+                    tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 1; // Asume tipo1 a tipo4
+                    actualizarContenido(cellId, `tipo${tipo}`);
+                    break;
+                case 2:
+                    tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 5; // Asume tipo5 a tipo8
+                    actualizarContenido(cellId, `tipo${tipo}`);
+                    break;
+                case 4:
+                    tipo = ['Bajo', 'Moderado', 'Alto'].indexOf(categoria) + 9; // Asume tipo9 a tipo11
+                    actualizarContenido(cellId, `tipo${tipo}`);
+                    break;
+                case 5:
+                    tipo = ['Leve', 'Moderado', 'Alto'].indexOf(categoria) + 12; // Asume tipo12 a tipo14
+                    actualizarContenido(cellId, `tipo${tipo}`);
+                    break;
+                default:
+                    console.log('Formulario no reconocido');
             }
         });
     })
     .catch(error => console.error('Error al obtener las categorías:', error));
     });
-
-    // Llamado a la funcion para actualizar el BAI
-    //actualizarContenido('cell1', 'tipo1');
-    //actualizarContenido('cell1', 'tipo2');
-    //actualizarContenido('cell1', 'tipo3');
-    //actualizarContenido('cell1', 'tipo4');
-
-    // Llamado a la funcion para actualizar el Beck
-    //actualizarContenido('cell2', 'tipo5');
-    //actualizarContenido('cell2', 'tipo6');
-    //actualizarContenido('cell2', 'tipo7');
-    //actualizarContenido('cell2', 'tipo8');
-
-    // Llamado a la funcion para actualizar el Indice de bienestar
-    //actualizarContenido('cell3', 'tipo9');
-    //actualizarContenido('cell3', 'tipo10');
-    //actualizarContenido('cell3', 'tipo11');
-
-    // Llamado a la funcion para actualizar la escala de estres
-    //actualizarContenido('cell4', 'tipo12');
-    //actualizarContenido('cell4', 'tipo13');
-    //actualizarContenido('cell4', 'tipo14');
 </script>
 
 </html>
