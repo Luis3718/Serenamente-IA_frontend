@@ -518,23 +518,13 @@
 
     async function evaluarPaciente(idPaciente) {
         try {
-            const response = await fetch(`http://localhost:8002/formularios/evaluar_paciente/${idPaciente}`);
-            const resultado = await response.json();
-
-            alert(`Evaluación del paciente: ${resultado.status}`);
-            if (resultado.status === "No apto") {
-                // Aquí puedes redirigir a otra página o manejar el caso de "no apto" como prefieras
-                console.log('El paciente no es apto.');
-                console.log(resultado.message);
-                // Redirigir a la pagina de canalizacion
-                window.location.href = 'canalizacion.html'; // Cambiar a la página anterior
-            }
-            else{
-                // Redirigir a la pagina de resultados
-                window.location.href = 'resultados.html'; // Cambiar a la página anterior
-            }
+            const response = await fetch(`http://localhost:8002/formularios/contestar_pretest/${idPaciente}`, {
+                method: 'POST' 
+            });
+            // Redirigir a la página de resultados
+            window.location.href = 'resultados.html';
         } catch (error) {
-            console.error('Error al evaluar al paciente:', error);
+            console.error('Error al marcar el pretest como completado', error);
         }
     }
 
@@ -567,7 +557,7 @@
     document.getElementById('previousButton').addEventListener('click', () => {
         window.location.href = 'indice_calidad_sueño.html'; // Cambiar a la página anterior
     });
-    
+
     verificarAutenticacion();
 </script>
 </html>
