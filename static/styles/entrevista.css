@@ -145,16 +145,19 @@ main {
 }
 
 .container {
+    align-items: center; /* Centra los elementos verticalmente */
     background-color: #ffffff; /* Fondo claro para el contenedor */
     padding: 50px; /* Incremento del espaciado interno */
     border-radius: 10px; /* Bordes redondeados */
     position: relative;
+    display: flex; /* Utiliza flexbox para organizar los hijos internos */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.749);
     max-width: 1000px; /* Aumenta el ancho máximo */
     width: 100%; /* Asegura que sea responsivo */
     min-height: 300px; /* Altura mínima más grande */
     font-family: Arial, sans-serif; /* Fuente limpia y legible */
     font-size: 16px;
+    padding: 20px; /* Proporciona algo de espacio alrededor */
     color: #333; /* Texto oscuro */
 }
 
@@ -168,6 +171,24 @@ main {
     flex-direction: column;
     overflow: hidden;
 }
+
+.mascota-container {
+    position: absolute;
+    top: 50%; /* Ajustar para alinear verticalmente */
+    right: 25%; /* Ajustar para alinear horizontalmente a la derecha */
+    transform: translate(50%, -50%); /* Ajusta esto para centrar exactamente donde deseas */
+    width: 250px; /* Establece un ancho fijo */
+    height: 250px; /* Establece una altura fija */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mascota-imagen {
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
 .chatbot-header {
     background-color: #ffc000;
     color: #fff;
@@ -185,6 +206,7 @@ main {
     display: flex;
     flex-direction: column;
 }
+
 .mensaje-bot {
     background-color: #e0e0e0;
     padding: 10px;
@@ -194,6 +216,7 @@ main {
     text-align: justify;
     margin-bottom: 10px;
 }
+
 .mensaje-usuario {
     background-color: #ffc000;
     padding: 10px;
@@ -421,6 +444,23 @@ footer {
         border-radius: 6px; /* Ajustar bordes */
     }
 
+    .mascota-container {
+        position: absolute;
+        top: 50%; /* Ajustar para alinear verticalmente */
+        right: 25%; /* Ajustar para alinear horizontalmente a la derecha */
+        transform: translate(50%, -50%); /* Ajusta esto para centrar exactamente donde deseas */
+        width: 150px; /* Establece un ancho fijo */
+        height: 150px; /* Establece una altura fija */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .mascota-imagen {
+        width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+    }
+
 }
 
 /* Media query para pantallas pequeñas */
@@ -506,4 +546,24 @@ footer {
         max-height: 50px; /* Tamaño más pequeño para móvil */
         max-width: 50px;
     }
+
+    .mascota-container {
+        position: absolute;
+        top: 2.5%;  /* Posición arriba del todo dentro del contenedor principal */
+        left: 50%;  /* Centrado horizontal */
+        transform: translateX(-50%);  /* Ajuste fino para centrar exactamente la imagen */
+        width: 80px;  /* Tamaño más pequeño para no ocupar mucho espacio */
+        height: 80px;  /* Mantiene la proporción de la imagen */
+        z-index: 10;  /* Asegura que se muestre sobre otros elementos si es necesario */
+    }
+
+    .mascota-imagen {
+        width: 100%;  /* La imagen ocupa todo el ancho del contenedor */
+        height: auto;  /* Mantiene la proporción de la imagen */
+    }
+
+    .chatbot-container {
+        margin-top: 90px;  /* Añade margen arriba para no solapar el chatbot con la imagen de la mascota */
+    }
+
 }
