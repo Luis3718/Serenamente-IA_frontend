@@ -101,83 +101,6 @@
     
 </body>
 <script>
-    // Funcionalidad del chatbot
-    const messagesContainer = document.getElementById("mensajes-de-chat");
-    const optionsContainer = document.getElementById("opciones-contenedor");
-    const sendButton = document.getElementById("boton-enviar");
-
-    const preguntas = [
-        { text: "¡Hola! Soy Serenito y te doy la bienvenida a SerenaMente IA. Nuestro objetivo es ayudar a tu bienestar a través del mindfulness. Antes de iniciar tu plan de práctica quisiera preguntarte algunas cosas, te pido que contestes de manera clara y honestamente, que me permitan identificar tus características y necesidades para un plan a tu medida. ¿Te parece si comenzamos?", opciones: ["Sí", "No"] },
-        { text: "¿Has estado en terapia psicológica previamente?", opciones: ["Sí", "No"] },
-        { text: "¿Cuánto tiempo dedicas a la semana a tu salud emocional?", opciones: ["0-5 horas", "5-10 horas", "11-30 horas", "Más de 30 horas"] },
-        { text: "¿Sabes lo que es el mindfulness o atención plena?", opciones: ["Sí", "No"] },
-        { text: "¿Has practicado mindfulness?", opciones: ["Sí", "No"] },
-        { text: "¿Qué es lo más desafiante para ti al practicar mindfulness?", opciones: ["Tiempo", "Atención", "Preocupaciones", "Otro"] },
-        { text: "¿Qué te gustaría mejorar con mindfulness?", opciones: ["Estrés", "Autoconfianza", "Ansiedad", "Concentración"] }
-    ];
-    
-    let preguntaActual = 0;
-
-    // Funcion de animacion de escritura
-    function typeMessage(text, isUser) {
-    const messageElement = document.createElement("div");
-    messageElement.classList.add(isUser ? "mensaje-usuario" : "mensaje-bot");
-    messagesContainer.appendChild(messageElement);
-
-    let i = 0;
-    const typingInterval = setInterval(() => {
-        if (i < text.length) {
-            // Añade un carácter a la vez, incluyendo espacios y saltos de línea
-            messageElement.textContent += text.charAt(i);
-            i++;
-        } else {
-            clearInterval(typingInterval);
-            // Remueve el cursor parpadeante al final
-            messageElement.style.borderRight = 'none';
-        }
-        // Asegura que el contenedor de mensajes siempre muestre la parte más reciente del mensaje
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 50); // Velocidad de tipeo, ajusta según necesites más rápido o más lento
-    }
-
-
-    function addMessage(content, isUser) {
-        typeMessage(content, isUser);
-    }
-
-    function showOptions() {
-        optionsContainer.innerHTML = "";
-        if (preguntaActual < preguntas.length) {
-            addMessage(preguntas[preguntaActual].text, false);
-            preguntas[preguntaActual].opciones.forEach(opcion => {
-                const etiqueta = document.createElement("label");
-                etiqueta.classList.add("opcion-etiqueta");
-                const entrada = document.createElement("input");
-                entrada.type = "radio";
-                entrada.name = "opcion-de-pregunta";
-                entrada.value = opcion;
-                etiqueta.appendChild(entrada);
-                etiqueta.append(opcion);
-                optionsContainer.appendChild(etiqueta);
-            });
-        } else {
-            addMessage("¡Gracias por responder! Vamos a preparar tu plan de mindfulness.", false);
-            sendButton.disabled = true;
-        }
-    }
-
-    sendButton.addEventListener("click", function() {
-        const selectedOption = document.querySelector('input[name="opcion-de-pregunta"]:checked');
-        if (selectedOption) {
-            addMessage(selectedOption.value, true);
-            preguntaActual++;
-            setTimeout(showOptions, 800);
-        }
-    });
-
-    showOptions();
-
-
     // Funcion para el menu de hamburguesa
     const menuToggle = document.querySelector('.menu-toggle');
     const submenu = document.querySelector('.submenu');
@@ -241,7 +164,107 @@
     return null;
     }
 
-    //verificarAutenticacion();
-</script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messagesContainer = document.getElementById("mensajes-de-chat");
+        const optionsContainer = document.getElementById("opciones-contenedor");
+        const sendButton = document.getElementById("boton-enviar");
+    
+        let preguntaActual = 0;
+        const responses = []; // Arreglo para guardar las respuestas
+    
+        const preguntas = [
+            { text: "¡Hola! Soy Serenito y te doy la bienvenida a SerenaMente IA. Nuestro objetivo es ayudar a tu bienestar a través del mindfulness. Antes de iniciar tu plan de práctica quisiera preguntarte algunas cosas, te pido que contestes de manera clara y honestamente, que me permitan identificar tus características y necesidades para un plan a tu medida. ¿Te parece si comenzamos?", opciones: ["Sí", "No"] },
+            { text: "¿Has estado en terapia psicológica previamente?", opciones: ["Sí", "No"] },
+            { text: "¿Cuánto tiempo dedicas a la semana a tu salud emocional?", opciones: ["0-5 horas", "5-10 horas", "11-30 horas", "Más de 30 horas"] },
+            { text: "¿Sabes lo que es el mindfulness o atención plena?", opciones: ["Sí", "No"] },
+            { text: "¿Has practicado mindfulness?", opciones: ["Sí", "No"] },
+            { text: "¿Qué es lo más desafiante para ti al practicar mindfulness?", opciones: ["Tiempo", "Atención", "Preocupaciones", "Otro"] },
+            { text: "¿Qué te gustaría mejorar con mindfulness?", opciones: ["Estrés", "Autoconfianza", "Ansiedad", "Concentración"] }
+        ];
+    
+        function typeMessage(text, isUser) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add(isUser ? "mensaje-usuario" : "mensaje-bot");
+            messagesContainer.appendChild(messageElement);
+    
+            let i = 0;
+            const typingInterval = setInterval(() => {
+                if (i < text.length) {
+                    messageElement.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    messageElement.style.borderRight = 'none';
+                }
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 50);
+        }
+    
+        function addMessage(content, isUser) {
+            typeMessage(content, isUser);
+        }
+    
+        function showOptions() {
+            optionsContainer.innerHTML = "";
+            if (preguntaActual < preguntas.length) {
+                addMessage(preguntas[preguntaActual].text, false);
+                preguntas[preguntaActual].opciones.forEach(opcion => {
+                    const etiqueta = document.createElement("label");
+                    etiqueta.classList.add("opcion-etiqueta");
+                    const entrada = document.createElement("input");
+                    entrada.type = "radio";
+                    entrada.name = "opcion-de-pregunta";
+                    entrada.value = opcion;
+                    etiqueta.appendChild(entrada);
+                    etiqueta.append(opcion);
+                    optionsContainer.appendChild(etiqueta);
+                });
+            } else {
+                addMessage("¡Gracias por responder! Vamos a preparar tu plan de mindfulness.", false);
+                sendButton.disabled = true;
+                enviarRespuestas(); // Envía las respuestas después de la última pregunta
+            }
+        }
+    
+        sendButton.addEventListener("click", function() {
+        const selectedOption = document.querySelector('input[name="opcion-de-pregunta"]:checked');
+            if (selectedOption) {
+                if (preguntaActual > 0){
+                    responses.push({
+                    question: 135+preguntaActual,
+                    answer: selectedOption.value
+                });
+                }
 
+                addMessage(selectedOption.value, true);
+                preguntaActual++;
+                setTimeout(showOptions, 800);
+            }
+        });
+    
+        function enviarRespuestas() {
+            const data = {
+                ID_Paciente: getTokenId(),
+                formType: 11,
+                totalScore: 0,
+                category: "No aplica",
+                responses: responses
+            };
+    
+            fetch('http://localhost:8002/formularios/respuestas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => console.log("Datos enviados exitosamente", data))
+            .catch(error => console.error("Error al enviar datos", error));
+        }
+        
+        verificarAutenticacion();
+        showOptions();
+    });
+</script>    
 </html>
