@@ -182,11 +182,19 @@
             { text: "¿Qué te gustaría mejorar con mindfulness?", opciones: ["Estrés", "Autoconfianza", "Ansiedad", "Concentración"] }
         ];
     
-        function typeMessage(text, isUser) {
+        function addMessage(content, isUser) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add(isUser ? "mensaje-usuario" : "mensaje-bot");
+            messageElement.textContent = content; // Agrega el texto del mensaje directamente
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Asegura que el contenedor de mensajes haga scroll hasta el final
+        }
+
+        function typeMessage(text, isUser, callback) {
             const messageElement = document.createElement("div");
             messageElement.classList.add(isUser ? "mensaje-usuario" : "mensaje-bot");
             messagesContainer.appendChild(messageElement);
-    
+
             let i = 0;
             const typingInterval = setInterval(() => {
                 if (i < text.length) {
@@ -195,53 +203,72 @@
                 } else {
                     clearInterval(typingInterval);
                     messageElement.style.borderRight = 'none';
+                    callback(); // Asegurar que el callback se llama siempre
                 }
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }, 50);
         }
-    
-        function addMessage(content, isUser) {
-            typeMessage(content, isUser);
-        }
-    
+
         function showOptions() {
+            // Limpia el contenedor de opciones antes de añadir nuevas
             optionsContainer.innerHTML = "";
+
             if (preguntaActual < preguntas.length) {
-                addMessage(preguntas[preguntaActual].text, false);
-                preguntas[preguntaActual].opciones.forEach(opcion => {
-                    const etiqueta = document.createElement("label");
-                    etiqueta.classList.add("opcion-etiqueta");
-                    const entrada = document.createElement("input");
-                    entrada.type = "radio";
-                    entrada.name = "opcion-de-pregunta";
-                    entrada.value = opcion;
-                    etiqueta.appendChild(entrada);
-                    etiqueta.append(opcion);
-                    optionsContainer.appendChild(etiqueta);
+                typeMessage(preguntas[preguntaActual].text, false, () => {
+                    // Asegurarse de que sólo se añaden opciones si aún estamos en el rango válido de preguntas
+                    preguntas[preguntaActual].opciones.forEach(opcion => {
+                        const etiqueta = document.createElement("label");
+                        etiqueta.classList.add("opcion-etiqueta");
+                        const entrada = document.createElement("input");
+                        entrada.type = "radio";
+                        entrada.name = "opcion-de-pregunta";
+                        entrada.value = opcion;
+                        etiqueta.appendChild(entrada);
+                        etiqueta.append(opcion);
+                        optionsContainer.appendChild(etiqueta);
+                    });
+                    sendButton.disabled = false; // Re-habilitar el botón enviar aquí
                 });
             } else {
-                addMessage("¡Gracias por responder! Vamos a preparar tu plan de mindfulness.", false);
+                typeMessage("¡Gracias por responder! Vamos a preparar tu plan de mindfulness.", false);
                 sendButton.disabled = true;
-                enviarRespuestas(); // Envía las respuestas después de la última pregunta
+                enviarRespuestas();
+                marcar_entrevista();
             }
         }
-    
-        sendButton.addEventListener("click", function() {
-        const selectedOption = document.querySelector('input[name="opcion-de-pregunta"]:checked');
-            if (selectedOption) {
-                if (preguntaActual > 0){
-                    responses.push({
-                    question: 135+preguntaActual,
-                    answer: selectedOption.value
-                });
-                }
 
+        sendButton.addEventListener('click', function handleSendClick() {
+            const selectedOption = document.querySelector('input[name="opcion-de-pregunta"]:checked');
+            if (selectedOption) {
                 addMessage(selectedOption.value, true);
                 preguntaActual++;
-                setTimeout(showOptions, 800);
+                setTimeout(showOptions, 800); // Espera para manejar la transición
+            } else {
+                console.error("No se ha seleccionado ninguna opción");
             }
         });
     
+        async function marcar_entrevista() {
+            const idPaciente = getTokenId();
+            if (idPaciente) {
+                try {
+                    const response = await fetch(`http://localhost:8002/formularios/contestar_entrevista/${idPaciente}`, {
+                        method: 'POST'
+                    });
+                    if (response.ok) {
+                        console.log('Entrevista marcada exitosamente');
+                        window.location.href = 'dashboard.html'; // Redirigir a la página de dashboard
+                    } else {
+                        throw new Error('Fallo al marcar la entrevista');
+                    }
+                } catch (error) {
+                    console.error('Error al marcar la entrevista:', error);
+                }
+            } else {
+                console.error('ID del paciente no disponible');
+            }
+        }
+
         function enviarRespuestas() {
             const data = {
                 ID_Paciente: getTokenId(),
