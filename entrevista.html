@@ -173,34 +173,42 @@
         const responses = []; // Arreglo para guardar las respuestas
     
         const preguntas = [
-            { text: "¡Hola! Soy tu asistente Serenito y te doy la bienvenida a SerenaMente IA. Nuestro objetivo es ayudar a mejorar tu bienestar a través del mindfulness. Antes de comenzar quisiera preguntarte algunas cosas, te pido que contestes de manera honesta para poder identificar tus características y necesidades para diseñar un plan a tu medida. Ten en cuenta que no hay respuestas correctas o incorrectas, y que estas preguntas no afectarán tu evaluación. ¿Te parece si comenzamos?", opciones: ["Sí", "No"] },
-            { text: "Me gustaría saber si has estado en terapia psicológica antes?", opciones: ["Sí", "No"], 
+            { id: 135, text: "¡Hola! Soy tu asistente Serenito y te doy la bienvenida a SerenaMente IA. Nuestro objetivo es ayudar a mejorar tu bienestar a través del mindfulness. Antes de comenzar quisiera preguntarte algunas cosas, te pido que contestes de manera honesta para poder identificar tus características y necesidades para diseñar un plan a tu medida. Ten en cuenta que no hay respuestas correctas o incorrectas, y que estas preguntas no afectarán tu evaluación. ¿Te parece si comenzamos?", opciones: ["Sí", "No"] },
+            { id: 136, text: "Me gustaría saber si has estado en terapia psicológica antes?", opciones: ["Sí", "No"], 
                 subpreguntas: [
                     { 
+                        id: 137,
                         text: "¿Hace cuánto fue esa terapia, en meses?",
+                        parent: 136,
                         opciones: [],
                         respuestaDefault: "No aplica"
                     }
                 ]
             },
-            { text: "¿Cuánto horas consideras que dedicas a la semana  a tu salud emocional (talleres, podcast, asesorías, etc)?", opciones: [] },
-            { text: "¿Cuánto horas dedicas a la semana a realizar actividades físicas (deportes como correr, nadar, pesas, o a través de caminar, correr o baile, etc?)", opciones: [] },
-            { text: "¿Cuánto horas dedicas a la semana a tu la convivencia con tu red social (encontrarte con vecinos, amistades, familiares, o en clubes de pasatiempos, grupos deportivos o culturales, etc?)", opciones: [] },
-            { text: "¿Sabes en qué consiste el concepto mindfulness?", opciones: ["Sí", "No"],
+            { id: 138, text: "¿Cuánto horas consideras que dedicas a la semana  a tu salud emocional (talleres, podcast, asesorías, etc)?", opciones: [] },
+            { id: 139, text: "¿Cuánto horas dedicas a la semana a realizar actividades físicas (deportes como correr, nadar, pesas, o a través de caminar, correr o baile, etc?)", opciones: [] },
+            { id: 140, text: "¿Cuánto horas dedicas a la semana a tu la convivencia con tu red social (encontrarte con vecinos, amistades, familiares, o en clubes de pasatiempos, grupos deportivos o culturales, etc?)", opciones: [] },
+            { id: 141, text: "¿Sabes en qué consiste el concepto mindfulness?", opciones: ["Sí", "No"],
                 subpreguntas: [
                     {
+                        id: 142, 
                         text: "¿Has practicado mindfulness?",
+                        parent: 141,
                         opciones: ["Sí lo he practicado", "Si, actualmente lo practico", "Nunca lo he practicado"],
                         respuestaDefault: "No aplica",
 
                         subpreguntas: [
                             {
+                                id: 143,
                                 text: "¿Cuántas horas a la semana?",
+                                parent: 142,
                                 opciones: [],
                                 respuestaDefault: "No aplica"
                             },
                             {
+                                id: 144,
                                 text: "¿En qué nivel de practicante te identificas?",
+                                parent: 142,
                                 opciones: ["Principiante", "Medio", "Avanzado"],
                                 respuestaDefault: "No aplica"
                             }
@@ -208,10 +216,10 @@
                     }
                 ]
             },
-            { text: "Un elemento fundamental para que las actividades de mindfulness tengan un impacto positivo en la vida es la constancia diaria de las prácticas, nos gustaría enviarte recordatorios para realizar tus prácticas. ¿En qué horario quieres que te envíe un recordatorio para hacer tus prácticas de SerenaMente IA?", opciones: [] },
-            { text: "¿AM o PM?", opciones: ["AM", "PM"] },
-            { text: "¿Qué dificultades crees que puede haber en tu práctica de mindfulness?", opciones: ["Dispongo de poco tiempo", "Nunca la he practicado", "Tengo dudas si lo lograré", "Se me dificulta no moverme", "Se me dificulta estar en silencio", "Se me dificulta dejar de pensar en mis preocupaciones", "Se me dificulta sostener mi atención por mucho tiempo", "No creo que pueda incorporar en mi vida cotidiana", "Siento que debe llevar mucho tiempo aprenderla", "Siento que me voy a aburrir", "Suelo muchas cosas iniciadas sin concluir", "Otros aspectos"] },
-            { text: "¿Qué te gustaría lograr o mejorar con la práctica de mindfulness?", opciones: ["Gestionar mi estrés", "Aumentar mi autoconfianza", "Lidiar con una situación difícil", "Aceptar mi realidad", "Disminuir mi estado de ansiedad", "Regular las emociones que me incomodan", "Tolerar la frustración y el enojo", "Aumentar mi concentración y ser más eficiente en mis actividades", "Incrementar mi gratitud y compasión", "Compartirlo con mis seres queridos", "Cultivar la paciencia y la serenidad", "Terminar lo que comienzo"] }
+            { id: 145, text: "Un elemento fundamental para que las actividades de mindfulness tengan un impacto positivo en la vida es la constancia diaria de las prácticas, nos gustaría enviarte recordatorios para realizar tus prácticas. ¿En qué horario quieres que te envíe un recordatorio para hacer tus prácticas de SerenaMente IA?", opciones: [] },
+            { id: 146, text: "¿AM o PM?", opciones: ["AM", "PM"] },
+            { id: 147, text: "¿Qué dificultades crees que puede haber en tu práctica de mindfulness?", opciones: ["Dispongo de poco tiempo", "Nunca la he practicado", "Tengo dudas si lo lograré", "Se me dificulta no moverme", "Se me dificulta estar en silencio", "Se me dificulta dejar de pensar en mis preocupaciones", "Se me dificulta sostener mi atención por mucho tiempo", "No creo que pueda incorporar en mi vida cotidiana", "Siento que debe llevar mucho tiempo aprenderla", "Siento que me voy a aburrir", "Suelo muchas cosas iniciadas sin concluir", "Otros aspectos"] },
+            { id: 148, text: "¿Qué te gustaría lograr o mejorar con la práctica de mindfulness?", opciones: ["Gestionar mi estrés", "Aumentar mi autoconfianza", "Lidiar con una situación difícil", "Aceptar mi realidad", "Disminuir mi estado de ansiedad", "Regular las emociones que me incomodan", "Tolerar la frustración y el enojo", "Aumentar mi concentración y ser más eficiente en mis actividades", "Incrementar mi gratitud y compasión", "Compartirlo con mis seres queridos", "Cultivar la paciencia y la serenidad", "Terminar lo que comienzo"] }
         ];
     
         function addMessage(content, isUser) {
@@ -285,9 +293,24 @@
 
             if (selectedValue) {
                 addMessage(selectedValue, true);
-                responses.push({ pregunta: preguntas[preguntaActual].text, respuesta: selectedValue });
 
-                // Manejo de subpreguntas para subpreguntas
+                if (preguntas[preguntaActual].id === 145) {
+                    // Guardar temporalmente la respuesta de la pregunta 145
+                    respuestaTemporal145 = selectedValue;
+                } else if (preguntas[preguntaActual].id === 146) {
+                    // Concatenar respuesta de 146 con la de 145 y agregar al array con el ID 145
+                    selectedValue = respuestaTemporal145 + " " + selectedValue;
+                    responses.push({ question: 145, answer: selectedValue });
+                } else if (preguntas[preguntaActual].id === 147) {
+                    responses.push({ question: 146, answer: selectedValue });
+                } else if (preguntas[preguntaActual].id === 148) {
+                    responses.push({ question: 147, answer: selectedValue });
+                } else {
+                    // Almacenar respuesta normalmente para otras preguntas
+                    responses.push({ question: preguntas[preguntaActual].id, answer: selectedValue });
+                }
+
+                // Manejo de subpreguntas...
                 if (preguntas[preguntaActual].subpreguntas) {
                     if (selectedValue === "Sí" || selectedValue === "Sí lo he practicado" || selectedValue === "Si, actualmente lo practico") {
                         preguntas.splice(preguntaActual + 1, 0, ...preguntas[preguntaActual].subpreguntas);
@@ -296,6 +319,7 @@
 
                 preguntaActual++;
                 setTimeout(showOptions, 800);
+                console.log(responses);
             } else {
                 console.error("No se ha seleccionado ninguna opción o ingresado un valor numérico");
             }
