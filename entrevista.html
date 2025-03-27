@@ -282,6 +282,54 @@
             }
         }
 
+        function obtenerTodosLosIds(preguntas, ids = []) {
+            preguntas.forEach(pregunta => {
+                ids.push(pregunta.id);  // Agrega el ID de la pregunta actual
+                if (pregunta.subpreguntas && pregunta.subpreguntas.length > 0) {
+                    obtenerTodosLosIds(pregunta.subpreguntas, ids);  // Recursividad para subpreguntas
+                }
+            });
+            return ids;
+        }
+
+        function verificarYCompletarRespuestas() {
+            const idsPreguntas = obtenerTodosLosIds(preguntas);  // Obtenemos todos los IDs, incluyendo subpreguntas
+            const idsRespondidos = responses.map(r => r.question);  // IDs de las preguntas ya respondidas
+
+            console.log(idsPreguntas)
+            console.log(idsRespondidos)
+
+            idsPreguntas.forEach(id => {
+                if (!idsRespondidos.includes(id)) {
+                    // Encuentra la pregunta o subpregunta por su ID
+                    let pregunta = null;
+                    function encontrarPregunta(preguntas, id) {
+                        for (let p of preguntas) {
+                            if (p.id === id) {
+                                return p;
+                            }
+                            if (p.subpreguntas && p.subpreguntas.length > 0) {
+                                let found = encontrarPregunta(p.subpreguntas, id);
+                                if (found) return found;
+                            }
+                        }
+                        return null;
+                    }
+                    pregunta = encontrarPregunta(preguntas, id);
+
+                    let respuestaDefault = "No aplica";  // Respuesta por defecto si no se especifica una
+                    if (pregunta && pregunta.respuestaDefault) {
+                        respuestaDefault = pregunta.respuestaDefault;  // Usamos la respuesta default de la pregunta si existe
+                    }
+                    responses.push({ question: id, answer: respuestaDefault });
+                }
+            });
+                // Ordenamos el arreglo responses según el ID de la pregunta, de menor a mayor
+                responses.sort((a, b) => a.question - b.question);
+                responses.shift()
+                responses.pop()
+        }
+
         sendButton.addEventListener('click', function handleSendClick() {
             let selectedValue;
             if (preguntas[preguntaActual].opciones.length === 0) {
@@ -320,6 +368,12 @@
                 preguntaActual++;
                 setTimeout(showOptions, 800);
                 console.log(responses);
+                if (preguntaActual >= preguntas.length) {
+                    verificarYCompletarRespuestas();  // Aseguramos que todas las preguntas estén respondidas
+                    console.log(responses);
+                    enviarRespuestas();  // Función que maneja el envío de las respuestas
+                    marcar_entrevista();
+                }
             } else {
                 console.error("No se ha seleccionado ninguna opción o ingresado un valor numérico");
             }
