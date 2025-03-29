@@ -279,6 +279,8 @@
             } else {
                 typeMessage("¡Gracias por responder! Vamos a preparar tu plan de mindfulness.", false);
                 sendButton.disabled = true;
+                enviarRespuestas();
+                setTimeout(marcar_entrevista, 8000);
             }
         }
 
@@ -370,9 +372,7 @@
                 console.log(responses);
                 if (preguntaActual >= preguntas.length) {
                     verificarYCompletarRespuestas();  // Aseguramos que todas las preguntas estén respondidas
-                    console.log(responses);
-                    enviarRespuestas();  // Función que maneja el envío de las respuestas
-                    marcar_entrevista();
+                    //console.log(responses);
                 }
             } else {
                 console.error("No se ha seleccionado ninguna opción o ingresado un valor numérico");

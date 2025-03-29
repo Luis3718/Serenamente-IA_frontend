@@ -478,42 +478,42 @@
 
 
     async function enviarFormularios() {
-    // Lista de claves para los formularios almacenados en sessionStorage
-    const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Sueño_responses', 'Autocompacion_responses'];
-    let listaFormularios = [];
+        // Lista de claves para los formularios almacenados en sessionStorage
+        const keysFormularios = ['BAI_responses', 'Beck_responses', 'Suicida_responses', 'Bienestar_responses', 'Estres_responses', 'Mindfulness_responses', 'APOI_desfavorable_responses', 'APOI_favorable_responses', 'Sueño_responses', 'Autocompacion_responses'];
+        let listaFormularios = [];
 
-    // Cargar formularios del sessionStorage
-    for (const key of keysFormularios) {
-        const formularioData = sessionStorage.getItem(key);
-        if (formularioData) {
-            listaFormularios.push(JSON.parse(formularioData));
-        }
-    }
-
-    let formulariosEnviados = 0;
-
-    // Función para enviar los datos al servidor
-    for (const resultsJSON of listaFormularios) {
-        try {
-            const response = await fetch('http://localhost:8002/formularios/respuestas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(resultsJSON)
-            });
-            const data = await response.json();
-            formulariosEnviados++;
-
-            // Verifica si todos los formularios han sido enviados antes de evaluar al paciente
-            if (formulariosEnviados === listaFormularios.length) {
-                evaluarPaciente(resultsJSON.ID_Paciente);
+        // Cargar formularios del sessionStorage
+        for (const key of keysFormularios) {
+            const formularioData = sessionStorage.getItem(key);
+            if (formularioData) {
+                listaFormularios.push(JSON.parse(formularioData));
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al guardar las respuestas.');
         }
-    }
+
+        let formulariosEnviados = 0;
+
+        // Función para enviar los datos al servidor
+        for (const resultsJSON of listaFormularios) {
+            try {
+                const response = await fetch('http://localhost:8002/formularios/respuestas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(resultsJSON)
+                });
+                const data = await response.json();
+                formulariosEnviados++;
+
+                // Verifica si todos los formularios han sido enviados antes de evaluar al paciente
+                if (formulariosEnviados === listaFormularios.length) {
+                    evaluarPaciente(resultsJSON.ID_Paciente);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al guardar las respuestas.');
+            }
+        }
     }
 
     async function evaluarPaciente(idPaciente) {
@@ -544,8 +544,8 @@
         if (!validateForm()) {
             modal.style.display = 'block'; // Muestra el modal si el formulario no es válido
         } else {
-            enviarFormularios();
-            alert('Respuestas guardadas correctamente.');
+            //enviarFormularios();
+            //alert('Respuestas guardadas correctamente.');
         }
     });
 

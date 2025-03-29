@@ -270,36 +270,40 @@
 
     // Funcion para obtener la categoria
     document.addEventListener('DOMContentLoaded', function() {
-    const idPaciente = getTokenId(); // Asegúrate de que esta función extrae correctamente el ID del token
-    fetch(`http://localhost:8002/formularios/categorias/${idPaciente}`)
-    .then(response => response.json())
-    .then(data => {
-        data.forEach((resultado) => {
-            const formularioId = resultado.ID_Formulario;
-            const categoria = resultado.Categoria.trim();
-            const cellId = `cell${formularioId}`;
-            let tipo;
-            switch(formularioId) {
-                case 1:
-                    tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 1; // Asume tipo1 a tipo4
-                    actualizarContenido(cellId, `tipo${tipo}`);
-                    break;
-                case 2:
-                    tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 5; // Asume tipo5 a tipo8
-                    actualizarContenido(cellId, `tipo${tipo}`);
-                    break;
-                case 4:
-                    tipo = ['Bajo', 'Moderado', 'Alto'].indexOf(categoria) + 9; // Asume tipo9 a tipo11
-                    actualizarContenido(cellId, `tipo${tipo}`);
-                    break;
-                case 5:
-                    tipo = ['Leve', 'Moderado', 'Alto'].indexOf(categoria) + 12; // Asume tipo12 a tipo14
-                    actualizarContenido(cellId, `tipo${tipo}`);
-                    break;
-                default:
-                    console.log('Formulario no reconocido');
-            }
-        });
+        const idPaciente = getTokenId(); // Asegúrate de que esta función extrae correctamente el ID del token
+        fetch(`http://localhost:8002/formularios/categorias/${idPaciente}`)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((resultado) => {
+                const formularioId = resultado.ID_Formulario;
+                const categoria = resultado.Categoria.trim();
+                const cellId = `cell${formularioId}`;
+                let tipo;
+                switch(formularioId) {
+                    case 1:
+                        tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 1; // Asume tipo1 a tipo4
+                        console.log("Case 1 ", cellId, `tipo${tipo}`)
+                        actualizarContenido(cellId, `tipo${tipo}`);
+                        break;
+                    case 2:
+                        tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 5; // Asume tipo5 a tipo8
+                        console.log("Case 2 ", cellId, `tipo${tipo}`)
+                        actualizarContenido(cellId, `tipo${tipo}`);
+                        break;
+                    case 4:
+                        tipo = ['Bajo', 'Moderado', 'Alto'].indexOf(categoria) + 9; // Asume tipo9 a tipo11
+                        console.log("Case 3 ", cellId, `tipo${tipo}`)
+                        actualizarContenido(cellId, `tipo${tipo}`);
+                        break;
+                    case 5:
+                        tipo = ['Leve', 'Moderado', 'Alto'].indexOf(categoria) + 12; // Asume tipo12 a tipo14
+                        console.log("Case 4 ", cellId, `tipo${tipo}`)
+                        actualizarContenido(cellId, `tipo${tipo}`);
+                        break;
+                    default:
+                        console.log('Formulario no reconocido');
+                }
+            });
     })
     .catch(error => console.error('Error al obtener las categorías:', error));
     });
