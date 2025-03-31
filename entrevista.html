@@ -280,6 +280,7 @@
                 typeMessage("¡Gracias por responder! Vamos a preparar tu plan de mindfulness.", false);
                 sendButton.disabled = true;
                 enviarRespuestas();
+                asignar_protocolo();
                 setTimeout(marcar_entrevista, 8000);
             }
         }
@@ -394,6 +395,26 @@
                     }
                 } catch (error) {
                     console.error('Error al marcar la entrevista:', error);
+                }
+            } else {
+                console.error('ID del paciente no disponible');
+            }
+        }
+
+        async function asignar_protocolo(){
+            const idPaciente = getTokenId(); 
+            if (idPaciente) {
+                try {
+                    const response = await fetch(`http://localhost:8002/tratamiento/asignar_protocolo/${idPaciente}`, {
+                        method: 'POST'
+                    });
+                    if (response.ok) {
+                        console.log('Protocolo asignado exitosamente');
+                    } else {
+                        throw new Error('Fallo al asignar protocolo');
+                    }
+                } catch (error) {
+                    console.error('Error al asignar el protocolo', error);
                 }
             } else {
                 console.error('ID del paciente no disponible');

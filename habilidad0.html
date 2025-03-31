@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerenaMente IA</title>
+    <link rel="stylesheet" href="static/styles/habilidad.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="dashboard.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="progreso.html">Mi progreso</a></li>
+                    <div class="user-menu">
+                        <div id="user-avatar" class="avatar">US</div>
+                        <div id="user-dropdown" class="dropdown-menu">
+                            <a href="perfil.html">Ver perfil</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>                        
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container">
+            <h1>Habilidad: 0 Comenzar a trabajar en mí</h1>
+            <div style="display: flex; align-items: flex-start; gap: 20px;">
+                <img src="static/imagenes/image0.jpeg" alt="Descripción de la imagen" style="height: 100%; max-height: 300px; width: auto; object-fit: cover;">
+                <div style="flex: 1;">
+                    <p>Hola, te doy la bienvenida a los primeros pasos en este camino hacia el autodescubrimiento.</p>
+                    <p>Antes de comenzar, es importante que conozcas lo que puedes esperar de esta experiencia, aclarar algunos conceptos clave relacionados con SerenaMente IA y con el mindfulness para que tengas una comprensión clara de lo que implica este programa y sobre todo, que sepas que uno de los puntos más importantes es que esta experiencia te ofrece la integración de Inteligencia Artificial (IA) para personalizar tu proceso de aprendizaje y práctica.</p>
+                    <p>Recuerda que para generar cambios en la vida, lo más importante es comenzar, y tú ya estás dando ese primer paso.</p>
+                       </div>
+            </div>
+            
+            <p>Revisa el siguiente video</p>
+             
+           
+        <div class="video-container">
+            <video controls>
+                <source src="static/imagenes/video03.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+        </div>
+        
+        <p> Como viste en el video, incorporar mindfulness en conjunto con Inteligencia Artificial (IA) en la vida es algo realmente positivo, por lo que aquí te iré guiando en diferentes prácticas en un espacio de seguridad y confianza, para que puedas sentir comodidad en tu exploración. También te mostraré cómo están estructuradas las actividades para que sepas qué esperar a lo largo de las semanas. ¡Vamos a comenzar!</p>
+        
+        <div class="button-container">
+            <button onclick="startExperience()">Sí, tengo todo preparado para iniciar</button>
+            <button onclick="postponeExperience()">No, quisiera empezar después</button>
+        </div>
+        
+        <div id="activities-menu">
+            <div class="serenito">
+                <div class="speech-bubble">Selecciona la actividad para comenzar</div>
+                <img src="static/imagenes/serenito.png" alt="Serenito">
+            </div>
+            <div class="activities">
+                <!-- Actividad 1 (Disponible desde el inicio) -->
+                <div class="activity">
+                    <div class="activity-card" id="activity1" onclick="unlockActivity(2)">
+                        <p>1. Qué es mindfulness y cómo puede ayudarme</p>
+                        <a href="actividad01.html">
+                            <button> 
+                                <img src="static/imagenes/boton01.png" alt="Actividad 1">
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Actividad 2 (Bloqueada hasta que se haga clic en la primera) -->
+                <div class="activity">
+                    <div class="activity-card disabled" id="activity2" onclick="unlockActivity(3)">
+                        <p>2. Ya sé qué es mindfulness, ¿qué sigue?</p>
+                        <a href="actividad02.html">
+                            <button disabled>
+                                <img src="static/imagenes/boton02.png" alt="Actividad 2">
+                            </button>
+                        </a>
+                    </div>
+                </div>
+        
+                <!-- Actividad 3 (Bloqueada hasta que se haga clic en la segunda) -->
+                <div class="activity">
+                    <div class="activity-card disabled" id="activity3">
+                        <p>3. Respiración Consciente</p>
+                        <a href="actividad03.html">
+                            <button disabled>
+                                <img src="static/imagenes/boton03.png" alt="Actividad 3">
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcion para el menu de hamburguesa
+        const menuToggle = document.querySelector('.menu-toggle');
+        const submenu = document.querySelector('.submenu');
+
+        menuToggle.addEventListener('click', () => {
+            submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+        });
+
+        // Funcion que verifica el token 
+        async function verificarAutenticacion() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8002/auth/verify-token", {
+                    method: "GET",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    console.error("Error en la autenticación:", await response.json());
+                    localStorage.removeItem("token");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const userData = await response.json();
+                const initials = userData.usuario.nombre
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .toUpperCase();
+                document.getElementById("user-avatar").textContent = initials;
+            } catch (error) {
+                console.error("Error en la autenticación:", error);
+                window.location.href = "login.html";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const avatar = document.getElementById("user-avatar");
+        const userMenu = document.querySelector(".user-menu");
+
+        avatar.addEventListener("click", function () {
+            userMenu.classList.toggle("active");
+        });
+
+        document.getElementById("logout").addEventListener("click", function () {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+        });
+
+        //verificarAutenticacion();
+    });
+
+    //funcion de botones 
+    function startExperience() {
+        document.getElementById('activities-menu').classList.remove('hidden');
+        document.querySelector('.button-container').classList.add('hidden');
+    }
+    function postponeExperience() {
+        alert('Puedes volver cuando estés listo');
+        document.querySelector('.button-container').classList.add('hidden');
+    }
+
+    function startExperience() {
+        document.getElementById('activities-menu').style.display = 'flex';
+        document.querySelector('.button-container').style.display = 'none';
+    }
+
+    function unlockActivity(nextActivity) {
+        let activityCard = document.getElementById(`activity${nextActivity}`);
+
+        // Verifica si la actividad ya estaba desbloqueada para evitar que se repita
+        if (activityCard.classList.contains("disabled")) {
+            activityCard.classList.remove("disabled");
+            activityCard.classList.add("unlocked");
+
+            // Habilita el botón dentro de la actividad
+            let button = activityCard.querySelector("button");
+            button.disabled = false;
+        }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 3: Respiración Consciente</title>
+    <link rel="stylesheet" href="actividad.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="logo.jpeg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="progreso.html">Mi progreso</a></li>
+                    <div class="user-menu">
+                        <div id="user-avatar" class="avatar">US</div>
+                        <div id="user-dropdown" class="dropdown-menu">
+                            <a href="perfil.html">Ver perfil</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>                        
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container">
+            <h1>Actividad 3: Respiración Consciente</h1>
+            <p class="objetivo"><strong>Objetivo:</strong> En esta actividad comenzarás a usar la respiración como ancla para la atención y la regulación emocional.</p>
+            
+            <p>¡Hola, estoy emocionado porque vas a comenzar tu primera práctica! Con ella damos inicio a las actividades de mindfulness, lo que te permitirá comenzar a explorar lo que sucede en tu cuerpo, con tus sensaciones y a prestar atención a tus sentidos de forma intencional.</p>
+            
+            <p>Revisa el siguiente video, que te dará instrucciones sobre cómo realizar tu práctica mindfulness en la que comenzarás a usar la respiración como ancla para la atención y la regulación emocional.
+                <br>Recuerda que para practicar mindfulness, es importante dejar de lado la idea de hacerlo bien. Lo que te recomiendo es que trates de entregarte a la experiencia y verlo como un proceso que irás integrando poco a poco en tu vida. No olvides que, cuanto más lo practiques, más beneficios notarás.
+
+            </p>
+            
+            <div class="videoo-container">
+                <video id="practiceVideo" controls>
+                    <source src="Imagenes0/video03.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+            </div>
+            
+            <p>¡Excelente! Terminaste tu primera práctica de Mindfulness. ¿Qué te pareció? Me gustaría que pudieras compartir tu experiencia.</p>
+            <div id="final-message" class="hidden">
+                <p><strong>¡Felicidades por haber logrado esta primera habilidad: "Comenzar a trabajar en mí"!</strong></p>
+                <p>Aprendiste qué es el mindfulness, cómo funciona esta intervención y tuviste la oportunidad de experimentar tu primera práctica de respiración consciente.</p>
+                <p>Este es solo el comienzo de tu proceso. Recuerda que, con la práctica, podrás mejorar tu conexión con el momento presente y con tus emociones, lo que te ayudará a alcanzar una mayor comprensión de quién eres y de tu bienestar. ¡Gracias por haberte conectado!</p>
+                <div class="button-container">
+                    <a href="dash.html" class="button">Regresar al menú inicial</a>
+                </div>
+            </div>
+              
+
+    </div>
+        
+    <div id="chatbot-wrapper" class="chatbot-wrapper hidden">
+        <div id="chatbot-container" class="chatbot-container">
+            <div class="chatbot-header">Chatbot</div>
+            <div class="chatbot-messages" id="chatbot-messages"></div>
+            <div class="chatbot-input" id="chatbot-input"></div>
+        </div>
+    </div>
+    
+ 
+    
+        
+       
+    </main>
+
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcion para el menu de hamburguesa
+        const menuToggle = document.querySelector('.menu-toggle');
+        const submenu = document.querySelector('.submenu');
+
+        menuToggle.addEventListener('click', () => {
+            submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+        });
+
+        // Funcion que verifica el token y si se contesto el pretest
+        async function verificarAutenticacion() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8002/auth/verify-token", {
+                    method: "GET",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    console.error("Error en la autenticación:", await response.json());
+                    localStorage.removeItem("token");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const userData = await response.json();
+                const initials = userData.usuario.nombre
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .toUpperCase();
+                document.getElementById("user-avatar").textContent = initials;
+            } catch (error) {
+                console.error("Error en la autenticación:", error);
+                window.location.href = "login.html";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const avatar = document.getElementById("user-avatar");
+        const userMenu = document.querySelector(".user-menu");
+
+        avatar.addEventListener("click", function () {
+            userMenu.classList.toggle("active");
+        });
+
+        document.getElementById("logout").addEventListener("click", function () {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+        });
+        //verificarAutenticacion();
+    });
+    document.getElementById('practiceVideo').addEventListener('ended', function() {
+            document.getElementById('chatbot-container').classList.remove('hidden');
+        });
+        
+        function submitResponses() {
+            alert('Tus respuestas han sido enviadas. ¡Gracias por compartir tu experiencia!');
+            document.getElementById('chatbot-container').classList.add('hidden');
+            document.getElementById('final-message').classList.remove('hidden');
+        }
+    //
+     //animacion de tchatbot
+
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.querySelector("video");
+    
+    const chatbot = document.getElementById("chatbot-wrapper");
+
+    const messages = document.getElementById("chatbot-messages");
+    const inputArea = document.getElementById("chatbot-input");
+
+    const preguntas = [
+        {
+            texto: "¿Te fue posible realizar toda la práctica?",
+            tipo: "select",
+            opciones: ["Sí, todo bien", "No, tuve dificultades"]
+        },
+        {
+            texto: "¿Qué tan presente te sentiste durante la práctica?",
+            tipo: "select",
+            opciones: ["Nada presente", "Un poco presente", "Moderadamente presente", "Muy presente", "Completamente presente"]
+        },
+        {
+            texto: "¿Qué notaste en tu cuerpo durante tu práctica? (Marca todas las que apliquen)",
+            tipo: "multi",
+            opciones: ["Tensión muscular", "Sensación de calor", "Sensación de frío", "Incomodidad", "Dolor", "Relajación", "Ligereza", "Pesadez", "Hormigueo", "Otro"]
+        },
+        {
+            texto: "¿Qué pensamientos o emociones surgieron durante tu práctica? (Marca todas las que apliquen)",
+            tipo: "multi",
+            opciones: ["Preocupación por el futuro", "Recuerdos del pasado", "Autocrítica", "Juicio hacia otros", "Frustración", "Tristeza", "Alegría", "Calma", "Paz", "Ira", "Miedo", "Otro (especificar):"]
+        },
+        {
+            texto: "¿Identificaste alguna conexión con tu forma de vivir el estrés?",
+            tipo: "select",
+            opciones: ["Sí, claramente", "Posiblemente", "No, no lo creo", "No estoy seguro/a"]
+        },
+        {
+            texto: "¿Notaste algunas de estas experiencias durante la práctica? (Marca todas las que apliquen)",
+            tipo: "multi",
+            opciones: ["Pensamientos automáticos", "Recuerdos vividos", "Emociones desagradables", "Inquietud", "Aburrimiento", "Sueño", "Preocupaciones", "Recuerdos", "Emociones agradables", "Conmovido/a", "Claridad mental", "Consciencia expandida", "Sentirte con más energía", "Tranquilidad", "Cosquilleo", "Relajación muscular", "Sensaciones internas"]
+        }
+    ];
+
+    let respuestas = {};
+    let indice = 0;
+
+    function mostrarPregunta() {
+        inputArea.innerHTML = "";
+
+        const pregunta = preguntas[indice];
+
+        const burbuja = document.createElement("div");
+        burbuja.className = "mensaje-bot typing-question";
+        messages.appendChild(burbuja);
+
+        escribirPalabraPorPalabra(burbuja, pregunta.texto, () => {
+            burbuja.classList.remove("typing-question");
+
+            if (pregunta.tipo === "select") {
+                const select = document.createElement("select");
+                pregunta.opciones.forEach(op => {
+                    const opt = document.createElement("option");
+                    opt.textContent = op;
+                    select.appendChild(opt);
+                });
+                inputArea.appendChild(select);
+
+                const btn = crearBoton(() => {
+                    respuestas[`pregunta_${indice}`] = select.value;
+                    siguiente();
+                });
+                inputArea.appendChild(btn);
+
+            } else if (pregunta.tipo === "multi") {
+                const contenedor = document.createElement("div");
+                contenedor.className = "multi-options";
+
+                pregunta.opciones.forEach(op => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.textContent = op;
+                    btn.onclick = () => btn.classList.toggle("selected");
+                    contenedor.appendChild(btn);
+                });
+
+                inputArea.appendChild(contenedor);
+
+                if (pregunta.texto.includes("Otro")) {
+                    const input = document.createElement("input");
+                    input.placeholder = "Especifica aquí si elegiste 'Otro'";
+                    contenedor.appendChild(input);
+                }
+
+                const btn = crearBoton(() => {
+                    const seleccionados = Array.from(contenedor.querySelectorAll(".selected")).map(b => b.textContent);
+                    const otro = contenedor.querySelector("input")?.value;
+                    if (otro) seleccionados.push(otro);
+                    respuestas[`pregunta_${indice}`] = seleccionados;
+                    siguiente();
+                });
+                inputArea.appendChild(btn);
+            }
+
+            messages.scrollTop = messages.scrollHeight;
+        });
+    }
+
+    function crearBoton(fn) {
+        const btn = document.createElement("button");
+        btn.textContent = "Siguiente";
+        btn.className = "boton-enviar";
+        btn.onclick = fn;
+        return btn;
+    }
+
+    function escribirPalabraPorPalabra(el, texto, callback) {
+        const palabras = texto.split(" ");
+        let i = 0;
+
+        function escribir() {
+            if (i < palabras.length) {
+                el.textContent += palabras[i] + " ";
+                i++;
+                setTimeout(escribir, 50);
+            } else {
+                callback();
+            }
+        }
+        escribir();
+    }
+
+    function siguiente() {
+    indice++;
+    if (indice < preguntas.length) {
+        mostrarPregunta();
+    } else {
+        inputArea.innerHTML = "";
+
+        const gracias = document.createElement("div");
+        gracias.className = "mensaje-bot";
+        gracias.textContent = "Gracias por tus respuestas 🧘‍♀️🧘‍♂️";
+        messages.appendChild(gracias);
+        messages.scrollTop = messages.scrollHeight;
+
+        // Esperamos 2 segundos y mostramos mensaje final en el contenedor principal
+        setTimeout(() => {
+            document.getElementById('chatbot-wrapper').classList.remove('hidden');
+
+            document.getElementById("final-message").classList.remove("hidden");
+
+        }, 2000);
+    }
+}
+
+
+    // Mostrar chatbot solo al terminar el video
+    video.addEventListener("ended", () => {
+        chatbot.classList.remove("hidden");
+        mostrarPregunta();
+    });
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
