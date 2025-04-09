@@ -327,8 +327,16 @@
             }
         }
 
+        totalScore=totalScore/9
         // Determinar categoría basada en la calificación total
-        let categoria = "No aplica";
+        let categoria = "";
+        if (totalScore <= 5.0) {
+            categoria = "Poca";
+        } else if (totalScore >= 5.1 && totalScore <= 7.9) {
+            categoria = "Media";
+        } else if (totalScore >= 8.0) {
+            categoria = "Buena";
+        }
 
         const resultsJSON = {
             ID_Paciente: getTokenId(),
