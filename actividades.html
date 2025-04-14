@@ -36,31 +36,31 @@
     <main>
         <div class="container">
             <div class="button-container">
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-1">
                     <img src="static/imagenes/image1.jpg" alt="Botón 1">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-2">
                     <img src="static/imagenes/image2.jpg" alt="Botón 2">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-3" onclick="unlockButton(this)">
                     <img src="static/imagenes/image3.jpg" alt="Botón 3">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-4" onclick="unlockButton(this)">
                     <img src="static/imagenes/image4.jpg" alt="Botón 4">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-5" onclick="unlockButton(this)">
                     <img src="static/imagenes/image5.jpg" alt="Botón 5">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-6" onclick="unlockButton(this)">
                     <img src="static/imagenes/image6.jpg" alt="Botón 6">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-7" onclick="unlockButton(this)">
                     <img src="static/imagenes/image7.jpg" alt="Botón 7">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>    
@@ -199,19 +199,53 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-        const avatar = document.getElementById("user-avatar");
-        const userMenu = document.querySelector(".user-menu");
+            const avatar = document.getElementById("user-avatar");
+            const userMenu = document.querySelector(".user-menu");
 
-        avatar.addEventListener("click", function () {
-            userMenu.classList.toggle("active");
-        });
+            avatar.addEventListener("click", function () {
+                userMenu.classList.toggle("active");
+            });
 
-        document.getElementById("logout").addEventListener("click", function () {
-            localStorage.removeItem("token");
-            window.location.href = "login.html";
-        });
-        
+            document.getElementById("logout").addEventListener("click", function () {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+            });
+
+            async function desbloquearHabilidades() {
+            const idPaciente = getTokenId();
+            if (!idPaciente) return;
+
+            try {
+                const response = await fetch(`http://localhost:8002/tratamiento/progreso/habilidades_estado/${idPaciente}`);
+                const data = await response.json();
+
+                data.forEach((habilidad) => {
+                    const { id, estado } = habilidad;
+                    if (estado === "actual" || estado === "completada") {
+                        const boton = document.getElementById(`habilidad-${id}`);
+                        if (boton) {
+                            boton.classList.add('unlocked');
+
+                            if (estado === "completada") {
+                                boton.classList.add('completed');
+                            }
+
+                            const candado = boton.querySelector('.lock-icon');
+                            if (candado) {
+                                candado.style.display = 'none';
+                            }
+
+                            boton.removeAttribute("onclick");
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Error al obtener habilidades:", error);
+            }
+        }
+
         verificarAutenticacion();
+        desbloquearHabilidades();
     });
     </script>
     </body>

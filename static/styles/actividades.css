@@ -264,6 +264,10 @@ main {
     transform: scale(1.05);
 }
 
+.image-button.completed {
+    border: 3px solid #4CAF50; /* Borde verde por ejemplo */
+}
+
 .social-bar {
     position: fixed;
     top: 50%;
