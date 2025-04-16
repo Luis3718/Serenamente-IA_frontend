@@ -401,6 +401,28 @@
             }
         }
 
+        async function asignar_habilidad_actividad() {
+            const idPaciente = getTokenId();
+            if (idPaciente) {
+                try {
+                    const response = await fetch(`http://localhost:8002/tratamiento/asignar_habilidad_actividad/${idPaciente}`, {
+                        method: 'POST'
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('Habilidad y actividad asignadas:', data);
+                    } else {
+                        const error = await response.json();
+                        throw new Error(error.detail || 'Fallo al asignar habilidad y actividad');
+                    }
+                } catch (error) {
+                    console.error('Error al asignar habilidad y actividad:', error);
+                }
+            } else {
+                console.error('ID del paciente no disponible');
+            }
+        }
+
         async function asignar_protocolo(){
             const idPaciente = getTokenId(); 
             if (idPaciente) {
@@ -410,6 +432,7 @@
                     });
                     if (response.ok) {
                         console.log('Protocolo asignado exitosamente');
+                        await asignar_habilidad_actividad(); // <---- aquí llamamos la función
                     } else {
                         throw new Error('Fallo al asignar protocolo');
                     }
