@@ -44,35 +44,29 @@
                     <img src="static/imagenes/image2.jpg" alt="Botón 2">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" id="habilidad-3" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-3">
                     <img src="static/imagenes/image3.jpg" alt="Botón 3">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" id="habilidad-4" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-4">
                     <img src="static/imagenes/image4.jpg" alt="Botón 4">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" id="habilidad-5" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-5">
                     <img src="static/imagenes/image5.jpg" alt="Botón 5">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" id="habilidad-6" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-6">
                     <img src="static/imagenes/image6.jpg" alt="Botón 6">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>
-                <button class="image-button" id="habilidad-7" onclick="unlockButton(this)">
+                <button class="image-button" id="habilidad-7">
                     <img src="static/imagenes/image7.jpg" alt="Botón 7">
                     <img src="static/imagenes/candado.jpg" alt="Candado" class="lock-icon">
                 </button>    
             </div>
         </div>
     </main>
-        
-    <script>
-    function unlockButton(button) {
-        button.classList.toggle('unlocked');
-    }
-    </script>
 
     <div class="social-bar">
         <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
@@ -209,9 +203,13 @@
             document.getElementById("logout").addEventListener("click", function () {
                 localStorage.removeItem("token");
                 window.location.href = "login.html";
-            });
+        });
 
-            async function desbloquearHabilidades() {
+        function irAEleccion(idHabilidad) {
+            window.location.href = `habilidad${idHabilidad}.html`;
+        }
+
+        async function desbloquearHabilidades() {
             const idPaciente = getTokenId();
             if (!idPaciente) return;
 
@@ -225,7 +223,6 @@
                         const boton = document.getElementById(`habilidad-${id}`);
                         if (boton) {
                             boton.classList.add('unlocked');
-
                             if (estado === "completada") {
                                 boton.classList.add('completed');
                             }
@@ -235,7 +232,7 @@
                                 candado.style.display = 'none';
                             }
 
-                            boton.removeAttribute("onclick");
+                            boton.onclick = () => irAEleccion(id);
                         }
                     }
                 });
