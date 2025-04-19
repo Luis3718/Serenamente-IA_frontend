@@ -396,7 +396,7 @@ footer {
         flex-direction: column; /* Cambia la dirección de los elementos a vertical */
         position: absolute; /* Asegura que esté encima de otros elementos */
         top: 100%; /* Coloca el menú justo debajo del contenedor principal */
-        left: 0;
+        left: -50;
         width: 100%; /* Abarca todo el ancho de la pantalla */
         background-color: #ffffff; /* Fondo blanco para contraste */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra para distinción */
