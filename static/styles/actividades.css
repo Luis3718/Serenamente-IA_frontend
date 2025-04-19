@@ -264,9 +264,11 @@ main {
     transform: scale(1.05);
 }
 
-.image-button.completed {
-    border: 3px solid #4CAF50; /* Borde verde por ejemplo */
-}
+.image-button.completed img {
+    filter: grayscale(0%) brightness(0.8) sepia(0.3) hue-rotate(60deg) saturate(2);
+    border: 3px solid #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}   
 
 .social-bar {
     position: fixed;
