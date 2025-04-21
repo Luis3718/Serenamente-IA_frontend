@@ -299,19 +299,23 @@
             cardDiv.classList.add("activity-card");
             cardDiv.id = `activity${index + 1}`;
 
-            console.log("Actividad actual ID:", actividadActualId);
-            console.log("Actividades:", actividades);
-
             const estaDesbloqueada = actividad.ID_Actividad === actividadActualId;
 
-            if (!estaDesbloqueada) {
+            if (actividad.ID_Actividad < actividadActualId) {
+                // Actividad completada – verde
+                cardDiv.classList.add("completada");
+            } else if (actividad.ID_Actividad === actividadActualId) {
+                // Actividad actual – desbloqueada
+                // No hacemos nada, se queda normal
+            } else {
+                // Actividad futura – bloqueada
                 cardDiv.classList.add("disabled");
             }
 
             cardDiv.innerHTML = `
                 <p>${index + 1}. ${actividad.Nombre}</p>
-                <a href="actividad${String(index + 1).padStart(2, '0')}.html">
-                    <button ${!estaDesbloqueada ? "disabled" : ""}>
+                <a href="actividad${index + 1}.html">
+                    <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
                         <img src="static/imagenes/boton0${index + 1}.png" alt="Actividad ${index + 1}">
                     </button>
                 </a>

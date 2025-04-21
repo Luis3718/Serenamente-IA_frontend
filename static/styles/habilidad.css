@@ -208,6 +208,16 @@ main {
     color: #333; /* Texto oscuro */
 }
 
+.activity-card.completada {
+    background-color: #d4f7d4; /* verde suave */
+    border: 2px solid #00c853; /* verde fuerte */
+    opacity: 1;
+}
+
+.activity-card.completada button {
+    filter: saturate(1.2);
+}
+
 .social-bar {
     position: fixed;
     top: 50%;
