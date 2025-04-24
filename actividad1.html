@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad 1: Qué es mindfulness y cómo puede ayudarme</title>
-    <link rel="stylesheet" href="actividad.css">
+    <link rel="stylesheet" href="static/styles/actividad.css">
 </head>
 <body>
     <!-- Submenú y logo-->
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <a href="index.html">
-                    <img src="Imagenes0/logo.jpeg" alt="Logo SerenaMente IA" class="logo">
+                <a href="dashboard.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
                 </a>
             </div>
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
@@ -43,7 +43,7 @@
                 <div class="video-container">
                     <p>Para comenzar, te invito a ver un video que explica lo qué es y qué no es el mindfulness, también se muestra los alcances de la intervención y cómo podrá ayudarte en tu vida diaria.</p>
                     <video controls>
-                        <source src="Imagenes0/video03.mp4" type="video/mp4">
+                        <source src="static/imagenes/video03.mp4" type="video/mp4">
                         Tu navegador no soporta la reproducción de videos.
                     </video>
                 </div>
@@ -51,7 +51,7 @@
                     <p>Pero hay mucho que decir y aprender del mindfulness, así que también vamos a ver este video
                     </p>
                     <video controls>
-                        <source src="Imagenes0/video03.mp4" type="video/mp4">
+                        <source src="static/imagenes/video03.mp4" type="video/mp4">
                         Tu navegador no soporta la reproducción de videos.
                     </video>
                 </div>
@@ -60,7 +60,7 @@
             <p>Ahora que ya sabes un poco más de mindfulness ¿qué te parece? Sigamos explorando de manera breve cómo se ha utilizado para aumentar la salud mental.</p>
             <div class="infografia">
                 <a href="link-a-infografia" target="_blank">
-                    <img src="Imagenes0/infografia.jpg" alt="Infografía sobre Mindfulness">
+                    <img src="static/imagenes/infografia.jpg" alt="Infografía sobre Mindfulness">
                 </a>
             </div>
             
@@ -68,7 +68,7 @@
             <p>¡Estoy aquí para apoyarte en este camino de transformación!</p>
             
             <div class="serenito-container">
-                <img src="Imagenes0/serenito.png" alt="Serenito comunicándose" class="serenito-img">
+                <img src="static/imagenes/serenito.png" alt="Serenito comunicándose" class="serenito-img">
                 <div class="serenito-dialogo">
                     <p class="typing-text"> Has llegado al final de esta introducción a mindfulness, un viaje donde la atención plena y la tecnología se unen para ayudarte a desarrollar habilidades clave para tu bienestar emocional.
                    <br> Recuerda que mindfulness no es una solución instantánea, sino una práctica continua que requiere paciencia y dedicación.
@@ -78,8 +78,8 @@
         
             
             <div class="button-container">
-                <a href="dash.html" class="button">Regresar al menú inicial</a>
-                <a href="actividad02.html" class="button">Siguiente paso</a>
+                <a href="dashboard.html" class="button">Regresar al menú inicial</a>
+                <a href="#" class="button" id="btn-siguiente" style="pointer-events: none; opacity: 0.5;">Siguiente paso</a>
             </div>
         </div>
     </main>
@@ -147,7 +147,51 @@
             submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
         });
 
-        // Funcion que verifica el token y si se contesto el pretest
+        //animacion de texto
+        document.addEventListener("DOMContentLoaded", function () {
+        const textElement = document.querySelector(".typing-text");
+        const text = textElement.textContent.trim();
+        textElement.textContent = "";
+
+        const videoElements = document.querySelectorAll("video");
+        let videosTerminados = 0;
+        let textoTerminado = false;
+        const btnSiguiente = document.getElementById("btn-siguiente");
+
+        function verificarTodoCompletado() {
+            if (videosTerminados === videoElements.length && textoTerminado) {
+                btnSiguiente.style.pointerEvents = "auto";
+                btnSiguiente.style.opacity = 1;
+            }
+        }
+
+        // Detectar fin de cada video
+        videoElements.forEach(video => {
+            video.addEventListener("ended", () => {
+                videosTerminados++;
+                verificarTodoCompletado();
+            });
+        });
+
+        // Animación de texto tipo máquina de escribir
+        let i = 0;
+        const speed = 30;
+
+        function typeWriter() {
+            if (i < text.length) {
+                textElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                textoTerminado = true;
+                verificarTodoCompletado();
+            }
+        }
+
+        typeWriter();
+        });
+
+        // Funcion que verifica el token
         async function verificarAutenticacion() {
             const token = localStorage.getItem("token");
             if (!token) {
@@ -195,28 +239,70 @@
         });
         //verificarAutenticacion();
     });
-    //animacion de texto
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const textElement = document.querySelector(".typing-text");
-        const text = textElement.textContent.trim();
-        textElement.textContent = ""; // Limpia el texto inicialmente
+        // Funcionalidad para extraer el id del token 
+        function getTokenId() {
+            const token = localStorage.getItem("token");
+            if (token) {
+                try {
+                    const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
+                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    }).join(''));
 
-        let i = 0;
-        const speed = 30; // velocidad en ms entre cada palabra
-
-        function typeWriter() {
-            if (i < text.length) {
-                textElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
+                    const { id } = JSON.parse(jsonPayload);
+                    return id;
+                } catch (error) {
+                    console.error("Error decoding token:", error);
+                    return null;
+                }
             }
+            return null;
         }
 
-        typeWriter();
-    });
+        const pacienteId = getTokenId(); 
+        const habilidadActual = 1; // <- Cambia este valor según la habilidad actual de esta página
 
+        document.getElementById("btn-siguiente").addEventListener("click", async function (e) {
+            e.preventDefault();
 
+            if (!pacienteId) {
+                alert("No se encontró el ID del paciente.");
+                return;
+            }
+
+            try {
+                // Completar la actividad actual
+                const completarResp = await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                if (!completarResp.ok) {
+                    const error = await completarResp.json();
+                    alert("Error al completar la actividad: " + error.detail);
+                    return;
+                }
+
+                // Obtener el nuevo progreso
+                const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+                const progreso = await progresoResp.json();
+
+                const nuevaHabilidad = progreso.ID_Habilidad;
+                const nuevaActividad = progreso.ID_Actividad;
+
+                // Redirigir según la habilidad
+                if (nuevaHabilidad === habilidadActual) {
+                    window.location.href = `actividad${nuevaActividad}.html`;
+                } else {
+                    window.location.href = "actividades.html";
+                }
+            } catch (error) {
+                console.error("Error al avanzar:", error);
+                alert("Ocurrió un error al avanzar a la siguiente actividad.");
+            }
+        });
     </script>
 </body>
 </html>

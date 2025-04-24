@@ -175,7 +175,7 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la ventana */
     margin: 0;
-    background-image: url('fondo.jpeg');
+    background-image: url('../imagenes/fondo.jpg');
     background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
     background-position: center; /* Centra la imagen */
     background-attachment: fixed; /* Hace que el fondo permanezca fijo al hacer scroll */
@@ -349,126 +349,6 @@ footer {
     text-align: center; /* Centra el texto */
 }
 
-/* Ajustes para pantallas intermedias (entre móvil y escritorio grande) */
-@media (min-width: 981px) and (max-width: 1400px) {
-    body {
-        font-size: 14px; /* Reducir tamaño de fuente general */
-    }
-
-    .submenu {
-        width: 50%; /* Reducir ancho del submenú */
-        padding: 15px 0; /* Ajustar padding */
-        transform: translateX(-50%); /* Centra el menú respecto a la página */
-    }
-
-    .submenu ul {
-        align-items: center; /* Asegurar alineación central */
-    }
-    
-    .submenu ul li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .submenu ul li a {
-        font-size: 14px; /* Reducir tamaño de letra del submenú */
-        padding: 8px 15px; /* Ajustar padding de los enlaces */
-    }
-
-    .submenu ul li a.login {
-        font-size: 14px; /* Reducir tamaño del texto */
-        padding: 6px 12px; /* Reducir padding para mejorar ajuste */
-        border-radius: 6px; /* Ajustar bordes */
-    }
-
-}
-
-/* Media query para pantallas pequeñas */
-@media (max-width: 980px) {
-    .menu-toggle {
-        display: block; /* Muestra el botón hamburguesa */
-        margin-left: auto; /* Alinea el botón al final */
-    }
-
-    .submenu {
-        display: none; /* Oculta el menú inicialmente */
-        flex-direction: column; /* Cambia la dirección de los elementos a vertical */
-        position: absolute; /* Asegura que esté encima de otros elementos */
-        top: 100%; /* Coloca el menú justo debajo del contenedor principal */
-        left: 0;
-        width: 100%; /* Abarca todo el ancho de la pantalla */
-        background-color: #ffffff; /* Fondo blanco para contraste */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra para distinción */
-        z-index: 1000; /* Asegura que esté encima de otros elementos */
-    }
-
-    .submenu.active {
-        display: flex; /* Muestra el menú al activarlo */
-    }
-
-    .submenu ul {
-        flex-direction: column; /* Cambia la lista a orientación vertical */
-        padding: 0;
-        margin: 0;
-    }
-
-    .submenu ul li {
-        width: 100%; /* Cada elemento ocupa todo el ancho */
-        text-align: center; /* Centra el texto */
-        padding: 10px 0; /* Espaciado vertical */
-    }
-
-    .submenu ul li a {
-        display: block; /* Hace que los enlaces sean bloques */
-        padding: 15px; /* Espaciado interno */
-        color: #333; /* Texto oscuro */
-        font-size: 16px; /* Tamaño de fuente legible */
-        text-decoration: none; /* Quita el subrayado */
-        border-bottom: 1px solid #eee; /* Línea divisoria entre elementos */
-    }
-
-    .submenu ul li a:hover {
-        background-color: #ffc000; /* Fondo amarillo en hover */
-        color: white; /* Texto blanco en hover */
-    }
-
-    .logo {
-        max-width: 20vw; /* Más pequeño para pantallas móviles */
-        height: auto;
-    }
-
-    .social-icon img {
-        width: 30px;  /* Tamaño menor para móvil */
-        height: 30px;
-    }
-
-    .banner-section {
-        flex-direction: column; /* Acomoda los elementos en columna */
-    }
-
-    .banner-logo {
-        margin-bottom: 10px; /* Espaciado entre el logo principal y los textos */
-    }
-
-    .banner-text {
-        text-align: center; /* Centra el texto */
-        margin-bottom: 15px; /* Espaciado entre texto y logos */
-    }
-
-    .banner-logos {
-        display: flex;
-        flex-wrap: wrap; /* Ajusta los logos en filas */
-        gap: 10px; /* Espaciado entre logos */
-        justify-content: center; /* Centra los logos */
-    }
-
-    .banner-logos img {
-        max-height: 50px; /* Tamaño más pequeño para móvil */
-        max-width: 50px;
-    }
-}
-/**/
 .serenito-container {
     display: flex;
     align-items: center;
@@ -808,4 +688,124 @@ p {
 .mensaje-final p {
     font-size: 16px;
     margin-bottom: 25px;
+}
+
+/* Ajustes para pantallas intermedias (entre móvil y escritorio grande) */
+@media (min-width: 981px) and (max-width: 1400px) {
+    body {
+        font-size: 14px; /* Reducir tamaño de fuente general */
+    }
+
+    .submenu {
+        width: 50%; /* Reducir ancho del submenú */
+        padding: 15px 0; /* Ajustar padding */
+        transform: translateX(-50%); /* Centra el menú respecto a la página */
+    }
+
+    .submenu ul {
+        align-items: center; /* Asegurar alineación central */
+    }
+    
+    .submenu ul li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .submenu ul li a {
+        font-size: 14px; /* Reducir tamaño de letra del submenú */
+        padding: 8px 15px; /* Ajustar padding de los enlaces */
+    }
+
+    .submenu ul li a.login {
+        font-size: 14px; /* Reducir tamaño del texto */
+        padding: 6px 12px; /* Reducir padding para mejorar ajuste */
+        border-radius: 6px; /* Ajustar bordes */
+    }
+
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 980px) {
+    .menu-toggle {
+        display: block; /* Muestra el botón hamburguesa */
+        margin-left: auto; /* Alinea el botón al final */
+    }
+
+    .submenu {
+        display: none; /* Oculta el menú inicialmente */
+        flex-direction: column; /* Cambia la dirección de los elementos a vertical */
+        position: absolute; /* Asegura que esté encima de otros elementos */
+        top: 100%; /* Coloca el menú justo debajo del contenedor principal */
+        left: -50;
+        width: 100%; /* Abarca todo el ancho de la pantalla */
+        background-color: #ffffff; /* Fondo blanco para contraste */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra para distinción */
+        z-index: 1000; /* Asegura que esté encima de otros elementos */
+    }
+
+    .submenu.active {
+        display: flex; /* Muestra el menú al activarlo */
+    }
+
+    .submenu ul {
+        flex-direction: column; /* Cambia la lista a orientación vertical */
+        padding: 0;
+        margin: 0;
+    }
+
+    .submenu ul li {
+        width: 100%; /* Cada elemento ocupa todo el ancho */
+        text-align: center; /* Centra el texto */
+        padding: 10px 0; /* Espaciado vertical */
+    }
+
+    .submenu ul li a {
+        display: block; /* Hace que los enlaces sean bloques */
+        padding: 15px; /* Espaciado interno */
+        color: #333; /* Texto oscuro */
+        font-size: 16px; /* Tamaño de fuente legible */
+        text-decoration: none; /* Quita el subrayado */
+        border-bottom: 1px solid #eee; /* Línea divisoria entre elementos */
+    }
+
+    .submenu ul li a:hover {
+        background-color: #ffc000; /* Fondo amarillo en hover */
+        color: white; /* Texto blanco en hover */
+    }
+
+    .logo {
+        max-width: 20vw; /* Más pequeño para pantallas móviles */
+        height: auto;
+    }
+
+    .social-icon img {
+        width: 30px;  /* Tamaño menor para móvil */
+        height: 30px;
+    }
+
+    .banner-section {
+        flex-direction: column; /* Acomoda los elementos en columna */
+    }
+
+    .banner-logo {
+        margin-bottom: 10px; /* Espaciado entre el logo principal y los textos */
+    }
+
+    .banner-text {
+        text-align: center; /* Centra el texto */
+        margin-bottom: 15px; /* Espaciado entre texto y logos */
+    }
+
+    .banner-logos {
+        display: flex;
+        flex-wrap: wrap; /* Ajusta los logos en filas */
+        gap: 10px; /* Espaciado entre logos */
+        justify-content: center; /* Centra los logos */
+    }
+
+    .banner-logos img {
+        max-height: 50px; /* Tamaño más pequeño para móvil */
+        max-width: 50px;
+    }
 }
