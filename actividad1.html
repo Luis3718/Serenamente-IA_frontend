@@ -148,15 +148,16 @@
         });
 
         //animacion de texto
-        document.addEventListener("DOMContentLoaded", function () {
         const textElement = document.querySelector(".typing-text");
         const text = textElement.textContent.trim();
         textElement.textContent = "";
 
+        let textoTerminado = false;
+        let i = 0;
+        const speed = 30;
+        const btnSiguiente = document.getElementById("btn-siguiente");
         const videoElements = document.querySelectorAll("video");
         let videosTerminados = 0;
-        let textoTerminado = false;
-        const btnSiguiente = document.getElementById("btn-siguiente");
 
         function verificarTodoCompletado() {
             if (videosTerminados === videoElements.length && textoTerminado) {
@@ -164,18 +165,6 @@
                 btnSiguiente.style.opacity = 1;
             }
         }
-
-        // Detectar fin de cada video
-        videoElements.forEach(video => {
-            video.addEventListener("ended", () => {
-                videosTerminados++;
-                verificarTodoCompletado();
-            });
-        });
-
-        // Animación de texto tipo máquina de escribir
-        let i = 0;
-        const speed = 30;
 
         function typeWriter() {
             if (i < text.length) {
@@ -188,7 +177,26 @@
             }
         }
 
-        typeWriter();
+        // Animación solo si el texto está en pantalla
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    typeWriter();
+                    observer.unobserve(entry.target); // Solo una vez
+                }
+            });
+        }, {
+            threshold: 0.5 // Al menos 50% visible
+        });
+
+        observer.observe(document.querySelector(".serenito-dialogo"));
+
+        // Detectar fin de cada video
+        videoElements.forEach(video => {
+            video.addEventListener("ended", () => {
+                videosTerminados++;
+                verificarTodoCompletado();
+            });
         });
 
         // Funcion que verifica el token
@@ -237,7 +245,7 @@
             localStorage.removeItem("token");
             window.location.href = "login.html";
         });
-        //verificarAutenticacion();
+        verificarAutenticacion();
     });
 
         // Funcionalidad para extraer el id del token 
