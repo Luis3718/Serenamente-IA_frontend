@@ -348,9 +348,47 @@
                     messages.appendChild(gracias);
                     messages.scrollTop = messages.scrollHeight;
     
-                    setTimeout(() => {
-                        document.getElementById('chatbot-wrapper').classList.remove('hidden');
-                        document.getElementById("final-message").classList.remove("hidden");
+                    setTimeout(async () => {
+                        const pacienteId = getTokenId(); // función ya existente
+                        const actividadActual = 3; // ← cambia esto al ID de esta actividad
+                        const habilidadActual = 1; // ← cambia esto al ID real de la habilidad
+
+                        // Transformar el objeto de respuestas a arreglo de objetos
+                        const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
+                            ID_Pregunta: i + 1,
+                            ID_Actividad: actividadActual,
+                            ID_Paciente: pacienteId,
+                            Respuesta: Array.isArray(v) ? v.join(", ") : v
+                        }));
+
+                        try {
+                            // Enviar respuestas
+                            await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(respuestasFormateadas)
+                            });
+
+                            // Completar actividad
+                            await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" }
+                            });
+
+                            // Obtener nuevo progreso y redirigir
+                            const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+                            const progreso = await progresoResp.json();
+
+                            if (progreso.ID_Habilidad === habilidadActual) {
+                                window.location.href = `actividad${progreso.ID_Actividad}.html`;
+                            } else {
+                                window.location.href = "actividades.html";
+                            }
+
+                        } catch (error) {
+                            console.error("Error al guardar respuestas o avanzar:", error);
+                            alert("Ocurrió un error al enviar tus respuestas o avanzar.");
+                        }
                     }, 2000);
                 }
             }
