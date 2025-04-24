@@ -261,8 +261,9 @@
             return null;
         }
 
-        const pacienteId = getTokenId(); 
-        const habilidadActual = 1; // <- Cambia este valor según la habilidad actual de esta página
+        const actividadActual = 1; // Cambia este número por el ID real de esta actividad
+        const habilidadActual = 1; // Cambia este número por el ID real de esta habilidad
+        const pacienteId = getTokenId(); // Ya lo tienes definido en tu script
 
         document.getElementById("btn-siguiente").addEventListener("click", async function (e) {
             e.preventDefault();
@@ -273,7 +274,28 @@
             }
 
             try {
-                // Completar la actividad actual
+                // Verificar si esta actividad ya fue completada
+                const completadaResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
+                const completadaData = await completadaResp.json();
+
+                // Si ya fue completada: Omitir el POST, solo redireccionar
+                if (completadaData.completada) {
+                    const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+                    const progreso = await progresoResp.json();
+
+                    const nuevaHabilidad = progreso.ID_Habilidad;
+                    const nuevaActividad = progreso.ID_Actividad;
+
+                    if (nuevaHabilidad === habilidadActual) {
+                        window.location.href = `actividad${nuevaActividad}.html`;
+                    } else {
+                        window.location.href = "actividades.html";
+                    }
+
+                    return;
+            }
+
+                // Si no ha sido completada: realizar flujo completo
                 const completarResp = await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" }
@@ -285,21 +307,20 @@
                     return;
                 }
 
-                // Obtener el nuevo progreso
                 const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const progreso = await progresoResp.json();
 
                 const nuevaHabilidad = progreso.ID_Habilidad;
                 const nuevaActividad = progreso.ID_Actividad;
 
-                // Redirigir según la habilidad
                 if (nuevaHabilidad === habilidadActual) {
                     window.location.href = `actividad${nuevaActividad}.html`;
                 } else {
                     window.location.href = "actividades.html";
                 }
+
             } catch (error) {
-                console.error("Error al avanzar:", error);
+                console.error("Error en el flujo de navegación:", error);
                 alert("Ocurrió un error al avanzar a la siguiente actividad.");
             }
         });
