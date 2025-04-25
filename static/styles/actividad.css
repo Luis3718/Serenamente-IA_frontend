@@ -433,6 +433,16 @@ h1 {
     display: inline-block; /* Asegura que el tamaño del fondo respete el contenido */
 }
 
+h2
+{
+    color: #ffc000;
+    text-align: left;
+    padding: 0%;
+    margin-top: 0;
+    margin-bottom: 5px
+
+}
+
 /* Mantiene el estilo del cuadro de texto de Serenito */
 .serenito-dialogo {
     background-color: #f0f0f0;
@@ -449,6 +459,100 @@ p {
     line-height: 1.6; /* Valor recomendado para texto legible */
     text-align: justify;
 }
+
+/*bolita de respiraciones*/
+.breathing-guide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+.circle {
+    width: 100px;
+    height: 100px;
+    background-color: #f7f307;
+    border-radius: 50%;
+    transition: transform 5s ease-in-out;
+}
+#breathing-text {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+/* Estilo del recuadro "Recuerda" */
+.recuerda-box {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Imagen del Koala */
+.koala-img {
+    width: 80px;
+    height: auto;
+}
+
+/* Animación de aparición */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #ffd000;
+    }
+    50% {
+        transform: scale(1.5);
+        box-shadow: 0 0 25px #ffc000;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #ffd000;
+    }
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #ffd000;
+    }
+    50% {
+        transform: scale(1.5);
+        box-shadow: 0 0 25px #ffc000;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #ffd000;
+    }
+}
+/*ESTILO BOLITA*/
+.circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #fffac2, #ffd000);
+    box-shadow: 0 0 20px rgba(255, 208, 0, 0.7);
+    transition: transform 5s ease-in-out, box-shadow 5s ease-in-out;
+}
+
 /*estilos de chatbot*/
 /* Animación de texto tipo máquina */
 .typing-question::after {
