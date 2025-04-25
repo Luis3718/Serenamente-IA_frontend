@@ -11,7 +11,7 @@
         <div class="header-container">
             <div class="logo-container">
                 <a href="index.html">
-                    <img src="logo.jpeg" alt="Logo SerenaMente IA" class="logo">
+                    <img src="static/imagenes/logo.jpeg" alt="Logo SerenaMente IA" class="logo">
                 </a>
             </div>
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
@@ -30,8 +30,6 @@
             </nav>
         </div>
     </header>
-    
-
     <!-- Contenido principal -->
     <main>
         <div class="container">
@@ -168,7 +166,9 @@
                 window.location.href = "login.html";
             }
         }
-    
+        
+        verificarAutenticacion();
+
         document.addEventListener("DOMContentLoaded", function () {
             const avatar = document.getElementById("user-avatar");
             const userMenu = document.querySelector(".user-menu");
@@ -213,44 +213,76 @@
             return null;
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
             const video = document.querySelector("video");
             const chatbot = document.getElementById("chatbot-wrapper");
             const messages = document.getElementById("chatbot-messages");
             const inputArea = document.getElementById("chatbot-input");
     
-            const preguntas = [
-                {
-                    texto: "¿Te fue posible realizar toda la práctica?",
-                    tipo: "única",
-                    opciones: ["Sí, todo bien", "No, tuve dificultades"]
-                },
-                {
-                    texto: "¿Qué tan presente te sentiste durante la práctica?",
-                    tipo: "única",
-                    opciones: ["Nada presente", "Un poco presente", "Moderadamente presente", "Muy presente", "Completamente presente"]
-                },
-                {
-                    texto: "¿Qué notaste en tu cuerpo durante tu práctica? (Marca todas las que apliquen)",
-                    tipo: "multi",
-                    opciones: ["Tensión muscular", "Sensación de calor", "Sensación de frío", "Incomodidad", "Dolor", "Relajación", "Ligereza", "Pesadez", "Hormigueo", "Otro"]
-                },
-                {
-                    texto: "¿Qué pensamientos o emociones surgieron durante tu práctica? (Marca todas las que apliquen)",
-                    tipo: "multi",
-                    opciones: ["Preocupación por el futuro", "Recuerdos del pasado", "Autocrítica", "Juicio hacia otros", "Frustración", "Tristeza", "Alegría", "Calma", "Paz", "Ira", "Miedo", "Otro (especificar):"]
-                },
-                {
-                    texto: "¿Identificaste alguna conexión con tu forma de vivir el estrés?",
-                    tipo: "única",
-                    opciones: ["Sí, claramente", "Posiblemente", "No, no lo creo", "No estoy seguro/a"]
-                },
-                {
-                    texto: "¿Notaste algunas de estas experiencias durante la práctica? (Marca todas las que apliquen)",
-                    tipo: "multi",
-                    opciones: ["Pensamientos automáticos","Sueño",  "Emociones desagradables", "Inquietud","Recuerdos vividos", "Aburrimiento",  "Preocupaciones", "Recuerdos", "Emociones agradables", "Conmovido/a", "Claridad mental", "Consciencia expandida", "Sentirte con más energía", "Tranquilidad", "Cosquilleo", "Relajación muscular", "Sensaciones internas"]
+            const pacienteId = getTokenId();
+            let actividadActual = 3; // <-- Cambia al ID real de esta actividad
+            let habilidadActual = 1; // <-- Cambia al ID real de esta habilidad
+            let idTratamiento = null;
+            let esUltimaActividad = false;
+
+            try {
+                // Obtener el progreso del paciente (para saber el tratamiento actual)
+                const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+                const progreso = await progresoResp.json();
+                idTratamiento = progreso.ID_Tratamiento;
+
+                // Obtener las actividades de la habilidad en el tratamiento actual
+                const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
+                const actividades = await actividadesResp.json();
+                const idsActividades = actividades.map(act => act.ID_Actividad);
+
+                const index = idsActividades.indexOf(actividadActual);
+                if (index === idsActividades.length - 1) {
+                    esUltimaActividad = true;
                 }
-            ];
+
+            } catch (error) {
+                console.error("Error al determinar si es la última actividad:", error);
+            }
+
+            let preguntas = [
+            {
+                texto: "¿Te fue posible realizar toda la práctica?",
+                tipo: "única",
+                opciones: ["Sí, todo bien", "No, tuve dificultades"]
+            },
+            {
+                texto: "¿Qué tan presente te sentiste durante la práctica?",
+                tipo: "única",
+                opciones: ["Nada presente", "Un poco presente", "Moderadamente presente", "Muy presente", "Completamente presente"]
+            },
+            {
+                texto: "¿Qué notaste en tu cuerpo durante tu práctica? (Marca todas las que apliquen)",
+                tipo: "multi",
+                opciones: ["Tensión muscular", "Sensación de calor", "Sensación de frío", "Incomodidad", "Dolor", "Relajación", "Ligereza", "Pesadez", "Hormigueo", "Otro"]
+            },
+            {
+                texto: "¿Qué pensamientos o emociones surgieron durante tu práctica? (Marca todas las que apliquen)",
+                tipo: "multi",
+                opciones: ["Preocupación por el futuro", "Recuerdos del pasado", "Autocrítica", "Juicio hacia otros", "Frustración", "Tristeza", "Alegría", "Calma", "Paz", "Ira", "Miedo", "Otro (especificar):"]
+            },
+            {
+                texto: "¿Identificaste alguna conexión con tu forma de vivir el estrés?",
+                tipo: "única",
+                opciones: ["Sí, claramente", "Posiblemente", "No, no lo creo", "No estoy seguro/a"]
+            },
+            {
+                texto: "¿Notaste algunas de estas experiencias durante la práctica? (Marca todas las que apliquen)",
+                tipo: "multi",
+                opciones: ["Pensamientos automáticos", "Sueño", "Emociones desagradables", "Inquietud", "Recuerdos vividos", "Aburrimiento", "Preocupaciones", "Recuerdos", "Emociones agradables", "Conmovido/a", "Claridad mental", "Consciencia expandida", "Sentirte con más energía", "Tranquilidad", "Cosquilleo", "Relajación muscular", "Sensaciones internas"]
+            }
+        ];
+
+        // Limitar a 4 preguntas si no es la última
+        if (!esUltimaActividad) {
+            preguntas = preguntas.slice(0, 4);
+        }
+
     
             let respuestas = {};
             let indice = 0;
@@ -356,7 +388,7 @@
                 escribir();
             }
     
-            function siguiente() {
+            async function siguiente() {
                 indice++;
                 if (indice < preguntas.length) {
                     mostrarPregunta();
@@ -367,35 +399,42 @@
                     gracias.textContent = "Gracias por tus respuestas";
                     messages.appendChild(gracias);
                     messages.scrollTop = messages.scrollHeight;
-    
+
                     setTimeout(async () => {
                         const pacienteId = getTokenId(); // función ya existente
-                        const actividadActual = 3; // ← cambia esto al ID de esta actividad
-                        const habilidadActual = 1; // ← cambia esto al ID real de la habilidad
-
-                        // Transformar el objeto de respuestas a arreglo de objetos
-                        const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
-                            ID_Pregunta: i + 1,
-                            ID_Actividad: actividadActual,
-                            ID_Paciente: pacienteId,
-                            Respuesta: Array.isArray(v) ? v.join(", ") : v
-                        }));
+                        const actividadActual = 3;
+                        const habilidadActual = 1;
 
                         try {
-                            // Enviar respuestas
-                            await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify(respuestasFormateadas)
-                            });
+                            // Consultar si ya está completada
+                            const compResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
+                            const compData = await compResp.json();
+                            const yaCompletada = compData.completada;
 
-                            // Completar actividad
-                            await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" }
-                            });
+                            if (!yaCompletada) {
+                                // Transformar el objeto de respuestas a arreglo de objetos
+                                const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
+                                    ID_Pregunta: i + 1,
+                                    ID_Actividad: actividadActual,
+                                    ID_Paciente: pacienteId,
+                                    Respuesta: Array.isArray(v) ? v.join(", ") : v
+                                }));
 
-                            // Obtener nuevo progreso y redirigir
+                                // Enviar respuestas
+                                await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(respuestasFormateadas)
+                                });
+
+                                // Completar actividad
+                                await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" }
+                                });
+                            }
+
+                            // Obtener nuevo progreso y redirigir (en ambos casos)
                             const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                             const progreso = await progresoResp.json();
 
@@ -406,8 +445,8 @@
                             }
 
                         } catch (error) {
-                            console.error("Error al guardar respuestas o avanzar:", error);
-                            alert("Ocurrió un error al enviar tus respuestas o avanzar.");
+                            console.error("Error en el flujo de finalización:", error);
+                            alert("Ocurrió un error al finalizar la actividad.");
                         }
                     }, 2000);
                 }
@@ -419,8 +458,6 @@
             });
         });
     </script>
-  
-
 </body>
 </html>
 
