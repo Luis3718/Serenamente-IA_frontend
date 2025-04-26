@@ -35,141 +35,135 @@
     <main>
         <div class="container">
           <h2>Habilidad 01</h2>
-            <h1>Actividad 4:Yoga consciente</h1>
+            <h1>Actividad 4: Yoga consciente</h1>
             <p><strong>Objetivo: </strong>Esta práctica de yoga consciente trata de prestar atención a cómo se siente y mueve tu cuerpo, sin hacer posturas difíciles. 
             </p>
-                    <p >   Hola de nuevo, me alegra verte. Antes de empezar con tu práctica, te invito a que veas el siguiente video.
+                    <p >   
+                        Hola de nuevo, me alegra verte. Antes de empezar con tu práctica, te invito a que veas el siguiente video.
                     </p>
         
-
                     <div class="videoo-container">
                         <video controls>
                             <source src="static/imagenes/video03.mp4" type="video/mp4">
                             Tu navegador no soporta la reproducción de videos.
                         </video>
                     </div>
-                <div class="recuerda-box">
-                    <img src="static/imagenes/recuerda.jpeg" alt="Koala recuerda" class="koala-img">
-                    <p><strong>Recuerda:</strong> No necesitas preocuparte si nunca has hecho yoga antes. Aquí no buscamos hacer movimientos complicados, solo movernos con atención para sentir nuestro cuerpo, nuestra respiración y estar en el momento presente.
-<BR>Busca un lugar tranquilo donde puedas sentarte cómodamente en una silla o acostarte en el suelo con una manta o tapete. Dedica unos 15-20 minutos para esta práctica. Lo más importante es que lo hagas con curiosidad y amabilidad hacia ti mismo. Si alguna postura te molesta, puedes cambiarla o imaginarla.
-
+                    <div class="recuerda-box">
+                        <img src="static/imagenes/recuerda.jpeg" alt="Koala recuerda" class="koala-img">
+                        <p><strong>Recuerda:</strong> No necesitas preocuparte si nunca has hecho yoga antes. Aquí no buscamos hacer movimientos complicados, solo movernos con atención para sentir nuestro cuerpo, nuestra respiración y estar en el momento presente.
+                            <BR>Busca un lugar tranquilo donde puedas sentarte cómodamente en una silla o acostarte en el suelo con una manta o tapete. Dedica unos 15-20 minutos para esta práctica. Lo más importante es que lo hagas con curiosidad y amabilidad hacia ti mismo. Si alguna postura te molesta, puedes cambiarla o imaginarla.
                         </p>
+                    </div>
+                    <p>¿Tienes tiempo y un lugar adecuado para hacer la práctica ahora? Puedes elegir cómo prefieres hacer la práctica. Solo haz clic en el video que más te guste.
+                    </p>
+                    <div class="videos-container">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="Imagenes0/video03.mp4" type="video/mp4">
+                                Tu navegador no soporta la reproducción de videos.
+                            </video>
+                        </div>
+                        <div class="video-container">   
+                            <video controls>
+                                <source src="Imagenes0/video03.mp4" type="video/mp4">
+                                Tu navegador no soporta la reproducción de videos.
+                            </video>
+                        </div>
+                    </div>
+                    <p>
+                        ¡Muy bien! Has completado tu práctica de yoga consciente. Recuerda que lo más importante es cómo te sientes y que has tomado un momento para estar presente contigo mismo. ¡Nos vemos en la siguiente práctica!
+                    </p>
+                    <div class="button-container">
+                        <button id="mostrarChatbot" class="button">He completado la práctica</button>
+                    </div>
+                    <!-- Contenedor del chatbot -->
+                    <div id="chatbot-wrapper" class="chatbot-wrapper hidden">
+                        <div class="chatbot-container">
+                        <div class="chatbot-header">Chatbot</div>
+                        <div id="chatbot-messages" class="chatbot-messages"></div>
+                        <div id="chatbot-input" class="chatbot-input"></div>
+                    </div>
+            </div>
+        
+        <!-- CONTENEDOR FINAL  -->
+        <div id="mensaje-final" style="display: none; margin-top: 40px;">
+            <!-- Mensaje final -->
+            <div class="mensaje-final" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 40px;">
+            <div style="flex: 2;">
+                <p><strong>¡Excelente trabajo!</strong> En esta práctica has aprendido a enfocar tu atención en la respiración y en tu cuerpo, lo que te ayuda a conectarte con el presente, con el aquí y el ahora. Recuerda que la práctica de mindfulness es un viaje de autodescubrimiento, que te permitirá explorar lo que te ocurre en todos los niveles.
+            
+                    </p>
+                <p>No olvides que puedes volver a esta práctica siempre que lo necesites.</p>
+                <div class="button-container" style="margin-top: 15px;">
+                <button id="btn-siguiente-actividad" class="boton-enviar" style="display: none;">Quiero saber más</button>
+                <button id="btn-menu-principal" class="boton-enviar" style="display: none;">Regresar al menú principal</button>  
                 </div>
-  <p>¿Tienes tiempo y un lugar adecuado para hacer la práctica ahora? Puedes elegir cómo prefieres hacer la práctica. Solo haz clic en el video que más te guste.
-</p>
-<div class="videos-container">
-    <div class="video-container">
-        <video controls>
-            <source src="Imagenes0/video03.mp4" type="video/mp4">
-            Tu navegador no soporta la reproducción de videos.
-        </video>
-    </div>
-    <div class="video-container">
-       
-        <video controls>
-            <source src="Imagenes0/video03.mp4" type="video/mp4">
-            Tu navegador no soporta la reproducción de videos.
-        </video>
-    </div>
-</div>
-
-
-<p>¡Muy bien! Has completado tu práctica de yoga consciente. Recuerda que lo más importante es cómo te sientes y que has tomado un momento para estar presente contigo mismo. ¡Nos vemos en la siguiente práctica!
-</p>
-<div class="button-container">
-    <button id="mostrarChatbot" class="button">He completado la práctica</button>
-
-    
-</div>
-<!-- Contenedor del chatbot -->
-<div id="chatbot-wrapper" class="chatbot-wrapper hidden">
-    <div class="chatbot-container">
-      <div class="chatbot-header">Chatbot</div>
-      <div id="chatbot-messages" class="chatbot-messages"></div>
-      <div id="chatbot-input" class="chatbot-input"></div>
-    </div>
-  </div>
-  
- <!-- CONTENEDOR FINAL  -->
-<div id="contenedor-final" style="display: none; margin-top: 40px;">
-
-    <!-- Mensaje final -->
-    <div class="mensaje-final" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 40px;">
-      <div style="flex: 2;">
-        <p><strong>¡Excelente trabajo!</strong> En esta práctica has aprendido a enfocar tu atención en la respiración y en tu cuerpo, lo que te ayuda a conectarte con el presente, con el aquí y el ahora. Recuerda que la práctica de mindfulness es un viaje de autodescubrimiento, que te permitirá explorar lo que te ocurre en todos los niveles.
-     
-            </p>
-        <p>No olvides que puedes volver a esta práctica siempre que lo necesites.</p>
-        <div class="button-container" style="margin-top: 15px;">
-          <button id="btn-siguiente-actividad" class="boton-enviar" style="display: none;">Quiero saber más</button>
-          <button id="btn-menu-principal" class="boton-enviar" style="display: none;">Regresar al menú principal</button>  
+            </div>
+        
+            <!-- Imagen -->
+            <div style="flex: 1; text-align: center;">
+                <img src="static/imagenes/progreso.png" alt="Progreso coloreado 1/3" style="max-width: 100%; height: auto;">
+            </div>
+            </div>
+        
+            <!-- Menú de actividades -->
+            <div id="activities-menu" style="margin-top: 40px;">
+            <div class="serenito" style="display: flex; align-items: center; gap: 10px;">
+                <div class="speech-bubble">Continuemos con la siguiente actividad </div>
+                <img src="static/imagenes/serenito.png" alt="Serenito">
+            </div>
+            <div class="activities">
+                <div class="activities">
+                    <!-- Actividad 1 -->
+                    <div class="activity">
+                    <div class="activity-card" id="activity1" onclick="unlockActivity(2)">
+                        <p>1. Consciencia en mi respiración</p>
+                        <a href="actividad11.html">
+                        <button>
+                            <img src="static/imagenes/boton11.png" alt="Actividad 1">
+                        </button>
+                        </a>
+                    </div>
+                    </div>
+            
+                    <!-- Actividad 2 -->
+                    <div class="activity">
+                    <div class="activity-card" id="activity2" onclick="unlockActivity(3)">
+                        <p>2. Meditación de la montaña</p>
+                        <a href="actividad12.html">
+                        <button >
+                            <img src="static/imagenes/boton12.png" alt="Actividad 2">
+                        </button>
+                        </a>
+                    </div>
+                    </div>
+            
+                    <!-- Actividad 3 -->
+                    <div class="activity">
+                    <div class="activity-card" id="activity3">
+                        <p>3. Escaneo corporal</p>
+                        <a href="actividad13.html">
+                        <button >
+                            <img src="static/imagenes/boton13.png" alt="Actividad 3">
+                        </button>
+                        </a>
+                    </div>
+                    </div>
+            
+                    <!-- Actividad 4 -->
+                    <div class="activity">
+                    <div class="activity-card" id="activity4">
+                        <p>4. Yoga consciente</p>
+                        <a href="actividad14.html">
+                        <button >
+                            <img src="static/imagenes/boton14.png" alt="Actividad 4">
+                        </button>
+                        </a>
+                    </div>
+                    </div>
+            </div>
+            </div>
         </div>
-      </div>
-  
-      <!-- Imagen -->
-      <div style="flex: 1; text-align: center;">
-        <img src="static/imagenes/progreso.png" alt="Progreso coloreado 1/3" style="max-width: 100%; height: auto;">
-      </div>
-    </div>
-  
-    <!-- Menú de actividades -->
-    <div id="activities-menu" style="margin-top: 40px;">
-      <div class="serenito" style="display: flex; align-items: center; gap: 10px;">
-        <div class="speech-bubble">Continuemos con la siguiente actividad/div>
-        <img src="static/imagenes/serenito.png" alt="Serenito">
-      </div>
-      <div class="activities">
-        <div class="activities">
-            <!-- Actividad 1 -->
-            <div class="activity">
-              <div class="activity-card" id="activity1" onclick="unlockActivity(2)">
-                <p>1. Consciencia en mi respiración</p>
-                <a href="actividad11.html">
-                  <button>
-                    <img src="static/imagenes/boton11.png" alt="Actividad 1">
-                  </button>
-                </a>
-              </div>
-            </div>
-      
-            <!-- Actividad 2 -->
-            <div class="activity">
-              <div class="activity-card" id="activity2" onclick="unlockActivity(3)">
-                <p>2. Meditación de la montaña</p>
-                <a href="actividad12.html">
-                  <button >
-                    <img src="static/imagenes/boton12.png" alt="Actividad 2">
-                  </button>
-                </a>
-              </div>
-            </div>
-      
-            <!-- Actividad 3 -->
-            <div class="activity">
-              <div class="activity-card" id="activity3">
-                <p>3. Escaneo corporal</p>
-                <a href="actividad13.html">
-                  <button >
-                    <img src="static/imagenes/boton13.png" alt="Actividad 3">
-                  </button>
-                </a>
-              </div>
-            </div>
-      
-            <!-- Actividad 4 -->
-            <div class="activity">
-              <div class="activity-card" id="activity4">
-                <p>4. Yoga consciente</p>
-                <a href="actividad14.html">
-                  <button >
-                    <img src="static/imagenes/boton14.png" alt="Actividad 4">
-                  </button>
-                </a>
-              </div>
-            </div>
-      </div>
-    </div>
-  </div>
    
     </main>
     <div class="social-bar">
