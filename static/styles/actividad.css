@@ -773,6 +773,7 @@ p {
 .hidden {
     display: none;
 }
+
 /*mensaje final*/
 .mensaje-final {
     margin: 30px auto;
@@ -788,10 +789,119 @@ p {
     color: #545368;
     font-size: 24px;
     margin-bottom: 15px;
+}/* Contenedor de Serenito y Actividades */
+#activities-menu {
+    display: flex; /* Mostrar en fila */
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto 0;
+    gap: 40px;
 }
-.mensaje-final p {
+
+/* Serenito a la izquierda */
+.serenito {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.serenito img {
+    width: 450px; /* Más pequeño y proporcionado */
+    height: auto;
+}
+
+.speech-bubble {
+    background: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 260px;
     font-size: 16px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+    text-align: center;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de actividades */
+.activities {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* Cada actividad */
+.activity {
+    flex: 1 1 45%; /* Hasta dos por fila */
+    display: flex;
+    justify-content: center;
+}
+
+/* Tarjeta de actividad */
+.activity-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 220px; /* Más pequeñas */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.activity-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Texto del botón */
+.activity-card p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Botón e imagen */
+.activity-card button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.activity-card button img {
+    width: 80px; /* Tamaño más pequeño */
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.activity-card button:hover img {
+    transform: scale(1.1);
+}
+
+/* Actividades deshabilitadas */
+.activity-card.disabled {
+    background-color: #e0e0e0;
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.activity-card.completada {
+    background-color: #d4f7d4; /* verde suave */
+    border: 2px solid #00c853; /* verde fuerte */
+    opacity: 1;
+}
+
+.activity-card.completada button {
+    filter: saturate(1.2);
 }
 
 /* Ajustes para pantallas intermedias (entre móvil y escritorio grande) */
