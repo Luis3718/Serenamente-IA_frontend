@@ -214,11 +214,11 @@
         // Funcion para el menu de hamburguesa
         const menuToggle = document.querySelector('.menu-toggle');
         const submenu = document.querySelector('.submenu');
-
+  
         menuToggle.addEventListener('click', () => {
             submenu.classList.toggle('active');
         });
-
+  
         // Funcion animacion de bolita de respiracion
         function breathingAnimation() {
             const circle = document.querySelector(".circle");
@@ -237,46 +237,52 @@
         }
     
         document.addEventListener("DOMContentLoaded", breathingAnimation);
-
+  
         //animacion de texto
-        const textElement = document.querySelector(".typing-text");
-        const text = textElement.textContent.trim();
-        textElement.textContent = "";
-
-        let textoTerminado = false;
-        let i = 0;
-        const speed = 30;
-        const btnSiguiente = document.getElementById("btn-siguiente");
-        const videoElements = document.querySelectorAll("video");
-        let videosTerminados = 0;
-
-        const btnMostrarChatbot = document.getElementById("mostrarChatbot");
-
-        function typeWriter() {
-            if (i < text.length) {
-                textElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            } else {
-                textoTerminado = true;
-                btnMostrarChatbot.disabled = false; // ✅ Se habilita el botón cuando termina el texto
-            }
-        }
-
-        // Animación solo si el texto está en pantalla
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    typeWriter();
-                    observer.unobserve(entry.target); // Solo una vez
-                }
-            });
-        }, {
-            threshold: 0.5 // Al menos 50% visible
-        });
-
-        observer.observe(document.querySelector(".serenito-dialogo"));
-        
+        document.addEventListener("DOMContentLoaded", () => {
+          const textElement = document.querySelector(".typing-text");
+          const botonMostrarChatbot = document.getElementById("mostrarChatbot");
+  
+          if (textElement) {
+              const text = textElement.textContent.trim();
+              textElement.textContent = "";
+  
+              let i = 0;
+              const speed = 30;
+  
+              function typeWriter() {
+                  if (i < text.length) {
+                      textElement.textContent += text.charAt(i);
+                      i++;
+                      setTimeout(typeWriter, speed);
+                  } else {
+                      botonMostrarChatbot.disabled = false; // ✅ Habilita botón al terminar de escribir
+                  }
+              }
+  
+              // Solo si existe .serenito-dialogo observamos
+              const serenitoDialogo = document.querySelector(".serenito-dialogo");
+              if (serenitoDialogo) {
+                  const observer = new IntersectionObserver((entries, observer) => {
+                      entries.forEach(entry => {
+                          if (entry.isIntersecting) {
+                              typeWriter();
+                              observer.unobserve(entry.target); // Solo una vez
+                          }
+                      });
+                  }, { threshold: 0.5 });
+  
+                  observer.observe(serenitoDialogo);
+              } else {
+                  // Si no hay serenito-dialogo, habilita inmediatamente
+                  botonMostrarChatbot.disabled = false;
+              }
+          } else {
+              // No hay texto, habilita el botón de una vez
+              botonMostrarChatbot.disabled = false;
+          }
+      });
+  
         // Funcion que verifica el token y si se contesto el pretest
         async function verificarAutenticacion() {
             const token = localStorage.getItem("token");
@@ -284,20 +290,20 @@
                 window.location.href = "login.html";
                 return;
             }
-
+  
             try {
                 const response = await fetch("http://localhost:8002/auth/verify-token", {
                     method: "GET",
                     headers: { "Authorization": `Bearer ${token}` }
                 });
-
+  
                 if (!response.ok) {
                     console.error("Error en la autenticación:", await response.json());
                     localStorage.removeItem("token");
                     window.location.href = "login.html";
                     return;
                 }
-
+  
                 const userData = await response.json();
                 const initials = userData.usuario.nombre
                     .split(" ")
@@ -320,37 +326,37 @@
                 window.location.href = "login.html";
                 return;
             }
-
+  
             const pacienteId = getTokenId(); // Usa tu función getTokenId() que ya tienes
             const habilidadId = 2; // <-- Cambia esto al número real de la habilidad que corresponde a esta actividad
             const activitiesContainer = document.querySelector("#activities-menu .activities");
-
+  
             try {
                 // Obtener tratamiento actual
                 const tratamientoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const tratamientoData = await tratamientoResp.json();
                 const tratamientoId = tratamientoData.ID_Tratamiento;
-
+  
                 // Obtener actividades de la habilidad actual
                 const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamientoId}/habilidad/${habilidadId}`);
                 const actividades = await actividadesResp.json();
-
+  
                 // Obtener el progreso del paciente
                 const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${pacienteId}`);
                 const progresoData = await progresoResp.json();
                 const actividadActualId = progresoData.id_actividad_actual;
-
+  
                 // Limpiar el contenedor
                 activitiesContainer.innerHTML = "";
-
+  
                 actividades.forEach((actividad, index) => {
                     const activityDiv = document.createElement("div");
                     activityDiv.classList.add("activity");
-
+  
                     const cardDiv = document.createElement("div");
                     cardDiv.classList.add("activity-card");
                     cardDiv.id = `activity${index + 1}`;
-
+  
                     if (actividad.ID_Actividad < actividadActualId) {
                         cardDiv.classList.add("completada"); // ✅ Se pintará verde con tu clase CSS
                     } else if (actividad.ID_Actividad === actividadActualId) {
@@ -358,7 +364,7 @@
                     } else {
                         cardDiv.classList.add("disabled"); // 🔒 Futuras actividades
                     }
-
+  
                     cardDiv.innerHTML = `
                         <p>${index + 1}. ${actividad.Nombre}</p>
                         <a href="actividad${actividad.ID_Actividad}.html">
@@ -367,36 +373,36 @@
                             </button>
                         </a>
                     `;
-
+  
                     activityDiv.appendChild(cardDiv);
                     activitiesContainer.appendChild(activityDiv);
                 });
-
+  
             } catch (error) {
                 console.error("Error cargando actividades dinámicamente:", error);
             }
         });
-
+  
         document.addEventListener("DOMContentLoaded", function () {
             const avatar = document.getElementById("user-avatar");
             const userMenu = document.querySelector(".user-menu");
-
+  
             avatar.addEventListener("click", function () {
                 userMenu.classList.toggle("active");
             });
-
+  
             document.getElementById("logout").addEventListener("click", function () {
                 localStorage.removeItem("token");
                 window.location.href = "login.html";
             });
         });
-
+  
         function submitResponses() {
             alert('Tus respuestas han sido enviadas. ¡Gracias por compartir tu experiencia!');
             document.getElementById('chatbot-container').classList.add('hidden');
             document.getElementById('final-message').classList.remove('hidden');
         }
-
+  
         function getTokenId() {
             const token = localStorage.getItem("token");
             if (token) {
@@ -406,7 +412,7 @@
                     const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
                         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
                     }).join(''));
-
+  
                     const { id } = JSON.parse(jsonPayload);
                     return id;
                 } catch (error) {
@@ -416,39 +422,39 @@
             }
             return null;
         }
-
+  
         document.addEventListener("DOMContentLoaded", async () => {
             const video = document.querySelector("video");
             const chatbot = document.getElementById("chatbot-wrapper");
             const messages = document.getElementById("chatbot-messages");
             const inputArea = document.getElementById("chatbot-input");
-
+  
             const pacienteId = getTokenId();
             let actividadActual = 4; // <-- Cambia al ID real de esta actividad
-            let habilidadActual = 1; // <-- Cambia al ID real de esta habilidad
+            let habilidadActual = 2; // <-- Cambia al ID real de esta habilidad
             let idTratamiento = null;
             let esUltimaActividad = false;
-
+  
             try {
                 // Obtener el progreso del paciente (para saber el tratamiento actual)
                 const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const progreso = await progresoResp.json();
                 idTratamiento = progreso.ID_Tratamiento;
-
+  
                 // Obtener las actividades de la habilidad en el tratamiento actual
                 const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
                 const actividades = await actividadesResp.json();
                 const idsActividades = actividades.map(act => act.ID_Actividad);
-
+  
                 const index = idsActividades.indexOf(actividadActual);
                 if (index === idsActividades.length - 1) {
                     esUltimaActividad = true;
                 }
-
+  
             } catch (error) {
                 console.error("Error al determinar si es la última actividad:", error);
             }
-
+  
             let preguntas = [
             {
                 texto: "¿Te fue posible realizar toda la práctica?",
@@ -481,41 +487,41 @@
                 opciones: ["Pensamientos automáticos", "Sueño", "Emociones desagradables", "Inquietud", "Recuerdos vividos", "Aburrimiento", "Preocupaciones", "Recuerdos", "Emociones agradables", "Conmovido/a", "Claridad mental", "Consciencia expandida", "Sentirte con más energía", "Tranquilidad", "Cosquilleo", "Relajación muscular", "Sensaciones internas"]
             }
         ];
-
+  
         // Limitar a 4 preguntas si no es la última
         if (!esUltimaActividad) {
             preguntas = preguntas.slice(0, 4);
         }
-
-
+  
+  
             let respuestas = {};
             let indice = 0;
-
+  
             function mostrarPregunta() {
                 inputArea.innerHTML = "";
                 const pregunta = preguntas[indice];
                 const contenedorBurbuja = document.createElement("div");
                 contenedorBurbuja.className = "mensaje-bot-container";
-
+  
                 const burbuja = document.createElement("div");
                 burbuja.className = "mensaje-bot typing-question";
-
+  
                 contenedorBurbuja.appendChild(burbuja);
                 messages.appendChild(contenedorBurbuja);
-
+  
                 escribirPalabraPorPalabra(burbuja, pregunta.texto, () => {
                     burbuja.classList.remove("typing-question");
-
+  
                     const contenedorOpciones = document.createElement("div");
                     contenedorOpciones.className = "multi-options";
-
+  
                     let inputOtro;
-
+  
                     pregunta.opciones.forEach(op => {
                         const btn = document.createElement("button");
                         btn.type = "button";
                         btn.textContent = op;
-
+  
                         btn.onclick = () => {
                             if (pregunta.tipo === "única") {
                                 contenedorOpciones.querySelectorAll("button").forEach(b => b.classList.remove("selected"));
@@ -523,7 +529,7 @@
                             } else {
                                 btn.classList.toggle("selected");
                             }
-
+  
                             if (op.includes("Otro")) {
                                 if (inputOtro) inputOtro.style.display = "block";
                             } else if (pregunta.tipo === "única" && inputOtro) {
@@ -531,26 +537,26 @@
                                 inputOtro.value = "";
                             }
                         };
-
+  
                         contenedorOpciones.appendChild(btn);
                     });
-
+  
                     if (pregunta.opciones.some(op => op.includes("Otro"))) {
                         inputOtro = document.createElement("input");
                         inputOtro.placeholder = "Especifica";
                         inputOtro.style.display = "none";
                         contenedorOpciones.appendChild(inputOtro);
                     }
-
+  
                     inputArea.appendChild(contenedorOpciones);
-
+  
                     const btn = crearBoton(() => {
                         const seleccionados = Array.from(contenedorOpciones.querySelectorAll(".selected")).map(b => b.textContent);
                         const otroTexto = inputOtro?.value?.trim();
                         if (otroTexto) seleccionados.push(otroTexto);
-
+  
                         if (seleccionados.length === 0) return alert("Por favor, selecciona al menos una opción");
-
+  
                         respuestas[`pregunta_${indice}`] = seleccionados;
                         mostrarRespuestaUsuario(seleccionados.join(", "));
                         siguiente();
@@ -559,7 +565,7 @@
                     messages.scrollTop = messages.scrollHeight;
                 });
             }
-
+  
             function mostrarRespuestaUsuario(texto) {
                 const burbuja = document.createElement("div");
                 burbuja.className = "mensaje-usuario";
@@ -567,7 +573,7 @@
                 messages.appendChild(burbuja);
                 messages.scrollTop = messages.scrollHeight;
             }
-
+  
             function crearBoton(fn) {
                 const btn = document.createElement("button");
                 btn.textContent = "Siguiente";
@@ -575,11 +581,11 @@
                 btn.onclick = fn;
                 return btn;
             }
-
+  
             function escribirPalabraPorPalabra(el, texto, callback) {
                 const palabras = texto.split(" ");
                 let i = 0;
-
+  
                 function escribir() {
                     if (i < palabras.length) {
                         el.textContent += palabras[i] + " ";
@@ -591,7 +597,7 @@
                 }
                 escribir();
             }
-
+  
             async function siguiente() {
                 indice++;
                 if (indice < preguntas.length) {
@@ -603,18 +609,18 @@
                     gracias.textContent = "Gracias por tus respuestas";
                     messages.appendChild(gracias);
                     messages.scrollTop = messages.scrollHeight;
-
+  
                     setTimeout(async () => {
                         const pacienteId = getTokenId(); // función ya existente
                         const actividadActual = 4; // o el número de tu actividad
                         const habilidadActual = 2; // o la habilidad real
-
+  
                         try {
                             // Consultar si ya está completada
                             const compResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
                             const compData = await compResp.json();
                             const yaCompletada = compData.completada;
-
+  
                             if (!yaCompletada) {
                                 // Enviar respuestas
                                 const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
@@ -623,13 +629,13 @@
                                     ID_Paciente: pacienteId,
                                     Respuesta: Array.isArray(v) ? v.join(", ") : v
                                 }));
-
+  
                                 await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(respuestasFormateadas)
                                 });
-
+  
                                 await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" }
@@ -641,14 +647,14 @@
                             
                             const nuevaHabilidad = progreso.ID_Habilidad;
                             const nuevaActividad = progreso.ID_Actividad;
-
+  
                             const botonSiguiente = document.getElementById("btn-siguiente-actividad");
                             const botonMenu = document.getElementById("btn-menu-principal");
-
+  
                             if (nuevaHabilidad === habilidadActual) {
                                 botonSiguiente.style.display = "inline-block";
                                 botonMenu.style.display = "inline-block";
-
+  
                                 botonSiguiente.onclick = function() {
                                     window.location.href = `actividad${nuevaActividad}.html`;
                                 };
@@ -658,21 +664,21 @@
                             } else {
                                 botonSiguiente.style.display = "none";
                                 botonMenu.style.display = "inline-block";
-
+  
                                 botonMenu.onclick = function() {
                                     window.location.href = "actividades.html";
                                 };
                             }
-
+  
                             // ✅ No redirigimos
                             // ✅ Mostramos el mensaje final
                             const chatbotWrapper = document.getElementById("chatbot-wrapper");
                             const mensajeFinal = document.getElementById("mensaje-final");
-
+  
                             chatbotWrapper.classList.add("hidden");
                             mensajeFinal.style.display = "block";
                             mensajeFinal.style.animation = "fadeIn 1s ease forwards";
-
+  
                         } catch (error) {
                             console.error("Error en el flujo de finalización:", error);
                             alert("Ocurrió un error al finalizar la actividad.");
@@ -684,13 +690,13 @@
             document.getElementById("mostrarChatbot").addEventListener("click", () => {
                 const chatbotWrapper = document.getElementById("chatbot-wrapper");
                 const botonMostrar = document.getElementById("mostrarChatbot");
-
+  
                 chatbotWrapper.classList.remove("hidden");
                 botonMostrar.classList.add("hidden");
                 mostrarPregunta();
             });
         });
-      </script>
+    </script>
 </body>
 </html>
 
