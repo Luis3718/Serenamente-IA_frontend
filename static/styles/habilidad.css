@@ -359,6 +359,77 @@ footer {
     text-align: center; /* Centra el texto */
 }
 
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    gap: 15px;
+    justify-content: center;
+}
+
+.card {
+    width: 120px;
+    height: 120px;
+    background-color: #e5e7eb;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.card-front {
+    background-color: #ffc000;
+    color: white;
+    transform: rotateY(180deg);
+    font-size: 1.1rem;
+}
+
+.card-back {
+    background-color: #d1d5db;
+    color: #6b7280;
+}
+
+.win-message {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    display: none;
+}
+
+.card-front img {
+    max-width: 80px;
+    max-height: 80px;
+}
+
 /* Ajustes para pantallas intermedias (entre móvil y escritorio grande) */
 @media (min-width: 981px) and (max-width: 1400px) {
     body {
