@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entendiendo la Rueda de la Consciencia </title>
+    <link rel="stylesheet" href="actividad.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="static/imagenes/logo.jpeg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="progreso.html">Mi progreso</a></li>
+                    <div class="user-menu">
+                        <div id="user-avatar" class="avatar">US</div>
+                        <div id="user-dropdown" class="dropdown-menu">
+                            <a href="perfil.html">Ver perfil</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>                        
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+          <h2>Habilidad 04</h2>
+            <h1>Actividad 1: Entendiendo la Rueda de la Consciencia </h1>
+            <p><strong>Objetivo: </strong>Identificarás porque la rueda de la consciencia es efectiva para manejar el estrés   </p>
+                    <p>   ¡Hola! Me alegra que sigas en este camino de bienestar. Antes de abordar la práctica de esta sesión, es 
+                        importante que identifiques como las práctica de mindfulness como la Rueda de la Consciencia inciden en tu cuerpo y en consecuencia en tu bienestar.  </p>
+                    <div class="videoo-container">
+                        <video controls>
+                            <source src="static/imagenes/video03.mp4" type="video/mp4">
+                            Tu navegador no soporta la reproducción de videos.
+                        </video>
+                    </div>
+                <div class="recuerda-box">
+                    <img src="static/imagenes/recuerda.jpeg" alt="Koala recuerda" class="koala-img">
+                    <p>Ahora que ya tienes más elementos para acercarte a la práctica del día de hoy. No olvides que puedes volver a este 
+                        contenido siempre que lo necesites. <strong>Recuerda:</strong> También que la práctica constante te permitirá afinar tu capacidad de atención, cultivar la serenidad y 
+                        responder con más claridad a tus experiencias. </p>
+                </div>
+
+<div class="button-container">
+    <button id="mostrarChatbot" class="button">He completado la práctica</button>
+
+    
+</div>
+<!-- Contenedor del chatbot -->
+<div id="chatbot-wrapper" class="chatbot-wrapper hidden">
+    <div class="chatbot-container">
+      <div class="chatbot-header">Chatbot</div>
+      <div id="chatbot-messages" class="chatbot-messages"></div>
+      <div id="chatbot-input" class="chatbot-input"></div>
+    </div>
+  </div>
+  
+ <!-- CONTENEDOR FINAL  -->
+<div id="contenedor-final" style="display: none; margin-top: 40px;">
+
+    <!-- Mensaje final -->
+    <div class="mensaje-final" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 40px;">
+      <div style="flex: 2;">
+        <p>No olvides que puedes volver a esta práctica siempre que lo necesites.</p>
+        <div class="button-container" style="margin-top: 15px;">
+          <button onclick="startExperience()" class="boton-enviar">Quiero saber más</button>
+          <button onclick="postponeExperience()" class="boton-enviar">Regresar al menú principal</button>
+        </div>
+      </div>
+  
+      <!-- Imagen -->
+      <div style="flex: 1; text-align: center;">
+        <img src="static/imagenes/progreso.png" alt="Progreso coloreado 1/3" style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+  
+    <!-- Menú de actividades -->
+    <div id="activities-menu" style="margin-top: 40px;">
+      <div class="serenito" style="display: flex; align-items: center; gap: 10px;">
+        <div class="speech-bubble">Continuemos con la siguiente actividad</div>
+        <img src="static/imagenes/serenito.png" alt="Serenito">
+      </div>
+      <div class="activities">
+        <div class="activities">
+            <!-- Actividad 1 -->
+            <div class="activity">
+              <div class="activity-card" id="activity1" onclick="unlockActivity(2)">
+                <p>1.  Entendiendo la Rueda de la Consciencia</p>
+                <a href="actividad41.html">
+                  <button>
+                    <img src="static/imagenes/boton41.png" alt="Actividad 1">
+                  </button>
+                </a>
+              </div>
+            </div>
+      
+            <!-- Actividad 2 -->
+            <div class="activity">
+              <div class="activity-card " id="activity2" onclick="unlockActivity(3)">
+                <p>2.  Practicando la Rueda de la Consciencia</p>
+                <a href="actividad42.html">
+                  <button >
+                    <img src="static/imagenes/boton42.png" alt="Actividad 2">
+                  </button>
+                </a>
+              </div>
+            </div>
+      
+            <!-- Actividad 3 -->
+            <div class="activity">
+              <div class="activity-card disabled " id="activity3">
+                <p>3. Práctica Breve de Yoga</p>
+                <a href="actividad43.html">
+                  <button disabled>
+                    <img src="static/imagenes/boton43.png" alt="Actividad 3">
+                  </button>
+                </a>
+              </div>
+            </div>
+      
+            <!-- Actividad 4 -->
+            <div class="activity">
+              <div class="activity-card disabled" id="activity4">
+                <p>4.Atender el conflicto interno</p>
+                <a href="actividad44.html">
+                  <button disabled>
+                    <img src="static/imagenes/boton44.png" alt="Actividad 4">
+                  </button>
+                </a>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+  
+    </main>
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+      const chatbotWrapper = document.getElementById("chatbot-wrapper");
+      const messages = document.getElementById("chatbot-messages");
+      const inputArea = document.getElementById("chatbot-input");
+      const finalMessage = document.getElementById("contenedor-final");
+    
+      const textElement = document.querySelector(".typing-text");
+      if (textElement) {
+          const text = textElement.textContent.trim();
+          textElement.textContent = "";
+          let i = 0;
+          const speed = 40;
+          function typeWriter() {
+              if (i < text.length) {
+                  textElement.textContent += text.charAt(i);
+                  i++;
+                  setTimeout(typeWriter, speed);
+              }
+          }
+          typeWriter();
+      }
+      
+      let respuestas = {};
+      let indice = 0;
+    
+      const preguntas = [
+        {
+          texto: "¿Te fue posible realizar toda la práctica?",
+          tipo: "única",
+          opciones: ["Sí, todo bien", "No, tuve dificultades"]
+        },
+        {
+          texto: "¿Qué tan presente te sentiste durante la práctica?",
+          tipo: "única",
+          opciones: ["Nada presente", "Un poco presente", "Moderadamente presente", "Muy presente", "Completamente presente"]
+        },
+        {
+          texto: "¿Qué notaste en tu cuerpo durante tu práctica? (Marca todas las que apliquen)",
+          tipo: "multi",
+          opciones: ["Tensión muscular", "Sensación de calor", "Sensación de frío", "Incomodidad", "Dolor", "Relajación", "Ligereza", "Pesadez", "Hormigueo", "Otro"]
+        },
+        {
+          texto: "¿Qué pensamientos o emociones surgieron durante tu práctica? (Marca todas las que apliquen)",
+          tipo: "multi",
+          opciones: ["Preocupación por el futuro","Miedo", "Recuerdos del pasado", "Autocrítica", "Juicio hacia otros", "Frustración","Ira",  "Tristeza", "Alegría", "Calma", "Paz",  "Otro (especificar):"]
+        },
+        {
+          texto: "¿Identificaste alguna conexión entre lo que experimentaste en la práctica y la forma en que vives el estrés?",
+          tipo: "única",
+          opciones: ["Sí, claramente", "Posiblemente", "No, no lo creo", "No estoy seguro/a"]
+        },
+        {
+          texto: "¿Notaste algunas de estas experiencias durante la práctica? (Marca todas las que apliquen)",
+          tipo: "multi",
+          opciones: ["Pensamientos automáticos","Sueño",  "Emociones desagradables", "Inquietud","Recuerdos vividos", "Aburrimiento",  "Preocupaciones", "Recuerdos", "Emociones agradables", "Conmovido/a", "Claridad mental", "Consciencia expandida", "Sentirte con más energía", "Tranquilidad", "Cosquilleo en alguna parte del cuerpo", "Relajación de mis músculos", "Sensaciones de mis órganos internos"]
+        }
+      ];
+    
+      document.getElementById("mostrarChatbot").addEventListener("click", () => {
+        chatbotWrapper.classList.remove("hidden");
+        document.getElementById("mostrarChatbot").classList.add("hidden");
+        mostrarPregunta();
+      });
+    
+      function mostrarPregunta() {
+        inputArea.innerHTML = "";
+        const pregunta = preguntas[indice];
+        const burbuja = document.createElement("div");
+        burbuja.className = "mensaje-bot typing-question";
+        messages.appendChild(burbuja);
+    
+        escribirPalabraPorPalabra(burbuja, pregunta.texto, () => {
+          burbuja.classList.remove("typing-question");
+    
+          const contenedor = document.createElement("div");
+          contenedor.className = "multi-options";
+          let inputOtro;
+    
+          pregunta.opciones.forEach(op => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.textContent = op;
+    
+            btn.onclick = () => {
+              if (pregunta.tipo === "única") {
+                contenedor.querySelectorAll("button").forEach(b => b.classList.remove("selected"));
+                btn.classList.add("selected");
+              } else {
+                btn.classList.toggle("selected");
+              }
+    
+              if (op.includes("Otro")) {
+                if (inputOtro) inputOtro.style.display = "block";
+              } else if (pregunta.tipo === "única" && inputOtro) {
+                inputOtro.style.display = "none";
+                inputOtro.value = "";
+              }
+            };
+    
+            contenedor.appendChild(btn);
+          });
+    
+          if (pregunta.opciones.some(op => op.includes("Otro"))) {
+            inputOtro = document.createElement("input");
+            inputOtro.placeholder = "Especifica aquí si elegiste 'Otro'";
+            inputOtro.style.display = "none";
+            contenedor.appendChild(inputOtro);
+          }
+    
+          inputArea.appendChild(contenedor);
+    
+          const btn = crearBoton(() => {
+            const seleccionados = Array.from(contenedor.querySelectorAll(".selected")).map(b => b.textContent);
+            const otroTexto = inputOtro?.value?.trim();
+            if (otroTexto) seleccionados.push(otroTexto);
+    
+            if (seleccionados.length === 0) {
+              alert("Por favor, selecciona al menos una opción");
+              return;
+            }
+    
+            respuestas[`pregunta_${indice}`] = seleccionados;
+            mostrarRespuestaUsuario(seleccionados.join(", "));
+            siguiente();
+          });
+    
+          inputArea.appendChild(btn);
+          messages.scrollTop = messages.scrollHeight;
+        });
+      }
+    
+      function siguiente() {
+        indice++;
+        if (indice < preguntas.length) {
+          mostrarPregunta();
+        } else {
+          inputArea.innerHTML = "";
+          const final = document.createElement("div");
+          final.className = "mensaje-bot";
+          final.textContent = "Gracias por tus respuestas";
+          messages.appendChild(final);
+          messages.scrollTop = messages.scrollHeight;
+          setTimeout(() => {
+            chatbotWrapper.classList.add("hidden");
+            finalMessage.style.display = "block";
+            finalMessage.style.animation = "fadeIn 1s ease forwards";
+          }, 2000);
+        }
+      }
+    
+      function mostrarRespuestaUsuario(texto) {
+        const burbuja = document.createElement("div");
+        burbuja.className = "mensaje-usuario";
+        burbuja.textContent = texto;
+        messages.appendChild(burbuja);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    
+      function crearBoton(fn) {
+        const btn = document.createElement("button");
+        btn.textContent = "Siguiente";
+        btn.className = "boton-enviar";
+        btn.onclick = fn;
+        return btn;
+      }
+    
+      function escribirPalabraPorPalabra(el, texto, callback) {
+        const palabras = texto.split(" ");
+        let i = 0;
+        function escribir() {
+          if (i < palabras.length) {
+            el.textContent += palabras[i] + " ";
+            i++;
+            setTimeout(escribir, 35);
+          } else {
+            callback();
+          }
+        }
+        escribir();
+      }
+    
+      function startExperience() {
+        window.location.href = "actividad14.html";
+      }
+    
+      function postponeExperience() {
+        window.location.href = "file:///C:/Users/Angelica%20Reyes/Desktop/form/dash.html";
+      }
+    </script>
+</body>
+</html>
