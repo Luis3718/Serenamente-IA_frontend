@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meditación para Ver </title>
+    <title>Escaneo Corporal </title>
     <link rel="stylesheet" href="static/styles/actividad.css">
 </head>
 <body>
@@ -34,19 +34,11 @@
     <main>
         <div class="container">
           <h2>Habilidad 02</h2>
-            <h1>Meditación para Ver </h1>
-            <p><strong>Objetivo: </strong>Vamos a reconocer el papel de la percepción en las emociones y la interpretación de tus experiencias.
+            <h1>Escaneo Corporal</h1>
+            <p><strong>Objetivo: </strong>Esta práctica te ayudará a escuchar mejor tu cuerpo y a darte cuenta de las sensaciones que tienes. No necesitas saber nada antes, solo estar con curiosidad y ser amable. 
             </p>
-                    <p>   Hola de nuevo, me alegra verte. Antes de empezar con tu práctica, te invito a que veas el siguiente video.
+                    <p>   Hola de nuevo, me alegra verte. La siguiente práctica ¡ya la has realizado antes!, te invito a que veas el video nuevamente antes de comenzar.
                     </p>
-        
-                    <div class="serenito-container">
-                        <img src="static/imagenes/serenito.png" alt="Serenito comunicándose" class="serenito-img">
-                        <div class="serenito-dialogo">
-                            <p class="typing-text"> Hola, estoy emocionado de reencontrarnos en este camino de bienestar. A continuación comenzaremos una práctica para que reconozcas que la información que te provee la vista depende de la amplitud con la que mires y en el sitio donde se concentre tu atención. Es importante que la trates de incluir en tu día a día, tal vez al despertar o en un descanso que tengas. Puedes usar el audio que te dejo o hacerlo por tu cuenta con lo que ya sabes, ¡tal vez te aventures en practicar con los demás sentidos!
-                            </p>
-                         </div>
-                    </div>
 
                     <div class="videoo-container">
                         <video controls>
@@ -55,7 +47,25 @@
                         </video>
                     </div>
 
-<p>¡Has terminado tu práctica de Mindfulness! Me gustaría conocer tu experiencia
+                    <div class="serenito-container">
+                      <img src="static/imagenes/serenito.png" alt="Serenito comunicándose" class="serenito-img">
+                      <div class="serenito-dialogo">
+                          <p class="typing-text"> SerenaMente IA es un programa centrado en tu bienestar y en el desarrollo progresivo de nuevas habilidades. 
+                            <br>Por eso, esta práctica no es solo una repetición, es la oportunidad para fortalecer la conciencia sin juicios y con aceptación. 
+                            <br> ¡Así que prepárate para disfrutar de esta experiencia con todo lo tú ya has avanzado!
+                          </p>
+                       </div>
+                  </div>
+                  <p></p>
+                  <p></p>
+                   <div class="videoo-container">
+                    <video controls>
+                        <source src="static/imagenes/video03.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                </div>
+               
+<p> ¡Excelente! ahora que terminaste tu práctica de Mindfulness tomate un momento para notar cómo te sientes y compartirme tu experiencia!
 </p>
 <div class="button-container">
     <button id="mostrarChatbot" class="button">He completado la práctica</button>
@@ -82,8 +92,8 @@
         </p>
         <p>No olvides que puedes volver a esta práctica siempre que lo necesites.</p>
         <div class="button-container" style="margin-top: 15px;">
-          <button id="btn-siguiente-actividad" class="boton-enviar" style="display: none;">Quiero saber más</button>
-          <button id="btn-menu-principal" class="boton-enviar" style="display: none;">Regresar al menú principal</button>
+          <button onclick="startExperience()" class="boton-enviar">Quiero saber más</button>
+          <button onclick="postponeExperience()" class="boton-enviar">Regresar al menú principal</button>
         </div>
       </div>
   
