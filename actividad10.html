@@ -89,59 +89,9 @@
         <div class="speech-bubble">Continuemos con la siguiente actividad</div>
         <img src="static/imagenes/serenito.png" alt="Serenito">
       </div>
-      <div class="activities">
-        <!-- Actividad 1 -->
-        <div class="activity">
-          <div class="activity-card" id="activity1">
-            <p>1. Consciencia en mi respiración</p>
-            <a href="actividad21.html">
-              <button>
-                <img src="static/imagenes/boton21.png" alt="Actividad 1">
-              </button>
-            </a>
-          </div>
-        </div>
-  
-        <!-- Actividad 2 -->
-        <div class="activity">
-          <div class="activity-card " id="activity2" >
-            <p>2. Meditación de la montaña</p>
-            <a href="actividad22.html">
-              <button >
-                <img src="static/imagenes/boton22.png" alt="Actividad 2">
-              </button>
-            </a>
-          </div>
-        </div>
-  
-        <!-- Actividad 3 -->
-        <div class="activity">
-          <div class="activity-card " id="activity3">
-            <p>3. Escaneo corporal</p>
-            <a href="actividad23.html">
-              <button >
-                <img src="static/imagenes/boton23.png" alt="Actividad 3">
-              </button>
-            </a>
-          </div>
-        </div>
-  
-        <!-- Actividad 4 -->
-        <div class="activity">
-          <div class="activity-card " id="activity4">
-            <p>4. Yoga consciente</p>
-            <a href="actividad24.html">
-              <button >
-                <img src="static/imagenes/boton24.png" alt="Actividad 4">
-              </button>
-            </a>
-          </div>
-        </div>
-      </div>
+    
+      <div class="activities"></div>
     </div>
-  </div>
-
-
 
     </main>
     <div class="social-bar">
@@ -307,67 +257,74 @@
       
       // Funcion para dibujar dinamicamente las activiades del mensaje-final
       document.addEventListener("DOMContentLoaded", async function () {
-          const token = localStorage.getItem("token");
-          if (!token) {
-              window.location.href = "login.html";
-              return;
-          }
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
 
-          const pacienteId = getTokenId(); // Usa tu función getTokenId() que ya tienes
-          const habilidadId = 3; // <-- Cambia esto al número real de la habilidad que corresponde a esta actividad
-          const activitiesContainer = document.querySelector("#activities-menu .activities");
+        const pacienteId = getTokenId();
+        const habilidadId = 3; 
+        const activitiesContainer = document.querySelector("#activities-menu .activities");
 
-          try {
-              // Obtener tratamiento actual
-              const tratamientoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
-              const tratamientoData = await tratamientoResp.json();
-              const tratamientoId = tratamientoData.ID_Tratamiento;
+        try {
+            // Obtener tratamiento actual
+            const tratamientoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+            const tratamientoData = await tratamientoResp.json();
+            const tratamientoId = tratamientoData.ID_Tratamiento;
 
-              // Obtener actividades de la habilidad actual
-              const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamientoId}/habilidad/${habilidadId}`);
-              const actividades = await actividadesResp.json();
+            // Obtener actividades de esta habilidad
+            const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamientoId}/habilidad/${habilidadId}`);
+            const actividades = await actividadesResp.json();
 
-              // Obtener el progreso del paciente
-              const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${pacienteId}`);
-              const progresoData = await progresoResp.json();
-              const actividadActualId = progresoData.id_actividad_actual;
+            // Obtener progreso (actividad actual)
+            const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${pacienteId}`);
+            const progresoData = await progresoResp.json();
+            const actividadActualId = progresoData.id_actividad_actual;
 
-              // Limpiar el contenedor
-              activitiesContainer.innerHTML = "";
+            // Limpiar contenedor
+            activitiesContainer.innerHTML = "";
 
-              actividades.forEach((actividad, index) => {
-                  const activityDiv = document.createElement("div");
-                  activityDiv.classList.add("activity");
+            // Crear dinámicamente las actividades
+            actividades.forEach((actividad, index) => {
+                const activityDiv = document.createElement("div");
+                activityDiv.classList.add("activity");
 
-                  const cardDiv = document.createElement("div");
-                  cardDiv.classList.add("activity-card");
-                  cardDiv.id = `activity${index + 1}`;
+                const cardDiv = document.createElement("div");
+                cardDiv.classList.add("activity-card");
+                cardDiv.id = `activity${index + 1}`;
 
-                  if (actividad.ID_Actividad < actividadActualId) {
-                      cardDiv.classList.add("completada"); // ✅ Se pintará verde con tu clase CSS
-                  } else if (actividad.ID_Actividad === actividadActualId) {
-                      // ✅ Actividad actual desbloqueada, no hacemos nada especial
-                  } else {
-                      cardDiv.classList.add("disabled"); // 🔒 Futuras actividades
-                  }
+                // ¿Ya completada?
+                if (actividad.ID_Actividad < actividadActualId) {
+                    cardDiv.classList.add("completada"); // Verde
+                } 
+                // ¿Actual?
+                else if (actividad.ID_Actividad === actividadActualId) {
+                    // No hacemos nada (queda desbloqueada)
+                } 
+                // ¿Futura?
+                else {
+                    cardDiv.classList.add("disabled"); // Gris
+                }
 
-                  cardDiv.innerHTML = `
-                      <p>${index + 1}. ${actividad.Nombre}</p>
-                      <a href="actividad${actividad.ID_Actividad}.html">
-                          <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
-                              <img src="static/imagenes/boton${habilidadId}${index + 1}.png" alt="actividad${habilidadId}${index + 1}">
-                          </button>
-                      </a>
-                  `;
+                // Estructura HTML de la tarjeta
+                cardDiv.innerHTML = `
+                    <p>${index + 1}. ${actividad.Nombre}</p>
+                    <a href="actividad${actividad.ID_Actividad}.html">
+                        <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
+                            <img src="static/imagenes/boton${habilidadId}${index + 1}.png" alt="actividad${habilidadId}${index + 1}">
+                        </button>
+                    </a>
+                `;
 
-                  activityDiv.appendChild(cardDiv);
-                  activitiesContainer.appendChild(activityDiv);
-              });
+                activityDiv.appendChild(cardDiv);
+                activitiesContainer.appendChild(activityDiv);
+            });
 
-          } catch (error) {
-              console.error("Error cargando actividades dinámicamente:", error);
-          }
-      });
+        } catch (error) {
+            console.error("Error cargando actividades dinámicamente:", error);
+        }
+    });
 
       document.addEventListener("DOMContentLoaded", function () {
           const avatar = document.getElementById("user-avatar");
@@ -416,7 +373,7 @@
           const inputArea = document.getElementById("chatbot-input");
 
           const pacienteId = getTokenId();
-          let actividadActual = 9; // <-- Cambia al ID real de esta actividad
+          let actividadActual = 10; // <-- Cambia al ID real de esta actividad
           let habilidadActual = 3; // <-- Cambia al ID real de esta habilidad
           let idTratamiento = null;
           let esUltimaActividad = false;
@@ -584,94 +541,112 @@
               escribir();
           }
 
-          async function siguiente() {
-              indice++;
-              if (indice < preguntas.length) {
-                  mostrarPregunta();
-              } else {
-                  inputArea.innerHTML = "";
-                  const gracias = document.createElement("div");
-                  gracias.className = "mensaje-bot";
-                  gracias.textContent = "Gracias por tus respuestas";
-                  messages.appendChild(gracias);
-                  messages.scrollTop = messages.scrollHeight;
+          // Función nueva para esperar a que el progreso se actualice
+          async function esperarActualizacionProgreso(pacienteId, actividadAnterior) {
+              let intentos = 5; // Máximo 5 intentos
+              while (intentos > 0) {
+                  const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${pacienteId}`);
+                  const progresoData = await progresoResp.json();
+                  const nuevaActividad = progresoData.id_actividad_actual;
+                  
+                  if (nuevaActividad !== actividadAnterior) {
+                      return progresoData; // ✅ Ya se actualizó el progreso
+                  }
 
-                  setTimeout(async () => {
-                      const pacienteId = getTokenId(); // función ya existente
-                      const actividadActual = 9; // o el número de tu actividad
-                      const habilidadActual = 3; // o la habilidad real
-
-                      try {
-                          // Consultar si ya está completada
-                          const compResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
-                          const compData = await compResp.json();
-                          const yaCompletada = compData.completada;
-
-                          if (!yaCompletada) {
-                              // Enviar respuestas
-                              const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
-                                  ID_Pregunta: i + 1,
-                                  ID_Actividad: actividadActual,
-                                  ID_Paciente: pacienteId,
-                                  Respuesta: Array.isArray(v) ? v.join(", ") : v
-                              }));
-
-                              await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
-                                  method: "POST",
-                                  headers: { "Content-Type": "application/json" },
-                                  body: JSON.stringify(respuestasFormateadas)
-                              });
-
-                              await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
-                                  method: "POST",
-                                  headers: { "Content-Type": "application/json" }
-                              });
-                          }
-                          
-                          const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
-                          const progreso = await progresoResp.json();
-                          
-                          const nuevaHabilidad = progreso.ID_Habilidad;
-                          const nuevaActividad = progreso.ID_Actividad;
-
-                          const botonSiguiente = document.getElementById("btn-siguiente-actividad");
-                          const botonMenu = document.getElementById("btn-menu-principal");
-
-                          if (nuevaHabilidad === habilidadActual) {
-                              botonSiguiente.style.display = "inline-block";
-                              botonMenu.style.display = "inline-block";
-
-                              botonSiguiente.onclick = function() {
-                                  window.location.href = `actividad${nuevaActividad}.html`;
-                              };
-                              botonMenu.onclick = function() {
-                                  window.location.href = "actividades.html";
-                              };
-                          } else {
-                              botonSiguiente.style.display = "none";
-                              botonMenu.style.display = "inline-block";
-
-                              botonMenu.onclick = function() {
-                                  window.location.href = "actividades.html";
-                              };
-                          }
-
-                          // ✅ No redirigimos
-                          // ✅ Mostramos el mensaje final
-                          const chatbotWrapper = document.getElementById("chatbot-wrapper");
-                          const mensajeFinal = document.getElementById("mensaje-final");
-
-                          chatbotWrapper.classList.add("hidden");
-                          mensajeFinal.style.display = "block";
-                          mensajeFinal.style.animation = "fadeIn 1s ease forwards";
-
-                      } catch (error) {
-                          console.error("Error en el flujo de finalización:", error);
-                          alert("Ocurrió un error al finalizar la actividad.");
-                      }
-                  }, 2000);
+                  await new Promise(resolve => setTimeout(resolve, 500)); // Espera 500ms antes de volver a intentar
+                  intentos--;
               }
+              throw new Error("No se actualizó el progreso después de varios intentos");
           }
+
+          async function siguiente() {
+            indice++;
+            if (indice < preguntas.length) {
+                mostrarPregunta();
+            } else {
+                inputArea.innerHTML = "";
+                const gracias = document.createElement("div");
+                gracias.className = "mensaje-bot";
+                gracias.textContent = "Gracias por tus respuestas";
+                messages.appendChild(gracias);
+                messages.scrollTop = messages.scrollHeight;
+
+                setTimeout(async () => {
+                    const pacienteId = getTokenId(); 
+                    const actividadAnterior = actividadActual; // Guarda la actividad que acabas de terminar
+                    const habilidadActual = 3; // <-- O el ID real de tu habilidad
+
+                    try {
+                        // Verificar si ya estaba completada
+                        const compResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadAnterior}`);
+                        const compData = await compResp.json();
+                        const yaCompletada = compData.completada;
+
+                        if (!yaCompletada) {
+                            // Guardar las respuestas
+                            const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
+                                ID_Pregunta: i + 1,
+                                ID_Actividad: actividadAnterior,
+                                ID_Paciente: pacienteId,
+                                Respuesta: Array.isArray(v) ? v.join(", ") : v
+                            }));
+
+                            await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(respuestasFormateadas)
+                            });
+
+                            await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" }
+                            });
+                        }
+
+                        // Ahora esperar que el backend actualice el progreso
+                        const progresoActualizado = await esperarActualizacionProgreso(pacienteId, actividadAnterior);
+                        
+                        const nuevaHabilidad = progresoActualizado.ID_Habilidad;
+                        const nuevaActividad = progresoActualizado.ID_Actividad;
+
+                        // Mostrar botones correctamente
+                        const botonSiguiente = document.getElementById("btn-siguiente-actividad");
+                        const botonMenu = document.getElementById("btn-menu-principal");
+
+                        if (nuevaHabilidad === habilidadActual) {
+                            botonSiguiente.style.display = "inline-block";
+                            botonMenu.style.display = "inline-block";
+
+                            botonSiguiente.onclick = function() {
+                                window.location.href = `actividad${nuevaActividad}.html`;
+                            };
+                            botonMenu.onclick = function() {
+                                window.location.href = "actividades.html";
+                            };
+                        } else {
+                            botonSiguiente.style.display = "none";
+                            botonMenu.style.display = "inline-block";
+
+                            botonMenu.onclick = function() {
+                                window.location.href = "actividades.html";
+                            };
+                        }
+
+                        // Mostrar mensaje final
+                        const chatbotWrapper = document.getElementById("chatbot-wrapper");
+                        const mensajeFinal = document.getElementById("mensaje-final");
+
+                        chatbotWrapper.classList.add("hidden");
+                        mensajeFinal.style.display = "block";
+                        mensajeFinal.style.animation = "fadeIn 1s ease forwards";
+
+                    } catch (error) {
+                        console.error("Error en el flujo de finalización:", error);
+                        alert("Ocurrió un error al finalizar la actividad.");
+                    }
+                }, 2000);
+            }
+        }
       
           document.getElementById("mostrarChatbot").addEventListener("click", () => {
               const chatbotWrapper = document.getElementById("chatbot-wrapper");
