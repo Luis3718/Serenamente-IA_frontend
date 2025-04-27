@@ -35,7 +35,7 @@
     <div class="container">
         <h1>Habilidad 3: Reconocer ser y hacer</h1>
             <div style="display: flex; align-items: flex-start; gap: 20px;">
-                <img src="static/imagenes/image3.jpeg" alt="Descripción de la imagen" style="height: 100%; max-height: 300px; width: auto; object-fit: cover;">
+                <img src="static/imagenes/image4.jpg" alt="Descripción de la imagen" style="height: 100%; max-height: 300px; width: auto; object-fit: cover;">
                 <div style="flex: 1;">
                     <p> Te doy la bienvenida a descubrir esta tercera habilidad para seguir conectando contigo para poder estar presente de manera plena.<br>
                         Hoy aprenderemos sobre el poder de estar presente a través de la respiración y las sensaciones en el cuerpo, para encontrar una forma diferente de responder al estrés. </p> 
@@ -222,50 +222,122 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-    const avatar = document.getElementById("user-avatar");
-    const userMenu = document.querySelector(".user-menu");
+        const avatar = document.getElementById("user-avatar");
+        const userMenu = document.querySelector(".user-menu");
 
-    avatar.addEventListener("click", function () {
-        userMenu.classList.toggle("active");
+        avatar.addEventListener("click", function () {
+            userMenu.classList.toggle("active");
+        });
+
+        document.getElementById("logout").addEventListener("click", function () {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
     });
 
-    document.getElementById("logout").addEventListener("click", function () {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
+    verificarAutenticacion();
     });
-    //verificarAutenticacion();
-});
 
-//funcion de botones 
-function startExperience() {
+    //funcion de botones 
+    function startExperience() {
         document.getElementById('activities-menu').classList.remove('hidden');
         document.querySelector('.button-container').classList.add('hidden');
     }
-    function postponeExperience() {
-        alert('Puedes volver cuando estés listo');
-        document.querySelector('.button-container').classList.add('hidden');
+        function postponeExperience() {
+            alert('Puedes volver cuando estés listo');
+            document.querySelector('.button-container').classList.add('hidden');
+        }
+
+        function startExperience() {
+            document.getElementById('activities-menu').style.display = 'flex';
+            document.querySelector('.button-container').style.display = 'none';
     }
 
-    function startExperience() {
-document.getElementById('activities-menu').style.display = 'flex';
-document.querySelector('.button-container').style.display = 'none';
-}
+    // Funcionalidad para extraer el id del token 
+    function getTokenId() {
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
 
-function unlockActivity(nextActivity) {
-let activityCard = document.getElementById(`activity${nextActivity}`);
+                const { id } = JSON.parse(jsonPayload);
+                return id;
+            } catch (error) {
+                console.error("Error decoding token:", error);
+                return null;
+            }
+        }
+        return null;
+    }
 
-// Verifica si la actividad ya estaba desbloqueada para evitar que se repita
-if (activityCard.classList.contains("disabled")) {
-    activityCard.classList.remove("disabled");
-    activityCard.classList.add("unlocked");
+    // Lógica principal: desbloquea SOLO la actividad actual
+    document.addEventListener("DOMContentLoaded", async function () {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
 
-    // Habilita el botón dentro de la actividad
-    let button = activityCard.querySelector("button");
-    button.disabled = false;
-}
-}
+        const paciente_id = getTokenId();
 
+        // Obtener tratamiento actual del paciente
+        const tratamientoResponse = await fetch(`http://localhost:8002/tratamiento/buscar_protocolo/${paciente_id}`);
+        const tratamientoData = await tratamientoResponse.json();
+        const tratamiento_id = tratamientoData.ID_Tratamiento;
 
+        // ID de la habilidad (puede estar fijo o dinámico según el contexto)
+        const habilidad_id = 4;
+
+        // Obtener actividades relacionadas con la habilidad
+        const actividadesResponse = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamiento_id}/habilidad/${habilidad_id}`);
+        const actividades = await actividadesResponse.json();
+        
+        // Obtener la actividad actual del paciente
+        const progresoResponse = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${paciente_id}`);
+        const progresoData = await progresoResponse.json();
+        const actividadActualId = progresoData.id_actividad_actual;
+
+        // Limpiar y mostrar actividades
+        const activitiesContainer = document.querySelector(".activities");
+        activitiesContainer.innerHTML = "";
+
+        actividades.forEach((actividad, index) => {
+            const activityDiv = document.createElement("div");
+            activityDiv.classList.add("activity");
+
+            const cardDiv = document.createElement("div");
+            cardDiv.classList.add("activity-card");
+            cardDiv.id = `activity${index + 1}`;
+
+            const estaDesbloqueada = actividad.ID_Actividad === actividadActualId;
+
+            if (actividad.ID_Actividad < actividadActualId) {
+                // Actividad completada – verde
+                cardDiv.classList.add("completada");
+            } else if (actividad.ID_Actividad === actividadActualId) {
+                // Actividad actual – desbloqueada
+                // No hacemos nada, se queda normal
+            } else {
+                // Actividad futura – bloqueada
+                cardDiv.classList.add("disabled");
+            }
+
+            cardDiv.innerHTML = `
+                <p>${index + 1}. ${actividad.Nombre}</p>
+                <a href="actividad${actividad.ID_Actividad}.html">
+                    <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
+                        <img src="static/imagenes/boton${habilidad_id}${index + 1}.png" alt="actividad${habilidad_id}${index + 1}">
+                    </button>
+                </a>
+            `;
+
+            activityDiv.appendChild(cardDiv);
+            activitiesContainer.appendChild(activityDiv);
+        });
+    });
 </script>
 </body>
 </html>
