@@ -11,7 +11,7 @@
         <div class="header-container">
             <div class="logo-container">
                 <a href="index.html">
-                    <img src="Imagenes6/logo.jpeg" alt="Logo SerenaMente IA" class="logo">
+                    <img src="static/imagenes/logo.jpeg" alt="Logo SerenaMente IA" class="logo">
                 </a>
             </div>
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
@@ -103,8 +103,9 @@ reactividad, respondiendo con mayor claridad y equilibrio.   </p>
         </div>
        
         <div class="button-container" style="margin-top: 15px;">
-          <button onclick="startExperience()" class="boton-enviar">Quiero saber más</button>
-          <button onclick="postponeExperience()" class="boton-enviar">Regresar al menú principal</button>
+          <button href="#" class="boton-enviar">Quiero saber más</button>
+          <button id="btn-menu-principal" class="boton-enviar" style="display: none;">Regresar al menú principal</button>
+          <button id="btn-siguiente-actividad" class="boton-enviar" style="display: none;">Siguiente actividad</button>
         </div>
       </div>
   
