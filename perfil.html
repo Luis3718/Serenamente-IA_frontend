@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerenaMente IA</title>
+    <link rel="stylesheet" href="static/styles/actividades.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="dashboard.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="progreso.html">Mi progreso</a></li>
+                    <div class="user-menu">
+                        <div id="user-avatar" class="avatar">US</div>
+                        <div id="user-dropdown" class="dropdown-menu">
+                            <a href="perfil.html">Ver perfil</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>                        
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container" style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1>Mi Perfil</h1>
+    
+            <div id="perfil-datos" style="margin-top: 20px;">
+                <!-- Aquí se llenarán los datos dinámicamente -->
+            </div>
+    
+            <div style="margin-top: 30px; text-align: center;">
+                <button id="btn-salir-tratamiento" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer;">
+                    Salir del tratamiento
+                </button>
+            </div>
+        </div>
+    
+        <!-- Modal de confirmación -->
+        <div id="modal-confirmacion" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 8px; text-align: center; width: 90%; max-width: 400px;">
+                <h2>¿Estás seguro que quieres salir del tratamiento?</h2>
+                <p>Esta acción no se puede revertir.</p>
+                <div style="margin-top: 20px;">
+                    <button id="btn-cancelar" style="margin-right: 10px;">Cancelar</button>
+                    <button id="btn-confirmar-salida" style="background-color: red; color: white;">Salir</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+   
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcion para el menu de hamburguesa
+        const menuToggle = document.querySelector('.menu-toggle');
+        const submenu = document.querySelector('.submenu');
+
+        menuToggle.addEventListener('click', () => {
+            submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+        });
+
+        // Funcion para dar funcionalidad al logout
+        document.getElementById("logout").addEventListener("click", function () {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+        });
+
+        async function cargarPerfil() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const pacienteId = getTokenId();
+            try {
+                const response = await fetch(`http://localhost:8002/pacientes/perfil/${pacienteId}`);
+                const data = await response.json();
+
+                const contenedor = document.getElementById("perfil-datos");
+                contenedor.innerHTML = `
+                    <p><strong>Nombre:</strong> ${data.Nombre} <span style="cursor: pointer;">✏️</span></p>
+                    <p><strong>Apellidos:</strong> ${data.Apellidos} <span style="cursor: pointer;">✏️</span></p>
+                    <p><strong>Correo:</strong> ${data.Correo}</p>
+                    <p><strong>Celular:</strong> ${data.Celular} <span style="cursor: pointer;">✏️</span></p>
+                `;
+            } catch (error) {
+                console.error("Error al cargar perfil:", error);
+            }
+            }
+            // Funcion que verifica el token y si se contesto el pretest
+            async function verificarAutenticacion() {
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                try {
+                    const response = await fetch("http://localhost:8002/auth/verify-token", {
+                        method: "GET",
+                        headers: { "Authorization": `Bearer ${token}` }
+                    });
+
+                    if (!response.ok) {
+                        console.error("Error en la autenticación:", await response.json());
+                        localStorage.removeItem("token");
+                        window.location.href = "login.html";
+                        return;
+                    }
+
+                    const userData = await response.json();
+                    const initials = userData.usuario.nombre
+                    .split(" ")
+                    .map(word => word[0])
+                    .join("")
+                    .toUpperCase();
+                    document.getElementById("user-avatar").textContent = initials;
+                } catch (error) {
+                    console.error("Error en la autenticación:", error);
+                    window.location.href = "login.html";
+                }
+        }
+
+        // Funcionalidad para extraer el id del token 
+        function getTokenId() {
+            const token = localStorage.getItem("token");
+            if (token) {
+                try {
+                    const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
+                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                    }).join(''));
+
+                    const { id } = JSON.parse(jsonPayload);
+                    return id;
+                } catch (error) {
+                    console.error("Error decoding token:", error);
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const avatar = document.getElementById("user-avatar");
+            const userMenu = document.querySelector(".user-menu");
+            const btnConfirmar = document.getElementById("btn-confirmar-salida");
+            const btnCancelar = document.getElementById("btn-cancelar");
+            const modal = document.getElementById("modal-confirmacion");
+            const btnSalir = document.getElementById("btn-salir-tratamiento");
+
+            avatar.addEventListener("click", function () {
+                userMenu.classList.toggle("active");
+            });
+
+            document.getElementById("logout").addEventListener("click", function () {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+            });
+
+            btnSalir.addEventListener("click", () => {
+                modal.style.display = "flex";
+            });
+
+            btnCancelar.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+
+            btnConfirmar.addEventListener("click", async () => {
+                const pacienteId = getTokenId();
+                try {
+                    await fetch(`http://localhost:8002/pacientes/salir-tratamiento/${pacienteId}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+                    localStorage.removeItem("token");
+                    window.location.href = "login.html";
+                } catch (error) {
+                    console.error("Error al salir del tratamiento:", error);
+                }
+            });
+
+        verificarAutenticacion();
+        cargarPerfil();
+    });
+    </script>
+    </body>
+</html>
+
+
