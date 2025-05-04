@@ -275,11 +275,11 @@
         .then(response => response.json())
         .then(data => {
             data.forEach((resultado) => {
-                const formularioId = resultado.ID_Formulario;
+                const tipoFormulario = resultado.ID_TipoFormulario;
                 const categoria = resultado.Categoria.trim();
-                const cellId = `cell${formularioId}`;
+                const cellId = `cell${tipoFormulario}`;
                 let tipo;
-                switch(formularioId) {
+                switch(tipoFormulario) {
                     case 1:
                         tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 1; // Asume tipo1 a tipo4
                         console.log("Case 1 ", cellId, `tipo${tipo}`)
