@@ -554,6 +554,37 @@ p {
 }
 
 /*estilos de chatbot*/
+.mensaje-bot-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+.mensaje-bot {
+    background-color: #e0e0e0;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 15px;
+    max-width: 80%;
+    text-align: left;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+.mensaje-usuario {
+    background-color: #ffc000;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 15px;
+    max-width: 80%;
+    align-self: flex-end;
+    text-align: left;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Animación de texto tipo máquina */
 .typing-question::after {
     content: "|";
