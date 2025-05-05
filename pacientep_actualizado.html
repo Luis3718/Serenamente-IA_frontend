@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil del Paciente</title>
+<link rel="stylesheet" href="habilidad.css">
+<style>
+  body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+  .header-container {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .logo-container img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    cursor: pointer;
+  }
+  .submenu ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+  }
+  .submenu ul li {
+    display: inline;
+  }
+  .submenu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+  .submenu ul li a:hover {
+    color: #3498db;
+  }
+  .perfil-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+  }
+  .perfil-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .perfil-header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  .card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+  }
+  .card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    color: #34495e;
+  }
+  .card p {
+    margin-bottom: 8px;
+  }
+  .botones-acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .botones-acciones button {
+    background-color: #3498db;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .botones-acciones button:hover {
+    background-color: #2980b9;
+  }
+</style>
+</head>
+<body>
+
+<header class="header-container">
+  <div class="logo-container">
+    <a href="#"><img src="logo.jpeg" alt="Logo Serenamente"></a>
+  </div>
+  <nav class="submenu">
+    <ul>
+      <li><a href="#">Mi Progreso</a></li>
+      <li><a href="#">Perfil</a></li>
+      <li><a href="#">US</a></li>
+      <li><a href="#">Cerrar Sesión</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="perfil-container">
+  <div class="perfil-header">
+    <img src="serenito.jpeg" alt="Foto del paciente">
+    <h1>Nombre del Paciente</h1>
+    <p>Última conexión: Hace 3 días</p>
+  </div>
+
+  <div class="card">
+    <h2>📋 Información Personal</h2>
+    <p><strong>Correo:</strong> paciente@example.com</p>
+    <p><strong>Fecha de Registro:</strong> 01/04/2025</p>
+  </div>
+
+  <div class="card">
+    <h2>📈 Estado Actual</h2>
+    <p><strong>Estado de Cuenta:</strong> Activo</p>
+    <p><strong>Última Actividad:</strong> 10/04/2025</p>
+    <p><strong>Actividades Completadas:</strong> 5 de 10</p>
+  </div>
+
+  <div class="card">
+    <h2>📥 Descargar Documentos</h2>
+    <div class="botones-acciones">
+      <button>Descargar Expediente Completo</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>❓ Preguntas Frecuentes</h2>
+    <div class="botones-acciones">
+      <button>Ver Preguntas Frecuentes</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SerenaMente IA</title>
-    <link rel="stylesheet" href="static/styles/progreso.css">
+    <link rel="stylesheet" href="static/styles/progreso_paciente.css">
 </head>
 <body>
     <!-- Submenú y logo-->
@@ -35,31 +35,8 @@
     <!-- Contenido principal -->
     <main>
         <div class="container">
-            <p>Gracias por tus respuestas. Para conocer más sobre tus resultados abre cada campo.</p>
-            <p><b>Recuerda: Esto no es un diagnóstico psicológico.</b></p>   
-            <br> 
-            <div class="row">
-                <div class="cell" id="cell1">
-                    <h3></h3>
-                    <img src="" alt="">
-                    <p></p>
-                </div>
-                <div class="cell" id="cell2">
-                    <h3></h3>
-                    <img src="" alt="">
-                    <p></p>
-                </div>
-                <div class="cell" id="cell4">
-                    <h3></h3>
-                    <img src="" alt="">
-                    <p></p>
-                </div>
-                <div class="cell" id="cell5">
-                    <h3></h3>
-                    <img src="" alt="">
-                    <p></p>
-                </div>
-            </div>
+            <h1>Mi Progreso</h1>
+            <div class="cards-progreso" id="cardsProgreso"></div>
         </div>
     </main>
 
@@ -117,209 +94,136 @@
     </footer>
 
     <script>
-        // Funcion del contenedor
-        const contenido = {
-            tipo1: {
-                titulo: "Ansiedad",
-                imagen: "static/imagenes/1_4.svg",
-                texto: "La ansiedad es una emoción natural del cuerpo ante una potencial amenaza interna o externa. Tu resultado indica que es adaptativa y desarrollarás más habilidades emocionales al finalizar SerenaMente IA."
-            },
-            tipo2: {
-                titulo: "Ansiedad",
-                imagen: "static/imagenes/2_4.svg",
-                texto: "La ansiedad es una reacción emocional natural que prepara al cuerpo ante un peligro real o percibido. En ocasiones, las señales de alarma se presentan más continua e intensamente."
-            },
-            tipo3: {
-                titulo: "Ansiedad",
-                imagen: "static/imagenes/3_4.svg",
-                texto: "Tus respuestas nos hacen considerar que puedes beneficiarte de un programa psicológico como el que ofrece SerenaMente-IA e incrementes tus recursos para lidiar con estas señales, y así evitar que la ansiedad se vuelva una dificultad en tu vida."
-            },
-            tipo4: {
-                titulo: "Ansiedad",
-                imagen: "static/imagenes/4_4.svg",
-                texto: "La ansiedad es una reacción emocional natural del cuerpo, sin embargo, a veces puede ser intensa y compleja de manejar. Tus respuestas nos hacen considerar que te beneficiarías de un programa en SerenaMente IA, orientado a que identifiques y desarrolles estrategias para lidiar y regular tus emociones."
-            },
-            tipo5: {
-                titulo: "Depresión",
-                imagen: "static/imagenes/1_4.svg",
-                texto: "La depresión es una condición en la que nos percibimos con menos vitalidad. Actualmente tu puntaje indica que no tienes síntomas significativos, por lo que SerenaMente IA incrementará tu resiliencia y manejo de situaciones difíciles."
-            },
-            tipo6: {
-                titulo: "Depresión",
-                imagen: "static/imagenes/2_4.svg",
-                texto: "La depresión es un estado físico y mental en el que tenemos menos vitalidad para realizar nuestras actividades diarias, lo que nos puede conducir a sentirnos abrumados. El programa de SerenaMente IA está diseñado para facilitar el manejo de tus emociones y así evitar que la depresión se convierta en un desafío para tu bienestar."
-            },
-            tipo7: {
-                titulo: "Depresión",
-                imagen: "static/imagenes/3_4.svg",
-                texto: "La depresión es un estado físico y mental en el que tenemos menos vitalidad que puede llegar a interferir con las actividades diarias, lo que nos puede conducir a sentirnos abrumados. Tus respuestas nos llevan a pensar que trabajar en la mejora de tu estado emocional podría ser un objetivo valioso. En SerenaMente IA puedes beneficiarte al prácticar estrategias, específica de autocuidado en el momento presente, incrementando la plenitud en tu vida."
-            },
-            tipo8: {
-                titulo: "Depresión",
-                imagen: "static/imagenes/4_4.svg",
-                texto: "La depresión es un estado físico y mental en el que tenemos menos vitalidad que puede llegar a interferir con las actividades diarias, convirtiéndose en un desafío para tu bienestar. Tus respuestas sugieren que el apoyo de un profesional de la salud mental es importante para orientarte en estrategias para manejar tus síntomas. SerenaMente IA ofrece un apoyo preventivo que puede no cubrir tus necesidades personales."
-            },
-            tipo9: {
-                titulo: "Bienestar",
-                imagen: "static/imagenes/1_3.svg",
-                texto: "El bienestar es un estado positivo que refleja nuestra calidad de vida y nuestra capacidad para aportar al mundo, sintiendo que nuestras acciones tienen significado y propósito. Tu puntaje sugiere que tu nivel de bienestar se encuentra por debajo del promedio, por lo que implementar el programa de SerenaMente IA podrás desarrollar estrategias para no quedar atrapado por las experiencias difíciles."
-            },
-            tipo10: {
-                titulo: "Bienestar",
-                imagen: "static/imagenes/2_3.svg",
-                texto: "El bienestar es un estado positivo que refleja nuestra calidad de vida y nuestra capacidad para aportar al mundo, sintiendo que nuestras acciones tienen significado y propósito. Tu puntaje sugiere que tu nivel de bienestar se encuentra por debajo del promedio, por lo que implementar el programa de SerenaMente IA podrás desarrollar estrategias para no quedar atrapado por las experiencias difíciles."
-            },
-            tipo11: {
-                titulo: "Bienestar",
-                imagen: "static/imagenes/3_3.svg",
-                texto: "El bienestar es un estado positivo relacionado a nuestra calidad de vida y a nuestra capacidad para contribuir al mundo con un sentimiento de significado y propósito. Tu nivel de bienestar está por arriba del promedio, pero aún puedes tomar acciones para aumentarlo. En SerenaMente IA encontrarás recursos para cuidar de este estado positivo y cómo incrementarlo."
-            },
-            tipo12: {
-                titulo: "Estrés",
-                imagen: "static/imagenes/1_3.svg",
-                texto: "Sentir estrés es natural en las personas. Contar con habilidades para manejar el estrés de nuestra vida cotidiana está asociado al bienestar físico y mental. Muestras habilidades para hacer frente a las situaciones desafiantes de la vida; sin embargo, fortalecer tus herramientas para manejar el estrés y mejorar tu bienestar emocional contribuirá aún más a tu calidad de vida."
-            },
-            tipo13: {
-                titulo: "Estrés",
-                imagen: "static/imagenes/2_3.svg",
-                texto: "Sentir estrés es natural en las personas porque nos prepara para reaccionar. Cuando es continuado o estamos enfrentando una situación puede incrementarse y llegar a sentirnos abrumados. Tu puntaje sugiere que logras afrontar las situaciones y al completar el programa de SerenaMente IA habrás ampliado tus habilidades para manejar las experiencias con mayor equilibrio sin poner en riesgo tu bienestar emocional."
-            },
-            tipo14: {
-                titulo: "Estrés",
-                imagen: "static/imagenes/3_3.svg",
-                texto: "Una reacción emocional ante situaciones imprevistas o complejas es el estrés. Cuando el nivel de estrés es alto, se pone en riesgo el bienestar físico y mental. Tus respuestas indican que estás experimentado un nivel de estrés significativo, por lo que es importante que desarrolles y expandas tus recursos y estrategias que te permitan lidiar ante las situaciones estresantes con mayor claridad y menos reactividad."
+        // Función para obtener el ID del token
+        function getTokenId() {
+          const token = localStorage.getItem("token");
+          if (!token) return null;
+          try {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+              '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+            return JSON.parse(jsonPayload).id;
+          } catch (error) {
+            console.error("Error decoding token:", error);
+            return null;
+          }
+        }
+      
+        // Función que verifica la sesión
+        async function verificarAutenticacion() {
+          const token = localStorage.getItem("token");
+          if (!token) {
+            window.location.href = "login.html";
+            return;
+          }
+      
+          try {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
+              method: "GET",
+              headers: { "Authorization": `Bearer ${token}` }
+            });
+      
+            if (!response.ok) {
+              console.error("Error en la autenticación:", await response.json());
+              localStorage.removeItem("token");
+              window.location.href = "login.html";
+              return;
             }
-            
-        };
-
-        // Función para actualizar el contenido
-        function actualizarContenido(id, tipo) {
-        const contenedor = document.getElementById(id);
-        if (contenedor && contenido[tipo]) {
-            contenedor.querySelector('h3').textContent = contenido[tipo].titulo;
-            contenedor.querySelector('img').src = contenido[tipo].imagen;
-            contenedor.querySelector('img').alt = contenido[tipo].titulo;
-            contenedor.querySelector('p').textContent = contenido[tipo].texto;
-        } else {
-            console.error('No se encontró el tipo o el contenedor:', id, tipo);
+      
+            const userData = await response.json();
+            const initials = userData.usuario.nombre
+              .split(" ")
+              .map(word => word[0])
+              .join("")
+              .toUpperCase();
+            document.getElementById("user-avatar").textContent = initials;
+          } catch (error) {
+            console.error("Error en la autenticación:", error);
+            window.location.href = "login.html";
+          }
         }
-        }
-
-        // Funcion para el menu de hamburguesa
-        const menuToggle = document.querySelector('.menu-toggle');
-        const submenu = document.querySelector('.submenu');
-
-        menuToggle.addEventListener('click', () => {
-            submenu.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
-        });
-
-        // Funcion para dar funcionalidad al logout
-        document.getElementById("logout").addEventListener("click", function () {
+      
+        document.addEventListener("DOMContentLoaded", async () => {
+          // menú hamburguesa
+          const menuToggle = document.querySelector('.menu-toggle');
+          const submenu = document.querySelector('.submenu');
+          const avatar = document.getElementById("user-avatar");
+          const userMenu = document.querySelector(".user-menu");
+      
+          menuToggle.addEventListener("click", () => {
+            submenu.classList.toggle("active");
+          });
+      
+          avatar.addEventListener("click", () => {
+            userMenu.classList.toggle("active");
+          });
+      
+          document.getElementById("logout").addEventListener("click", () => {
             localStorage.removeItem("token");
             window.location.href = "login.html";
-        });
+          });
+      
+          // Verificar token
+          await verificarAutenticacion();
+      
+          // Lógica del progreso
+          const idPaciente = getTokenId();
+          const cardsProgreso = document.getElementById('cardsProgreso');
+          const coloresPastel = ['#A8D0E6', '#B8E2C8', '#F8E9A1', '#FFB6B9', '#D5AAFF', '#FFD3B6', '#C7FFD8'];
+      
+          if (!idPaciente) return;
+      
+          try {
+            const response = await fetch(`http://localhost:8002/tratamiento/progreso/habilidades_estado/${idPaciente}`);
+            const habilidades = await response.json();
+      
+            for (let index = 0; index < habilidades.length; index++) {
+              const hab = habilidades[index];
 
-        // Funcion que verifica el token y si se contesto el pretest
-        async function verificarAutenticacion() {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                window.location.href = "login.html";
-                return;
-            }
+              if (hab.nombre.toLowerCase().includes("final del tratamiento")) {
+                continue;
+              }
 
-            try {
-                const response = await fetch("http://localhost:8002/auth/verify-token", {
-                    method: "GET",
-                    headers: { "Authorization": `Bearer ${token}` }
-                });
-
-                if (!response.ok) {
-                    console.error("Error en la autenticación:", await response.json());
-                    localStorage.removeItem("token");
-                    window.location.href = "login.html";
-                    return;
-                }
-
-                const userData = await response.json();
-                const initials = userData.usuario.nombre
-                .split(" ")
-                .map(word => word[0])
-                .join("")
-                .toUpperCase();
-                document.getElementById("user-avatar").textContent = initials;
-            } catch (error) {
-                console.error("Error en la autenticación:", error);
-                window.location.href = "login.html";
-            }
-        }
-
-        // Funcionalidad para extraer el id del token 
-        function getTokenId() {
-            const token = localStorage.getItem("token");
-            if (token) {
+              const card = document.createElement('div');
+              card.classList.add('card');
+      
+              const circle = document.createElement('div');
+              circle.classList.add('circle');
+      
+              const porcentaje = document.createElement('span');
+              let porcentajeValor = 0;
+      
+              if (hab.estado === "completada") {
+                porcentajeValor = 100;
+              } else if (hab.estado === "actual") {
                 try {
-                    const base64Url = token.split('.')[1]; // obtiene la parte de carga del JWT
-                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                    }).join(''));
-
-                    const { id } = JSON.parse(jsonPayload);
-                    return id;
-                } catch (error) {
-                    console.error("Error decoding token:", error);
-                    return null;
+                  const res = await fetch(`http://localhost:8002/tratamiento/progreso/porcentaje_habilidad/${idPaciente}/${hab.id}`);
+                  const data = await res.json();
+                  porcentajeValor = data.porcentaje;
+                } catch (e) {
+                  console.error("Error al obtener porcentaje real:", e);
+                  porcentajeValor = 50;
                 }
+              }
+      
+              porcentaje.textContent = porcentajeValor + "%";
+              circle.appendChild(porcentaje);
+              card.appendChild(circle);
+      
+              const titulo = document.createElement('h3');
+              titulo.textContent = hab.nombre;
+              card.appendChild(titulo);
+      
+              cardsProgreso.appendChild(card);
+      
+              const color = coloresPastel[index % coloresPastel.length];
+              circle.style.background = `conic-gradient(${color} 0% ${porcentajeValor}%, #ecf0f1 ${porcentajeValor}% 100%)`;
             }
-            return null;
-        }
-
-        // Funcion para obtener la categoria
-        document.addEventListener('DOMContentLoaded', function() {
-            const idPaciente = getTokenId(); // Asegúrate de que esta función extrae correctamente el ID del token
-            fetch(`http://localhost:8002/formularios/categorias/${idPaciente}`)
-            .then(response => response.json())
-            .then(data => {
-                data.forEach((resultado) => {
-                    const formularioId = resultado.ID_Formulario;
-                    const categoria = resultado.Categoria.trim();
-                    const cellId = `cell${formularioId}`;
-                    let tipo;
-                    switch(formularioId) {
-                        case 1:
-                            tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 1; // Asume tipo1 a tipo4
-                            actualizarContenido(cellId, `tipo${tipo}`);
-                            break;
-                        case 2:
-                            tipo = ['Mínima', 'Leve', 'Moderada', 'Severa'].indexOf(categoria) + 5; // Asume tipo5 a tipo8
-                            actualizarContenido(cellId, `tipo${tipo}`);
-                            break;
-                        case 4:
-                            tipo = ['Bajo', 'Moderado', 'Alto'].indexOf(categoria) + 9; // Asume tipo9 a tipo11
-                            actualizarContenido(cellId, `tipo${tipo}`);
-                            break;
-                        case 5:
-                            tipo = ['Leve', 'Moderado', 'Alto'].indexOf(categoria) + 12; // Asume tipo12 a tipo14
-                            actualizarContenido(cellId, `tipo${tipo}`);
-                            break;
-                        default:
-                            console.log('Formulario no reconocido');
-                    }
-                });
-            })
-            .catch(error => console.error('Error al obtener las categorías:', error));
+          } catch (error) {
+            console.error("Error al obtener el progreso del paciente:", error);
+          }
         });
-
-        document.addEventListener("DOMContentLoaded", function () {
-        const avatar = document.getElementById("user-avatar");
-        const userMenu = document.querySelector(".user-menu");
-
-        avatar.addEventListener("click", function () {
-            userMenu.classList.toggle("active");
-        });
-
-        verificarAutenticacion();
-    });
-    </script>
+      </script>      
 </body>
 </html>
