@@ -169,6 +169,17 @@
                         </select>
                     </div>
                     <div class="question">
+                        <label for="tipoENT">¿Padece alguna de las siguientes enfermedades no transmisibles?</label>
+                        <select id="tipoENT" name="tipoENT" required>
+                            <option value="1">Enfermedades cardiovasculares</option>
+                            <option value="2">Diabetes</option>
+                            <option value="3">Cáncer</option>
+                            <option value="4">Enfermedades renales</option>
+                            <option value="5">Enfermedad respiratorias crónicas</option>
+                            <option value="6">Ninguno</option>
+                        </select>
+                    </div>
+                    <div class="question">
                         <label for="tomaMedicamentos">Toma medicamentos:</label>
                         <select id="tomaMedicamentos" name="TomaMedicamentos" required onchange="toggleMedicacionField()">
                             <option value="No">No</option>
@@ -525,6 +536,7 @@
                 ID_Residencia: parseInt(document.getElementById("residencia").value),
                 ID_EstadoCivil: parseInt(document.getElementById("estadoCivil").value),
                 EnTratamiento: document.getElementById("enTratamiento").value,
+                ID_TipoENT: document.getElementById("tipoENT").value,
                 TomaMedicamentos: document.getElementById("tomaMedicamentos").value,
                 NombreMedicacion: document.getElementById("nombreMedicacion").value || null,
                 AvisoPrivacidad: document.getElementById("aviso_privacidad").checked,
