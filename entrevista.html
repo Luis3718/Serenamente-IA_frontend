@@ -425,22 +425,38 @@
 
         async function asignar_protocolo(){
             const idPaciente = getTokenId(); 
-            if (idPaciente) {
-                try {
-                    const response = await fetch(`http://localhost:8002/tratamiento/asignar_protocolo/${idPaciente}`, {
-                        method: 'POST'
-                    });
-                    if (response.ok) {
-                        console.log('Protocolo asignado exitosamente');
-                        await asignar_habilidad_actividad(); // <---- aquí llamamos la función
-                    } else {
-                        throw new Error('Fallo al asignar protocolo');
-                    }
-                } catch (error) {
-                    console.error('Error al asignar el protocolo', error);
-                }
-            } else {
+            if (!idPaciente) {
                 console.error('ID del paciente no disponible');
+                return;
+            }
+
+            try {
+                const datosResponse = await fetch(`http://localhost:8002/formularios/datos_expertos/${idPaciente}`);
+                if (!datosResponse.ok) {
+                    throw new Error("Error al obtener datos del paciente para evaluación");
+                }
+                const datos = await datosResponse.json();
+
+                const asignacionResponse = await fetch("http://localhost:8002/formularios/asignar_tratamiento", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                if (!asignacionResponse.ok) {
+                    const error = await asignacionResponse.json();
+                    throw new Error(error.detail || "Error al asignar tratamiento con sistema experto");
+                }
+
+                const resultado = await asignacionResponse.json();
+                console.log("Sistema experto asignó tratamiento:", resultado);
+
+                await asignar_habilidad_actividad();
+
+            } catch (error) {
+                console.error("Error en el flujo de asignación del protocolo:", error);
             }
         }
 
