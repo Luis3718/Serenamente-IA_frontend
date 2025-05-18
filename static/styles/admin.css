@@ -1,0 +1,429 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  * {
+      font-family: 'Montserrat';
+  }
+
+  .login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .login-container img {
+    width: 120px;
+    margin-bottom: 20px;
+  }
+
+  .login-container h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+
+  .login-container input {
+    margin-bottom: 20px;
+  }
+
+  .login-container .btn-primary {
+    width: 100%;
+  }
+
+  .mensaje-error {
+    color: #c0392b;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #ffc000;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  .btn-primary {
+    background-color: #2980b9;
+    color: white;
+  }
+  
+  .btn-secondary {
+    background-color: #8e44ad;
+    color: white;
+  }
+  
+  .btn-success {
+    background-color: #27ae60;
+    color: white;
+  }
+  
+  .btn-warning {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: #c0392b;
+    color: white;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .acciones {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .actividad-tag {
+    background: #ecf0f1;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin: 4px 4px 0 0;
+    display: inline-block;
+  }
+  
+  .actividad-tag button {
+    background: none;
+    border: none;
+    margin-left: 5px;
+    color: #e74c3c;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .select-con-boton {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .alerta {
+    background-color: #fdecea;
+    color: #d9534f;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .success {
+    background-color: #eafaf1;
+    color: #27ae60;
+  }
+  
+  /* Plantilla de Actividad */
+  .plantilla-actividad {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .video-container, .imagen-container, .actividad-container {
+    width: 100%;
+    text-align: center;
+    background: #fdfdfd;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  iframe, video, img {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+  }
+  
+  .descripcion {
+    font-size: 16px;
+    color: #555;
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .sopa-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    gap: 4px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .sopa-grid div {
+    background: #dfe6e9;
+    padding: 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #2d3436;
+    text-transform: uppercase;
+  }
+  
+  .memorama-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .memorama-grid div {
+    background: #fab1a0;
+    padding: 15px;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+  
+  /* Header y navegación */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  header img {
+    height: 80px;
+    cursor: pointer;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Admin actividades */
+  .formulario {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+  }
+  
+  .busqueda {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .busqueda input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .tabla-actividades {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  th {
+    background: #ecf0f1;
+  }
+  
+  .acciones button {
+    margin-right: 8px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .btn-editar { background: #f1c40f; color: #fff; }
+  .btn-eliminar { background: #e74c3c; color: #fff; }
+  .btn-ver { background: #2ecc71; color: #fff; }
+  
+  body { 
+    font-family: 'Montserrat', sans-serif; 
+    margin: 0; 
+    background-image: url('/static/imagenes/fondo_admin.jpg');
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    background-image: url('fondo2.jpg');
+    
+    padding: 15px 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  header img { height: 60px; }
+  nav ul {
+    list-style: none; display: flex; gap: 25px; margin: 0; padding: 0;
+  }
+  nav ul li a {
+    text-decoration: none; color: #333; font-weight: bold;
+  }
+  .container {
+    max-width: 1000px; margin: auto; padding: 40px 20px;
+      background-image: url('fondoo.jpg');
+  }
+
+  .busqueda {
+    display: flex; margin-bottom: 30px;
+  }
+  .busqueda input {
+    flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+  }
+  .busqueda button {
+    margin-left: 10px; background: #3498db; color: white; padding: 12px 20px;
+    border: none; border-radius: 8px; cursor: pointer;
+  }
+
+  table {
+    width: 100%; border-collapse: collapse; background: white;
+    border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  th, td {
+    padding: 14px; border-bottom: 1px solid #eee; text-align: left;
+  }
+  th { background: #ecf0f1; }
+  .acciones button {
+    margin: 2px; padding: 6px 10px;
+    border: none; border-radius: 6px; cursor: pointer;
+  }
+  .btn-editar { background: #f1c40f; color: #fff; }
+  .btn-eliminar { background: #e74c3c; color: #fff; }
+  .btn-descarga { background: #2ecc71; color: #fff; }
+  .descarga-opciones {
+    display: none;
+    margin-top: 5px;
+  }
+  .descarga-opciones button {
+    display: inline-block;
+    margin: 3px 3px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .form-edicion {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    display: none;
+  }
+  .form-edicion input, .form-edicion select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .form-edicion button {
+    padding: 10px 15px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .error {
+    color: red; font-weight: bold; margin-top: 10px;
+  }
+  .descarga-opciones {
+    display: none;
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 8px;
+    margin-top: 6px;
+  }
+
+  .descarga-opciones button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 14px;
+    margin: 2px 2px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .descarga-opciones button:hover {
+    background-color: #2980b9;
+  }
+
+  
