@@ -38,13 +38,11 @@
         return;
         }
 
-        const hash = await sha256(contrasena);
-
         try {
         const response = await fetch("http://localhost:8002/admin/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ usuario, contrasena: hash }),
+            body: JSON.stringify({ usuario, contrasena}),
         });
 
         const data = await response.json();

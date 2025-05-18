@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Pacientes</title>
+  <link rel="stylesheet" href="static/styles/admin.css" />
+
+</head>
+<body>
+
+<header>
+  <img src="static/imagenes/logo.jpeg" alt="Logo Serenamente" />
+  <nav>
+    <ul>
+      <li><a href="admin_terapia.html">Habilidades</a></li>
+      <li><a href="admin_actividades.html">Actividades</a></li>
+      <li><a href="admin_paciente.html">Pacientes</a></li>
+      <li><a href="admin_bases.html">Base de datos</a></li>
+      <li><a href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Gestión de Pacientes</h1>
+
+  <div class="busqueda">
+    <input type="email" id="buscarCorreo" placeholder="Buscar por correo electrónico" />
+    <button onclick="buscarPaciente()">Buscar</button>
+  </div>
+
+  <div id="errorMensaje" class="error" style="display: none;"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Apellidos</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Sexo</th>
+        <th>F. Nacimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaPacientes"></tbody>
+  </table>
+
+  <div class="form-edicion" id="formEdicion">
+    <h3>Editar Paciente</h3>
+    <input id="editId" type="hidden" />
+    <input id="editApellidos" placeholder="Apellidos" />
+    <input id="editNombre" placeholder="Nombre" />
+    <input id="editCorreo" placeholder="Correo electrónico" />
+    <select id="editSexo">
+      <option value="">Selecciona sexo</option>
+      <option value="Hombre">Hombre</option>
+      <option value="Mujer">Mujer</option>
+      <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+    </select>
+    <input id="editSegundoCorreo" placeholder="Segundo correo" />
+    <input id="editNuevaContrasena" type="password" placeholder="Nueva contraseña" />
+    </select>
+    <input id="editFecha" type="date" />
+    <button onclick="guardarCambios()">Guardar cambios</button>
+  </div>
+</div>
+
+<script>
+    function cerrarSesion() {
+      localStorage.removeItem("admin_token");
+      window.location.href = "login_admin.html";
+    }
+
+    async function cargarPacientes() {
+      const token = localStorage.getItem("admin_token");
+      try {
+        const response = await fetch("http://localhost:8002/pacientes/", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error("No autorizado");
+        const data = await response.json();
+
+        const pacientes = data.map(p => ({
+          id: p.ID_Paciente,
+          nombre: p.Nombre,
+          apellidos: p.Apellidos,
+          correo: p.Correo,
+          segundo_correo: p.CorreoAlternativo ?? "",
+          sexo: p.Sexo,
+          nacimiento: p.FechaNacimiento?.split("T")[0] ?? ""
+        }));
+
+
+        window.pacientes = pacientes;
+        renderizarPacientes(pacientes);
+      } catch (err) {
+        console.error("Error cargando pacientes:", err);
+        cerrarSesion();
+      }
+    }
+
+    function renderizarPacientes(pacientes) {
+      const tbody = document.getElementById("tablaPacientes");
+      tbody.innerHTML = "";
+
+      pacientes.forEach(paciente => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${paciente.apellidos}</td>
+          <td>${paciente.nombre}</td>
+          <td>${paciente.correo}</td>
+          <td>${paciente.sexo}</td>
+          <td>${paciente.nacimiento}</td>
+          <td>
+            <button onclick="editarPaciente(${paciente.id})">Editar</button>
+            <button onclick="eliminarPaciente(${paciente.id})">Pausar</button>
+          </td>
+        `;
+        tbody.appendChild(fila);
+      });
+    }
+
+    function editarPaciente(id) {
+      const paciente = window.pacientes.find(p => p.id === id);
+      if (!paciente) return alert("Paciente no encontrado");
+
+      document.getElementById("editId").value = paciente.id;
+      document.getElementById("editNombre").value = paciente.nombre;
+      document.getElementById("editApellidos").value = paciente.apellidos;
+      document.getElementById("editCorreo").value = paciente.correo;
+      document.getElementById("editSegundoCorreo").value = paciente.segundo_correo ?? "";
+      document.getElementById("editNuevaContrasena").value = "";
+
+      const sexoSelect = document.getElementById("editSexo");
+      const normalizado = paciente.sexo?.charAt(0).toUpperCase() + paciente.sexo?.slice(1).toLowerCase();
+      sexoSelect.value = normalizado;
+
+      document.getElementById("editFecha").value = paciente.nacimiento;
+      document.getElementById("formEdicion").style.display = "block";
+    }
+
+    async function guardarCambios() {
+      const id = document.getElementById("editId").value;
+      const perfilData = {
+        Nombre: document.getElementById("editNombre").value,
+        Apellidos: document.getElementById("editApellidos").value,
+        Correo: document.getElementById("editCorreo").value,
+        SegundoCorreo: document.getElementById("editSegundoCorreo").value,
+        Sexo: document.getElementById("editSexo").value,
+        FechaNacimiento: document.getElementById("editFecha").value,
+        NuevaContrasena: document.getElementById("editNuevaContrasena").value
+      };
+
+      const token = localStorage.getItem("admin_token");
+      const res = await fetch(`http://localhost:8002/pacientes/admin/actualizar_completo/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(perfilData)
+      });
+
+      if (res.ok) {
+        alert("Paciente actualizado correctamente");
+        document.getElementById("formEdicion").style.display = "none";
+        await cargarPacientes();
+      } else {
+        alert("Error al actualizar el paciente");
+      }
+    }
+
+
+    async function eliminarPaciente(id) {
+      if (!confirm("¿Poner en pausa a este paciente?")) return;
+
+      const token = localStorage.getItem("admin_token");
+      const res = await fetch(`http://localhost:8002/pacientes/termina_tratamiento/${id}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (res.ok) {
+        alert("Paciente pausado");
+        await cargarPacientes();
+      } else {
+        alert("No se pudo poner en pausa al paciente");
+      }
+    }
+
+    function buscarPaciente() {
+      const term = document.getElementById("buscarCorreo").value.toLowerCase();
+      const rows = Array.from(document.querySelectorAll("#tablaPacientes tr"));
+      let found = false;
+
+      rows.forEach(tr => {
+        const correo = tr.children[2].textContent.toLowerCase();
+        const visible = correo.includes(term);
+        tr.style.display = visible ? "" : "none";
+        if (visible) found = true;
+      });
+
+      document.getElementById("errorMensaje").style.display = found ? "none" : "block";
+      document.getElementById("errorMensaje").textContent = found
+        ? ""
+        : "No se encontró ningún paciente con ese correo.";
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const token = localStorage.getItem("admin_token");
+      if (!token) return cerrarSesion();
+
+      try {
+        const check = await fetch("http://localhost:8002/admin/perfil", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!check.ok) throw new Error("Token inválido");
+        await cargarPacientes();
+      } catch (err) {
+        console.error("Sesión inválida:", err);
+        cerrarSesion();
+      }
+    });
+</script>
+</body>
+</html>
