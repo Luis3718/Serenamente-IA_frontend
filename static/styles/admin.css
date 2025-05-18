@@ -316,6 +316,76 @@
     cursor: pointer;
   }
   
+  .descarga-opciones-horizontal {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .descarga-opciones-horizontal button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .descarga-opciones-horizontal button:hover {
+    background-color: #2980b9;
+  }
+  
+  .acciones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .botones-principales {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .descarga-opciones {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-descarga {
+    background-color: #1f90ff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .btn-descarga:hover {
+    background-color: #1670d9;
+  }
+
+  .descarga-opciones button:hover {
+    background-color: #bbdefb;
+  }
+
+  .acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
   .btn-editar { background: #f1c40f; color: #fff; }
   .btn-eliminar { background: #e74c3c; color: #fff; }
   .btn-ver { background: #2ecc71; color: #fff; }

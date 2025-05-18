@@ -39,7 +39,7 @@
         <th>Nombre</th>
         <th>Correo</th>
         <th>Sexo</th>
-        <th>F. Nacimiento</th>
+        <th>Fecha de Nacimiento</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -114,8 +114,17 @@
           <td>${paciente.sexo}</td>
           <td>${paciente.nacimiento}</td>
           <td>
-            <button onclick="editarPaciente(${paciente.id})">Editar</button>
-            <button onclick="eliminarPaciente(${paciente.id})">Pausar</button>
+            <div class="acciones-container">
+              <div class="botones-principales">
+                <button onclick="editarPaciente(${paciente.id})">Editar</button>
+                <button onclick="eliminarPaciente(${paciente.id})">Pausar</button>
+                <button onclick="toggleDescarga(${paciente.id})">📥 Descargar</button>
+              </div>
+              <div id="descarga-${paciente.id}" class="descarga-opciones">
+                <button class="btn-descarga" onclick="descargarExpediente(${paciente.id})">Expediente</button>
+                <button class="btn-descarga" onclick="descargarPretest(${paciente.id})">Pretest</button>
+              </div>
+            </div>
           </td>
         `;
         tbody.appendChild(fila);
@@ -172,6 +181,14 @@
       }
     }
 
+    function toggleDescarga(id) {
+      const div = document.getElementById(`descarga-${id}`);
+      if (div.style.display === "flex") {
+        div.style.display = "none";
+      } else {
+        div.style.display = "flex";
+      }
+    }
 
     async function eliminarPaciente(id) {
       if (!confirm("¿Poner en pausa a este paciente?")) return;
@@ -206,6 +223,54 @@
       document.getElementById("errorMensaje").textContent = found
         ? ""
         : "No se encontró ningún paciente con ese correo.";
+    }
+
+    function descargarExpediente(pacienteId) {
+      const token = localStorage.getItem("admin_token");
+      fetch(`http://localhost:8002/admin/descargar_reporte/${pacienteId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el reporte");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Reporte_Paciente_${pacienteId}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el reporte: " + err.message);
+      });
+    }
+
+    function descargarPretest(pacienteId) {
+      const token = localStorage.getItem("admin_token");
+      fetch(`http://localhost:8002/admin/descargar_pretest/${pacienteId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el pretest");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Pretest_Paciente_${pacienteId}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el pretest: " + err.message);
+      });
     }
 
     document.addEventListener("DOMContentLoaded", async () => {
