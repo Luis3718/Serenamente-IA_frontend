@@ -16,7 +16,6 @@
       <li><a href="admin_terapia.html">Habilidades</a></li>
       <li><a href="admin_actividades.html">Actividades</a></li>
       <li><a href="admin_paciente.html">Pacientes</a></li>
-      <li><a href="admin_bases.html">Base de datos</a></li>
       <li><a href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
     </ul>
   </nav>
@@ -31,6 +30,10 @@
   </div>
 
   <div id="errorMensaje" class="error" style="display: none;"></div>
+  <div class="descargas-globales">
+    <button onclick="descargarPretests()">📥 Descargar Pre-tests</button>
+    <button onclick="descargarBaseCompleta()">📥 Descargar Base completa</button>
+  </div>
 
   <table>
     <thead>
@@ -290,6 +293,54 @@
         cerrarSesion();
       }
     });
+
+    function descargarPretests() {
+    const token = localStorage.getItem("admin_token");
+    fetch("http://localhost:8002/admin/exportar_pretests_completo", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("No se pudo generar el archivo");
+      return res.blob();
+    })
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Pretest_Completo.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    })
+    .catch(err => {
+      alert("Error descargando el archivo: " + err.message);
+    });
+  }
+
+  function descargarBaseCompleta() {
+    const token = localStorage.getItem("admin_token");
+    fetch("http://localhost:8002/admin/exportar_base_completa", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("No se pudo generar el archivo");
+      return res.blob();
+    })
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Base_de_datos_completa.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    })
+    .catch(err => {
+      alert("Error descargando el archivo: " + err.message);
+    });
+  }
 </script>
 </body>
 </html>

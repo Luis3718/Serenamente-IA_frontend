@@ -340,6 +340,14 @@
   .descarga-opciones-horizontal button:hover {
     background-color: #2980b9;
   }
+
+  .descargas-globales {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
   
   .acciones-container {
     display: flex;
