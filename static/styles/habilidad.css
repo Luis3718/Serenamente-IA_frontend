@@ -361,14 +361,15 @@ footer {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(3, 120px);
-    gap: 15px;
+    grid-template-columns: repeat(3, 180px); /* más ancho */
+    gap: 25px; /* mayor espacio entre tarjetas */
     justify-content: center;
+    margin: 40px auto; /* centrado vertical y horizontal */
 }
 
 .card {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     background-color: #e5e7eb;
     border-radius: 10px;
     display: flex;
@@ -412,6 +413,11 @@ footer {
     color: white;
     transform: rotateY(180deg);
     font-size: 1.1rem;
+    word-wrap: break-word;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-back {

@@ -43,11 +43,11 @@
                         comienza en tu interior!
                         <br>
                        <strong>Objetivo:</strong> En esta última habilidad conectarás lo que has vivenciado hasta ahora y cómo lo has integrado a tu vida desarrollando y fortaleciendo tus recursos internos
-y externos de manera que te conviertas en refugio propio, donde habites sereno y presente.
-<br>
-A lo largo de cada habilidad te has encontrado contigo en distintas formas. Piensa en los momentos del programa en que sentiste conexión contigo, ¿qué
-práctica te funcionó mejor?, ¿qué señales te envías cuando necesitas una pausa?, ¿qué descubriste sobre tus formas de responder al estrés?, ¿ha cambiado tu
-forma de comunicarte con los demás cuando estás verdaderamente presente?
+                        y externos de manera que te conviertas en refugio propio, donde habites sereno y presente.
+                        <br>
+                        A lo largo de cada habilidad te has encontrado contigo en distintas formas. Piensa en los momentos del programa en que sentiste conexión contigo, ¿qué
+                        práctica te funcionó mejor?, ¿qué señales te envías cuando necesitas una pausa?, ¿qué descubriste sobre tus formas de responder al estrés?, ¿ha cambiado tu
+                        forma de comunicarte con los demás cuando estás verdaderamente presente?
 
                         </p> 
                     <div class="recuerda-box">
@@ -62,10 +62,14 @@ forma de comunicarte con los demás cuando estás verdaderamente presente?
     </p>
 
         <div class="video-container">
-            <video controls>
-                <source src="static/imagenes/video03.mp4" type="video/mp4">
-                Tu navegador no soporta la reproducción de videos.
-            </video>
+            <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+                padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+                border-radius: 8px; will-change: transform;">
+                <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                    src="https://www.canva.com/design/DAGmix3HDMk/eFFto--2gYOpIhcfA35HHg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+                </iframe>
+                </div>
+                <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGmix3HDMk&#x2F;eFFto--2gYOpIhcfA35HHg&#x2F;view?utm_content=DAGmix3HDMk&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Autocuidado_H1</a> de Proyecto Serenamente
             <p>Ahora que eres consciente de este camino de bienestar cuidando de ti. Ahora sabes que estás presente en el cuerpo, en
                 la emociones, en tus creencias e ideas, también te has encontrado a ti mismo en el encuentro con los demás y que tu respiración te permite acceder a tu
                 centro, ¡así es, a ser mindful!, vamos a explorar como puedes mantenerlo a largo plazo
@@ -348,14 +352,20 @@ forma de comunicarte con los demás cuando estás verdaderamente presente?
         });
     });
 
-    // Funcionalidad del minijuego del memorama
+    // Funcionalidad del minijuego del memorama 
     const pares = [
-        { id: 1, tipo: 'texto', contenido: 'ft1' },
-        { id: 1, tipo: 'imagen', contenido: 'static/imagenes/ft1.png' },
-        { id: 2, tipo: 'texto', contenido: 'ft2' },
-        { id: 2, tipo: 'imagen', contenido: 'static/imagenes/ft2.png' },
-        { id: 3, tipo: 'texto', contenido: 'ft3' },
-        { id: 3, tipo: 'imagen', contenido: 'static/imagenes/ft3.png' }
+    { id: 1, tipo: 'texto', contenido: 'ft1' },
+    { id: 1, tipo: 'imagen', contenido: 'Imagenes5/ft1.png' },
+    { id: 2, tipo: 'texto', contenido: 'ft2' },
+    { id: 2, tipo: 'imagen', contenido: 'Imagenes5/ft2.png' },
+    { id: 3, tipo: 'texto', contenido: 'ft3' },
+    { id: 3, tipo: 'imagen', contenido: 'Imagenes5/ft3.png' },
+    { id: 4, tipo: 'texto', contenido: 'ft4' },
+    { id: 4, tipo: 'imagen', contenido: 'Imagenes5/ft4.png' },
+    { id: 5, tipo: 'texto', contenido: 'ft5' },
+    { id: 5, tipo: 'imagen', contenido: 'Imagenes5/ft5.png' },
+    { id: 6, tipo: 'texto', contenido: 'ft6' },
+    { id: 6, tipo: 'imagen', contenido: 'Imagenes5/ft6.png' }
     ];
 
     const cards = [...pares].sort(() => 0.5 - Math.random());
@@ -365,72 +375,72 @@ forma de comunicarte con los demás cuando estás verdaderamente presente?
     let lockBoard = false;
 
     cards.forEach(cardData => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.dataset.id = cardData.id;
-      card.dataset.tipo = cardData.tipo;
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.id = cardData.id;
+    card.dataset.tipo = cardData.tipo;
 
-      const cardInner = document.createElement('div');
-      cardInner.classList.add('card-inner');
+    const cardInner = document.createElement('div');
+    cardInner.classList.add('card-inner');
 
-      const front = document.createElement('div');
-      front.classList.add('card-front');
+    const front = document.createElement('div');
+    front.classList.add('card-front');
 
-      if (cardData.tipo === 'imagen') {
+    if (cardData.tipo === 'imagen') {
         const img = document.createElement('img');
         img.src = cardData.contenido;
         img.alt = 'Imagen';
         front.appendChild(img);
-      } else {
+    } else {
         front.textContent = cardData.contenido;
-      }
+    }
 
-      const back = document.createElement('div');
-      back.classList.add('card-back');
-      back.textContent = '?';
+    const back = document.createElement('div');
+    back.classList.add('card-back');
+    back.textContent = '?';
 
-      cardInner.appendChild(front);
-      cardInner.appendChild(back);
-      card.appendChild(cardInner);
-      gameBoard.appendChild(card);
+    cardInner.appendChild(front);
+    cardInner.appendChild(back);
+    card.appendChild(cardInner);
+    gameBoard.appendChild(card);
 
-      card.addEventListener('click', () => flipCard(card));
+    card.addEventListener('click', () => flipCard(card));
     });
 
     function flipCard(card) {
-      if (lockBoard || card.classList.contains('flipped')) return;
+    if (lockBoard || card.classList.contains('flipped')) return;
 
-      card.classList.add('flipped');
-      flippedCards.push(card);
+    card.classList.add('flipped');
+    flippedCards.push(card);
 
-      if (flippedCards.length === 2) {
+    if (flippedCards.length === 2) {
         lockBoard = true;
         const [card1, card2] = flippedCards;
 
         if (
-          card1.dataset.id === card2.dataset.id &&
-          card1.dataset.tipo !== card2.dataset.tipo
+        card1.dataset.id === card2.dataset.id &&
+        card1.dataset.tipo !== card2.dataset.tipo
         ) {
-          flippedCards = [];
-          lockBoard = false;
-          checkWin();
+        flippedCards = [];
+        lockBoard = false;
+        checkWin();
         } else {
-          setTimeout(() => {
+        setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
             flippedCards = [];
             lockBoard = false;
-          }, 1000);
+        }, 1000);
         }
-      }
+    }
     }
 
     function checkWin() {
-      const allCards = document.querySelectorAll('.card');
-      const flipped = document.querySelectorAll('.card.flipped');
-      if (flipped.length === allCards.length) {
+    const allCards = document.querySelectorAll('.card');
+    const flipped = document.querySelectorAll('.card.flipped');
+    if (flipped.length === allCards.length) {
         winMessage.style.display = 'block';
-      }
+    }
     }
 </script>
 </body>

@@ -62,12 +62,12 @@
                 <div class="game-board" id="gameBoard"></div>
                 <div class="win-message" id="winMessage">¡Felicidades, lo lograste!</div>
 
-    <p>Ahora que ya viste cómo una respuesta más consciente puede influir en tu vida diaria y en tus
-    relaciones, es más fácil que empieces a notar tus reacciones automáticas: lo que piensas, sientes y haces sin darte cuenta. Con ayuda de la atención plena,
-    puedes aprender a darte un momento antes de actuar y así elegir cómo responder, en lugar de reaccionar por impulso. Esto también te ayuda a relacionarte
-    mejor con otras personas, con más empatía y comprensión.<br>
-   <strong> Vamos a iniciar</strong>
-    </p>
+                <p>Ahora que ya viste cómo una respuesta más consciente puede influir en tu vida diaria y en tus
+                relaciones, es más fácil que empieces a notar tus reacciones automáticas: lo que piensas, sientes y haces sin darte cuenta. Con ayuda de la atención plena,
+                puedes aprender a darte un momento antes de actuar y así elegir cómo responder, en lugar de reaccionar por impulso. Esto también te ayuda a relacionarte
+                mejor con otras personas, con más empatía y comprensión.<br>
+                <strong> Vamos a iniciar</strong>
+                </p>
    
 
             <div class="button-container">
@@ -346,13 +346,19 @@
     });
 
     // Funcionalidad del minijuego del memorama
-    const pares = [
-        { id: 1, tipo: 'texto', contenido: 'ft1' },
-        { id: 1, tipo: 'imagen', contenido: 'static/imagenes/ft1.png' },
-        { id: 2, tipo: 'texto', contenido: 'ft2' },
-        { id: 2, tipo: 'imagen', contenido: 'static/imagenes/ft2.png' },
-        { id: 3, tipo: 'texto', contenido: 'ft3' },
-        { id: 3, tipo: 'imagen', contenido: 'static/imagenes/ft3.png' }
+   const pares = [
+    { id: 1, tipo: 'texto', contenido: 'Responder vs. Reaccionar' },
+    { id: 1, tipo: 'imagen', contenido: 'static/imagenes/memo1.jpeg' },
+    { id: 2, tipo: 'texto', contenido: 'Las "Firmas" del Estrés' },
+    { id: 2, tipo: 'imagen', contenido: 'static/imagenes/memo2.jpeg' },
+    { id: 3, tipo: 'texto', contenido: 'Tolerancia al Malestar' },
+    { id: 3, tipo: 'imagen', contenido: 'static/imagenes/memo3.jpeg' },
+    { id: 4, tipo: 'texto', contenido: 'Conciencia Interpersonal (Mindfulness Interpersonal)' },
+    { id: 4, tipo: 'imagen', contenido: 'static/imagenes/memo4.jpeg' },
+    { id: 5, tipo: 'texto', contenido: 'Comunicación Consciente' },
+    { id: 5, tipo: 'imagen', contenido: 'static/imagenes/memo5.jpeg' },
+    { id: 6, tipo: 'texto', contenido: 'Neuroplasticidad' },
+    { id: 6, tipo: 'imagen', contenido: 'static/imagenes/memo6.jpeg' }
     ];
 
     const cards = [...pares].sort(() => 0.5 - Math.random());
@@ -362,72 +368,72 @@
     let lockBoard = false;
 
     cards.forEach(cardData => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.dataset.id = cardData.id;
-      card.dataset.tipo = cardData.tipo;
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.id = cardData.id;
+    card.dataset.tipo = cardData.tipo;
 
-      const cardInner = document.createElement('div');
-      cardInner.classList.add('card-inner');
+    const cardInner = document.createElement('div');
+    cardInner.classList.add('card-inner');
 
-      const front = document.createElement('div');
-      front.classList.add('card-front');
+    const front = document.createElement('div');
+    front.classList.add('card-front');
 
-      if (cardData.tipo === 'imagen') {
+    if (cardData.tipo === 'imagen') {
         const img = document.createElement('img');
         img.src = cardData.contenido;
         img.alt = 'Imagen';
         front.appendChild(img);
-      } else {
+    } else {
         front.textContent = cardData.contenido;
-      }
+    }
 
-      const back = document.createElement('div');
-      back.classList.add('card-back');
-      back.textContent = '?';
+    const back = document.createElement('div');
+    back.classList.add('card-back');
+    back.textContent = '?';
 
-      cardInner.appendChild(front);
-      cardInner.appendChild(back);
-      card.appendChild(cardInner);
-      gameBoard.appendChild(card);
+    cardInner.appendChild(front);
+    cardInner.appendChild(back);
+    card.appendChild(cardInner);
+    gameBoard.appendChild(card);
 
-      card.addEventListener('click', () => flipCard(card));
+    card.addEventListener('click', () => flipCard(card));
     });
 
     function flipCard(card) {
-      if (lockBoard || card.classList.contains('flipped')) return;
+    if (lockBoard || card.classList.contains('flipped')) return;
 
-      card.classList.add('flipped');
-      flippedCards.push(card);
+    card.classList.add('flipped');
+    flippedCards.push(card);
 
-      if (flippedCards.length === 2) {
+    if (flippedCards.length === 2) {
         lockBoard = true;
         const [card1, card2] = flippedCards;
 
         if (
-          card1.dataset.id === card2.dataset.id &&
-          card1.dataset.tipo !== card2.dataset.tipo
+        card1.dataset.id === card2.dataset.id &&
+        card1.dataset.tipo !== card2.dataset.tipo
         ) {
-          flippedCards = [];
-          lockBoard = false;
-          checkWin();
+        flippedCards = [];
+        lockBoard = false;
+        checkWin();
         } else {
-          setTimeout(() => {
+        setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
             flippedCards = [];
             lockBoard = false;
-          }, 1000);
+        }, 1000);
         }
-      }
+    }
     }
 
     function checkWin() {
-      const allCards = document.querySelectorAll('.card');
-      const flipped = document.querySelectorAll('.card.flipped');
-      if (flipped.length === allCards.length) {
+    const allCards = document.querySelectorAll('.card');
+    const flipped = document.querySelectorAll('.card.flipped');
+    if (flipped.length === allCards.length) {
         winMessage.style.display = 'block';
-      }
+    }
     }
 </script>
 </body>

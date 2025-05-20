@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerenaMente IA</title>
+    <link rel="stylesheet" href="static/styles/quierosabermas.css">
+</head>
+<body>
+    <!-- Submenú y logo-->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="dashboard.html">
+                    <img src="static/imagenes/logo.jpg" alt="Logo SerenaMente IA" class="logo">
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+            <nav class="submenu">
+                <ul>
+                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="progreso.html">Mi progreso</a></li>
+                    <div class="user-menu">
+                        <div id="user-avatar" class="avatar">US</div>
+                        <div id="user-dropdown" class="dropdown-menu">
+                            <a href="perfil.html">Ver perfil</a>
+                            <a href="#" id="logout">Cerrar sesión</a>
+                        </div>
+                    </div>                        
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container">
+            <h1>Quiero saber más</h1>
+            <p>En este apartado...</p>
+
+            <div class="content-flex">
+                <div class="video-grid">
+                    <div class="video-placeholder" onclick="openVideo('/static/videos/G_Video B1.mp4', 'Introducción a la meditación')">Introducción a la meditación</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Respiración consciente')">Respiración consciente</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Escaneo corporal')">Escaneo corporal</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Meditación guiada corta')">Meditación guiada corta</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Mindfulness en movimiento')">Mindfulness en movimiento</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Agradecimiento diario')">Agradecimiento diario</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Meditación')">Meditación</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Relajante')">Relajante</div>
+                    <div class="video-placeholder" onclick="openVideo('video03.mp4', 'Cierre de sesión consciente')">Cierre de sesión consciente</div>
+                </div>
+
+                <div class="facebook-section">
+                    <h3>Publicaciones de Facebook</h3>
+                    <div class="facebook-box">
+                        <iframe 
+                            src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/SerenaMenteUNAM&tabs=timeline&width=300&height=1000"
+                            width="100%" height="1000" style="border:none; overflow: visible;" frameborder="0" allowfullscreen
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="videoModal" class="video-modal" onclick="closeVideo()">
+        <button onclick="closeVideo(); event.stopPropagation();" style="position: absolute; top: 20px; right: 20px; background: #fff; color: #000; border: none; padding: 10px 15px; font-weight: bold; border-radius: 5px; cursor: pointer;">Cerrar</button>
+        <video id="modalVideo" controls autoplay></video>
+    </div>
+
+    <div class="social-bar">
+        <a href="https://www.facebook.com/SerenaMenteUNAM?_rdc=1&_rdr#" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
+    </div>
+    
+    <!--Banner con logos-->
+    <div class="banner-section">
+        <div class="banner-logo">
+            <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
+        </div>
+        <div class="banner-text">
+            <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
+        </div>
+        <div class="banner-logos">
+            <a href="https://www.unam.mx">
+                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+            </a>
+            <a href="https://suayed.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+            </a>
+            <a href="https://labpsiit.iztacala.unam.mx/">
+                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+            </a>
+            <a href="https://www.ipn.mx/">
+                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+            </a>
+            <a href="https://www.escom.ipn.mx/">
+                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-text">
+                <h3>¿Tienes dudas?</h3>
+                <p>Si tienes más preguntas o dudas sobre cualquier tema, puedes contactarnos y seguro te responderemos.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="mailto:serenamente@iztacala.unam.mx" class="footer-btn">Correo electrónico</a>
+                <a href="avisoprivacidad.html" class="footer-btn">Aviso de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Estas funciones están ahora en el ámbito global
+        function openVideo(src, title) {
+            const modal = document.getElementById("videoModal");
+            const video = document.getElementById("modalVideo");
+            video.src = src;
+            modal.style.display = "flex";
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById("videoModal");
+            const video = document.getElementById("modalVideo");
+            video.pause();
+            video.src = "";
+            modal.style.display = "none";
+        }
+
+        // Funcion para el menu de hamburguesa
+        const menuToggle = document.querySelector('.menu-toggle');
+        const submenu = document.querySelector('.submenu');
+
+        menuToggle.addEventListener('click', () => {
+            submenu.classList.toggle('active');
+        });
+
+        async function verificarAutenticacion() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8002/auth/verify-token", {
+                    method: "GET",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    console.error("Error en la autenticación:", await response.json());
+                    localStorage.removeItem("token");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const userData = await response.json();
+                const initials = userData.usuario.nombre
+                    .split(" ")
+                    .map(word => word[0])
+                    .join("")
+                    .toUpperCase();
+                document.getElementById("user-avatar").textContent = initials;
+            } catch (error) {
+                console.error("Error en la autenticación:", error);
+                window.location.href = "login.html";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const avatar = document.getElementById("user-avatar");
+            const userMenu = document.querySelector(".user-menu");
+
+            avatar.addEventListener("click", function () {
+                userMenu.classList.toggle("active");
+            });
+
+            document.getElementById("logout").addEventListener("click", function () {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+            });
+
+            verificarAutenticacion();
+        });
+    </script>
+
+</body>
+</html>
