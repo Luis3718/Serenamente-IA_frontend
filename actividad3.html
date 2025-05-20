@@ -142,7 +142,7 @@
             }
     
             try {
-                const response = await fetch("http://localhost:8002/auth/verify-token", {
+                const response = await fetch("https://serenamente.iztacala.unam.mx/api:8002/auth/verify-token", {
                     method: "GET",
                     headers: { "Authorization": `Bearer ${token}` }
                 });
@@ -227,12 +227,12 @@
 
             try {
                 // Obtener el progreso del paciente (para saber el tratamiento actual)
-                const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+                const progresoResp = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/progreso/${pacienteId}`);
                 const progreso = await progresoResp.json();
                 idTratamiento = progreso.ID_Tratamiento;
 
                 // Obtener las actividades de la habilidad en el tratamiento actual
-                const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
+                const actividadesResp = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
                 const actividades = await actividadesResp.json();
                 const idsActividades = actividades.map(act => act.ID_Actividad);
 
@@ -407,7 +407,7 @@
 
                         try {
                             // Consultar si ya está completada
-                            const compResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
+                            const compResp = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
                             const compData = await compResp.json();
                             const yaCompletada = compData.completada;
 
@@ -421,21 +421,21 @@
                                 }));
 
                                 // Enviar respuestas
-                                await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
+                                await fetch("https://serenamente.iztacala.unam.mx/api:8002/tratamiento/respuestas/guardar", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(respuestasFormateadas)
                                 });
 
                                 // Completar actividad
-                                await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
+                                await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" }
                                 });
                             }
 
                             // Obtener nuevo progreso y redirigir (en ambos casos)
-                            const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
+                            const progresoResp = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/progreso/${pacienteId}`);
                             const progreso = await progresoResp.json();
 
                             if (progreso.ID_Habilidad === habilidadActual) {

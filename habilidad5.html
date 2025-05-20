@@ -199,7 +199,7 @@
         }
 
         try {
-            const response = await fetch("http://localhost:8002/auth/verify-token", {
+            const response = await fetch("https://serenamente.iztacala.unam.mx/api:8002/auth/verify-token", {
                 method: "GET",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -287,7 +287,7 @@
         const paciente_id = getTokenId();
 
         // Obtener tratamiento actual del paciente
-        const tratamientoResponse = await fetch(`http://localhost:8002/tratamiento/buscar_protocolo/${paciente_id}`);
+        const tratamientoResponse = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/buscar_protocolo/${paciente_id}`);
         const tratamientoData = await tratamientoResponse.json();
         const tratamiento_id = tratamientoData.ID_Tratamiento;
 
@@ -295,11 +295,11 @@
         const habilidad_id = 5;
 
         // Obtener actividades relacionadas con la habilidad
-        const actividadesResponse = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamiento_id}/habilidad/${habilidad_id}`);
+        const actividadesResponse = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/ruta_actividad/${tratamiento_id}/habilidad/${habilidad_id}`);
         const actividades = await actividadesResponse.json();
         
         // Obtener la actividad actual del paciente
-        const progresoResponse = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${paciente_id}`);
+        const progresoResponse = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/progreso/actividad_actual/${paciente_id}`);
         const progresoData = await progresoResponse.json();
         const actividadActualId = progresoData.id_actividad_actual;
 

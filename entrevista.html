@@ -124,7 +124,7 @@
         }
 
         try {
-            const response = await fetch("http://localhost:8002/auth/verify-token", {
+            const response = await fetch("https://serenamente.iztacala.unam.mx/api:8002/auth/verify-token", {
                 method: "GET",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -384,7 +384,7 @@
             const idPaciente = getTokenId();
             if (idPaciente) {
                 try {
-                    const response = await fetch(`http://localhost:8002/formularios/contestar_entrevista/${idPaciente}`, {
+                    const response = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/formularios/contestar_entrevista/${idPaciente}`, {
                         method: 'POST'
                     });
                     if (response.ok) {
@@ -405,7 +405,7 @@
             const idPaciente = getTokenId();
             if (idPaciente) {
                 try {
-                    const response = await fetch(`http://localhost:8002/tratamiento/asignar_habilidad_actividad/${idPaciente}`, {
+                    const response = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/asignar_habilidad_actividad/${idPaciente}`, {
                         method: 'POST'
                     });
                     if (response.ok) {
@@ -431,13 +431,13 @@
             }
 
             try {
-                const datosResponse = await fetch(`http://localhost:8002/formularios/datos_expertos/${idPaciente}`);
+                const datosResponse = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/formularios/datos_expertos/${idPaciente}`);
                 if (!datosResponse.ok) {
                     throw new Error("Error al obtener datos del paciente para evaluación");
                 }
                 const datos = await datosResponse.json();
 
-                const asignacionResponse = await fetch("http://localhost:8002/formularios/asignar_tratamiento", {
+                const asignacionResponse = await fetch("https://serenamente.iztacala.unam.mx/api:8002/formularios/asignar_tratamiento", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
@@ -469,7 +469,7 @@
                 responses: responses
             };
     
-            fetch('http://localhost:8002/formularios/respuestas', {
+            fetch('https://serenamente.iztacala.unam.mx/api:8002/formularios/respuestas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
