@@ -1193,28 +1193,210 @@
                 <button type="button" onclick="guardarYContinuarSCS()">Siguiente</button>
               </form>
             </div>
-            <div id="formulario-sus" style="display: none;">
-              <h1>Escala de Autocompasión SCS</h1>
-              <p>
-                  <strong>Instrucciones:</strong> Lee las frases que aparecen a continuación cuidadosamente antes de responder. Elige la frecuencia con la que te comportas frente a esa situación.
-              </p>
-              <p>
-                  <strong>Opciones de Respuesta:</strong> 1 = Casi nunca, 2 = Ocasionalmente, 3 = La mitad de las veces 4 = Bastante a menudo 5 = Casi siempre
-              </p>
-              <form id="sus">
-
-              </form>
+            <div id="formulario-asi" style="display: none;">
+                <h1>Medidas Secundarias: Aceptabilidad, satisfacción e idoneidad</h1>
+                <p>
+                    Por favor, lea cada grupo cuidadosamente y elija una oración en cada conjunto, 
+                    la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u> donde 1= Nada y 10= Muchísimo</u> 
+                    Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
+                </p>
+            <form id="asi">
+                <p>Aceptabilidad</p>
+                <div class="question">
+                    <p>1.	SerenaMente IA fue adecuada para mi </p>
+                    <label><input type="radio" name="q1" value="1"> 1 - Nada</label><br>
+                    <label><input type="radio" name="q1" value="2"> 2 - Muy poco</label><br>
+                    <label><input type="radio" name="q1" value="3"> 3 - Poco</label><br>
+                    <label><input type="radio" name="q1" value="4"> 4 - Algo</label><br>
+                    <label><input type="radio" name="q1" value="5"> 5 - Moderado</label><br>
+                    <label><input type="radio" name="q1" value="6"> 6 - Considerable</label><br>
+                    <label><input type="radio" name="q1" value="7"> 7 - Alto</label><br>
+                    <label><input type="radio" name="q1" value="8"> 8 - Bastante</label><br>
+                    <label><input type="radio" name="q1" value="9"> 9 - Mucho </label><br>
+                    <label><input type="radio" name="q1" value="10"> 10 - Muchísimo</label><br>
+                </div>
+                <div class="question">
+                    <p>2.	¿Cree que SerenaMente fue útil en su caso?</p>
+                    <label><input type="radio" name="q2" value="1"> 1 - Nada</label><br>
+                    <label><input type="radio" name="q2" value="2"> 2 - Muy poco</label><br>
+                    <label><input type="radio" name="q2" value="3"> 3 - Poco</label><br>
+                    <label><input type="radio" name="q2" value="4"> 4 - Algo</label><br>
+                    <label><input type="radio" name="q2" value="5"> 5 - Moderado</label><br>
+                    <label><input type="radio" name="q2" value="6"> 6 - Considerable</label><br>
+                    <label><input type="radio" name="q2" value="7"> 7 - Alto</label><br>
+                    <label><input type="radio" name="q2" value="8"> 8 - Bastante</label><br>
+                    <label><input type="radio" name="q2" value="9"> 9 - Mucho </label><br>
+                    <label><input type="radio" name="q2" value="10"> 10 - Muchísimo</label><br>
+                </div>
+                <div class="question">
+                    <p>3.	¿Cree que SerenaMente IA podría ser útil para tratar otros problemas psicológicos?</p>
+                    <label><input type="radio" name="q3" value="1"> 1 - Nada</label><br>
+                    <label><input type="radio" name="q3" value="2"> 2 - Muy poco</label><br>
+                    <label><input type="radio" name="q3" value="3"> 3 - Poco</label><br>
+                    <label><input type="radio" name="q3" value="4"> 4 - Algo</label><br>
+                    <label><input type="radio" name="q3" value="5"> 5 - Moderado</label><br>
+                    <label><input type="radio" name="q3" value="6"> 6 - Considerable</label><br>
+                    <label><input type="radio" name="q3" value="7"> 7 - Alto</label><br>
+                    <label><input type="radio" name="q3" value="8"> 8 - Bastante</label><br>
+                    <label><input type="radio" name="q3" value="9"> 9 - Mucho </label><br>
+                    <label><input type="radio" name="q3" value="10"> 10 - Muchísimo</label><br>
+                </div>
+                <p>Satisfacción</p>
+                <div class="question">
+                    <p>4. En general, ¿qué tan satisfecho(a) está con la forma en que SerenaMente IA ha tratado su problema? </p>
+                    <label><input type="radio" name="q4" value="1"> 1 - Completamente insatisfecho/a </label><br>
+                    <label><input type="radio" name="q4" value="2"> 2 - Muy insatisfecho/a </label><br>
+                    <label><input type="radio" name="q4" value="3"> 3 - Algo insatisfecho/a </label><br>
+                    <label><input type="radio" name="q4" value="4"> 4 - Bastante satisfecho/a </label><br>
+                    <label><input type="radio" name="q4" value="5"> 5 - Muy satisfecho/a </label><br>
+                    <label><input type="radio" name="q4" value="6"> 6 - Completamente satisfecho/a </label><br>
+                </div>
+               
+                <div class="question">
+                    <p> 5. ¿Le ha ayudado SerenaMente IA en relación con un problema específico? </p>
+                    <label><input type="radio" name="q5" value="1"> 1 - No estoy seguro/a </label><br>
+                    <label><input type="radio" name="q5" value="2"> 2 - Hizo que las cosas empeoraran bastante</label><br>
+                    <label><input type="radio" name="q5" value="3"> 3 - Hizo que las cosas empeoraran un poco </label><br>
+                    <label><input type="radio" name="q5" value="4"> 4 - No ha habido cambios </label><br>
+                    <label><input type="radio" name="q5" value="5"> 5 - Hizo que las cosas mejoraran algo </label><br>
+                    <label><input type="radio" name="q5" value="6"> 6 - Hizo que las cosas mejoraran mucho</label><br>
+                </div>
+                <p>Idoneidad</p>
+                <p> Por favor, lea cada grupo cuidadosamente y elija una oración en cada conjunto, 
+                la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u>donde 1= Nada y 10= Muchísimo</u> 
+                Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
+                </p>
+                <div class="question">
+                    <p>6.	¿Las estrategias terapéuticas/ tareas/ actividades que se utilizaron a lo largo de esta aplicación fueron entendibles para usted? </p>
+                    <label><input type="radio" name="q6" value="1"> 1 - Nada</label><br>
+                    <label><input type="radio" name="q6" value="2"> 2 - Muy poco</label><br>
+                    <label><input type="radio" name="q6" value="3"> 3 - Poco</label><br>
+                    <label><input type="radio" name="q6" value="4"> 4 - Algo</label><br>
+                    <label><input type="radio" name="q6" value="5"> 5 - Moderado</label><br>
+                    <label><input type="radio" name="q6" value="6"> 6 - Considerable</label><br>
+                    <label><input type="radio" name="q6" value="7"> 7 - Alto</label><br>
+                    <label><input type="radio" name="q6" value="8"> 8 - Bastante</label><br>
+                    <label><input type="radio" name="q6" value="9"> 9 - Mucho </label><br>
+                    <label><input type="radio" name="q6" value="10"> 10 - Muchísimo</label><br>
+                </div>
+                <div class="question">
+                    <p>7.	Los contenidos de la aplicación le parecieron interesantes.</p>
+                    <label><input type="radio" name="q7" value="1"> 1 - Nada</label><br>
+                    <label><input type="radio" name="q7" value="2"> 2 - Muy poco</label><br>
+                    <label><input type="radio" name="q7" value="3"> 3 - Poco</label><br>
+                    <label><input type="radio" name="q7" value="4"> 4 - Algo</label><br>
+                    <label><input type="radio" name="q7" value="5"> 5 - Moderado</label><br>
+                    <label><input type="radio" name="q7" value="6"> 6 - Considerable</label><br>
+                    <label><input type="radio" name="q7" value="7"> 7 - Alto</label><br>
+                    <label><input type="radio" name="q7" value="8"> 8 - Bastante</label><br>
+                    <label><input type="radio" name="q7" value="9"> 9 - Mucho </label><br>
+                    <label><input type="radio" name="q7" value="10"> 10 - Muchísimo</label><br>
+                </div>
+                <div class="question">
+                    <p>8.	¿Qué modificaría?</p>
+                    <label><input type="radio" name="q8" value="1"> 1 - Nada</label><br>
+                    <label><input type="radio" name="q8" value="2"> 2 - Muy poco</label><br>
+                    <label><input type="radio" name="q8" value="3"> 3 - Poco</label><br>
+                    <label><input type="radio" name="q8" value="4"> 4 - Algo</label><br>
+                    <label><input type="radio" name="q8" value="5"> 5 - Moderado</label><br>
+                    <label><input type="radio" name="q8" value="6"> 6 - Considerable</label><br>
+                    <label><input type="radio" name="q8" value="7"> 7 - Alto</label><br>
+                    <label><input type="radio" name="q8" value="8"> 8 - Bastante</label><br>
+                    <label><input type="radio" name="q8" value="9"> 9 - Mucho </label><br>
+                    <label><input type="radio" name="q8" value="10"> 10 - Muchísimo</label><br>
+                </div>  
+                <button type="button" onclick="guardarYContinuarASI()">Siguiente</button>  
+            </form>
             </div>
-             <div id="formulario-asi" style="display: none;">
-              <h1>Escala de Autocompasión SCS</h1>
-              <p>
-                  <strong>Instrucciones:</strong> Lee las frases que aparecen a continuación cuidadosamente antes de responder. Elige la frecuencia con la que te comportas frente a esa situación.
-              </p>
-              <p>
-                  <strong>Opciones de Respuesta:</strong> 1 = Casi nunca, 2 = Ocasionalmente, 3 = La mitad de las veces 4 = Bastante a menudo 5 = Casi siempre
-              </p>
-              <form id="asi">
-                
+            <div id="formulario-sus" style="display: none;">
+              <h1>Sistema de escala de usabilidad</h1>
+                <p> Por favor, lea cada grupo cuidadosamente y elija una oración en cada conjunto, 
+                la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u>donde 1= En completo desacuerdo y 5= Completamente de acuerdo</u> 
+                Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
+                </p>
+              <form id="sus">
+                <div class="question">
+                    <p>1. Creo que me gustará usar con frecuencia este sistema </p>
+                    <label><input type="radio" name="q" value="1"> 1</label><br>
+                    <label><input type="radio" name="q" value="2"> 2</label><br>
+                    <label><input type="radio" name="q" value="3"> 3</label><br>
+                    <label><input type="radio" name="q" value="4"> 4</label><br>
+                    <label><input type="radio" name="q" value="5"> 5</label><br>
+                </div>
+               
+                <div class="question">
+                    <p>2. El sistema me pareció poco complejo en su uso </p>
+                    <label><input type="radio" name="q2" value="1"> 1</label><br>
+                    <label><input type="radio" name="q2" value="2"> 2</label><br>
+                    <label><input type="radio" name="q2" value="3"> 3</label><br>
+                    <label><input type="radio" name="q2" value="4"> 4</label><br>
+                    <label><input type="radio" name="q2" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>3. Creo que es fácil utilizar el sistema </p>
+                    <label><input type="radio" name="q3" value="1"> 1</label><br>
+                    <label><input type="radio" name="q3" value="2"> 2</label><br>
+                    <label><input type="radio" name="q3" value="3"> 3</label><br>
+                    <label><input type="radio" name="q3" value="4"> 4</label><br>
+                    <label><input type="radio" name="q3" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>4. Creo que necesitaría del apoyo de un experto / una experta para poder usar el sistema</p>
+                    <label><input type="radio" name="q4" value="1"> 1</label><br>
+                    <label><input type="radio" name="q4" value="2"> 2</label><br>
+                    <label><input type="radio" name="q4" value="3"> 3</label><br>
+                    <label><input type="radio" name="q4" value="4"> 4</label><br>
+                    <label><input type="radio" name="q4" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>5. Me pareció que los componentes del sistema están bastante bien integrados </p>
+                    <label><input type="radio" name="q5" value="1"> 1</label><br>
+                    <label><input type="radio" name="q5" value="2"> 2</label><br>
+                    <label><input type="radio" name="q5" value="3"> 3</label><br>
+                    <label><input type="radio" name="q5" value="4"> 4</label><br>
+                    <label><input type="radio" name="q5" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>6. Creo que había demasiadas inconsistencias en el sistema</p>
+                    <label><input type="radio" name="q6" value="1"> 1</label><br>
+                    <label><input type="radio" name="q6" value="2"> 2</label><br>
+                    <label><input type="radio" name="q6" value="3"> 3</label><br>
+                    <label><input type="radio" name="q6" value="4"> 4</label><br>
+                    <label><input type="radio" name="q6" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>7. Imagino que la mayoría de las personas aprenderían muy rápidamente a utilizar el sistema</p>
+                    <label><input type="radio" name="q7" value="1"> 1</label><br>
+                    <label><input type="radio" name="q7" value="2"> 2</label><br>
+                    <label><input type="radio" name="q7" value="3"> 3</label><br>
+                    <label><input type="radio" name="q7" value="4"> 4</label><br>
+                    <label><input type="radio" name="q7" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>8. Me pareció que el sistema es muy extenso para su uso</p>
+                    <label><input type="radio" name="q8" value="1"> 1</label><br>
+                    <label><input type="radio" name="q8" value="2"> 2</label><br>
+                    <label><input type="radio" name="q8" value="3"> 3</label><br>
+                    <label><input type="radio" name="q8" value="4"> 4</label><br>
+                    <label><input type="radio" name="q8" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>9. Me sentí muy confiado / confiada en el manejo del sistema</p>
+                    <label><input type="radio" name="q9" value="1"> 1</label><br>
+                    <label><input type="radio" name="q9" value="2"> 2</label><br>
+                    <label><input type="radio" name="q9" value="3"> 3</label><br>
+                    <label><input type="radio" name="q9" value="4"> 4</label><br>
+                    <label><input type="radio" name="q9" value="5"> 5</label><br>
+                </div>
+                <div class="question">
+                    <p>10. Necesito aprender muchas cosas antes de manejarme en el sistema</p>
+                    <label><input type="radio" name="q10" value="1"> 1</label><br>
+                    <label><input type="radio" name="q10" value="2"> 2</label><br>
+                    <label><input type="radio" name="q10" value="3"> 3</label><br>
+                    <label><input type="radio" name="q10" value="4"> 4</label><br>
+                    <label><input type="radio" name="q10" value="5"> 5</label><br>
+                </div>
+                <button type="button" onclick="guardarYEnviarSUS()">Enviar</button>
               </form>
             </div>
         </div>
@@ -1367,6 +1549,52 @@
         return null;
     }
 
+    async function enviarResultados() {
+        const endpoints = [
+            'BAI_responses',
+            'Beck_responses',
+            'Estres_responses',
+            'Bienestar_responses',
+            'Sueño_responses',
+            'APOI_desfavorable_responses',
+            'APOI_favorable_responses',
+            'MAAS_responses',
+            'SCS_responses',
+            'ASI_aceptabilidad_responses',
+            'ASI_satisfaccion_responses',
+            'ASI_identidad_responses',
+            'SUS_responses'
+        ];
+
+        const url = 'http://localhost:8002/formularios/respuestas'; // Cambia por tu URL real
+
+        for (let key of endpoints) {
+            const item = sessionStorage.getItem(key);
+            if (item) {
+                try {
+                    const respuesta = JSON.parse(item);
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(respuesta)
+                    });
+
+                    if (!response.ok) {
+                        console.error(`Error al enviar ${key}:`, response.status);
+                    } else {
+                        console.log(`Enviado correctamente: ${key}`);
+                        sessionStorage.removeItem(key); // Limpia después de enviar si lo deseas
+                    }
+                } catch (e) {
+                    console.error(`Error procesando ${key}:`, e);
+                }
+            }
+        }
+        alert("¡Todos los formularios se enviaron correctamente!");
+    }
+
     // Logica de formularios
     // Formulario BAI
     function guardarYContinuarBAI() {
@@ -1465,7 +1693,7 @@
               puntuacion = 4 - puntuacion;
           }
           totalScore += puntuacion;
-          responses.push({ question: 42 + i, answer: puntuacion });
+          responses.push({ question: 53 + i, answer: puntuacion });
       }
 
       let categoria = "";
@@ -1503,7 +1731,7 @@
                 return;
             }
             totalScore += parseInt(val.value);
-            responses.push({ question: 56 + i, answer: val.value }); // continúa desde la pregunta 57
+            responses.push({ question: 48 + i, answer: val.value }); // continúa desde la pregunta 57
         }
 
         // Escalar el puntaje (suma de 5 ítems * 5 = 25 => escalar a 100)
@@ -1535,7 +1763,7 @@
         const form = document.getElementById('Sueñoform');
         const questions = form.querySelectorAll('.question');
         let responses = [];
-        let index = 70; // Ajusta este número según la numeración de tu sistema
+        let index = 90; // Ajusta este número según la numeración de tu sistema
 
         for (let question of questions) {
             let inputText = question.querySelector('input[type="text"]');
@@ -1613,14 +1841,14 @@
         [1, 6, 7].forEach((num, i) => {
             const val = form.querySelector(`input[name="q${num}"]:checked`).value;
             totalScoreDes += parseInt(val);
-            responsesDes.push({ question: 90 + i, answer: val });
+            responsesDes.push({ question: 82 + i, answer: val });
         });
 
         // Cálculo favorable: ítems 2, 3, 4, 5
         [2, 3, 4, 5].forEach((num, i) => {
             const val = form.querySelector(`input[name="q${num}"]:checked`).value;
             totalScoreFav += parseInt(val);
-            responsesFav.push({ question: 93 + i, answer: val });
+            responsesFav.push({ question: 85 + i, answer: val });
         });
 
         const resultDes = {
@@ -1664,14 +1892,14 @@
                 return;
             }
             sumaTotal += parseInt(val.value);
-            responses.push({ question: 99 + i, answer: val.value }); // continúa desde la pregunta 100
+            responses.push({ question: 67 + i, answer: val.value }); // continúa desde la pregunta 100
         }
 
         const promedio = (sumaTotal / totalPreguntas).toFixed(2);
 
         const result = {
             ID_Paciente: getTokenId(),
-            formType: 3,
+            formType: 6,
             totalScore: promedio,
             category: "Mindfulness",
             responses
@@ -1699,7 +1927,7 @@
                 return;
             }
             sumaTotal += parseInt(val.value);
-            responses.push({ question: 114 + i, answer: val.value }); // continuación desde la pregunta 115
+            responses.push({ question: 109 + i, answer: val.value }); // continuación desde la pregunta 115
         }
 
         const promedio = (sumaTotal / totalPreguntas).toFixed(2);
@@ -1717,12 +1945,133 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-scs').style.display = 'none';
-        document.getElementById('formulario-sus').style.display = 'block';
+        document.getElementById('formulario-asi').style.display = 'block';
     }
 
-    // Formulario sus  
+    // Formulario ASI  
+    function guardarYContinuarASI() {
+        const form = document.getElementById('ASIform');
+        let responsesAceptabilidad = [];
+        let responsesSatisfaccion = [];
+        let responsesIdentidad = [];
 
-    // Formulario asi   
+        let totalAceptabilidad = 0;
+        let totalIdentidad = 0;
+
+        // Preguntas Aceptabilidad (Likert, ID_TipoFormulario: 12) → q1 a q3
+        for (let i = 1; i <= 3; i++) {
+            const val = form.querySelector(`input[name="q${i}"]:checked`);
+            if (!val) {
+                alert("Por favor responde todas las preguntas del apartado Aceptabilidad.");
+                return;
+            }
+            const value = parseInt(val.value);
+            responsesAceptabilidad.push({ question: 147 + i, answer: value });
+            totalAceptabilidad += value;
+        }
+
+        // Preguntas Satisfacción (Abierta, ID_TipoFormulario: 13) → q4 y q5
+        for (let i = 4; i <= 5; i++) {
+            const val = form.querySelector(`input[name="q${i}"]`);
+            if (!val || val.value.trim() === "") {
+                alert("Por favor responde todas las preguntas del apartado Satisfacción.");
+                return;
+            }
+            responsesSatisfaccion.push({ question: 150 + i, answer: val.value.trim() });
+        }
+
+        // Preguntas Identidad (Likert, ID_TipoFormulario: 14) → q6 a q8
+        for (let i = 6; i <= 8; i++) {
+            const val = form.querySelector(`input[name="q${i}"]:checked`);
+            if (!val) {
+                alert("Por favor responde todas las preguntas del apartado Identidad.");
+                return;
+            }
+            const value = parseInt(val.value);
+            responsesIdentidad.push({ question: 152 + i, answer: value });
+            totalIdentidad += value;
+        }
+
+        // Estructura para guardar
+        const aceptabilidad = {
+            ID_Paciente: getTokenId(),
+            formType: 12,
+            totalScore: totalAceptabilidad,
+            category: "Aceptabilidad",
+            responses: responsesAceptabilidad
+        };
+
+        const satisfaccion = {
+            ID_Paciente: getTokenId(),
+            formType: 13,
+            totalScore: 0,
+            category: "Satisfacción",
+            responses: responsesSatisfaccion
+        };
+
+        const identidad = {
+            ID_Paciente: getTokenId(),
+            formType: 14,
+            totalScore: totalIdentidad,
+            category: "Identidad",
+            responses: responsesIdentidad
+        };
+
+        sessionStorage.setItem('ASI_aceptabilidad_responses', JSON.stringify(aceptabilidad));
+        sessionStorage.setItem('ASI_satisfaccion_responses', JSON.stringify(satisfaccion));
+        sessionStorage.setItem('ASI_identidad_responses', JSON.stringify(identidad));
+
+        console.log("ASI guardado:", { aceptabilidad, satisfaccion, identidad });
+
+        // Avanzar
+        document.getElementById('formulario-asi').style.display = 'none';
+        document.getElementById('formulario-sus').style.display = 'block'; // o lo que siga
+    }
+
+    // Formulario SUS   
+    function guardarYEnviarSUS() {
+        const form = document.getElementById('SUSform');
+        let responses = [];
+        let totalAjustado = 0;
+
+        for (let i = 1; i <= 10; i++) {
+            const input = form.querySelector(`input[name="q${i}"]:checked`);
+            if (!input) {
+                alert("Por favor responde todas las preguntas del cuestionario SUS.");
+                return;
+            }
+
+            const valor = parseInt(input.value);
+            let valorCorregido;
+
+            if ([1, 3, 5, 7, 9].includes(i)) {
+                valorCorregido = valor - 1;
+            } else {
+                valorCorregido = 5 - valor;
+            }
+
+            totalAjustado += valorCorregido;
+            responses.push({ question: 155 + i, answer: valor });
+        }
+
+        const susScore = (totalAjustado * 2.5).toFixed(2);
+
+        const result = {
+            ID_Paciente: getTokenId(),
+            formType: 15,
+            totalScore: susScore,
+            category: "Usabilidad",
+            responses
+        };
+
+        sessionStorage.setItem('SUS_responses', JSON.stringify(result));
+        console.log("Guardado SUS:", result);
+
+        // Mostrar mensaje final
+        document.getElementById('formulario-sus').style.display = 'none';
+        document.getElementById('mensaje-final').style.display = 'block';
+        enviarResultados()
+    }
 
     // Lógica principal: desbloquea SOLO la actividad actual
     document.addEventListener("DOMContentLoaded", async function () {
