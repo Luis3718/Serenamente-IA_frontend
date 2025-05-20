@@ -228,7 +228,7 @@
         }
 
         try {
-            const response = await fetch("https://serenamente.iztacala.unam.mx/api:8002/auth/verify-token", {
+            const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
                 method: "GET",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -271,7 +271,7 @@
     // Funcion para obtener la categoria
     document.addEventListener('DOMContentLoaded', function() {
         const idPaciente = getTokenId(); // Asegúrate de que esta función extrae correctamente el ID del token
-        fetch(`https://serenamente.iztacala.unam.mx/api:8002/formularios/categorias/${idPaciente}`)
+        fetch(`https://serenamente.iztacala.unam.mx/api/formularios/categorias/${idPaciente}`)
         .then(response => response.json())
         .then(data => {
             data.forEach((resultado) => {
@@ -311,7 +311,7 @@
     // Llamada a la funcion de evaluar paciente
     async function evaluarPaciente(idPaciente) {
     try {
-        const response = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/formularios/evaluar_paciente/${idPaciente}`);
+        const response = await fetch(`https://serenamente.iztacala.unam.mx/api/formularios/evaluar_paciente/${idPaciente}`);
         const resultado = await response.json();
 
         if (resultado.status === "Apto") {

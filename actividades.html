@@ -150,7 +150,7 @@
             }
 
             try {
-                const response = await fetch("https://serenamente.iztacala.unam.mx/api:8002/auth/verify-token", {
+                const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
                     method: "GET",
                     headers: { "Authorization": `Bearer ${token}` }
                 });
@@ -218,7 +218,7 @@
             if (!idPaciente) return;
 
             try {
-                const response = await fetch(`https://serenamente.iztacala.unam.mx/api:8002/tratamiento/progreso/habilidades_estado/${idPaciente}`);
+                const response = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/habilidades_estado/${idPaciente}`);
                 const data = await response.json();
 
                 data.forEach((habilidad) => {
