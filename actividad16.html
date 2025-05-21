@@ -73,7 +73,7 @@
       <div style="flex: 2;">
         <p>No olvides que puedes volver a esta práctica siempre que lo necesites.</p>
         <div class="button-container" style="margin-top: 15px;">
-          <button href="quierosabermas.html" class="boton-enviar">Quiero saber más</button>
+          <button id="btn-quiero-saber-mas" class="boton-enviar">Quiero saber más</button>
           <button id="btn-menu-principal" class="boton-enviar" style="display: none;">Regresar al menú principal</button>
           <button id="btn-siguiente-actividad" class="boton-enviar" style="display: none;">Siguiente actividad</button>
         </div>
@@ -687,6 +687,10 @@
               mostrarPregunta();
           });
       });
+      
+      document.getElementById("btn-quiero-saber-mas").addEventListener("click", function() {
+            window.location.href = "quierosabermas.html";
+        });
   </script>
 </body>
 </html>
