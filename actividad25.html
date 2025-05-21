@@ -89,7 +89,7 @@ amplio de prácticas y puedes volver a revisar cualquier contenido que desees si
         
 
         <div class="button-container" style="margin-top: 15px;">
-          <button href="quierosabermas.html" class="boton-enviar">Quiero saber más</button>
+          <button id="btn-quiero-saber-mas" class="boton-enviar">Quiero saber más</button>
           <button id="btn-menu-principal" class="boton-enviar" style="display: none;">Regresar al menú principal</button>
           <button id="btn-siguiente-actividad" class="boton-enviar" style="display: none;">Siguiente actividad</button>
         </div>
@@ -703,6 +703,10 @@ amplio de prácticas y puedes volver a revisar cualquier contenido que desees si
               mostrarPregunta();
           });
       });
+
+      document.getElementById("btn-quiero-saber-mas").addEventListener("click", function() {
+            window.location.href = "quierosabermas.html";
+        });
   </script>
 </body>
 </html>
