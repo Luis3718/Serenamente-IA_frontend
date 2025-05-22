@@ -43,7 +43,7 @@
                 <button type="submit" class="login-btn">Iniciar Sesión</button>
             </form>
             <p class="login-help">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
-            <p class="login-help">¿Olvidaste tu contrasña? <a href="recuperarcontraseña.html">Recuperar contraseña</a></p>
+            <p class="login-help">¿Olvidaste tu contrasña? <a href="recuperar_contrasena.html">Recuperar contraseña</a></p>
         </div>
     </main>    
 
@@ -133,14 +133,14 @@
             // Redirigir según el estado del formulario_contestado
             if (data.formulario_contestado) {
                 if (data.entrevista_contestada){
-                    window.location.href = "/dashboard.html";
+                    window.location.href = "/TT//dashboard.html";
                 }
                 else{
-                    window.location.href = "/resultados.html";
+                    window.location.href = "/TT//resultados.html";
                     
                 }
             } else {
-                window.location.href = "/formulario.html";
+                window.location.href = "/TT//formulario.html";
             }
         } catch (error) {
             console.error("Error durante el inicio de sesión:", error);

@@ -298,7 +298,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
       async function verificarAutenticacion() {
           const token = localStorage.getItem("token");
           if (!token) {
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
               return;
           }
 
@@ -311,7 +311,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
               if (!response.ok) {
                   console.error("Error en la autenticación:", await response.json());
                   localStorage.removeItem("token");
-                  window.location.href = "login.html";
+                  window.location.href = "/TT/login.html";
                   return;
               }
 
@@ -324,7 +324,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
               document.getElementById("user-avatar").textContent = initials;
           } catch (error) {
               console.error("Error en la autenticación:", error);
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
           }
       }
       
@@ -334,7 +334,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
       document.addEventListener("DOMContentLoaded", async function () {
           const token = localStorage.getItem("token");
           if (!token) {
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
               return;
           }
 
@@ -404,7 +404,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
 
           document.getElementById("logout").addEventListener("click", function () {
               localStorage.removeItem("token");
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
           });
       });
 
@@ -675,14 +675,14 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
                                   window.location.href = `actividad${nuevaActividad}.html`;
                               };
                               botonMenu.onclick = function() {
-                                  window.location.href = "actividades.html";
+                                  window.location.href = "/TT/actividades.html";
                               };
                           } else {
                               botonSiguiente.style.display = "none";
                               botonMenu.style.display = "inline-block";
 
                               botonMenu.onclick = function() {
-                                  window.location.href = "actividades.html";
+                                  window.location.href = "/TT/actividades.html";
                               };
                           }
 
@@ -713,7 +713,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.  </p>
       });
 
       document.getElementById("btn-quiero-saber-mas").addEventListener("click", function() {
-            window.location.href = "quierosabermas.html";
+            window.location.href = "/TT/quierosabermas.html";
         });
   </script>
 </body>

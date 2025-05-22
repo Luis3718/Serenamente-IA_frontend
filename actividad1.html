@@ -203,7 +203,7 @@
         async function verificarAutenticacion() {
             const token = localStorage.getItem("token");
             if (!token) {
-                window.location.href = "login.html";
+                window.location.href = "/TT/login.html";
                 return;
             }
 
@@ -216,7 +216,7 @@
                 if (!response.ok) {
                     console.error("Error en la autenticación:", await response.json());
                     localStorage.removeItem("token");
-                    window.location.href = "login.html";
+                    window.location.href = "/TT/login.html";
                     return;
                 }
 
@@ -229,7 +229,7 @@
                 document.getElementById("user-avatar").textContent = initials;
             } catch (error) {
                 console.error("Error en la autenticación:", error);
-                window.location.href = "login.html";
+                window.location.href = "/TT/login.html";
             }
         }
 
@@ -243,7 +243,7 @@
 
         document.getElementById("logout").addEventListener("click", function () {
             localStorage.removeItem("token");
-            window.location.href = "login.html";
+            window.location.href = "/TT/login.html";
         });
         verificarAutenticacion();
     });
@@ -297,7 +297,7 @@
                     if (nuevaHabilidad === habilidadActual) {
                         window.location.href = `actividad${nuevaActividad}.html`;
                     } else {
-                        window.location.href = "actividades.html";
+                        window.location.href = "/TT/actividades.html";
                     }
 
                     return;
@@ -324,7 +324,7 @@
                 if (nuevaHabilidad === habilidadActual) {
                     window.location.href = `actividad${nuevaActividad}.html`;
                 } else {
-                    window.location.href = "actividades.html";
+                    window.location.href = "/TT/actividades.html";
                 }
 
             } catch (error) {

@@ -292,7 +292,7 @@
       async function verificarAutenticacion() {
           const token = localStorage.getItem("token");
           if (!token) {
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
               return;
           }
 
@@ -305,7 +305,7 @@
               if (!response.ok) {
                   console.error("Error en la autenticación:", await response.json());
                   localStorage.removeItem("token");
-                  window.location.href = "login.html";
+                  window.location.href = "/TT/login.html";
                   return;
               }
 
@@ -318,7 +318,7 @@
               document.getElementById("user-avatar").textContent = initials;
           } catch (error) {
               console.error("Error en la autenticación:", error);
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
           }
       }
       
@@ -328,7 +328,7 @@
       document.addEventListener("DOMContentLoaded", async function () {
           const token = localStorage.getItem("token");
           if (!token) {
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
               return;
           }
 
@@ -398,7 +398,7 @@
 
           document.getElementById("logout").addEventListener("click", function () {
               localStorage.removeItem("token");
-              window.location.href = "login.html";
+              window.location.href = "/TT/login.html";
           });
       });
 
@@ -669,14 +669,14 @@
                                   window.location.href = `actividad${nuevaActividad}.html`;
                               };
                               botonMenu.onclick = function() {
-                                  window.location.href = "actividades.html";
+                                  window.location.href = "/TT/actividades.html";
                               };
                           } else {
                               botonSiguiente.style.display = "none";
                               botonMenu.style.display = "inline-block";
 
                               botonMenu.onclick = function() {
-                                  window.location.href = "actividades.html";
+                                  window.location.href = "/TT/actividades.html";
                               };
                           }
 
@@ -707,7 +707,7 @@
       });
 
       document.getElementById("btn-quiero-saber-mas").addEventListener("click", function() {
-            window.location.href = "quierosabermas.html";
+            window.location.href = "/TT/quierosabermas.html";
         });
   </script>
 </body>

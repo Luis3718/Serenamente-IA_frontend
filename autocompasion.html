@@ -438,14 +438,14 @@
 
     document.getElementById("logout").addEventListener("click", function () {
         localStorage.removeItem("token");
-        window.location.href = "login.html";
+        window.location.href = "/TT/login.html";
     });
 
     // Funcion que verifica el token y si se contesto el pretest
     async function verificarAutenticacion() {
         const token = localStorage.getItem("token");
         if (!token) {
-            window.location.href = "login.html";
+            window.location.href = "/TT/login.html";
             return;
         }
 
@@ -458,14 +458,14 @@
             if (!response.ok) {
                 console.error("Error en la autenticación:", await response.json());
                 localStorage.removeItem("token");
-                window.location.href = "login.html";
+                window.location.href = "/TT/login.html";
                 return;
             }
 
             console.log("No hay error con el token")
         } catch (error) {
             console.error("Error en la autenticación:", error);
-            window.location.href = "login.html";
+            window.location.href = "/TT/login.html";
         }
     }
 
@@ -544,8 +544,8 @@
         if (!validateForm()) {
             modal.style.display = 'block'; // Muestra el modal si el formulario no es válido
         } else {
-            //enviarFormularios();
-            //alert('Respuestas guardadas correctamente.');
+            enviarFormularios();
+            alert('Respuestas guardadas correctamente.');
         }
     });
 
@@ -555,7 +555,7 @@
     });
 
     document.getElementById('previousButton').addEventListener('click', () => {
-        window.location.href = 'indice_calidad_sueño.html'; // Cambiar a la página anterior
+        window.location.href = 'indice_calidad_sueno.html'; // Cambiar a la página anterior
     });
 
     verificarAutenticacion();
