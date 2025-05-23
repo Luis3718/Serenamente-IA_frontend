@@ -37,7 +37,7 @@
                 <form id="registroForm">
                     <div class="question">
                         <label for="nombre">Nombre(s):</label>
-                        <input type="text" id="nombre" name="Nombre" placeholder="Nombre(s)" required>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre(s)" required>
                     </div>
                     <div class="question">
                         <label for="apellidos">Apellidos:</label>
@@ -45,13 +45,13 @@
                     </div>
                     <div class="question">
                         <label for="correo">Correo electrónico:</label>
-                        <input type="email" id="correo" name="Correo" placeholder="ejemplo@correo.com" required>
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
                     </div>
                     <div class="question" style="position: relative;">
                         <label for="correo">Correo alternativo:
                             <span class="help-icon" onclick="toggleTooltip(this)">?</span>
                         </label>
-                        <input type="email" id="correoAlternativo" name="correo" placeholder="ejemplo@correo.com" required>
+                        <input type="email" id="correoAlternativo" name="correoalternativo" placeholder="ejemplo@correo.com" required>
                         <div class="tooltip">
                             <span class="close-tooltip" onclick="closeTooltip(this)">×</span>
                             Introduce un correo alternativo para contactarte en caso de problemas con el principal.
@@ -59,7 +59,7 @@
                     </div>                                                                                                                                         
                     <div class="question">
                         <label for="contraseña">Contraseña:</label>
-                        <input type="password" id="contraseña" name="Contraseña" required>
+                        <input type="password" id="contraseña" name="contrasena" required>
                     </div>
                     <div class="question">
                         <label for="celular">Celular:
@@ -73,7 +73,7 @@
                     </div>
                     <div class="question">
                         <label for="sexo">Sexo:</label>
-                        <select id="sexo" name="Sexo" required>
+                        <select id="sexo" name="sexo" required>
                             <option value="Mujer">Mujer</option>
                             <option value="Hombre">Hombre</option>
                             <option value="Prefiero no decirlo">Prefiero no decirlo</option>
@@ -81,11 +81,11 @@
                     </div>
                     <div class="question">
                         <label for="fechaNacimiento">Fecha de nacimiento:</label>
-                        <input type="date" id="fechaNacimiento" name="FechaNacimiento" required>
+                        <input type="date" id="fechaNacimiento" name="fechanacimiento" required>
                     </div>
                     <div class="question">
                         <label for="nivelEstudios">Nivel de estudios:</label>
-                        <select id="nivelEstudios" name="ID_NivelEstudios" required>
+                        <select id="nivelEstudios" name="id_nivelestudios" required>
                             <option value="1">No estudié</option>
                             <option value="2">Primaria</option>
                             <option value="3">Secundaria</option>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="question">
                         <label for="ocupacion">Ocupación:</label>
-                        <select id="ocupacion" name="ID_Ocupacion" required>
+                        <select id="ocupacion" name="id_ocupacion" required>
                             <option value="1">Encargado(a) del hogar</option>
                             <option value="2">Estudiante</option>
                             <option value="3">Empleado(a)</option>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="question">
                         <label for="residencia">Lugar de residencia:</label>
-                        <select id="residencia" name="ID_Residencia" required>
+                        <select id="residencia" name="id_residencia" required>
                             <option value="1">Aguascalientes</option>
                             <option value="2">Baja California</option>
                             <option value="3">Baja California Sur</option>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="question">
                         <label for="estadoCivil">Estado civil:</label>
-                        <select id="estadoCivil" name="ID_EstadoCivil" required>
+                        <select id="estadoCivil" name="id_estadocivil" required>
                             <option value="1">Soltero(a)</option>
                             <option value="2">Unión libre</option>
                             <option value="3">Casado(a)</option>
@@ -161,7 +161,7 @@
                     </div>
                     <div class="question">
                         <label for="enTratamiento">En tratamiento:</label>
-                        <select id="enTratamiento" name="EnTratamiento" required>
+                        <select id="enTratamiento" name="entratamiento" required>
                             <option value="ninguno">Ninguno</option>
                             <option value="psicológico">Psicológico</option>
                             <option value="psiquiátrico">Psiquiátrico</option>
@@ -170,7 +170,7 @@
                     </div>
                     <div class="question">
                         <label for="tipoENT">¿Padece alguna de las siguientes enfermedades no transmisibles?</label>
-                        <select id="tipoENT" name="tipoENT" required>
+                        <select id="tipoENT" name="id_tipoent" required>
                             <option value="1">Enfermedades cardiovasculares</option>
                             <option value="2">Diabetes</option>
                             <option value="3">Cáncer</option>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="question">
                         <label for="tomaMedicamentos">Toma medicamentos:</label>
-                        <select id="tomaMedicamentos" name="TomaMedicamentos" required onchange="toggleMedicacionField()">
+                        <select id="tomaMedicamentos" name="tomamedicamentos" required onchange="toggleMedicacionField()">
                             <option value="No">No</option>
                             <option value="No aplica">No aplica</option>
                             <option value="Sí">Sí</option>
@@ -189,16 +189,16 @@
                     </div>
                     <div class="question" id="medicacionField" style="display: none;">
                         <label for="nombreMedicacion">Nombre de medicación:</label>
-                        <input type="text" id="nombreMedicacion" name="nombre_medicacion">
+                        <input type="text" id="nombreMedicacion" name="nombremedicacion">
                     </div>
                     <div class="checkbox-container">
-                        <input type="checkbox" id="aviso_privacidad" name="aviso_privacidad" required>
+                        <input type="checkbox" id="aviso_privacidad" name="avisoprivacidad" required>
                         <label for="aviso_privacidad">
                             He leído y acepto el <span class="aviso-privacidad" id="avisoPrivacidadLink">aviso de privacidad</span>.
                         </label>
                     </div>
                     <div class="checkbox-container">
-                        <input type="checkbox" id="carta_concentimiento" name="carta_concentimiento" required>
+                        <input type="checkbox" id="carta_concentimiento" name="cartaconsentimiento" required>
                         <label for="carta_concentimiento">
                             He leído y acepto el <span class="carta_concentimiento" id="carta_concentimientoLink">formato de consentimiento informado</span>.
                         </label>
@@ -493,7 +493,7 @@
         // Funcion que conecta con mi API y el endpoint de registro
         async function enviarRegistro(data) {
             try {
-                const response = await fetch("http://127.0.0.1:8002/pacientes/", {
+                const response = await fetch("http://localhost:8002/pacientes/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -516,36 +516,36 @@
                 return false;
             }
         }    
-    
-        // Logica para obtener los datos de mi formulario de registro
+
         // Lógica para recopilar los datos del formulario y enviar el registro
         document.getElementById("registroForm").addEventListener("submit", async function (e) {
             e.preventDefault(); // Evita el comportamiento predeterminado del formulario
 
             const data = {
-                Nombre: document.getElementById("nombre").value,
-                Apellidos: document.getElementById("apellidos").value,
-                Correo: document.getElementById("correo").value,
-                CorreoAlternativo: document.getElementById("correoAlternativo").value,
-                Contraseña: document.getElementById("contraseña").value,
-                Celular: document.getElementById("celular").value,
-                Sexo: document.getElementById("sexo").value,
-                FechaNacimiento: document.getElementById("fechaNacimiento").value,
-                ID_NivelEstudios: parseInt(document.getElementById("nivelEstudios").value),
-                ID_Ocupacion: parseInt(document.getElementById("ocupacion").value),
-                ID_Residencia: parseInt(document.getElementById("residencia").value),
-                ID_EstadoCivil: parseInt(document.getElementById("estadoCivil").value),
-                EnTratamiento: document.getElementById("enTratamiento").value,
-                ID_TipoENT: document.getElementById("tipoENT").value,
-                TomaMedicamentos: document.getElementById("tomaMedicamentos").value,
-                NombreMedicacion: document.getElementById("nombreMedicacion").value || null,
-                AvisoPrivacidad: document.getElementById("aviso_privacidad").checked,
-                CartaConsentimiento: document.getElementById("carta_concentimiento").checked,
+                nombre: document.getElementById("nombre").value,
+                apellidos: document.getElementById("apellidos").value,
+                correo: document.getElementById("correo").value,
+                correoalternativo: document.getElementById("correoAlternativo").value,
+                contrasena: document.getElementById("contraseña").value,
+                celular: document.getElementById("celular").value,
+                sexo: document.getElementById("sexo").value,
+                fechanacimiento: document.getElementById("fechaNacimiento").value,
+                id_nivelestudios: parseInt(document.getElementById("nivelEstudios").value),
+                id_ocupacion: parseInt(document.getElementById("ocupacion").value),
+                id_residencia: parseInt(document.getElementById("residencia").value),
+                id_estadocivil: parseInt(document.getElementById("estadoCivil").value),
+                entratamiento: document.getElementById("enTratamiento").value,
+                id_tipoent: parseInt(document.getElementById("tipoENT").value),
+                tomamedicamentos: document.getElementById("tomaMedicamentos").value,
+                nombremedicacion: document.getElementById("nombreMedicacion").value || null,
+                avisoprivacidad: document.getElementById("aviso_privacidad").checked,
+                cartaconsentimiento: document.getElementById("carta_concentimiento").checked
             };
+
             
             const registroExitoso = await enviarRegistro(data); // Llama a enviarRegistro
             if (registroExitoso) {
-                // Opcional: Redirigir o mostrar un mensaje
+                window.location.href = "/TT/login.html";
             }
         });
 

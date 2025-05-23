@@ -450,7 +450,7 @@
         }
 
         try {
-            const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
                 method: "GET",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -495,7 +495,7 @@
         // Función para enviar los datos al servidor
         for (const resultsJSON of listaFormularios) {
             try {
-                const response = await fetch('https://serenamente.iztacala.unam.mx/api/formularios/respuestas', {
+                const response = await fetch('http://localhost:8002/formularios/respuestas', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -518,7 +518,7 @@
 
     async function evaluarPaciente(idPaciente) {
         try {
-            const response = await fetch(`https://serenamente.iztacala.unam.mx/api/formularios/contestar_pretest/${idPaciente}`, {
+            const response = await fetch(`http://localhost:8002/formularios/contestar_pretest/${idPaciente}`, {
                 method: 'POST' 
             });
             // Redirigir a la página de resultados
