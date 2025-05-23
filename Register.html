@@ -493,7 +493,7 @@
         // Funcion que conecta con mi API y el endpoint de registro
         async function enviarRegistro(data) {
             try {
-                const response = await fetch("http://localhost:8002/pacientes/", {
+                const response = await fetch("https://serenamente.iztacala.unam.mx/api/pacientes/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

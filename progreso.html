@@ -119,7 +119,7 @@
           }
       
           try {
-            const response = await fetch("http://localhost:8002/auth/verify-token", {
+            const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
               method: "GET",
               headers: { "Authorization": `Bearer ${token}` }
             });
@@ -175,7 +175,7 @@
           if (!idPaciente) return;
       
           try {
-            const response = await fetch(`http://localhost:8002/tratamiento/progreso/habilidades_estado/${idPaciente}`);
+            const response = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/habilidades_estado/${idPaciente}`);
             const habilidades = await response.json();
       
             for (let index = 0; index < habilidades.length; index++) {
@@ -198,7 +198,7 @@
                 porcentajeValor = 100;
               } else if (hab.estado === "actual") {
                 try {
-                  const res = await fetch(`http://localhost:8002/tratamiento/progreso/porcentaje_habilidad/${idPaciente}/${hab.id}`);
+                  const res = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/porcentaje_habilidad/${idPaciente}/${hab.id}`);
                   const data = await res.json();
                   porcentajeValor = data.porcentaje;
                 } catch (e) {
