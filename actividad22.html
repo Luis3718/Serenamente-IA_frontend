@@ -353,7 +353,7 @@ reactividad, respondiendo con mayor claridad y equilibrio.   </p>
               // Obtener tratamiento actual
               const tratamientoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
               const tratamientoData = await tratamientoResp.json();
-              const tratamientoId = tratamientoData.ID_Tratamiento;
+              const tratamientoId = tratamientoData.id_tratamiento;
 
               // Obtener actividades de la habilidad actual
               const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamientoId}/habilidad/${habilidadId}`);
@@ -375,22 +375,22 @@ reactividad, respondiendo con mayor claridad y equilibrio.   </p>
                   cardDiv.classList.add("activity-card");
                   cardDiv.id = `activity${index + 1}`;
 
-                  if (actividad.ID_Actividad < actividadActualId) {
-                      cardDiv.classList.add("completada");
-                  } else if (actividad.ID_Actividad === actividadActualId) {
-                      // Actividad actual desbloqueada
-                  } else {
-                      cardDiv.classList.add("disabled");
-                  }
-
-                  cardDiv.innerHTML = `
-                      <p>${index + 1}. ${actividad.Nombre}</p>
-                      <a href="actividad${actividad.ID_Actividad}.html">
-                          <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
-                              <img src="static/imagenes/boton${habilidadId}${index + 1}.png" alt="actividad${habilidadId}${index + 1}">
-                          </button>
-                      </a>
-                  `;
+                  if (actividad.id_actividad < actividadActualId) {
+                        cardDiv.classList.add("completada");
+                    } else if (actividad.id_actividad === actividadActualId) {
+                        // Actividad actual desbloqueada
+                    } else {
+                        cardDiv.classList.add("disabled");
+                    }
+  
+                    cardDiv.innerHTML = `
+                        <p>${index + 1}. ${actividad.nombre}</p>
+                        <a href="actividad${actividad.id_actividad}.html">
+                            <button ${actividad.id_actividad > actividadActualId ? "disabled" : ""}>
+                                <img src="static/imagenes/boton${habilidadId}${index + 1}.png" alt="actividad${habilidadId}${index + 1}">
+                            </button>
+                        </a>
+                    `;
 
                   activityDiv.appendChild(cardDiv);
                   activitiesContainer.appendChild(activityDiv);
@@ -458,12 +458,12 @@ reactividad, respondiendo con mayor claridad y equilibrio.   </p>
               // Obtener el progreso del paciente (para saber el tratamiento actual)
               const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
               const progreso = await progresoResp.json();
-              idTratamiento = progreso.ID_Tratamiento;
+              idTratamiento = progreso.id_tratamiento;
 
               // Obtener las actividades de la habilidad en el tratamiento actual
               const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
               const actividades = await actividadesResp.json();
-              const idsActividades = actividades.map(act => act.ID_Actividad);
+              const idsActividades = actividades.map(act => act.id_actividad);
 
               const index = idsActividades.indexOf(actividadActual);
               if (index === idsActividades.length - 1) {
@@ -644,10 +644,10 @@ reactividad, respondiendo con mayor claridad y equilibrio.   </p>
                           if (!yaCompletada) {
                               // Envia las respuestas
                               const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
-                                  ID_Pregunta: i + 1,
-                                  ID_Actividad: actividadActual,
-                                  ID_Paciente: pacienteId,
-                                  Respuesta: Array.isArray(v) ? v.join(", ") : v
+                                id_pregunta: i + 1,
+                                id_actividad: actividadActual,
+                                id_paciente: pacienteId,
+                                respuesta: Array.isArray(v) ? v.join(", ") : v
                               }));
 
                               // llama el endpoint de enviar respuestas
@@ -668,8 +668,8 @@ reactividad, respondiendo con mayor claridad y equilibrio.   </p>
                           const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                           const progreso = await progresoResp.json();
                           
-                          const nuevaHabilidad = progreso.ID_Habilidad;
-                          const nuevaActividad = progreso.ID_Actividad;
+                          const nuevaHabilidad = progreso.id_habilidad;
+                          const nuevaActividad = progreso.id_actividad;
 
                           const botonSiguiente = document.getElementById("btn-siguiente-actividad");
                           const botonMenu = document.getElementById("btn-menu-principal");

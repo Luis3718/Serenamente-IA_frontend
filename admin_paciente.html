@@ -86,13 +86,13 @@
         const data = await response.json();
 
         const pacientes = data.map(p => ({
-          id: p.ID_Paciente,
-          nombre: p.Nombre,
-          apellidos: p.Apellidos,
-          correo: p.Correo,
-          segundo_correo: p.CorreoAlternativo ?? "",
-          sexo: p.Sexo,
-          nacimiento: p.FechaNacimiento?.split("T")[0] ?? ""
+          id: p.id_paciente,
+          nombre: p.nombre,
+          apellidos: p.apellidos,
+          correo: p.correo,
+          segundo_correo: p.correoalternativo ?? "",
+          sexo: p.sexo,
+          nacimiento: p.fechanacimiento?.split("T")[0] ?? ""
         }));
 
 
@@ -156,13 +156,13 @@
     async function guardarCambios() {
       const id = document.getElementById("editId").value;
       const perfilData = {
-        Nombre: document.getElementById("editNombre").value,
-        Apellidos: document.getElementById("editApellidos").value,
-        Correo: document.getElementById("editCorreo").value,
-        SegundoCorreo: document.getElementById("editSegundoCorreo").value,
-        Sexo: document.getElementById("editSexo").value,
-        FechaNacimiento: document.getElementById("editFecha").value,
-        NuevaContrasena: document.getElementById("editNuevaContrasena").value
+        nombre: document.getElementById("editNombre").value,
+        apellidos: document.getElementById("editApellidos").value,
+        correo: document.getElementById("editCorreo").value,
+        correoalternativo: document.getElementById("editSegundoCorreo").value,
+        sexo: document.getElementById("editSexo").value,
+        fechanacimiento: document.getElementById("editFecha").value,
+        nuevacontrasena: document.getElementById("editNuevaContrasena").value
       };
 
       const token = localStorage.getItem("admin_token");

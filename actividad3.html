@@ -229,12 +229,12 @@
                 // Obtener el progreso del paciente (para saber el tratamiento actual)
                 const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const progreso = await progresoResp.json();
-                idTratamiento = progreso.ID_Tratamiento;
+                idTratamiento = progreso.id_tratamiento;
 
                 // Obtener las actividades de la habilidad en el tratamiento actual
                 const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
                 const actividades = await actividadesResp.json();
-                const idsActividades = actividades.map(act => act.ID_Actividad);
+                const idsActividades = actividades.map(act => act.id_actividad);
 
                 const index = idsActividades.indexOf(actividadActual);
                 if (index === idsActividades.length - 1) {
@@ -414,10 +414,10 @@
                             if (!yaCompletada) {
                                 // Transformar el objeto de respuestas a arreglo de objetos
                                 const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
-                                    ID_Pregunta: i + 1,
-                                    ID_Actividad: actividadActual,
-                                    ID_Paciente: pacienteId,
-                                    Respuesta: Array.isArray(v) ? v.join(", ") : v
+                                    id_pregunta: i + 1,
+                                    id_actividad: actividadActual,
+                                    id_paciente: pacienteId,
+                                    respuesta: Array.isArray(v) ? v.join(", ") : v
                                 }));
 
                                 // Enviar respuestas
@@ -438,8 +438,8 @@
                             const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                             const progreso = await progresoResp.json();
 
-                            if (progreso.ID_Habilidad === habilidadActual) {
-                                window.location.href = `actividad${progreso.ID_Actividad}.html`;
+                            if (progreso.id_habilidad === habilidadActual) {
+                                window.location.href = `actividad${progreso.id_actividad}.html`;
                             } else {
                                 window.location.href = "/TT/actividades.html";
                             }

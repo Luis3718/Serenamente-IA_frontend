@@ -291,8 +291,8 @@
                     const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                     const progreso = await progresoResp.json();
 
-                    const nuevaHabilidad = progreso.ID_Habilidad;
-                    const nuevaActividad = progreso.ID_Actividad;
+                    const nuevaHabilidad = progreso.id_habilidad;
+                    const nuevaActividad = progreso.id_actividad;
 
                     if (nuevaHabilidad === habilidadActual) {
                         window.location.href = `actividad${nuevaActividad}.html`;
@@ -318,8 +318,8 @@
                 const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const progreso = await progresoResp.json();
 
-                const nuevaHabilidad = progreso.ID_Habilidad;
-                const nuevaActividad = progreso.ID_Actividad;
+                const nuevaHabilidad = progreso.id_habilidad;
+                const nuevaActividad = progreso.id_actividad;
 
                 if (nuevaHabilidad === habilidadActual) {
                     window.location.href = `actividad${nuevaActividad}.html`;

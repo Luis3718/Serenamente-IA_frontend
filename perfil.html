@@ -245,15 +245,14 @@
             if (modoEdicion) {
                 contenedor.innerHTML = `
                     <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0,0,0,0.1);">
-                        <label><strong>Nombre:</strong></label>
-                        <input id="input-nombre" value="${data.Nombre}" />
+                        <label><strong>Nombre:</strong></label>                        
+                        <input id="input-nombre" value="${data.nombre}" />
                         <label><strong>Apellidos:</strong></label>
-                        <input id="input-apellidos" value="${data.Apellidos}" />
+                        <input id="input-apellidos" value="${data.apellidos}" />
                         <label><strong>Correo:</strong></label>
-                        <input value="${data.Correo}" disabled />
+                        <input value="${data.correo}" disabled />
                         <label><strong>Celular:</strong></label>
-                        <input id="input-celular" value="${data.Celular}" />
-                        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                        <input id="input-celular" value="${data.celular}" />                        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
                             <button id="btn-guardar-cambios" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Guardar cambios</button>
                             <button id="btn-cancelar-cambios" style="background-color: #ccc; color: black; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Cancelar</button>
                         </div>
@@ -263,10 +262,10 @@
                 document.getElementById("btn-cancelar-cambios").addEventListener("click", mostrarModalCancelar);
             } else {
                 contenedor.innerHTML = `
-                    <p><strong>Nombre:</strong> ${data.Nombre}</p>
-                    <p><strong>Apellidos:</strong> ${data.Apellidos}</p>
-                    <p><strong>Correo:</strong> ${data.Correo}</p>
-                    <p><strong>Celular:</strong> ${data.Celular}</p>
+                    <p><strong>Nombre:</strong> ${data.nombre}</p>
+                    <p><strong>Apellidos:</strong> ${data.apellidos}</p>
+                    <p><strong>Correo:</strong> ${data.correo}</p>
+                    <p><strong>Celular:</strong> ${data.celular}</p>
                     <button id="btn-editar-perfil" style="background-color: #2196F3; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 15px;">
                         ✏️ Editar perfil
                     </button>
@@ -376,9 +375,9 @@
         async function guardarCambios() {
             const pacienteId = getTokenId();
             const nuevoPerfil = {
-                Nombre: document.getElementById("input-nombre").value,
-                Apellidos: document.getElementById("input-apellidos").value,
-                Celular: document.getElementById("input-celular").value
+                nombre: document.getElementById("input-nombre").value,
+                apellidos: document.getElementById("input-apellidos").value,
+                celular: document.getElementById("input-celular").value
             };
 
             await fetch(`http://localhost:8002/pacientes/perfil/${pacienteId}`, {
