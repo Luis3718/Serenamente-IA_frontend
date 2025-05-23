@@ -289,7 +289,7 @@
         // Obtener tratamiento actual del paciente
         const tratamientoResponse = await fetch(`http://localhost:8002/tratamiento/buscar_protocolo/${paciente_id}`);
         const tratamientoData = await tratamientoResponse.json();
-        const tratamiento_id = tratamientoData.ID_Tratamiento;
+        const tratamiento_id = tratamientoData.id_tratamiento;
 
         // ID de la habilidad (puede estar fijo o dinámico según el contexto)
         const habilidad_id = 5;
@@ -315,23 +315,20 @@
             cardDiv.classList.add("activity-card");
             cardDiv.id = `activity${index + 1}`;
 
-            const estaDesbloqueada = actividad.ID_Actividad === actividadActualId;
+            const estaDesbloqueada = actividad.id_actividad === actividadActualId;
 
-            if (actividad.ID_Actividad < actividadActualId) {
-                // Actividad completada – verde
+            if (actividad.id_actividad < actividadActualId) {
                 cardDiv.classList.add("completada");
-            } else if (actividad.ID_Actividad === actividadActualId) {
-                // Actividad actual – desbloqueada
-                // No hacemos nada, se queda normal
+            } else if (actividad.id_actividad === actividadActualId) {
+                // actividad actual
             } else {
-                // Actividad futura – bloqueada
                 cardDiv.classList.add("disabled");
             }
 
             cardDiv.innerHTML = `
-                <p>${index + 1}. ${actividad.Nombre}</p>
-                <a href="actividad${actividad.ID_Actividad}.html">
-                    <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
+                <p>${index + 1}. ${actividad.nombre}</p>
+                <a href="actividad${actividad.id_actividad}.html">
+                    <button ${actividad.id_actividad > actividadActualId ? "disabled" : ""}>
                         <img src="static/imagenes/boton${habilidad_id}${index + 1}.png" alt="actividad${habilidad_id}${index + 1}">
                     </button>
                 </a>
