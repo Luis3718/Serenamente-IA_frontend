@@ -1200,7 +1200,7 @@
                     la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u> donde 1= Nada y 10= Muchísimo</u> 
                     Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
                 </p>
-            <form id="asi">
+            <form id="ASIform">
                 <p>Aceptabilidad</p>
                 <div class="question">
                     <p>1.	SerenaMente IA fue adecuada para mi </p>
@@ -1314,14 +1314,14 @@
                 la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u>donde 1= En completo desacuerdo y 5= Completamente de acuerdo</u> 
                 Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
                 </p>
-              <form id="sus">
+              <form id="SUSform">
                 <div class="question">
                     <p>1. Creo que me gustará usar con frecuencia este sistema </p>
-                    <label><input type="radio" name="q" value="1"> 1</label><br>
-                    <label><input type="radio" name="q" value="2"> 2</label><br>
-                    <label><input type="radio" name="q" value="3"> 3</label><br>
-                    <label><input type="radio" name="q" value="4"> 4</label><br>
-                    <label><input type="radio" name="q" value="5"> 5</label><br>
+                    <label><input type="radio" name="q1" value="1"> 1</label><br>
+                    <label><input type="radio" name="q1" value="2"> 2</label><br>
+                    <label><input type="radio" name="q1" value="3"> 3</label><br>
+                    <label><input type="radio" name="q1" value="4"> 4</label><br>
+                    <label><input type="radio" name="q1" value="5"> 5</label><br>
                 </div>
                
                 <div class="question">
@@ -1398,6 +1398,9 @@
                 </div>
                 <button type="button" onclick="guardarYEnviarSUS()">Enviar</button>
               </form>
+            </div>
+            <div id="mensaje-final" style="display: none;">
+                <p>Ageedecemos sus respuestas y participacion en el proyecto de Serenamente IA, recuerde que puede seguir accediendo a los contenidos si usted lo desea</p>
             </div>
         </div>
     </div>              

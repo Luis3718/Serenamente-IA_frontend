@@ -13,7 +13,7 @@
   <img src="static/imagenes/logo.jpeg" alt="Logo Serenamente" />
   <nav>
     <ul>
-      <li><a href="admin_terapia.html">Habilidades</a></li>
+      <li><a href="admin_habilidades.html">Habilidades</a></li>
       <li><a href="admin_actividades.html">Actividades</a></li>
       <li><a href="admin_paciente.html">Pacientes</a></li>
       <li><a href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
@@ -126,6 +126,7 @@
               <div id="descarga-${paciente.id}" class="descarga-opciones">
                 <button class="btn-descarga" onclick="descargarExpediente(${paciente.id})">Expediente</button>
                 <button class="btn-descarga" onclick="descargarPretest(${paciente.id})">Pretest</button>
+                <button class="btn-descarga" onclick="descargarPosttest(${paciente.id})">Posttest</button>
               </div>
             </div>
           </td>
@@ -210,22 +211,50 @@
       }
     }
 
-    function buscarPaciente() {
-      const term = document.getElementById("buscarCorreo").value.toLowerCase();
-      const rows = Array.from(document.querySelectorAll("#tablaPacientes tr"));
-      let found = false;
+    async function buscarPaciente() {
+      const term = document.getElementById("buscarCorreo").value.trim();
+      const errorDiv = document.getElementById("errorMensaje");
 
-      rows.forEach(tr => {
-        const correo = tr.children[2].textContent.toLowerCase();
-        const visible = correo.includes(term);
-        tr.style.display = visible ? "" : "none";
-        if (visible) found = true;
-      });
+      if (!term) {
+        errorDiv.textContent = "Ingresa un correo para buscar.";
+        errorDiv.style.display = "block";
+        return;
+      }
 
-      document.getElementById("errorMensaje").style.display = found ? "none" : "block";
-      document.getElementById("errorMensaje").textContent = found
-        ? ""
-        : "No se encontró ningún paciente con ese correo.";
+      const token = localStorage.getItem("admin_token");
+      try {
+        const res = await fetch(`https://serenamente.iztacala.unam.mx/api/admin/buscar_paciente?correo=${encodeURIComponent(term)}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+          errorDiv.textContent = "No se encontró ningún paciente con ese correo.";
+          errorDiv.style.display = "block";
+          renderizarPacientes([]);
+          return;
+        }
+
+        const data = await res.json();
+
+        const paciente = {
+          id: data.id_paciente,
+          nombre: data.nombre,
+          apellidos: data.apellidos,
+          correo: data.correo,
+          segundo_correo: data.correoalternativo ?? "",
+          sexo: data.sexo,
+          nacimiento: data.fechanacimiento?.split("T")[0] ?? ""
+        };
+
+        window.pacientes = [paciente];
+        renderizarPacientes([paciente]);
+        errorDiv.style.display = "none";
+
+      } catch (error) {
+        console.error("Error en búsqueda:", error);
+        errorDiv.textContent = "Error al buscar paciente.";
+        errorDiv.style.display = "block";
+      }
     }
 
     function descargarExpediente(pacienteId) {
@@ -267,6 +296,30 @@
         const a = document.createElement("a");
         a.href = url;
         a.download = `Pretest_Paciente_${pacienteId}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el pretest: " + err.message);
+      });
+    }
+
+    function descargarPosttest(pacienteId) {
+      const token = localStorage.getItem("admin_token");
+      fetch(`https://serenamente.iztacala.unam.mx/api/admin/descargar_posttest/${pacienteId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el pretest");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Postest_Paciente_${pacienteId}.xlsx`;
         document.body.appendChild(a);
         a.click();
         a.remove();

@@ -212,6 +212,27 @@ main {
  font-weight: bold;
 }
 
+.question.am-pm {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    gap: 10px; /* Espacio entre elementos */
+}
+
+.question.am-pm input[type="number"],
+.question.am-pm input[type="radio"] {
+    flex: 0 0 auto; /* No permite que los inputs crezcan o se encojan */
+    margin-right: 10px; /* Espacio a la derecha de cada input */
+}
+
+.question.am-pm label {
+    margin: 0 5px; /* Espacio alrededor de las etiquetas */
+    white-space: nowrap; /* Evita que las etiquetas se partan en líneas */
+}
+
+.question.am-pm input[type="radio"] {
+    margin-top: 0; /* Ajusta el margen superior para mejor alineación */
+}
+
 /* Preguntas */
 p {
     margin-bottom: 2px; /* Espaciado inferior entre preguntas */

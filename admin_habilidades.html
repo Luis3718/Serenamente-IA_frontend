@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrador - Actividades</title>
+  <link rel="stylesheet" href="static/styles/admin.css">
+</head>
+<body>
+
+<header>
+  <img src="static/imagenes/logo.jpg" alt="Logo Serenamente">
+  <nav>
+    <ul>
+      <li><a href="admin_habilidades.html">Habilidades</a></li>
+      <li><a href="admin_actividades.html">Actividades</a></li>
+      <li><a href="admin_paciente.html">Pacientes</a></li>
+      <li><a href="#">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Gestión de Habilidades</h1>
+
+  <div class="formulario">
+    <h2>Crear / Modificar Habilidad</h2>
+    <input type="number" id="numeroHabilidad" placeholder="Número de la habilidad">
+    <input type="text" id="nombreHabilidad" placeholder="Nombre de la habilidad">
+
+    <input type="number" id="cantidadActividades" placeholder="Número de actividades" onchange="generarCamposActividades()">
+
+    <div id="contenedorCamposActividades"></div>
+
+    <button class="btn-primary" onclick="crearHabilidad()">Crear habilidad</button>
+  </div>
+
+  <div class="card">
+    <h2>Listado de habilidades</h2>
+    <input type="text" id="buscarHabilidad" placeholder="Buscar por nombre..." oninput="filtrarHabilidades()">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Nombre</th>
+          <th>Actividades</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaHabilidades"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function cerrarSesion() {
+      localStorage.removeItem("admin_token");
+      window.location.href = "/TT/login_admin.html";
+  }
+  
+  const actividades = [];
+
+  function guardarActividad() {
+    const titulo = document.getElementById('titulo').value.trim();
+    const idHabilidad = document.getElementById('idHabilidad').value;
+    const descripcion = document.getElementById('descripcion').value.trim();
+    const recursosInput = document.getElementById('recursos').value.trim();
+    const recursos = recursosInput.split(',').map(r => r.trim()).filter(r => r);
+    const tipo = document.getElementById('tipoActividad').value;
+
+    if (!titulo || !descripcion || recursos.length === 0 || !tipo) {
+      alert('Por favor completa todos los campos.');
+      return;
+    }
+
+    const token = localStorage.getItem("admin_token"); 
+    
+    console.log({
+      id_habilidad: parseInt(idHabilidad),
+      nombre: titulo,
+      descripcion,
+      tipo,
+      recursos
+    });
+
+    fetch("https://serenamente.iztacala.unam.mx/api/admin/crear_actividad", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` 
+      },
+      body: JSON.stringify({
+        id_habilidad: parseInt(idHabilidad),
+        nombre: titulo,
+        descripcion,
+        tipo,
+        recursos
+      })
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("Error al guardar");
+      return response.json();
+    })
+    .then(data => {
+      alert("Actividad guardada en la base de datos");
+      actividades.push({ titulo, descripcion, recurso: recursos[0], tipo });
+      renderizarActividades();
+    })
+    .catch(error => {
+      console.error(error);
+      alert("Hubo un error al guardar la actividad.");
+    });
+  }
+
+
+  function asignarYVolverAHabilidad() {
+    const titulo = document.getElementById('titulo').value.trim();
+    if (!titulo) {
+      alert('Debes ingresar el título de la actividad para seleccionarla.');
+      return;
+    }
+    const index = localStorage.getItem('indexActividadSeleccionada');
+    if (index !== null) {
+      localStorage.setItem(`actividad_${index}`, titulo);
+      window.location.href = 'ad_terapia.html';
+    } else {
+      alert('No se ha identificado el campo de actividad al que pertenece.');
+    }
+  }
+
+  function renderizarActividades() {
+    const lista = document.getElementById('lista-actividades');
+    lista.innerHTML = '';
+    actividades.forEach((act, i) => {
+      const fila = document.createElement('tr');
+      fila.innerHTML = `
+        <td>${act.titulo}</td>
+        <td>${act.descripcion}</td>
+        <td>${act.tipo}</td>
+        <td><a href="${act.recurso}" target="_blank">Ver recurso</a></td>
+        <td class="acciones">
+          <button class="btn-ver" onclick="verActividad(${i})">🔍</button>
+          <button class="btn-editar" onclick="editarActividad(${i})">✏️</button>
+          <button class="btn-danger" onclick="eliminarActividad(${i})">🗑️</button>
+        </td>
+      `;
+      lista.appendChild(fila);
+    });
+  }
+
+  function editarActividad(i) {
+    const act = actividades[i];
+    document.getElementById('titulo').value = act.titulo;
+    document.getElementById('descripcion').value = act.descripcion;
+    document.getElementById('urlRecurso').value = act.recurso;
+    document.getElementById('tipoActividad').value = act.tipo;
+    document.getElementById('palabras').value = act.palabras.join(', ');
+    document.getElementById('mensajeFinal').value = act.mensajeFinal;
+    actividades.splice(i, 1);
+    renderizarActividades();
+  }
+
+  function eliminarActividad(i) {
+    if (confirm('¿Seguro que deseas eliminar esta actividad?')) {
+      actividades.splice(i, 1);
+      renderizarActividades();
+      alert('Actividad eliminada.');
+    }
+  }
+
+  function filtrarActividades() {
+    const termino = document.getElementById('buscar').value.toLowerCase();
+    const lista = document.getElementById('lista-actividades');
+    lista.innerHTML = '';
+    actividades.filter(act => act.titulo.toLowerCase().includes(termino)).forEach((act, i) => {
+      const fila = document.createElement('tr');
+      fila.innerHTML = `
+        <td>${act.titulo}</td>
+        <td>${act.descripcion}</td>
+        <td>${act.tipo}</td>
+        <td><a href="${act.recurso}" target="_blank">Ver recurso</a></td>
+        <td class="acciones">
+          <button class="btn-ver" onclick="verActividad(${i})">🔍</button>
+          <button class="btn-editar" onclick="editarActividad(${i})">✏️</button>
+          <button class="btn-danger" onclick="eliminarActividad(${i})">🗑️</button>
+        </td>
+      `;
+      lista.appendChild(fila);
+    });
+  }
+
+  function verActividad(i) {
+    localStorage.setItem('actividadVista', JSON.stringify(actividades[i]));
+    window.open('plantilla_act.html', '_blank');
+  }
+</script>
+
+</body>
+</html>
+
