@@ -60,7 +60,7 @@
             <p>Ahora que ya sabes un poco más de mindfulness ¿qué te parece? Sigamos explorando de manera breve cómo se ha utilizado para aumentar la salud mental.</p>
             <div class="infografia">
                 <a href="static/infografia/infografia_sigamos_explorando.pdf" target="_blank">
-                    <img src="static/infografia/infografia_sigamos_explorando.pdf" alt="Infografía sobre Mindfulness">
+                    <embed src="static/infografia/infografia_sigamos_explorando.pdf" type="application/pdf" width="100%" height="600px" />
                 </a>
             </div>
             
@@ -245,7 +245,7 @@
             localStorage.removeItem("token");
             window.location.href = "/TT/login.html";
         });
-        verificarAutenticacion();
+        //verificarAutenticacion();
     });
 
         // Funcionalidad para extraer el id del token 
@@ -295,7 +295,7 @@
                     const nuevaActividad = progreso.id_actividad;
 
                     if (nuevaHabilidad === habilidadActual) {
-                        window.location.href = "/TT/actividad${nuevaActividad}.html";
+                        window.location.href = '/TT/actividad${nuevaActividad}.html';
                     } else {
                         window.location.href = "/TT/actividades.html";
                     }
@@ -322,7 +322,7 @@
                 const nuevaActividad = progreso.id_actividad;
 
                 if (nuevaHabilidad === habilidadActual) {
-                    window.location.href = "/TT/actividad${nuevaActividad}.html";
+                    window.location.href = '/TT/actividad${nuevaActividad}.html';
                 } else {
                     window.location.href = "/TT/actividades.html";
                 }
