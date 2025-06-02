@@ -67,7 +67,7 @@
 
   function cerrarSesion() {
       localStorage.removeItem("admin_token");
-      window.location.href = "/TT/login_admin.html";
+      window.location.href = "login_admin.html";
   }
     
   function guardarActividad() {
@@ -95,8 +95,8 @@
     const editId = document.getElementById("editIndex").value;
 
     const url = editId
-      ? `https://serenamente.iztacala.unam.mx/api/admin/actualizar_actividad/${editId}`
-      : `https://serenamente.iztacala.unam.mx/api/admin/crear_actividad`;
+      ? `http://localhost:8002/admin/actualizar_actividad/${editId}`
+      : `http://localhost:8002/admin/crear_actividad`;
 
     const method = editId ? "PUT" : "POST";
 
@@ -124,7 +124,7 @@
   async function cargarActividades() {
     const token = localStorage.getItem("admin_token");
     try {
-      const res = await fetch("https://serenamente.iztacala.unam.mx/api/admin/actividades", {
+      const res = await fetch("http://localhost:8002/admin/actividades", {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -198,7 +198,7 @@
     if (!confirm("¿Eliminar esta actividad?")) return;
 
     try {
-      const res = await fetch(`https://serenamente.iztacala.unam.mx/api/admin/eliminar_actividad/${actividad.id_actividad}`, {
+      const res = await fetch(`http://localhost:8002/admin/eliminar_actividad/${actividad.id_actividad}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -240,10 +240,10 @@
 
   document.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("admin_token");
-    if (!token) return window.location.href = "/TT/login_admin.html";
+    if (!token) return window.location.href = "login_admin.html";
 
     try {
-      const check = await fetch("https://serenamente.iztacala.unam.mx/api/admin/perfil", {
+      const check = await fetch("http://localhost:8002/admin/perfil", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -253,7 +253,7 @@
     } catch (err) {
       console.error("Sesión inválida:", err);
       localStorage.removeItem("admin_token");
-      window.location.href = "/TT/login_admin.html";
+      window.location.href = "login_admin.html";
     }
   });
 

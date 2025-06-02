@@ -55,7 +55,7 @@
 <script>
   function cerrarSesion() {
       localStorage.removeItem("admin_token");
-      window.location.href = "/TT/login_admin.html";
+      window.location.href = "login_admin.html";
   }
   
   const actividades = [];
@@ -83,7 +83,7 @@
       recursos
     });
 
-    fetch("https://serenamente.iztacala.unam.mx/api/admin/crear_actividad", {
+    fetch("http://localhost:8002/admin/crear_actividad", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
