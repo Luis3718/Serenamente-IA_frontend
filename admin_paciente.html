@@ -32,6 +32,7 @@
   <div id="errorMensaje" class="error" style="display: none;"></div>
   <div class="descargas-globales">
     <button onclick="descargarPretests()">📥 Descargar Pre-tests</button>
+    <button onclick="descargarPosttests()">📥 Descargar Post-tests</button>
     <button onclick="descargarBaseCompleta()">📥 Descargar Base completa</button>
   </div>
 
@@ -348,52 +349,76 @@
     });
 
     function descargarPretests() {
-    const token = localStorage.getItem("admin_token");
-    fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_pretests_completo", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("No se pudo generar el archivo");
-      return res.blob();
-    })
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Pretest_Completo.xlsx";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    })
-    .catch(err => {
-      alert("Error descargando el archivo: " + err.message);
-    });
-  }
+      const token = localStorage.getItem("admin_token");
+      fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_pretests_completo", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el archivo");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Pretest_Completo.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el archivo: " + err.message);
+      });
+    }
 
-  function descargarBaseCompleta() {
-    const token = localStorage.getItem("admin_token");
-    fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_base_completa", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("No se pudo generar el archivo");
-      return res.blob();
-    })
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Base_de_datos_completa.xlsx";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    })
-    .catch(err => {
-      alert("Error descargando el archivo: " + err.message);
-    });
-  }
+    function descargarPosttests() {
+      const token = localStorage.getItem("admin_token");
+      fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_posttest_completo", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el archivo");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Post_test_Completo.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el archivo: " + err.message);
+      });
+    }
+
+    function descargarBaseCompleta() {
+      const token = localStorage.getItem("admin_token");
+      fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_base_completa", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el archivo");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Base_de_datos_completa.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el archivo: " + err.message);
+      });
+    }
 </script>
 </body>
 </html>
