@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="static/styles/admin.css">
 </head>
+
 <body>
 <header>
   <img src="static/imagenes/logo.jpg" alt="Logo Serenamente">
@@ -22,175 +23,164 @@
 <div class="container">
   <h1>Gestión de Habilidades</h1>
 
-  <!-- Formulario de habilidad -->
+  <!-- ─────────── Formulario ─────────── -->
   <section class="card">
     <h2 id="formTitle">Crear nueva habilidad</h2>
     <input type="hidden" id="habilidadId">
+
+    <label>Nombre</label>
     <input type="text" id="nombre" placeholder="Nombre de la habilidad">
+
+    <label>Actividades asociadas</label>
+    <select id="selectActividades" multiple size="6" style="width:100%;"></select>
+
     <button class="btn-success" onclick="guardar()">Guardar</button>
-    <button class="btn-secondary" onclick="resetForm()" id="cancelarBtn" hidden>Cancelar</button>
+    <button class="btn-secondary" id="cancelarBtn" onclick="resetForm()" hidden>Cancelar</button>
   </section>
 
-  <!-- Tabla de habilidades -->
+  <!-- ─────────── Tabla de habilidades ─────────── -->
   <section class="card">
     <h2>Listado de habilidades</h2>
     <input type="text" id="buscar" placeholder="Buscar por nombre..." oninput="dibujar()">
     <table>
       <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Acciones</th>
-        </tr>
+        <tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr>
       </thead>
       <tbody id="tbodyHabilidades"></tbody>
     </table>
   </section>
 
-  <!-- Tabla de actividades asociadas -->
+  <!-- ─────────── Tabla de actividades ligadas ─────────── -->
   <section class="card" id="seccionActividades" hidden>
-    <h2>Actividades de la habilidad seleccionada</h2>
-    <p id="nombreHabilidadSeleccionada" style="font-weight: bold;"></p>
+    <h2>Actividades ligadas</h2>
+    <p id="nombreHabilidadSeleccionada" style="font-weight:bold;"></p>
     <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Actividad</th>
-        </tr>
-      </thead>
+      <thead><tr><th>ID</th><th>Actividad</th></tr></thead>
       <tbody id="tbodyActividades"></tbody>
     </table>
   </section>
 </div>
 
 <script>
-const API = "http://localhost:8002/admin/habilidades";
+const API       = "http://localhost:8002/admin/habilidades";
+const API_ACT   = API + "/_todas_actividades";
 let habilidades = [];
+let actividades = [];          // todas las actividades disponibles
 
+/* ───── Util ───── */
 function authHeader() {
-  const token = localStorage.getItem("admin_token");
-  return { "Authorization": "Bearer " + token, "Content-Type": "application/json" };
+  const t = localStorage.getItem("admin_token");
+  return {"Authorization": "Bearer "+t, "Content-Type": "application/json"};
+}
+function cerrarSesion(){ localStorage.removeItem("admin_token"); location.href="login_admin.html";}
+
+/* ───── Carga inicial ───── */
+async function init(){
+  if(!localStorage.getItem("admin_token")) cerrarSesion();
+  await Promise.all([cargarActividades(), cargarHabilidades()]);
+}
+document.addEventListener("DOMContentLoaded", init);
+
+/* ───── Cargar catálogos ───── */
+async function cargarActividades(){
+  const r = await fetch(API_ACT, {headers:authHeader()});
+  actividades = await r.json();
+  const sel = document.getElementById("selectActividades");
+  sel.innerHTML = "";
+  actividades.forEach(a=>{
+    const opt = document.createElement("option");
+    opt.value = a.id_actividad; opt.textContent = `${a.id_actividad} · ${a.nombre}`;
+    sel.appendChild(opt);
+  });
+}
+async function cargarHabilidades(){
+  const r = await fetch(API, {headers:authHeader()});
+  habilidades = await r.json();
+  dibujar();
 }
 
-function cerrarSesion() {
-  localStorage.removeItem("admin_token");
-  location.href = "login_admin.html";
-}
-
-async function cargar() {
-  try {
-    const res = await fetch(API, { headers: authHeader() });
-    habilidades = await res.json();
-    dibujar();
-  } catch {
-    alert("Error al cargar habilidades");
-  }
-}
-
-function dibujar() {
+/* ───── Dibujar tabla ───── */
+function dibujar(){
   const filtro = document.getElementById("buscar").value.toLowerCase();
-  const tbody = document.getElementById("tbodyHabilidades");
-  tbody.innerHTML = "";
-
-  habilidades
-    .filter(h => h.nombre.toLowerCase().includes(filtro))
-    .forEach(h => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
+  const tbody  = document.getElementById("tbodyHabilidades");
+  tbody.innerHTML="";
+  habilidades.filter(h=>h.nombre.toLowerCase().includes(filtro))
+    .forEach(h=>{
+      const tr=document.createElement("tr");
+      tr.innerHTML=`
         <td>${h.id_habilidad}</td>
         <td>${h.nombre}</td>
         <td>
-          <button class="btn-editar" onclick='editar(${JSON.stringify(h)})'>✏️</button>
+          <button class="btn-editar" onclick='editar(${h.id_habilidad})'>✏️</button>
           <button class="btn-danger" onclick="eliminar(${h.id_habilidad})">🗑️</button>
-          <button onclick="verActividades(${h.id_habilidad}, '${h.nombre}')">📋 Actividades</button>
+          <button onclick="verActividades(${h.id_habilidad},'${h.nombre.replace(/'/g,"")}')">📋</button>
         </td>`;
       tbody.appendChild(tr);
     });
 }
 
-async function guardar() {
-  const id = document.getElementById("habilidadId").value;
+/* ───── Formulario CRUD ───── */
+function getSelectedActividades(){
+  return Array.from(document.getElementById("selectActividades").selectedOptions)
+              .map(o=>+o.value);
+}
+async function guardar(){
   const nombre = document.getElementById("nombre").value.trim();
-  if (!nombre) return alert("El nombre es obligatorio");
+  if(!nombre) return alert("Nombre obligatorio");
+  const actividad_ids = getSelectedActividades();
+  const id = document.getElementById("habilidadId").value;
+  const method = id? "PUT":"POST";
+  const url    = id? `${API}/${id}`: API;
+  const body = JSON.stringify({nombre, actividad_ids});
+  const r = await fetch(url,{method,headers:authHeader(),body});
+  if(!r.ok) return alert("Error al guardar");
+  await cargarHabilidades();
+  resetForm();
+}
+function resetForm(){
+  document.getElementById("habilidadId").value="";
+  document.getElementById("nombre").value="";
+  document.getElementById("formTitle").innerText="Crear nueva habilidad";
+  document.getElementById("cancelarBtn").hidden=true;
+  document.getElementById("selectActividades").selectedIndex=-1;
+  document.getElementById("seccionActividades").hidden=true;
+}
+async function editar(id){
+  const hab = habilidades.find(h=>h.id_habilidad===id);
+  if(!hab) return;
+  document.getElementById("habilidadId").value = hab.id_habilidad;
+  document.getElementById("nombre").value      = hab.nombre;
+  document.getElementById("formTitle").innerText="Editar habilidad";
+  document.getElementById("cancelarBtn").hidden=false;
 
-  const data = JSON.stringify({ nombre });
-  const method = id ? "PUT" : "POST";
-  const url = id ? `${API}/${id}` : API;
-
-  try {
-    const res = await fetch(url, {
-      method: method,
-      headers: authHeader(),
-      body: data
-    });
-    if (!res.ok) throw new Error();
-    await cargar();
-    resetForm();
-  } catch {
-    alert("Error al guardar");
-  }
+  // Pre-seleccionar actividades ligadas
+  const r = await fetch(`${API}/${id}/actividades`,{headers:authHeader()});
+  const ligadas = (await r.json()).map(a=>a.id_actividad);
+  const sel = document.getElementById("selectActividades");
+  Array.from(sel.options).forEach(o=> o.selected = ligadas.includes(+o.value));
+}
+async function eliminar(id){
+  if(!confirm("¿Eliminar habilidad?"))return;
+  const r = await fetch(`${API}/${id}`,{method:"DELETE",headers:authHeader()});
+  if(!r.ok) return alert("Error al eliminar");
+  await cargarHabilidades();
 }
 
-function editar(habilidad) {
-  document.getElementById("habilidadId").value = habilidad.id_habilidad;
-  document.getElementById("nombre").value = habilidad.nombre;
-  document.getElementById("formTitle").innerText = "Editar habilidad";
-  document.getElementById("cancelarBtn").hidden = false;
+/* ───── Ver actividades ligadas ───── */
+async function verActividades(id, nombre){
+  const r = await fetch(`${API}/${id}/actividades`,{headers:authHeader()});
+  const acts = await r.json();
+  const tbody = document.getElementById("tbodyActividades");
+  tbody.innerHTML="";
+  acts.forEach(a=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${a.id_actividad}</td><td>${a.nombre}</td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById("nombreHabilidadSeleccionada").innerText =
+    `Habilidad: ${nombre}  (${acts.length} actividades)`;
+  document.getElementById("seccionActividades").hidden=false;
 }
-
-function resetForm() {
-  document.getElementById("habilidadId").value = "";
-  document.getElementById("nombre").value = "";
-  document.getElementById("formTitle").innerText = "Crear nueva habilidad";
-  document.getElementById("cancelarBtn").hidden = true;
-  document.getElementById("seccionActividades").hidden = true;
-}
-
-async function eliminar(id) {
-  if (!confirm("¿Deseas eliminar esta habilidad?")) return;
-  try {
-    const res = await fetch(`${API}/${id}`, {
-      method: "DELETE",
-      headers: authHeader()
-    });
-    if (!res.ok) throw new Error();
-    await cargar();
-  } catch {
-    alert("Error al eliminar");
-  }
-}
-
-async function verActividades(id_habilidad, nombreHabilidad) {
-  try {
-    const res = await fetch(`${API}/${id_habilidad}/actividades`, {
-      headers: authHeader()
-    });
-    if (!res.ok) throw new Error();
-
-    const actividades = await res.json();
-    const tbody = document.getElementById("tbodyActividades");
-    const seccion = document.getElementById("seccionActividades");
-    const nombreLabel = document.getElementById("nombreHabilidadSeleccionada");
-
-    nombreLabel.innerText = `Habilidad: ${nombreHabilidad}`;
-    tbody.innerHTML = "";
-
-    actividades.forEach(act => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${act.id_actividad}</td><td>${act.nombre}</td>`;
-      tbody.appendChild(tr);
-    });
-
-    seccion.hidden = false;
-  } catch {
-    alert("Error al cargar actividades");
-  }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  if (!localStorage.getItem("admin_token")) cerrarSesion();
-  await cargar();
-});
 </script>
 </body>
 </html>
