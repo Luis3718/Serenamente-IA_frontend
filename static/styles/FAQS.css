@@ -215,6 +215,7 @@ main {
   .faq-answer {
     margin-top: 10px;
     display: none; /* Ocultar por defecto */
+    text-align: justify;
   }
   
   /* Muestra la respuesta cuando la pregunta está "activa" */
