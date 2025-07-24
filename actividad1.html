@@ -18,7 +18,7 @@
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
             <nav class="submenu">
                 <ul>
-                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="actividades.html">Mis habilidades</a></li>
                     <li><a href="progreso.html">Mi progreso</a></li>
                     <div class="user-menu">
                         <div id="user-avatar" class="avatar">US</div>
@@ -50,6 +50,7 @@
                 <div class="video-container">
                     <p>Pero hay mucho que decir y aprender del mindfulness, así que también vamos a ver este video
                     </p>
+                    <br><br><br>
                     <video controls>
                         <source src="static/videos/G_Video B3.mp4" type="video/mp4">
                         Tu navegador no soporta la reproducción de videos.
@@ -57,7 +58,7 @@
                 </div>
             </div>
             
-            <p>Ahora que ya sabes un poco más de mindfulness ¿qué te parece? Sigamos explorando de manera breve cómo se ha utilizado para aumentar la salud mental.</p>
+            <p>Ahora que ya sabes un poco más de mindfulness ¿qué te parece? Sigamos explorando de manera breve cómo se ha utilizado para aumentar la salud mental.</p><br><br>
             <div class="infografia">
                 <a href="static/infografia/infografia_sigamos_explorando.pdf" target="_blank">
                     <embed src="static/infografia/infografia_sigamos_explorando.pdf" type="application/pdf" width="100%" height="600px" />
@@ -245,7 +246,7 @@
             localStorage.removeItem("token");
             window.location.href = "login.html";
         });
-        //verificarAutenticacion();
+        verificarAutenticacion();
     });
 
         // Funcionalidad para extraer el id del token 
