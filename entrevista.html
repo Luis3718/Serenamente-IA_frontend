@@ -257,9 +257,17 @@
                 typeMessage(currentQuestion.text, false, () => {
                     if (currentQuestion.opciones.length === 0) { // No hay opciones predefinidas
                         const input = document.createElement("input");
-                        input.type = "number"; // Asegura que sólo se puedan ingresar números
+                        input.type = "number"; 
                         input.name = "respuesta-numerica";
                         input.placeholder = "Ingresa tu respuesta aquí...";
+                        input.min = "0"; // Por defecto, no negativos
+                        
+                        // Si es la pregunta 145, ajustamos el rango 1-12
+                        if (currentQuestion.id === 145) {
+                            input.min = "1";
+                            input.max = "12";
+                            input.placeholder = "Ingresa una hora (1 a 12)";
+                        }
                         optionsContainer.appendChild(input);
                     } else {
                         currentQuestion.opciones.forEach(opcion => {
@@ -337,6 +345,15 @@
             let selectedValue;
             if (preguntas[preguntaActual].opciones.length === 0) {
                 selectedValue = document.querySelector('input[name="respuesta-numerica"]').value;
+                if (selectedValue === '' || Number(selectedValue) < 0) {
+                    alert("Por favor ingresa un número válido mayor o igual a 0");
+                    return; 
+                }
+                // Validación especial para la pregunta 145 (1-12)
+                if (preguntas[preguntaActual].id === 145 && (Number(selectedValue) < 1 || Number(selectedValue) > 12)) {
+                    alert("Por favor ingresa una hora válida entre 1 y 12");
+                    return;
+                }
             } else {
                 const selectedOption = document.querySelector('input[name="opcion-de-pregunta"]:checked');
                 selectedValue = selectedOption ? selectedOption.value : '';
