@@ -250,35 +250,57 @@
     
 </body>
 <script>
-    // Funcionalidad de la barra 
+   // Funcionalidad de la barra 
     document.addEventListener("DOMContentLoaded", function () {
-    const progressBar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
-    const form = document.getElementById("Sueñoform");
-    const questions = form.querySelectorAll(".question");
-    let totalQuestions = questions.length;
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
 
-    function updateProgress() {
-        let answeredQuestions = 0;
+        const totalQuestionsGlobal = 134; // Total del sistema completo
+        const questionsInThisForm = document.querySelectorAll(".question").length;
 
-        // Recorrer cada pregunta y verificar si se ha respondido
-        questions.forEach(question => {
-            // Contar como respondida si alguna opción está seleccionada
-            if (question.querySelector('input[type="radio"]:checked') ||
-                (question.querySelector('input[type="number"]') && question.querySelector('input[type="number"]').value !== "") ||
-                (question.querySelector('input[type="text"]') && question.querySelector('input[type="text"]').value.trim() !== "")) {
-                answeredQuestions += 1;
+        // Identificador único para cada formulario (puedes usar el nombre del test, ej. "BAI")
+        const formKey = "Sueñoform"; // cambia este valor según el formulario actual
+
+        // Declaramos variables de piso y techo para evitar progresos incorrectos
+        const piso = 89;
+        const techo = 108; 
+
+        // Cargar progreso anterior global (si existe)
+        let previousProgress = parseInt(localStorage.getItem("answeredQuestionsGlobal")) || 0;
+        if (previousProgress >= techo || previousProgress<piso){
+            previousProgress = piso
+        }
+
+        function updateProgress() {
+            // Respuestas marcadas en este formulario
+            const currentFormAnswered = document.querySelectorAll("input[type='radio']:checked").length;
+
+            // Guardamos el progreso específico de este formulario en localStorage (opcional, si quieres rastrear cada uno)
+            localStorage.setItem(formKey, currentFormAnswered);
+
+            // Sumamos este formulario con el anterior guardado
+            const newGlobalProgress = previousProgress + currentFormAnswered;
+
+            // Guardamos el nuevo valor global
+            localStorage.setItem("answeredQuestionsGlobal", newGlobalProgress);
+
+            // Calculamos el porcentaje
+            const progressPercentage = Math.round((newGlobalProgress / totalQuestionsGlobal) * 100);
+
+            // Actualizamos barra y texto
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        // Actualiza cada vez que se selecciona una opción
+        document.addEventListener("change", function (e) {
+            if (e.target.matches("input[type='radio']")) {
+                updateProgress();
             }
         });
 
-        const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
-        progressBar.style.width = `${progressPercentage}%`;
-        progressText.textContent = `${progressPercentage}%`;
-    }
-
-    // Evento para actualizar la barra de progreso al cambiar cualquier entrada
-    form.addEventListener("change", updateProgress);
-    form.addEventListener("input", updateProgress);
+        // Inicializa al cargar
+        updateProgress();
     });
 
     document.addEventListener('DOMContentLoaded', function() {

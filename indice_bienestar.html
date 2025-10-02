@@ -171,14 +171,21 @@
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
 
-        const totalQuestionsGlobal = 135; // Total del sistema completo
+        const totalQuestionsGlobal = 134; // Total del sistema completo
         const questionsInThisForm = document.querySelectorAll(".question").length;
 
         // Identificador único para cada formulario (puedes usar el nombre del test, ej. "BAI")
         const formKey = "Bienestarform"; // cambia este valor según el formulario actual
 
+        // Declaramos variables de piso y techo para evitar progresos incorrectos
+        const piso = 48;
+        const techo = 53; 
+
         // Cargar progreso anterior global (si existe)
         let previousProgress = parseInt(localStorage.getItem("answeredQuestionsGlobal")) || 0;
+        if (previousProgress >= techo || previousProgress<piso){
+            previousProgress = piso
+        }
 
         function updateProgress() {
             // Respuestas marcadas en este formulario
