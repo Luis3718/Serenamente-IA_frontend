@@ -57,6 +57,11 @@
             <button onclick="startExperience()">Sí, tengo todo preparado para iniciar</button>
             
         </div>
+        <br>
+        <div class="progress-container-horizontal" style="display: none;">
+            <div class="progress-bar" id="progressBar"></div>
+            <span id="progressText">0%</span>
+        </div>
         <div id="formulario-contenedor" style="display: none;">
             <div id="formulario-bai">
               <h2>Inventario de Ansiedad de Beck (BAI)</h2>
@@ -223,7 +228,6 @@
                   Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
               </p>
               <form id="Beck">
-                <!-- Preguntas -->
                 <div class="question">
                     <p>1. Tristeza</p>
                     <label><input type="radio" name="q1" value="0"> 0 - No me siento triste</label><br>
@@ -998,7 +1002,7 @@
                     <label><input type="radio" name="q8" value="5"> 5</label>
                 </div>
                 <div class="question">
-                    <p>9. uando algo me molesta, trato de mantener mis emociones en equilibrio.</p>
+                    <p>9. Cuando algo me molesta, trato de mantener mis emociones en equilibrio.</p>
                     <label><input type="radio" name="q9" value="1"> 1</label>
                     <label><input type="radio" name="q9" value="2"> 2</label>
                     <label><input type="radio" name="q9" value="3"> 3</label>
@@ -1370,7 +1374,6 @@
 
 </div>
 
-<!--Banner con logos-->
 <div class="banner-section">
     <div class="banner-logo">
         <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
@@ -1397,7 +1400,6 @@
     </div>
 </div>
 
-<!-- Footer -->
 <footer>
     <div class="footer-container">
         <div class="footer-text">
@@ -1472,9 +1474,11 @@
 
     //funcion de botones 
     function startExperience() {
-      document.querySelector('.button-container').style.display = 'none';
-      document.getElementById('formulario-contenedor').style.display = 'block';
-      document.getElementById('formulario-bai').style.display = 'block';
+    document.querySelector('.button-container').style.display = 'none';
+    document.getElementById('formulario-contenedor').style.display = 'block';
+    document.getElementById('formulario-bai').style.display = 'block';
+
+    document.querySelector('.progress-container-horizontal').style.display = 'flex';
     }
 
     function postponeExperience() {
@@ -1502,6 +1506,54 @@
         }
         return null;
     }
+
+    // --- START PROGRESS BAR LOGIC ---
+    document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const formContainer = document.getElementById('formulario-contenedor');
+
+        // The total number of questions ONLY on this page (Habilidad 8).
+        const totalQuestionsOnThisPage = 146; 
+
+        function updateProgressBar() {
+            // Count all questions answered on THIS page by checking each question block.
+            let answeredQuestionsOnThisPage = 0;
+            const questionBlocks = formContainer.querySelectorAll('.question');
+            
+            questionBlocks.forEach(q => {
+                // A question is "answered" if it has a checked radio OR a filled text/number input.
+                const isRadioAnswered = q.querySelector('input[type="radio"]:checked');
+                const isNumberAnswered = q.querySelector('input[type="number"]') && q.querySelector('input[type="number"]').value !== '';
+                const isTextAnswered = q.querySelector('input[type="text"]') && q.querySelector('input[type="text"]').value.trim() !== '';
+
+                if (isRadioAnswered || isNumberAnswered || isTextAnswered) {
+                    answeredQuestionsOnThisPage++;
+                }
+            });
+
+            // Calculate percentage based ONLY on this page's progress.
+            // We ensure the value doesn't go over 100 in case of a counting error.
+            let progressPercentage = 0;
+            if (totalQuestionsOnThisPage > 0) {
+                progressPercentage = Math.min(100, Math.round((answeredQuestionsOnThisPage / totalQuestionsOnThisPage) * 100));
+            }
+
+            // Update the bar's width and the display text.
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        // Add an event listener to the main form container.
+        if (formContainer) {
+            formContainer.addEventListener("change", updateProgressBar);
+            formContainer.addEventListener("input", updateProgressBar);
+        }
+
+        // Initialize the progress bar when the page loads (will start at 0%).
+        updateProgressBar();
+    });
+    // --- END PROGRESS BAR LOGIC ---
 
     async function enviarResultados() {
         const endpoints = [
@@ -1586,7 +1638,11 @@
 
       // Continuar al siguiente formulario
       document.getElementById('formulario-bai').style.display = 'none';
-      document.getElementById('formulario-beck').style.display = 'block';
+      const nextForm = document.getElementById('formulario-beck');
+      nextForm.style.display = 'block';
+
+
+      nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario beck
@@ -1625,7 +1681,9 @@
 
       // Mostrar siguiente formulario
       document.getElementById('formulario-beck').style.display = 'none';
-      document.getElementById('formulario-estres').style.display = 'block';
+    const nextForm = document.getElementById('formulario-estres');
+    nextForm.style.display = 'block';
+    nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });    
     }
   
     // Formulario Estres
@@ -1668,7 +1726,9 @@
 
       // Muestra siguiente formulario
       document.getElementById('formulario-estres').style.display = 'none';
-      document.getElementById('formulario-bienestar').style.display = 'block';
+      const nextForm = document.getElementById('formulario-bienestar');
+      nextForm.style.display = 'block';
+      nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
     
     // Formulario bienestar
@@ -1709,7 +1769,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-bienestar').style.display = 'none';
-        document.getElementById('formulario-sueño').style.display = 'block';
+        const nextForm = document.getElementById('formulario-sueño');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario sueño
@@ -1770,7 +1832,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-sueño').style.display = 'none';
-        document.getElementById('formulario-apoi').style.display = 'block';
+        const nextForm = document.getElementById('formulario-apoi');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario apoi
@@ -1829,7 +1893,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-apoi').style.display = 'none';
-        document.getElementById('formulario-maas').style.display = 'block';
+        const nextForm = document.getElementById('formulario-maas');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario maas
@@ -1864,7 +1930,10 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-maas').style.display = 'none';
-        document.getElementById('formulario-scs').style.display = 'block';
+        const nextForm = document.getElementById('formulario-scs');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
+
     }
 
     // Formulario scs
@@ -1899,7 +1968,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-scs').style.display = 'none';
-        document.getElementById('formulario-asi').style.display = 'block';
+        const nextForm = document.getElementById('formulario-asi');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario ASI  
@@ -1931,7 +2002,7 @@
                 alert("Por favor responde todas las preguntas del apartado Satisfacción.");
                 return;
             }
-            responsesSatisfaccion.push({ question: 147 + i, answer: value });
+            responsesSatisfaccion.push({ question: 147 + i, answer: val.value });
         }
 
         // Preguntas Identidad (Likert, ID_TipoFormulario: 14) → q6 a q8
@@ -1979,7 +2050,9 @@
 
         // Avanzar
         document.getElementById('formulario-asi').style.display = 'none';
-        document.getElementById('formulario-sus').style.display = 'block'; // o lo que siga
+        const nextForm = document.getElementById('formulario-sus');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario SUS   
@@ -2092,4 +2165,3 @@
 </script>
 </body>
 </html>
-

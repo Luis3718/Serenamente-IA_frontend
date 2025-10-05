@@ -208,6 +208,37 @@ main {
     color: #333; /* Texto oscuro */
 }
 
+/* Barra de progreso horizontal */
+.progress-container-horizontal {
+    position: sticky; /* Barra fija al desplazar */
+    top: 0; /* Fijada en la parte superior del formulario */
+    width: 100%; /* Ancho completo del formulario */
+    background-color: #f3f3f3; /* Fondo claro */
+    padding: 10px 0; /* Espaciado interno vertical */
+    z-index: 10; /* Prioridad visual */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Barra de progreso */
+.progress-bar {
+    height: 10px; /* Altura de la barra */
+    background-color: #ffc000; /* Color amarillo */
+    width: 0%; /* Comienza vacía */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: width 0.3s ease; /* Transición suave */
+}
+
+/* Texto del porcentaje */
+#progressText {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333; /* Color oscuro */
+    margin-left: 20px; /* Espaciado con la barra */
+}
+
 .question p {
  font-weight: bold;
 }
