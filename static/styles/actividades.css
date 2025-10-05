@@ -234,8 +234,9 @@ main {
 
 .image-button img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 90%;
+    object-fit: contain;
+    object-position: top center;
     border-radius: 15px;
     filter: grayscale(100%);
     transition: filter 0.3s ease-in-out;
