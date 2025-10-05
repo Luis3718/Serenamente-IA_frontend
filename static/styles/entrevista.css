@@ -174,11 +174,11 @@ main {
 
 .mascota-container {
     position: absolute;
-    top: 50%; /* Ajustar para alinear verticalmente */
-    right: 25%; /* Ajustar para alinear horizontalmente a la derecha */
-    transform: translate(50%, -50%); /* Ajusta esto para centrar exactamente donde deseas */
-    width: 250px; /* Establece un ancho fijo */
-    height: 250px; /* Establece una altura fija */
+    top: 50%;
+    right: 25%;
+    transform: translate(50%, -50%);
+    width: 400px;  /* <-- Increased from 250px */
+    height: 400px; /* <-- Increased from 250px */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -446,11 +446,11 @@ footer {
 
     .mascota-container {
         position: absolute;
-        top: 50%; /* Ajustar para alinear verticalmente */
-        right: 25%; /* Ajustar para alinear horizontalmente a la derecha */
-        transform: translate(50%, -50%); /* Ajusta esto para centrar exactamente donde deseas */
-        width: 150px; /* Establece un ancho fijo */
-        height: 150px; /* Establece una altura fija */
+        top: 50%;
+        right: 25%;
+        transform: translate(50%, -50%);
+        width: 350px;  /* <-- Increased from 150px */
+        height: 350px; /* <-- Increased from 150px */
         display: flex;
         justify-content: center;
         align-items: center;
