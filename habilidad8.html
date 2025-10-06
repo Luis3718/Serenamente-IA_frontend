@@ -18,7 +18,7 @@
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
             <nav class="submenu">
                 <ul>
-                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="actividades.html">Mis habilidades</a></li>
                     <li><a href="progreso.html">Mi progreso</a></li>
                     <div class="user-menu">
                         <div id="user-avatar" class="avatar">US</div>
@@ -38,30 +38,29 @@
             <div style="display: flex; align-items: flex-start; gap: 20px;">
                 <img src="static/imagenes/image8.jpeg" alt="Descripción de la imagen" style="height: 100%; max-height: 300px; width: auto; object-fit: cover;">
                 <div style="flex: 1;">
-                    <p> ¡Hola! El día de hoy descubriremos cómo podemos relacionarnos con el estrés de manera diferente a través de nuestra atención y su conexión con nuestra consciencia.
+                    <p> ¡Hola! ¡Te doy la bienvenida a la última parte del programa! 
+                        Quiero agradecerte que formes parte de esta investigación en bienestar y salud mental. Para que coseches lo sembrado, te presentamos un video de como mindfulness se sostiene en la vida cotidiana integrando las habilidades que estuviste desarrollando. Al finalizar este video, ingresaras a la evaluación final.
+                        La información que proporcionas es crucial, te tomará aproximadamente 10 minutos e incluye una sección de preguntas de satisfacción. Es importante que sepas que una vez que completes la evaluación final se generará tu reconocimiento que recibirás en tu correo en los siguientes días.
                         <br>
-                        <strong>Objetivo:</strong> Con esta habilidad explorarás la naturaleza del estrés y su impacto en el cuerpo a través de la rueda de la consciencia de una práctica llamada “Rueda de la
-                        Consciencia
-                        <br>
-                        Cuando escuchas la palabras estrés, ¿qué es lo que viene a tu mente?<br> Quizás la imagen de una persona cansada y de mal humor, o que está
-                        pasando por un mal rato. Por mucho tiempo se ha asociado al estrés como algo negativo. Sin embargo esto no es necesariamente cierto. El día de hoy
-                        aprenderás que el estrés no es tu enemigo ¡es más! puede ser tu aliado si identificas cómo tu cuerpo lo experimenta.
-                        <br>
-                        Para esto nos apoyaremos de una práctica que también te permitirá relacionarte con tu cuerpo de una manera más profunda.</p> 
-               
                 </div>
             </div>
             <div class="recuerda-box">
                 <img src="static/imagenes/recuerda.jpeg" alt="Koala recuerda" class="koala-img">
-                <p>Recuerda que mindfulness no significa dejar de pensar, sino notar en qué estás pensando, qué está pasando en tu cuerpo y traer tu atención
-                    de vuelta al presente con curiosidad y amabilidad.
-                    </p>
+                <p>Ha sido un placer acompañarte en cada habilidad de SerenaMente IA
+                    Adicionalmente, quiero enfatizar que seguiremos en contacto contigo para conocer tus experiencias y estado de bienestar dentro de 3 y 6 meses.
+                    ¡Gracias por tu tiempo y participación!
+                </p>
             </div>
     <p>Para esto, revisa este video que te explica qué es el estrés, y la diferencia entre el estrés adaptativo y desadaptativo. 
     </p>
         <div class="button-container">
             <button onclick="startExperience()">Sí, tengo todo preparado para iniciar</button>
-            <button onclick="postponeExperience()">No, quisiera empezar después</button>
+            
+        </div>
+        <br>
+        <div class="progress-container-horizontal" style="display: none;">
+            <div class="progress-bar" id="progressBar"></div>
+            <span id="progressText">0%</span>
         </div>
         <div id="formulario-contenedor" style="display: none;">
             <div id="formulario-bai">
@@ -72,194 +71,151 @@
               </p>
                 <form id="baiForm">
                     <div class="question">
-                        <p>1. Hormigueo o entumecimiento</p>
-                        <label><input type="radio" name="q1" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q1" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q1" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q1" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q1" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q1" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                    <p>1. Hormigueo o entumecimiento</p>
+                    <label><input type="radio" name="q1" value="0"> 0 - No, en absoluto</label><br>
+                    <label><input type="radio" name="q1" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                    <label><input type="radio" name="q1" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                    <label><input type="radio" name="q1" value="3"> 3 - Gravemente, casi no podía soportarlo</label>
                     </div>
                     <div class="question">
                         <p>2. Sensación de calor</p>
                         <label><input type="radio" name="q2" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q2" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q2" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q2" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q2" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q2" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q2" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q2" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q2" value="3"> 3 - Gravemente, casi no podía soportarlo</label>
                     </div>
-                    <!-- Repite el bloque anterior para las 18 preguntas restantes -->
                     <div class="question">
                         <p>3. Temblor en las piernas</p>
                         <label><input type="radio" name="q3" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q3" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q3" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q3" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q3" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q3" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q3" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q3" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q3" value="3"> 3 - Gravemente, casi no podía soportarlo</label>
                     </div>
                     <div class="question">
                         <p>4. Incapacidad de relajarse</p>
                         <label><input type="radio" name="q4" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q4" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q4" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q4" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q4" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q4" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q4" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q4" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q4" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>5. Miedo a que suceda lo peor</p>
                         <label><input type="radio" name="q5" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q5" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q5" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q5" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q5" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q5" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q5" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q5" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q5" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>6. Mareo o aturdimiento</p>
                         <label><input type="radio" name="q6" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q6" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q6" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q6" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q6" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q6" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q6" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q6" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q6" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>7. Palpitaciones o taquicardia</p>
                         <label><input type="radio" name="q7" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q7" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q7" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q7" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q7" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q7" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q7" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q7" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q7" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>8. Sensación de inestabilidad e inseguridad física</p>
                         <label><input type="radio" name="q8" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q8" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q8" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q8" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q8" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q8" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q8" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q8" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q8" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>9. Terrores</p>
                         <label><input type="radio" name="q9" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q9" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q9" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q9" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q9" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q9" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q9" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q9" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q9" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>10. Nerviosismo</p>
                         <label><input type="radio" name="q10" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q10" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q10" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q10" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q10" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q10" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q10" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q10" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q10" value="3"> 3 - Gravemente, casi no podía soportarlo</label>                    
                     </div>
                     <div class="question">
                         <p>11. Sensación de ahogo</p>
                         <label><input type="radio" name="q11" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q11" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q11" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q11" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q11" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q11" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q11" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q11" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q11" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>12. Temblores de manos</p>
                         <label><input type="radio" name="q12" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q12" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q12" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q12" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q12" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q12" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q12" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q12" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q12" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>13. Temblor generalizado o estremecimiento</p>
                         <label><input type="radio" name="q13" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q13" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q13" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q13" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q13" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q13" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q13" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q13" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q13" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>14. Miedo a perder el control</p>
                         <label><input type="radio" name="q14" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q14" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q14" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q14" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q14" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q14" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q14" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q14" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q14" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>15. Dificultad para respirar</p>
                         <label><input type="radio" name="q15" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q15" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q15" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q15" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q15" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q15" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q15" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q15" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q15" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>16. Miedo a morirse</p>
                         <label><input type="radio" name="q16" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q16" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q16" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q16" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q16" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q16" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q16" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q16" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q16" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>17. Sobresaltos</p>
                         <label><input type="radio" name="q17" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q17" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q17" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q17" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q17" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q17" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q17" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q17" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q17" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>18. Molestias digestivas o abdominales</p>
                         <label><input type="radio" name="q18" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q18" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q18" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q18" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q18" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q18" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q18" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q18" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q18" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>19. Palidez</p>
                         <label><input type="radio" name="q19" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q19" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q19" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q19" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q19" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q19" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q19" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q19" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q19" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>20. Rubor facial</p>
                         <label><input type="radio" name="q20" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q20" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q20" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q20" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q20" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q20" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q20" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q20" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q20" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <div class="question">
                         <p>21. Sudoración (no debida al calor)</p>
                         <label><input type="radio" name="q21" value="0"> 0 - No, en absoluto</label><br>
-                        <label><input type="radio" name="q21" value="1"> 1 - Levemente</label><br>
-                        <label><input type="radio" name="q21" value="2"> 2 - No me molesta mucho</label><br>
-                        <label><input type="radio" name="q21" value="3"> 3 - Moderadamente</label><br>
-                        <label><input type="radio" name="q21" value="4"> 4 - Muy desagradable, pero podía soportarlo</label><br>
-                        <label><input type="radio" name="q21" value="5"> 5 - Gravemente, casi no podía soportarlo</label>
+                        <label><input type="radio" name="q21" value="1"> 1 - Levemente, No me molesta mucho</label><br>
+                        <label><input type="radio" name="q21" value="2"> 2 - Moderadamente, fue muy desagradable pero podía soportarlo</label><br>
+                        <label><input type="radio" name="q21" value="3"> 3 - Gravemente, casi no podía soportarlo</label>    
                     </div>
                     <button type="button" onclick="guardarYContinuarBAI()">Siguiente</button>
                 </form>
@@ -272,7 +228,6 @@
                   Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
               </p>
               <form id="Beck">
-                <!-- Preguntas -->
                 <div class="question">
                     <p>1. Tristeza</p>
                     <label><input type="radio" name="q1" value="0"> 0 - No me siento triste</label><br>
@@ -1047,7 +1002,7 @@
                     <label><input type="radio" name="q8" value="5"> 5</label>
                 </div>
                 <div class="question">
-                    <p>9. uando algo me molesta, trato de mantener mis emociones en equilibrio.</p>
+                    <p>9. Cuando algo me molesta, trato de mantener mis emociones en equilibrio.</p>
                     <label><input type="radio" name="q9" value="1"> 1</label>
                     <label><input type="radio" name="q9" value="2"> 2</label>
                     <label><input type="radio" name="q9" value="3"> 3</label>
@@ -1200,7 +1155,7 @@
                     la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u> donde 1= Nada y 10= Muchísimo</u> 
                     Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
                 </p>
-            <form id="asi">
+            <form id="ASIform">
                 <p>Aceptabilidad</p>
                 <div class="question">
                     <p>1.	SerenaMente IA fue adecuada para mi </p>
@@ -1314,14 +1269,14 @@
                 la que mejor describa cómo se ha sentido ultimamente de acuerdo a la escala Likert<u>donde 1= En completo desacuerdo y 5= Completamente de acuerdo</u> 
                 Si considera que varias oraciones en un mismo grupo reflejan cómo se ha sentido, elija la opción más alta.
                 </p>
-              <form id="sus">
+              <form id="SUSform">
                 <div class="question">
                     <p>1. Creo que me gustará usar con frecuencia este sistema </p>
-                    <label><input type="radio" name="q" value="1"> 1</label><br>
-                    <label><input type="radio" name="q" value="2"> 2</label><br>
-                    <label><input type="radio" name="q" value="3"> 3</label><br>
-                    <label><input type="radio" name="q" value="4"> 4</label><br>
-                    <label><input type="radio" name="q" value="5"> 5</label><br>
+                    <label><input type="radio" name="q1" value="1"> 1</label><br>
+                    <label><input type="radio" name="q1" value="2"> 2</label><br>
+                    <label><input type="radio" name="q1" value="3"> 3</label><br>
+                    <label><input type="radio" name="q1" value="4"> 4</label><br>
+                    <label><input type="radio" name="q1" value="5"> 5</label><br>
                 </div>
                
                 <div class="question">
@@ -1399,6 +1354,9 @@
                 <button type="button" onclick="guardarYEnviarSUS()">Enviar</button>
               </form>
             </div>
+            <div id="mensaje-final" style="display: none;">
+                <p>Ageedecemos sus respuestas y participacion en el proyecto de Serenamente IA, recuerde que puede seguir accediendo a los contenidos si usted lo desea</p>
+            </div>
         </div>
     </div>              
 </main>
@@ -1410,13 +1368,12 @@
     <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
         <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
     </a>
-    <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
-        <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
-    </a>
+    <a href="https://www.youtube.com/@laboratoriodepsicologiaein494" target="_blank" class="social-icon">
+            <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
+        </a>
 
 </div>
 
-<!--Banner con logos-->
 <div class="banner-section">
     <div class="banner-logo">
         <img src="static/imagenes/LOGO.png" alt="Logo SerenaMente">
@@ -1425,25 +1382,24 @@
         <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
     </div>
     <div class="banner-logos">
-        <a href="https://www.unam.mx">
+        <a href="https://www.unam.mx" target="_blank">
             <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
         </a>
-        <a href="https://suayed.iztacala.unam.mx/">
+        <a href="https://suayed.iztacala.unam.mx/" target="_blank">
             <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
         </a>
-        <a href="https://labpsiit.iztacala.unam.mx/">
+        <a href="https://labpsiit.iztacala.unam.mx/" target="_blank">
             <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
         </a>
-        <a href="https://www.ipn.mx/">
+        <a href="https://www.ipn.mx/" target="_blank">
             <img src="static/imagenes/Logo4.png" alt="Logo IPN">
         </a>
-        <a href="https://www.escom.ipn.mx/">
+        <a href="https://www.escom.ipn.mx/" target="_blank">
             <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
         </a>
     </div>
 </div>
 
-<!-- Footer -->
 <footer>
     <div class="footer-container">
         <div class="footer-text">
@@ -1475,7 +1431,7 @@
         }
 
         try {
-            const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
                 method: "GET",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -1518,9 +1474,11 @@
 
     //funcion de botones 
     function startExperience() {
-      document.querySelector('.button-container').style.display = 'none';
-      document.getElementById('formulario-contenedor').style.display = 'block';
-      document.getElementById('formulario-bai').style.display = 'block';
+    document.querySelector('.button-container').style.display = 'none';
+    document.getElementById('formulario-contenedor').style.display = 'block';
+    document.getElementById('formulario-bai').style.display = 'block';
+
+    document.querySelector('.progress-container-horizontal').style.display = 'flex';
     }
 
     function postponeExperience() {
@@ -1549,6 +1507,54 @@
         return null;
     }
 
+    // --- START PROGRESS BAR LOGIC ---
+    document.addEventListener("DOMContentLoaded", function () {
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+        const formContainer = document.getElementById('formulario-contenedor');
+
+        // The total number of questions ONLY on this page (Habilidad 8).
+        const totalQuestionsOnThisPage = 146; 
+
+        function updateProgressBar() {
+            // Count all questions answered on THIS page by checking each question block.
+            let answeredQuestionsOnThisPage = 0;
+            const questionBlocks = formContainer.querySelectorAll('.question');
+            
+            questionBlocks.forEach(q => {
+                // A question is "answered" if it has a checked radio OR a filled text/number input.
+                const isRadioAnswered = q.querySelector('input[type="radio"]:checked');
+                const isNumberAnswered = q.querySelector('input[type="number"]') && q.querySelector('input[type="number"]').value !== '';
+                const isTextAnswered = q.querySelector('input[type="text"]') && q.querySelector('input[type="text"]').value.trim() !== '';
+
+                if (isRadioAnswered || isNumberAnswered || isTextAnswered) {
+                    answeredQuestionsOnThisPage++;
+                }
+            });
+
+            // Calculate percentage based ONLY on this page's progress.
+            // We ensure the value doesn't go over 100 in case of a counting error.
+            let progressPercentage = 0;
+            if (totalQuestionsOnThisPage > 0) {
+                progressPercentage = Math.min(100, Math.round((answeredQuestionsOnThisPage / totalQuestionsOnThisPage) * 100));
+            }
+
+            // Update the bar's width and the display text.
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `${progressPercentage}%`;
+        }
+
+        // Add an event listener to the main form container.
+        if (formContainer) {
+            formContainer.addEventListener("change", updateProgressBar);
+            formContainer.addEventListener("input", updateProgressBar);
+        }
+
+        // Initialize the progress bar when the page loads (will start at 0%).
+        updateProgressBar();
+    });
+    // --- END PROGRESS BAR LOGIC ---
+
     async function enviarResultados() {
         const endpoints = [
             'BAI_responses',
@@ -1566,7 +1572,7 @@
             'SUS_responses'
         ];
 
-        const url = 'https://serenamente.iztacala.unam.mx/api/formularios/respuestas'; // Cambia por tu URL real
+        const url = 'http://localhost:8002/formularios/respuestas'; // Cambia por tu URL real
 
         for (let key of endpoints) {
             const item = sessionStorage.getItem(key);
@@ -1632,7 +1638,11 @@
 
       // Continuar al siguiente formulario
       document.getElementById('formulario-bai').style.display = 'none';
-      document.getElementById('formulario-beck').style.display = 'block';
+      const nextForm = document.getElementById('formulario-beck');
+      nextForm.style.display = 'block';
+
+
+      nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario beck
@@ -1671,7 +1681,9 @@
 
       // Mostrar siguiente formulario
       document.getElementById('formulario-beck').style.display = 'none';
-      document.getElementById('formulario-estres').style.display = 'block';
+    const nextForm = document.getElementById('formulario-estres');
+    nextForm.style.display = 'block';
+    nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });    
     }
   
     // Formulario Estres
@@ -1714,7 +1726,9 @@
 
       // Muestra siguiente formulario
       document.getElementById('formulario-estres').style.display = 'none';
-      document.getElementById('formulario-bienestar').style.display = 'block';
+      const nextForm = document.getElementById('formulario-bienestar');
+      nextForm.style.display = 'block';
+      nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
     
     // Formulario bienestar
@@ -1755,7 +1769,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-bienestar').style.display = 'none';
-        document.getElementById('formulario-sueño').style.display = 'block';
+        const nextForm = document.getElementById('formulario-sueño');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario sueño
@@ -1816,7 +1832,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-sueño').style.display = 'none';
-        document.getElementById('formulario-apoi').style.display = 'block';
+        const nextForm = document.getElementById('formulario-apoi');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario apoi
@@ -1875,7 +1893,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-apoi').style.display = 'none';
-        document.getElementById('formulario-maas').style.display = 'block';
+        const nextForm = document.getElementById('formulario-maas');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario maas
@@ -1910,7 +1930,10 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-maas').style.display = 'none';
-        document.getElementById('formulario-scs').style.display = 'block';
+        const nextForm = document.getElementById('formulario-scs');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
+
     }
 
     // Formulario scs
@@ -1945,7 +1968,9 @@
 
         // Mostrar siguiente formulario
         document.getElementById('formulario-scs').style.display = 'none';
-        document.getElementById('formulario-asi').style.display = 'block';
+        const nextForm = document.getElementById('formulario-asi');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario ASI  
@@ -1972,12 +1997,12 @@
 
         // Preguntas Satisfacción (Abierta, ID_TipoFormulario: 13) → q4 y q5
         for (let i = 4; i <= 5; i++) {
-            const val = form.querySelector(`input[name="q${i}"]`);
-            if (!val || val.value.trim() === "") {
+            const val = form.querySelector(`input[name="q${i}"]:checked`);
+            if (!val) {
                 alert("Por favor responde todas las preguntas del apartado Satisfacción.");
                 return;
             }
-            responsesSatisfaccion.push({ question: 150 + i, answer: val.value.trim() });
+            responsesSatisfaccion.push({ question: 147 + i, answer: val.value });
         }
 
         // Preguntas Identidad (Likert, ID_TipoFormulario: 14) → q6 a q8
@@ -1988,7 +2013,7 @@
                 return;
             }
             const value = parseInt(val.value);
-            responsesIdentidad.push({ question: 152 + i, answer: value });
+            responsesIdentidad.push({ question: 147 + i, answer: value });
             totalIdentidad += value;
         }
 
@@ -2025,7 +2050,9 @@
 
         // Avanzar
         document.getElementById('formulario-asi').style.display = 'none';
-        document.getElementById('formulario-sus').style.display = 'block'; // o lo que siga
+        const nextForm = document.getElementById('formulario-sus');
+        nextForm.style.display = 'block';
+        nextForm.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Formulario SUS   
@@ -2084,19 +2111,19 @@
         const paciente_id = getTokenId();
 
         // Obtener tratamiento actual del paciente
-        const tratamientoResponse = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/buscar_protocolo/${paciente_id}`);
+        const tratamientoResponse = await fetch(`http://localhost:8002/tratamiento/buscar_protocolo/${paciente_id}`);
         const tratamientoData = await tratamientoResponse.json();
-        const tratamiento_id = tratamientoData.ID_Tratamiento;
+        const tratamiento_id = tratamientoData.id_tratamiento;
 
         // ID de la habilidad (puede estar fijo o dinámico según el contexto)
         const habilidad_id = 5;
 
         // Obtener actividades relacionadas con la habilidad
-        const actividadesResponse = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/ruta_actividad/${tratamiento_id}/habilidad/${habilidad_id}`);
+        const actividadesResponse = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamiento_id}/habilidad/${habilidad_id}`);
         const actividades = await actividadesResponse.json();
         
         // Obtener la actividad actual del paciente
-        const progresoResponse = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/actividad_actual/${paciente_id}`);
+        const progresoResponse = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${paciente_id}`);
         const progresoData = await progresoResponse.json();
         const actividadActualId = progresoData.id_actividad_actual;
 
@@ -2112,23 +2139,20 @@
             cardDiv.classList.add("activity-card");
             cardDiv.id = `activity${index + 1}`;
 
-            const estaDesbloqueada = actividad.ID_Actividad === actividadActualId;
+            const estaDesbloqueada = actividad.id_actividad === actividadActualId;
 
-            if (actividad.ID_Actividad < actividadActualId) {
-                // Actividad completada – verde
+            if (actividad.id_actividad < actividadActualId) {
                 cardDiv.classList.add("completada");
-            } else if (actividad.ID_Actividad === actividadActualId) {
-                // Actividad actual – desbloqueada
-                // No hacemos nada, se queda normal
+            } else if (actividad.id_actividad === actividadActualId) {
+                // actividad actual
             } else {
-                // Actividad futura – bloqueada
                 cardDiv.classList.add("disabled");
             }
 
             cardDiv.innerHTML = `
-                <p>${index + 1}. ${actividad.Nombre}</p>
-                <a href="actividad${actividad.ID_Actividad}.html">
-                    <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
+                <p>${index + 1}. ${actividad.nombre}</p>
+                <a href="actividad${actividad.id_actividad}.html">
+                    <button ${actividad.id_actividad > actividadActualId ? "disabled" : ""}>
                         <img src="static/imagenes/boton${habilidad_id}${index + 1}.png" alt="actividad${habilidad_id}${index + 1}">
                     </button>
                 </a>
@@ -2141,4 +2165,3 @@
 </script>
 </body>
 </html>
-

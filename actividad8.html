@@ -17,7 +17,7 @@
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
             <nav class="submenu">
                 <ul>
-                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="actividades.html">Mis habilidades</a></li>
                     <li><a href="progreso.html">Mi progreso</a></li>
                     <div class="user-menu">
                         <div id="user-avatar" class="avatar">US</div>
@@ -171,7 +171,7 @@
         <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
         </a>
-        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+        <a href="https://www.youtube.com/@laboratoriodepsicologiaein494" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
         </a>
     
@@ -186,22 +186,22 @@
             <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
         </div>
         <div class="banner-logos">
-            <a href="https://www.unam.mx">
-                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
-            </a>
-            <a href="https://suayed.iztacala.unam.mx/">
-                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
-            </a>
-            <a href="https://labpsiit.iztacala.unam.mx/">
-                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
-            </a>
-            <a href="https://www.ipn.mx/">
-                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
-            </a>
-            <a href="https://www.escom.ipn.mx/">
-                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
-            </a>
-        </div>
+        <a href="https://www.unam.mx" target="_blank">
+            <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+        </a>
+        <a href="https://suayed.iztacala.unam.mx/" target="_blank">
+            <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+        </a>
+        <a href="https://labpsiit.iztacala.unam.mx/" target="_blank">
+            <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+        </a>
+        <a href="https://www.ipn.mx/" target="_blank">
+            <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+        </a>
+        <a href="https://www.escom.ipn.mx/" target="_blank">
+            <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+        </a>
+    </div>
     </div>
     <footer>
         <div class="footer-container">
@@ -298,7 +298,7 @@
             }
   
             try {
-                const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
+                const response = await fetch("http://localhost:8002/auth/verify-token", {
                     method: "GET",
                     headers: { "Authorization": `Bearer ${token}` }
                 });
@@ -339,16 +339,16 @@
   
             try {
                 // Obtener tratamiento actual
-                const tratamientoResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/${pacienteId}`);
+                const tratamientoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const tratamientoData = await tratamientoResp.json();
-                const tratamientoId = tratamientoData.ID_Tratamiento;
+                const tratamientoId = tratamientoData.id_tratamiento;
   
                 // Obtener actividades de la habilidad actual
-                const actividadesResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/ruta_actividad/${tratamientoId}/habilidad/${habilidadId}`);
+                const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${tratamientoId}/habilidad/${habilidadId}`);
                 const actividades = await actividadesResp.json();
   
                 // Obtener el progreso del paciente
-                const progresoResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/actividad_actual/${pacienteId}`);
+                const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/actividad_actual/${pacienteId}`);
                 const progresoData = await progresoResp.json();
                 const actividadActualId = progresoData.id_actividad_actual;
   
@@ -363,18 +363,18 @@
                     cardDiv.classList.add("activity-card");
                     cardDiv.id = `activity${index + 1}`;
   
-                    if (actividad.ID_Actividad < actividadActualId) {
+                    if (actividad.id_actividad < actividadActualId) {
                         cardDiv.classList.add("completada");
-                    } else if (actividad.ID_Actividad === actividadActualId) {
+                    } else if (actividad.id_actividad === actividadActualId) {
                         // Actividad actual desbloqueada
                     } else {
                         cardDiv.classList.add("disabled");
                     }
   
                     cardDiv.innerHTML = `
-                        <p>${index + 1}. ${actividad.Nombre}</p>
-                        <a href="actividad${actividad.ID_Actividad}.html">
-                            <button ${actividad.ID_Actividad > actividadActualId ? "disabled" : ""}>
+                        <p>${index + 1}. ${actividad.nombre}</p>
+                        <a href="actividad${actividad.id_actividad}.html">
+                            <button ${actividad.id_actividad > actividadActualId ? "disabled" : ""}>
                                 <img src="static/imagenes/boton${habilidadId}${index + 1}.png" alt="actividad${habilidadId}${index + 1}">
                             </button>
                         </a>
@@ -444,14 +444,14 @@
   
             try {
                 // Obtener el progreso del paciente (para saber el tratamiento actual)
-                const progresoResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/${pacienteId}`);
+                const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                 const progreso = await progresoResp.json();
-                idTratamiento = progreso.ID_Tratamiento;
+                idTratamiento = progreso.id_tratamiento;
   
                 // Obtener las actividades de la habilidad en el tratamiento actual
-                const actividadesResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
+                const actividadesResp = await fetch(`http://localhost:8002/tratamiento/ruta_actividad/${idTratamiento}/habilidad/${habilidadActual}`);
                 const actividades = await actividadesResp.json();
-                const idsActividades = actividades.map(act => act.ID_Actividad);
+                const idsActividades = actividades.map(act => act.id_actividad);
   
                 const index = idsActividades.indexOf(actividadActual);
                 if (index === idsActividades.length - 1) {
@@ -624,7 +624,7 @@
   
                         try {
                             // Consultar si la actividad ya está completada
-                            const compResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
+                            const compResp = await fetch(`http://localhost:8002/tratamiento/actividad/completada/${pacienteId}/${actividadActual}`);
                             const compData = await compResp.json();
                             const yaCompletada = compData.completada;
   
@@ -632,32 +632,32 @@
                             if (!yaCompletada) {
                                 // Envia las respuestas
                                 const respuestasFormateadas = Object.entries(respuestas).map(([k, v], i) => ({
-                                    ID_Pregunta: i + 1,
-                                    ID_Actividad: actividadActual,
-                                    ID_Paciente: pacienteId,
-                                    Respuesta: Array.isArray(v) ? v.join(", ") : v
+                                    id_pregunta: i + 1,
+                                    id_actividad: actividadActual,
+                                    id_paciente: pacienteId,
+                                    respuesta: Array.isArray(v) ? v.join(", ") : v
                                 }));
   
                                 // llama el endpoint de enviar respuestas
-                                await fetch("https://serenamente.iztacala.unam.mx/api/tratamiento/respuestas/guardar", {
+                                await fetch("http://localhost:8002/tratamiento/respuestas/guardar", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(respuestasFormateadas)
                                 });
   
                                 // llama al enpoint de marcar actividad como completada
-                                await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/completar_actividad/${pacienteId}`, {
+                                await fetch(`http://localhost:8002/tratamiento/progreso/completar_actividad/${pacienteId}`, {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" }
                                 });
                             }
                             
                             // Funcion qeu busca y genera el link a la siguiente actividad
-                            const progresoResp = await fetch(`https://serenamente.iztacala.unam.mx/api/tratamiento/progreso/${pacienteId}`);
+                            const progresoResp = await fetch(`http://localhost:8002/tratamiento/progreso/${pacienteId}`);
                             const progreso = await progresoResp.json();
                             
-                            const nuevaHabilidad = progreso.ID_Habilidad;
-                            const nuevaActividad = progreso.ID_Actividad;
+                            const nuevaHabilidad = progreso.id_habilidad;
+                            const nuevaActividad = progreso.id_actividad;
   
                             const botonSiguiente = document.getElementById("btn-siguiente-actividad");
                             const botonMenu = document.getElementById("btn-menu-principal");
@@ -667,7 +667,7 @@
                                 botonMenu.style.display = "inline-block";
   
                                 botonSiguiente.onclick = function() {
-                                    window.location.href = `actividad${nuevaActividad}.html`;
+                                    window.location.href = "actividad" +nuevaActividad+ ".html";
                                 };
                                 botonMenu.onclick = function() {
                                     window.location.href = "actividades.html";

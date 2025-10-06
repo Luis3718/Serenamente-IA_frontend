@@ -154,6 +154,17 @@ main {
     text-align: justify;
 }
 
+.titulo-evaluacion {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #2a9d8f; /* tono tranquilo, relacionado con calma y salud mental */
+  font-family: 'Poppins', sans-serif; /* o la que uses en tu sitio */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
 /* Barra de progreso horizontal */
 .progress-container-horizontal {
     position: sticky; /* Barra fija al desplazar */

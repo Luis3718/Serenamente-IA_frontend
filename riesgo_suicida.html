@@ -20,7 +20,7 @@
             </button>
             <nav class="submenu">
                 <ul>
-                    <li><a href="detalles.html">¿Qué es SerenaMente IA?</a></li>
+                    <li><a href="index.html">¿Qué es SerenaMente IA?</a></li>
                     <li><a href="quienessomos.html">¿Quiénes Somos?</a></li>
                     <li><a href="faqs.html">FAQ's</a></li>
                     <li><a href="#" id="logout">Cerrar sesión</a></li>
@@ -32,8 +32,9 @@
     <!-- Formulario -->
     <main>
         <div class="container">
+            <h1 class="titulo-evaluacion">Evaluación inicial</h1>
             <!-- Barra de progreso -->
-            <div class="progress-container-horizontal">
+            <div class="progress-container-horizontal">             
                 <div class="progress-bar" id="progressBar"></div>
                 <span id="progressText">0%</span>
             </div>
@@ -102,7 +103,7 @@
         <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
         </a>
-        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+        <a href="https://www.youtube.com/@laboratoriodepsicologiaein494" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
         </a>
     </div>
@@ -116,22 +117,22 @@
             <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
         </div>
         <div class="banner-logos">
-            <a href="https://www.unam.mx">
-                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
-            </a>
-            <a href="https://suayed.iztacala.unam.mx/">
-                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
-            </a>
-            <a href="https://labpsiit.iztacala.unam.mx/">
-                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
-            </a>
-            <a href="https://www.ipn.mx/">
-                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
-            </a>
-            <a href="https://www.escom.ipn.mx/">
-                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
-            </a>
-        </div>
+        <a href="https://www.unam.mx" target="_blank">
+            <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+        </a>
+        <a href="https://suayed.iztacala.unam.mx/" target="_blank">
+            <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+        </a>
+        <a href="https://labpsiit.iztacala.unam.mx/" target="_blank">
+            <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+        </a>
+        <a href="https://www.ipn.mx/" target="_blank">
+            <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+        </a>
+        <a href="https://www.escom.ipn.mx/" target="_blank">
+            <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+        </a>
+    </div>
     </div>       
 
     <!-- Footer -->
@@ -149,23 +150,57 @@
     </footer>
 </body>
 <script>
-     // Funcionalidad de la barra 
-     document.addEventListener("DOMContentLoaded", function () {
+    // Funcionalidad de la barra 
+    document.addEventListener("DOMContentLoaded", function () {
         const progressBar = document.getElementById("progressBar");
         const progressText = document.getElementById("progressText");
-        const form = document.getElementById("Riesgo_suicida");
-        const totalQuestions = document.querySelectorAll(".question").length;
-        let answeredQuestions = 0;
+
+        const totalQuestionsGlobal = 134; // Total del sistema completo
+        const questionsInThisForm = document.querySelectorAll(".question").length;
+
+        // Identificador único para cada formulario (puedes usar el nombre del test, ej. "BAI")
+        const formKey = "Riesgo_suicida"; // cambia este valor según el formulario actual
+
+        // Declaramos variables de piso y techo para evitar progresos incorrectos
+        const piso = 42;
+        const techo = 48; 
+
+        // Cargar progreso anterior global (si existe)
+        let previousProgress = parseInt(localStorage.getItem("answeredQuestionsGlobal")) || 0;
+        if (previousProgress >= techo || previousProgress<piso){
+            previousProgress = piso
+        }
 
         function updateProgress() {
-            const selectedInputs = form.querySelectorAll("input[type='radio']:checked");
-            answeredQuestions = selectedInputs.length;
-            const progressPercentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            // Respuestas marcadas en este formulario
+            const currentFormAnswered = document.querySelectorAll("input[type='radio']:checked").length;
+
+            // Guardamos el progreso específico de este formulario en localStorage (opcional, si quieres rastrear cada uno)
+            localStorage.setItem(formKey, currentFormAnswered);
+
+            // Sumamos este formulario con el anterior guardado
+            const newGlobalProgress = previousProgress + currentFormAnswered;
+
+            // Guardamos el nuevo valor global
+            localStorage.setItem("answeredQuestionsGlobal", newGlobalProgress);
+
+            // Calculamos el porcentaje
+            const progressPercentage = Math.round((newGlobalProgress / totalQuestionsGlobal) * 100);
+
+            // Actualizamos barra y texto
             progressBar.style.width = `${progressPercentage}%`;
             progressText.textContent = `${progressPercentage}%`;
         }
 
-        form.addEventListener("change", updateProgress);
+        // Actualiza cada vez que se selecciona una opción
+        document.addEventListener("change", function (e) {
+            if (e.target.matches("input[type='radio']")) {
+                updateProgress();
+            }
+        });
+
+        // Inicializa al cargar
+        updateProgress();
     });
     
     // Funcionalidad para extraer el id del token 
@@ -268,7 +303,7 @@
         }
 
         try {
-            const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
+            const response = await fetch("http://localhost:8002/auth/verify-token", {
                 method: "GET",
                 headers: { "Authorization": `Bearer ${token}` }
             });

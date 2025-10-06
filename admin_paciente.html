@@ -13,7 +13,7 @@
   <img src="static/imagenes/logo.jpeg" alt="Logo Serenamente" />
   <nav>
     <ul>
-      <li><a href="admin_terapia.html">Habilidades</a></li>
+      <li><a href="admin_habilidades.html">Habilidades</a></li>
       <li><a href="admin_actividades.html">Actividades</a></li>
       <li><a href="admin_paciente.html">Pacientes</a></li>
       <li><a href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
@@ -32,6 +32,7 @@
   <div id="errorMensaje" class="error" style="display: none;"></div>
   <div class="descargas-globales">
     <button onclick="descargarPretests()">📥 Descargar Pre-tests</button>
+    <button onclick="descargarPosttests()">📥 Descargar Post-tests</button>
     <button onclick="descargarBaseCompleta()">📥 Descargar Base completa</button>
   </div>
 
@@ -78,7 +79,7 @@
     async function cargarPacientes() {
       const token = localStorage.getItem("admin_token");
       try {
-        const response = await fetch("https://serenamente.iztacala.unam.mx/api/pacientes/", {
+        const response = await fetch("http://localhost:8002/pacientes/", {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -86,13 +87,13 @@
         const data = await response.json();
 
         const pacientes = data.map(p => ({
-          id: p.ID_Paciente,
-          nombre: p.Nombre,
-          apellidos: p.Apellidos,
-          correo: p.Correo,
-          segundo_correo: p.CorreoAlternativo ?? "",
-          sexo: p.Sexo,
-          nacimiento: p.FechaNacimiento?.split("T")[0] ?? ""
+          id: p.id_paciente,
+          nombre: p.nombre,
+          apellidos: p.apellidos,
+          correo: p.correo,
+          segundo_correo: p.correoalternativo ?? "",
+          sexo: p.sexo,
+          nacimiento: p.fechanacimiento?.split("T")[0] ?? ""
         }));
 
 
@@ -126,6 +127,7 @@
               <div id="descarga-${paciente.id}" class="descarga-opciones">
                 <button class="btn-descarga" onclick="descargarExpediente(${paciente.id})">Expediente</button>
                 <button class="btn-descarga" onclick="descargarPretest(${paciente.id})">Pretest</button>
+                <button class="btn-descarga" onclick="descargarPosttest(${paciente.id})">Posttest</button>
               </div>
             </div>
           </td>
@@ -156,17 +158,17 @@
     async function guardarCambios() {
       const id = document.getElementById("editId").value;
       const perfilData = {
-        Nombre: document.getElementById("editNombre").value,
-        Apellidos: document.getElementById("editApellidos").value,
-        Correo: document.getElementById("editCorreo").value,
-        SegundoCorreo: document.getElementById("editSegundoCorreo").value,
-        Sexo: document.getElementById("editSexo").value,
-        FechaNacimiento: document.getElementById("editFecha").value,
-        NuevaContrasena: document.getElementById("editNuevaContrasena").value
+        nombre: document.getElementById("editNombre").value,
+        apellidos: document.getElementById("editApellidos").value,
+        correo: document.getElementById("editCorreo").value,
+        correoalternativo: document.getElementById("editSegundoCorreo").value,
+        sexo: document.getElementById("editSexo").value,
+        fechanacimiento: document.getElementById("editFecha").value,
+        nuevacontrasena: document.getElementById("editNuevaContrasena").value
       };
 
       const token = localStorage.getItem("admin_token");
-      const res = await fetch(`https://serenamente.iztacala.unam.mx/api/pacientes/admin/actualizar_completo/${id}`, {
+      const res = await fetch(`http://localhost:8002/pacientes/admin/actualizar_completo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -197,7 +199,7 @@
       if (!confirm("¿Poner en pausa a este paciente?")) return;
 
       const token = localStorage.getItem("admin_token");
-      const res = await fetch(`https://serenamente.iztacala.unam.mx/api/pacientes/termina_tratamiento/${id}`, {
+      const res = await fetch(`http://localhost:8002/pacientes/termina_tratamiento/${id}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -210,27 +212,55 @@
       }
     }
 
-    function buscarPaciente() {
-      const term = document.getElementById("buscarCorreo").value.toLowerCase();
-      const rows = Array.from(document.querySelectorAll("#tablaPacientes tr"));
-      let found = false;
+    async function buscarPaciente() {
+      const term = document.getElementById("buscarCorreo").value.trim();
+      const errorDiv = document.getElementById("errorMensaje");
 
-      rows.forEach(tr => {
-        const correo = tr.children[2].textContent.toLowerCase();
-        const visible = correo.includes(term);
-        tr.style.display = visible ? "" : "none";
-        if (visible) found = true;
-      });
+      if (!term) {
+        errorDiv.textContent = "Ingresa un correo para buscar.";
+        errorDiv.style.display = "block";
+        return;
+      }
 
-      document.getElementById("errorMensaje").style.display = found ? "none" : "block";
-      document.getElementById("errorMensaje").textContent = found
-        ? ""
-        : "No se encontró ningún paciente con ese correo.";
+      const token = localStorage.getItem("admin_token");
+      try {
+        const res = await fetch(`http://localhost:8002/admin/buscar_paciente?correo=${encodeURIComponent(term)}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+          errorDiv.textContent = "No se encontró ningún paciente con ese correo.";
+          errorDiv.style.display = "block";
+          renderizarPacientes([]);
+          return;
+        }
+
+        const data = await res.json();
+
+        const paciente = {
+          id: data.id_paciente,
+          nombre: data.nombre,
+          apellidos: data.apellidos,
+          correo: data.correo,
+          segundo_correo: data.correoalternativo ?? "",
+          sexo: data.sexo,
+          nacimiento: data.fechanacimiento?.split("T")[0] ?? ""
+        };
+
+        window.pacientes = [paciente];
+        renderizarPacientes([paciente]);
+        errorDiv.style.display = "none";
+
+      } catch (error) {
+        console.error("Error en búsqueda:", error);
+        errorDiv.textContent = "Error al buscar paciente.";
+        errorDiv.style.display = "block";
+      }
     }
 
     function descargarExpediente(pacienteId) {
       const token = localStorage.getItem("admin_token");
-      fetch(`https://serenamente.iztacala.unam.mx/api/admin/descargar_reporte/${pacienteId}`, {
+      fetch(`http://localhost:8002/admin/descargar_reporte/${pacienteId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -254,7 +284,7 @@
 
     function descargarPretest(pacienteId) {
       const token = localStorage.getItem("admin_token");
-      fetch(`https://serenamente.iztacala.unam.mx/api/admin/descargar_pretest/${pacienteId}`, {
+      fetch(`http://localhost:8002/admin/descargar_pretest/${pacienteId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -276,12 +306,36 @@
       });
     }
 
+    function descargarPosttest(pacienteId) {
+      const token = localStorage.getItem("admin_token");
+      fetch(`http://localhost:8002/admin/descargar_posttest/${pacienteId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el pretest");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Postest_Paciente_${pacienteId}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el pretest: " + err.message);
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", async () => {
       const token = localStorage.getItem("admin_token");
       if (!token) return cerrarSesion();
 
       try {
-        const check = await fetch("https://serenamente.iztacala.unam.mx/api/admin/perfil", {
+        const check = await fetch("http://localhost:8002/admin/perfil", {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -295,52 +349,76 @@
     });
 
     function descargarPretests() {
-    const token = localStorage.getItem("admin_token");
-    fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_pretests_completo", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("No se pudo generar el archivo");
-      return res.blob();
-    })
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Pretest_Completo.xlsx";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    })
-    .catch(err => {
-      alert("Error descargando el archivo: " + err.message);
-    });
-  }
+      const token = localStorage.getItem("admin_token");
+      fetch("http://localhost:8002/admin/exportar_pretests_completo", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el archivo");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Pretest_Completo.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el archivo: " + err.message);
+      });
+    }
 
-  function descargarBaseCompleta() {
-    const token = localStorage.getItem("admin_token");
-    fetch("https://serenamente.iztacala.unam.mx/api/admin/exportar_base_completa", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("No se pudo generar el archivo");
-      return res.blob();
-    })
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Base_de_datos_completa.xlsx";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    })
-    .catch(err => {
-      alert("Error descargando el archivo: " + err.message);
-    });
-  }
+    function descargarPosttests() {
+      const token = localStorage.getItem("admin_token");
+      fetch("http://localhost:8002/admin/exportar_posttest_completo", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el archivo");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Post_test_Completo.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el archivo: " + err.message);
+      });
+    }
+
+    function descargarBaseCompleta() {
+      const token = localStorage.getItem("admin_token");
+      fetch("http://localhost:8002/admin/exportar_base_completa", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo generar el archivo");
+        return res.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Base_de_datos_completa.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        alert("Error descargando el archivo: " + err.message);
+      });
+    }
 </script>
 </body>
 </html>

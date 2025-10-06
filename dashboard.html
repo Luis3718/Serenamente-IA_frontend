@@ -18,7 +18,7 @@
             <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
             <nav class="submenu">
                 <ul>
-                    <li><a href="actividades.html">Mis actividades</a></li>
+                    <li><a href="actividades.html">Mis habilidades</a></li>
                     <li><a href="progreso.html">Mi progreso</a></li>
                     <div class="user-menu">
                         <div id="user-avatar" class="avatar">US</div>
@@ -47,7 +47,7 @@
         <a href="https://www.instagram.com/serenamente_app/?igshid=YTQwZjQ0NmI0OA%3D%3D" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_instagram.png" alt="Instagram">
         </a>
-        <a href="https://www.youtube.com/@SerenaMente-xk7tm" target="_blank" class="social-icon">
+        <a href="https://www.youtube.com/@laboratoriodepsicologiaein494" target="_blank" class="social-icon">
             <img src="static/imagenes/Logo_youtube.png" alt="YouTube">
         </a>
     </div>
@@ -61,22 +61,22 @@
             <p>Cuenta con el respaldo y colaboración de investigadores e investigadoras de las siguientes instituciones.</p>
         </div>
         <div class="banner-logos">
-            <a href="https://www.unam.mx">
-                <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
-            </a>
-            <a href="https://suayed.iztacala.unam.mx/">
-                <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
-            </a>
-            <a href="https://labpsiit.iztacala.unam.mx/">
-                <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
-            </a>
-            <a href="https://www.ipn.mx/">
-                <img src="static/imagenes/Logo4.png" alt="Logo IPN">
-            </a>
-            <a href="https://www.escom.ipn.mx/">
-                <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
-            </a>
-        </div>
+        <a href="https://www.unam.mx" target="_blank">
+            <img src="static/imagenes/Logo1.png" alt="Logo UNAM">
+        </a>
+        <a href="https://suayed.iztacala.unam.mx/" target="_blank">
+            <img src="static/imagenes/Logo2.png" alt="Logo SUAYED">
+        </a>
+        <a href="https://labpsiit.iztacala.unam.mx/" target="_blank">
+            <img src="static/imagenes/Logo3.png" alt="Logo LABPSITT">
+        </a>
+        <a href="https://www.ipn.mx/" target="_blank">
+            <img src="static/imagenes/Logo4.png" alt="Logo IPN">
+        </a>
+        <a href="https://www.escom.ipn.mx/" target="_blank">
+            <img src="static/imagenes/Logo5.png" alt="Logo ESCOM">
+        </a>
+    </div>
     </div>
 
     <!-- Footer -->
@@ -111,7 +111,7 @@
             }
 
             try {
-                const response = await fetch("https://serenamente.iztacala.unam.mx/api/auth/verify-token", {
+                const response = await fetch("http://localhost:8002/auth/verify-token", {
                     method: "GET",
                     headers: { "Authorization": `Bearer ${token}` }
                 });

@@ -151,6 +151,7 @@ main {
 
 .texto {
     text-align: justify;
+    line-height: 1.6; 
 }
 
 .team-section {
